@@ -1,0 +1,1076 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Modul Jenayah dalam Islam</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=Amiri:wght@400;700&display=swap">
+<style>
+/* Layout: emerald title band + sticky tab bar; one tab visible at a time; content in a 1120px column, grids collapse to one column on phones */
+:root{
+  --emerald:#0b5d4b; --emerald-2:#0f7a62; --gold:#b8891a; --gold-soft:#f6ecd0;
+  --teal:#138f8f; --teal-soft:#dff3f1; --mint:#eaf6f0; --peach:#fdeee6; --lilac:#efeafb; --sky:#e6f2fb;
+  --bg:#ffffff; --surface:#f6faf8; --line:#d7e6df; --fg:#14302a; --muted:#4e6a62; --ink-on:#ffffff;
+  --ok:#1d7f4e; --ok-soft:#e1f4e9; --bad:#b4472b; --bad-soft:#fbe9e3;
+  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",sans-serif;
+  --body:"Nunito Sans","Segoe UI",system-ui,sans-serif;
+  --arab:"Amiri","Traditional Arabic","Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --emerald:#0c3f34; --emerald-2:#3fc49d; --gold:#e3bd55; --gold-soft:#3a3218;
+  --teal:#4fc9c4; --teal-soft:#10302f; --mint:#122a23; --peach:#33231c; --lilac:#25213a; --sky:#14273a;
+  --bg:#0c1714; --surface:#11211d; --line:#23403a; --fg:#e6f2ee; --muted:#9dbab1; --ink-on:#f4fbf8;
+  --ok:#5fd39a; --ok-soft:#143326; --bad:#f08a6c; --bad-soft:#3a1f18; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --emerald:#0c3f34; --emerald-2:#3fc49d; --gold:#e3bd55; --gold-soft:#3a3218;
+  --teal:#4fc9c4; --teal-soft:#10302f; --mint:#122a23; --peach:#33231c; --lilac:#25213a; --sky:#14273a;
+  --bg:#0c1714; --surface:#11211d; --line:#23403a; --fg:#e6f2ee; --muted:#9dbab1; --ink-on:#f4fbf8;
+  --ok:#5fd39a; --ok-soft:#143326; --bad:#f08a6c; --bad-soft:#3a1f18; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--emerald)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;line-height:1.15;margin:0}
+p{margin:0}
+ul,ol{margin:0;padding-left:1.2em}
+li::marker{color:var(--gold)}
+.ar{font-family:var(--arab);direction:rtl;font-size:1.35em;line-height:1.9;display:block;text-align:right}
+.muted{color:var(--muted)}
+.hl{color:var(--teal);font-weight:800}
+.add{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--bad);border:1px solid var(--bad);border-radius:4px;padding:0 5px;margin-left:4px;vertical-align:1px}
+
+/* band */
+.band{background:var(--emerald);color:var(--ink-on);position:relative;overflow:hidden}
+.band::before{content:"";position:absolute;inset:0;opacity:.13;background-image:repeating-conic-gradient(from 45deg,var(--gold) 0 25%,transparent 0 50%);background-size:28px 28px;mask-image:linear-gradient(90deg,transparent 40%,#000);-webkit-mask-image:linear-gradient(90deg,transparent 40%,#000)}
+.band .wrap{position:relative;padding-block:34px 28px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--gold)}
+.band h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;margin-top:6px}
+.band h1 span{color:var(--gold)}
+.band p{max-width:60ch;opacity:.92;margin-top:8px}
+.band .back{display:inline-block;margin-top:12px;color:var(--ink-on);font-weight:700;font-size:.88rem}
+.kaabah{width:120px;height:120px}
+@media (max-width:640px){.band .wrap{grid-template-columns:1fr}.kaabah{display:none}}
+
+/* tabs */
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--bg);border-bottom:1px solid var(--line)}
+.tabs .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px}
+.tab{font:inherit;font-weight:800;font-size:.9rem;white-space:nowrap;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--emerald);border-color:var(--emerald);color:var(--ink-on)}
+.tab:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.tab small{font-weight:700;opacity:.75;margin-left:4px}
+
+.panel{padding-block:30px 60px}
+.sec{padding-block:26px;border-bottom:1px solid var(--line)}
+.sec:last-child{border-bottom:0}
+.sec-head{display:grid;gap:6px;margin-bottom:18px;max-width:72ch}
+.kicker{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--gold)}
+.sec-head h2{font-size:clamp(1.4rem,3vw,1.95rem);font-weight:800}
+.sec-head h2 .lt{color:var(--teal)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:860px){.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:680px){.grid2,.grid3{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:12px;padding:14px 16px;min-width:0;background:var(--bg)}
+.card h3{font-size:1.08rem;margin-bottom:6px}
+.soft-mint{background:var(--mint)}.soft-gold{background:var(--gold-soft)}.soft-teal{background:var(--teal-soft)}.soft-lilac{background:var(--lilac)}.soft-peach{background:var(--peach)}.soft-sky{background:var(--sky)}
+.note{font-size:.88rem;padding:10px 12px;border-radius:8px;background:var(--bad-soft);border-left:3px solid var(--bad)}
+.note b{color:var(--bad)}
+.tip{font-size:.9rem;padding:10px 12px;border-radius:8px;background:var(--teal-soft);border-left:3px solid var(--teal)}
+
+/* concept map */
+.cmap{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center}
+.cmap .core{grid-column:2;grid-row:1/span 5;width:170px;height:170px;border-radius:50%;background:var(--emerald);color:var(--ink-on);display:grid;place-items:center;text-align:center;font-family:var(--display);font-weight:800;font-size:1.3rem;border:5px solid var(--gold);padding:12px}
+.cmap .node{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--surface);font-size:.9rem;min-width:0}
+.cmap .node b{display:block;font-family:var(--display);color:var(--teal)}
+.cmap .l{grid-column:1}.cmap .r{grid-column:3}
+@media (max-width:760px){.cmap{grid-template-columns:1fr}.cmap .core{grid-column:1;grid-row:auto;margin:0 auto}.cmap .l,.cmap .r{grid-column:1}}
+.seq{display:flex;flex-wrap:wrap;gap:8px;counter-reset:s}
+.seq span{counter-increment:s;font-size:.86rem;font-weight:700;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--bg)}
+.seq span::before{content:counter(s) " · ";color:var(--gold)}
+
+/* tables */
+.tbox{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.9rem}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+th{background:var(--surface);font-family:var(--display);font-size:.85rem;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td b{color:var(--teal)}
+
+/* istilah cards */
+.term{display:grid;gap:6px}
+.term .t{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.term .t h3{margin:0;font-size:1.1rem}
+.term .k{font-size:.74rem;font-weight:800;color:var(--gold);letter-spacing:.06em;text-transform:uppercase}
+.term dl{margin:0;display:grid;grid-template-columns:96px minmax(0,1fr);gap:4px 10px;font-size:.88rem}
+.term dt{font-weight:800;color:var(--muted);font-size:.78rem;padding-top:2px}
+.term dd{margin:0}
+.term dd.x{color:var(--bad)}
+
+/* flow */
+.flow{display:grid;gap:0;counter-reset:f}
+.fstep{display:grid;grid-template-columns:76px minmax(0,1fr);gap:14px;padding-bottom:16px;position:relative}
+.fstep::after{content:"";position:absolute;left:37px;top:54px;bottom:0;width:2px;background:var(--line)}
+.fstep:last-child::after{display:none}
+.fstep .d{width:76px;height:54px;border-radius:10px;background:var(--emerald);color:var(--ink-on);display:grid;place-items:center;text-align:center;font-family:var(--display);font-weight:800;font-size:.8rem;line-height:1.1}
+.fstep .d b{display:block;font-size:1.3rem}
+.fstep .d.gold{background:var(--gold-soft);color:var(--fg);border:1px solid var(--gold)}
+.fstep .body{padding-top:4px;min-width:0}
+.fstep .body b{display:block}
+.pill{display:inline-block;font-size:.72rem;font-weight:800;padding:1px 8px;border-radius:999px;margin:2px 4px 0 0}
+.p-r{background:var(--emerald);color:var(--ink-on)}
+.p-w{background:var(--gold-soft);color:var(--fg);border:1px solid var(--gold)}
+.p-s{background:var(--teal-soft);color:var(--fg);border:1px solid var(--teal)}
+.p-x{background:var(--bad-soft);color:var(--fg);border:1px solid var(--bad)}
+
+/* situations */
+.sit{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:.88rem}
+.sit>div{padding:10px 12px;min-width:0;border-right:1px solid var(--line)}
+.sit>div:last-child{border-right:0}
+.sit .lab{font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:2px}
+.sit .s1{background:var(--surface)}.sit .s3{background:var(--gold-soft)}.sit .s5{background:var(--mint)}
+.sits{display:grid;gap:10px}
+.sits .num{font-family:var(--display);font-weight:800;color:var(--gold);margin-right:4px}
+@media (max-width:860px){.sit{grid-template-columns:1fr}.sit>div{border-right:0;border-bottom:1px solid var(--line)}.sit>div:last-child{border-bottom:0}}
+
+/* slides */
+.deck{display:grid;gap:12px}
+.stage{position:relative;width:100%;max-width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--bg)}
+@media (max-width:760px){.stage{aspect-ratio:auto;min-height:520px}}
+.slide{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:0}
+@media (max-width:760px){.slide{position:relative;grid-template-columns:1fr}}
+.slide .main{padding:clamp(18px,3vw,36px);display:flex;flex-direction:column;gap:10px;min-width:0;overflow:auto}
+.slide .side{background:var(--emerald);color:var(--ink-on);padding:clamp(16px,2.6vw,30px);display:flex;flex-direction:column;gap:12px;justify-content:space-between;min-width:0;position:relative;overflow:auto}
+.slide .side::before{content:"";position:absolute;inset:0;opacity:.1;background-image:repeating-conic-gradient(from 45deg,var(--gold) 0 25%,transparent 0 50%);background-size:24px 24px;pointer-events:none}
+.slide .side>*{position:relative}
+.slide .no{font-size:.74rem;font-weight:800;letter-spacing:.14em;color:var(--gold);text-transform:uppercase}
+.slide h3{font-size:clamp(1.3rem,2.8vw,2.1rem);font-weight:800}
+.slide .lead{font-size:clamp(.92rem,1.4vw,1.05rem);color:var(--muted)}
+.slide ul{font-size:clamp(.88rem,1.35vw,1.02rem);display:grid;gap:4px}
+.slide .kw{display:flex;flex-wrap:wrap;gap:6px}
+.slide .kw span{font-size:.78rem;font-weight:800;padding:3px 10px;border-radius:999px;background:var(--gold);color:var(--emerald)}
+.slide .q{font-size:.88rem;border-top:1px solid color-mix(in srgb,var(--ink-on) 30%,transparent);padding-top:10px}
+.slide .q b{color:var(--gold)}
+.slide .ex{font-size:.86rem;padding:8px 10px;border-radius:8px;background:color-mix(in srgb,var(--ink-on) 12%,transparent)}
+.slide .ill{width:100%;max-width:200px;height:auto;align-self:center}
+.slide.cover{grid-template-columns:1fr}
+.slide.cover .main{background:var(--emerald);color:var(--ink-on);justify-content:center;align-items:flex-start;position:relative}
+.slide.cover .main::before{content:"";position:absolute;inset:0;opacity:.14;background-image:repeating-conic-gradient(from 45deg,var(--gold) 0 25%,transparent 0 50%);background-size:30px 30px;mask-image:linear-gradient(90deg,transparent 30%,#000);-webkit-mask-image:linear-gradient(90deg,transparent 30%,#000)}
+.slide.cover .main>*{position:relative}
+.slide.cover h3{font-size:clamp(2rem,5vw,3.6rem)}
+.slide.cover h3 span{color:var(--gold)}
+.slide.cover .lead{color:var(--ink-on);opacity:.9}
+.dcontrols{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{font:inherit;font-weight:800;font-size:.9rem;padding:8px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.btn:hover{border-color:var(--teal)}
+.btn.pri{background:var(--emerald);border-color:var(--emerald);color:var(--ink-on)}
+.btn.gold{background:var(--gold-soft);border-color:var(--gold)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.dots{display:flex;gap:5px;flex-wrap:wrap}
+.dots button{width:26px;height:26px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:inherit;font-size:.72rem;font-weight:800;cursor:pointer}
+.dots button[aria-current="true"]{background:var(--gold);border-color:var(--gold);color:var(--emerald)}
+
+/* worksheet */
+.ws{display:grid;gap:14px}
+.lvl{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.lvl-h{display:flex;gap:12px;align-items:center;padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--line)}
+.lvl-h .badge{font-family:var(--display);font-weight:800;padding:6px 10px;border-radius:8px;background:var(--emerald);color:var(--ink-on);white-space:nowrap}
+.lvl-h h3{font-size:1.1rem}
+.lvl-b{padding:14px 16px;display:grid;gap:16px}
+.task h4{font-family:var(--body);font-size:.95rem;font-weight:800;margin-bottom:6px}
+.task ol{display:grid;gap:6px}
+.skema{display:none;margin-top:8px;padding:10px 12px;border-radius:8px;background:var(--ok-soft);border-left:3px solid var(--ok);font-size:.9rem}
+.show-skema .skema{display:block}
+.skema::before{content:"Skema jawapan";display:block;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ok);margin-bottom:3px}
+.blank{display:inline-block;min-width:110px;border-bottom:1.5px dashed var(--muted);margin:0 3px}
+.wbox{min-height:54px;border:1px dashed var(--line);border-radius:8px;margin-top:6px}
+
+/* games */
+.gamegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:18px}
+.gpick{font:inherit;text-align:left;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer;display:grid;gap:2px}
+.gpick b{font-family:var(--display);font-size:1rem}
+.gpick small{color:var(--muted)}
+.gpick .lv{font-size:.7rem;font-weight:800;color:var(--gold);letter-spacing:.08em;text-transform:uppercase}
+.gpick[aria-pressed="true"]{border-color:var(--emerald);background:var(--mint);box-shadow:inset 0 0 0 1px var(--emerald)}
+.gstage{border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:14px;background:var(--surface)}
+.ghead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ghead h3{font-size:1.4rem}
+.score{font-family:var(--display);font-weight:800;font-size:1.1rem;padding:6px 12px;border-radius:10px;background:var(--gold-soft);border:1px solid var(--gold);white-space:nowrap;font-variant-numeric:tabular-nums}
+.how{font-size:.9rem;color:var(--muted)}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (max-width:560px){.opts{grid-template-columns:1fr}}
+.opt{font:inherit;text-align:left;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer;min-height:44px}
+.opt:hover:not(:disabled){border-color:var(--teal)}
+.opt.ok{background:var(--ok-soft);border-color:var(--ok)}
+.opt.no{background:var(--bad-soft);border-color:var(--bad)}
+.opt.sel{border-color:var(--gold);box-shadow:inset 0 0 0 2px var(--gold)}
+.opt.done{opacity:.45}
+.fb{font-size:.92rem;padding:10px 12px;border-radius:10px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--ok-soft);border-left:3px solid var(--ok)}
+.fb.no{background:var(--bad-soft);border-left:3px solid var(--bad)}
+.qtext{font-size:1.08rem;font-weight:700}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:560px){.cols2{grid-template-columns:1fr}}
+.cols2>div{display:grid;gap:8px;align-content:start}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+.bin{font:inherit;font-weight:800;padding:10px;border-radius:10px;border:2px dashed var(--line);background:var(--bg);color:var(--fg);cursor:pointer;text-align:center}
+.bin:hover{border-color:var(--teal)}
+.chipq{font-size:1.15rem;font-family:var(--display);font-weight:800;padding:14px;border-radius:12px;background:var(--bg);border:1px solid var(--gold);text-align:center}
+.locks{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.lock{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--bg);display:grid;gap:8px}
+.lock.open{border-color:var(--ok);background:var(--ok-soft)}
+.lock input,.codein{font:inherit;font-size:1.1rem;font-weight:800;width:100%;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font-variant-numeric:tabular-nums}
+.boxes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.mbox{font:inherit;font-family:var(--display);font-weight:800;font-size:1.4rem;aspect-ratio:1.4;max-width:100%;border-radius:12px;border:1px solid var(--gold);background:var(--gold-soft);color:var(--fg);cursor:pointer}
+.mbox:disabled{background:var(--surface);border-color:var(--line);color:var(--muted);cursor:default;font-size:.9rem}
+.wheelwrap{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:18px;align-items:center}
+@media (max-width:680px){.wheelwrap{grid-template-columns:1fr}}
+.wheel{position:relative;width:100%;max-width:320px;aspect-ratio:1;margin:0 auto}
+.wheel canvas{width:100%;height:100%;display:block}
+.wheel .ptr{position:absolute;left:50%;top:-6px;transform:translateX(-50%);width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-top:26px solid var(--bad)}
+.ladder{display:grid;gap:4px}
+.ladder div{display:flex;justify-content:space-between;font-size:.82rem;padding:3px 10px;border-radius:6px;font-variant-numeric:tabular-nums}
+.ladder .cur{background:var(--gold);color:var(--emerald);font-weight:800}
+.ladder .past{color:var(--ok);font-weight:700}
+.champ{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:16px}
+@media (max-width:680px){.champ{grid-template-columns:1fr}}
+.mem{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media (max-width:560px){.mem{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.mcard{font:inherit;min-height:92px;border-radius:10px;border:1px solid var(--line);background:var(--emerald);color:var(--ink-on);cursor:pointer;padding:8px;font-size:.8rem;font-weight:700;line-height:1.25}
+.mcard.up{background:var(--bg);color:var(--fg);border-color:var(--gold)}
+.mcard.got{background:var(--ok-soft);color:var(--fg);border-color:var(--ok);cursor:default}
+.hp{height:16px;border-radius:999px;background:var(--bg);border:1px solid var(--line);overflow:hidden}
+.hp i{display:block;height:100%;background:var(--bad);transition:width .3s}
+.hearts{font-weight:800;color:var(--bad);font-variant-numeric:tabular-nums}
+.bossrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media (max-width:560px){.bossrow{grid-template-columns:1fr}}
+
+/* spm */
+.qblock{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.qblock .stem{padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--line);font-weight:700}
+.qitem{padding:12px 16px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.qitem:last-child{border-bottom:0}
+.qrow{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;align-items:start}
+.qrow .ql{font-weight:800;color:var(--muted)}
+.qrow .m{font-weight:800;font-size:.84rem;white-space:nowrap;color:var(--gold)}
+.ans{display:none;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;font-size:.88rem}
+.show-ans .ans{display:grid}
+@media (max-width:680px){.ans{grid-template-columns:1fr}}
+.ans>div{padding:8px 10px;border-radius:8px;min-width:0}
+.ans .a1{background:var(--ok-soft)}.ans .a2{background:var(--mint)}.ans .a3{background:var(--teal-soft)}.ans .a4{background:var(--bad-soft)}
+.ans .lab{display:block;font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.stim{border:2px solid var(--fg);padding:10px 14px;border-radius:4px;font-weight:700;text-align:center;margin:4px 0;background:var(--bg)}
+.mcq{display:grid;gap:12px}
+.mcq .it{border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:8px}
+
+/* diag */
+.aspects{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+@media (max-width:760px){.aspects{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.asp{border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center;background:var(--bg)}
+.asp b{display:block;font-family:var(--display);font-size:1.5rem;font-variant-numeric:tabular-nums}
+.asp small{display:block;font-size:.76rem;color:var(--muted)}
+.asp .lvl-tag{display:inline-block;margin-top:4px;font-size:.72rem;font-weight:800;padding:1px 8px;border-radius:999px}
+.t-low{background:var(--bad-soft);color:var(--bad)}.t-mid{background:var(--gold-soft)}.t-high{background:var(--ok-soft);color:var(--ok)}
+.check{display:grid;gap:6px}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--bg)}
+.check input{margin-top:5px;width:18px;height:18px;accent-color:var(--emerald)}
+.dq{display:grid;gap:10px}
+.dq .it{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:grid;gap:6px;background:var(--bg)}
+.dq .it .tag{font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+.dq select{font:inherit;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);max-width:100%}
+.dq .it.ok{border-color:var(--ok);background:var(--ok-soft)}
+.dq .it.no{border-color:var(--bad);background:var(--bad-soft)}
+.dq .why{font-size:.86rem;display:none}
+.dq .it.ok .why,.dq .it.no .why{display:block}
+footer{padding-block:20px 40px;font-size:.84rem;color:var(--muted);border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ===== Tema ceria: lapisan warna tambahan ===== */
+:root{
+  --c1:#e8457a; --c1s:#fde7ef; --c2:#f0861f; --c2s:#fff0e0; --c3:#7b5cd6; --c3s:#efeafd;
+  --c4:#2f80ed; --c4s:#e5f0fe; --c5:#16a37a; --c5s:#e2f6ee; --c6:#e0a800; --c6s:#fff6d6;
+  --band-grad:linear-gradient(115deg,#0b5d4b 0%,#0f8f86 38%,#2f80ed 72%,#7b5cd6 100%);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --c1:#ff7aa3; --c1s:#3a1826; --c2:#ffa95a; --c2s:#3a2614; --c3:#a993ff; --c3s:#251d42;
+  --c4:#6aa8ff; --c4s:#132741; --c5:#4fd6a8; --c5s:#11322a; --c6:#ffd15a; --c6s:#3a3112;
+  --band-grad:linear-gradient(115deg,#0a3a30 0%,#0d5c57 38%,#173f78 72%,#3b2d73 100%);}}
+:root[data-theme="dark"]{
+  --c1:#ff7aa3; --c1s:#3a1826; --c2:#ffa95a; --c2s:#3a2614; --c3:#a993ff; --c3s:#251d42;
+  --c4:#6aa8ff; --c4s:#132741; --c5:#4fd6a8; --c5s:#11322a; --c6:#ffd15a; --c6s:#3a3112;
+  --band-grad:linear-gradient(115deg,#0a3a30 0%,#0d5c57 38%,#173f78 72%,#3b2d73 100%);}
+.band{background:var(--band-grad)}
+.band::after{content:"";position:absolute;inset:auto -40px -60px auto;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,var(--c6) 0 18%,transparent 19%),radial-gradient(circle at 70% 30%,var(--c1) 0 10%,transparent 11%);opacity:.35;pointer-events:none}
+body::before{background:#0b5d4b}
+.tab:nth-child(6n+1){--tc:var(--c5)}.tab:nth-child(6n+2){--tc:var(--c4)}.tab:nth-child(6n+3){--tc:var(--c2)}.tab:nth-child(6n+4){--tc:var(--c1)}.tab:nth-child(6n+5){--tc:var(--c3)}.tab:nth-child(6n+6){--tc:var(--c6)}
+.tab{border-color:var(--tc);border-width:2px}
+.tab[aria-selected="true"]{background:var(--tc);border-color:var(--tc);color:#ffffff}
+.panel .sec:nth-of-type(6n+1) .sec-head h2{color:var(--c5)}
+.panel .sec:nth-of-type(6n+2) .sec-head h2{color:var(--c4)}
+.panel .sec:nth-of-type(6n+3) .sec-head h2{color:var(--c3)}
+.panel .sec:nth-of-type(6n+4) .sec-head h2{color:var(--c1)}
+.panel .sec:nth-of-type(6n+5) .sec-head h2{color:var(--c2)}
+.panel .sec:nth-of-type(6n+6) .sec-head h2{color:var(--c4)}
+.kicker{display:inline-block;width:max-content;max-width:100%;padding:2px 10px;border-radius:999px;background:var(--c6s);color:var(--fg)}
+.card.term{border-top:5px solid var(--cc,var(--c5))}
+.card.term:nth-child(6n+1){--cc:var(--c1)}.card.term:nth-child(6n+2){--cc:var(--c2)}.card.term:nth-child(6n+3){--cc:var(--c3)}.card.term:nth-child(6n+4){--cc:var(--c4)}.card.term:nth-child(6n+5){--cc:var(--c5)}.card.term:nth-child(6n+6){--cc:var(--c6)}
+.card.term .k{color:var(--cc)}
+.cmap .node{border-left:5px solid var(--nc,var(--c4))}
+.cmap .node:nth-child(5n+1){--nc:var(--c1)}.cmap .node:nth-child(5n+2){--nc:var(--c2)}.cmap .node:nth-child(5n+3){--nc:var(--c3)}.cmap .node:nth-child(5n+4){--nc:var(--c4)}.cmap .node:nth-child(5n+5){--nc:var(--c5)}
+.cmap .node b{color:var(--nc)}
+.cmap .core{background:conic-gradient(var(--c5),var(--c4),var(--c3),var(--c1),var(--c2),var(--c6),var(--c5));color:#ffffff;text-shadow:0 1px 3px rgba(0,0,0,.45)}
+.seq span:nth-child(6n+1){background:var(--c1s)}.seq span:nth-child(6n+2){background:var(--c2s)}.seq span:nth-child(6n+3){background:var(--c6s)}.seq span:nth-child(6n+4){background:var(--c5s)}.seq span:nth-child(6n+5){background:var(--c4s)}.seq span:nth-child(6n+6){background:var(--c3s)}
+th{background:var(--c4s)}
+.sit .s1{background:var(--c4s)}.sit .s3{background:var(--c6s)}.sit .s5{background:var(--c5s)}
+.sit .num{color:var(--c1)}
+.fstep:nth-child(5n+1) .d{background:var(--c5)}.fstep:nth-child(5n+2) .d{background:var(--c4)}.fstep:nth-child(5n+3) .d{background:var(--c3)}.fstep:nth-child(5n+4) .d{background:var(--c1)}.fstep:nth-child(5n+5) .d{background:var(--c2)}
+.fstep .d,.fstep .d.gold{color:#ffffff;border:0}
+.slide .side{background:linear-gradient(160deg,#0b5d4b,#0f8f86 50%,#2f80ed)}
+.slide.cover .main{background:var(--band-grad)}
+.slide .kw span:nth-child(4n+1){background:var(--c6)}.slide .kw span:nth-child(4n+2){background:#ffd6e4}.slide .kw span:nth-child(4n+3){background:#d9ccff}.slide .kw span:nth-child(4n+4){background:#c9f2e2}
+.slide .kw span{color:#14302a}
+.slide h3{color:var(--c3)}
+.slide.cover h3{color:#ffffff}
+.dots button[aria-current="true"]{background:var(--c1);border-color:var(--c1);color:#ffffff}
+.lvl:nth-child(5n+1) .badge{background:var(--c5)}.lvl:nth-child(5n+2) .badge{background:var(--c4)}.lvl:nth-child(5n+3) .badge{background:var(--c3)}.lvl:nth-child(5n+4) .badge{background:var(--c2)}.lvl:nth-child(5n+5) .badge{background:var(--c1)}
+.lvl:nth-child(5n+1){border-top:5px solid var(--c5)}.lvl:nth-child(5n+2){border-top:5px solid var(--c4)}.lvl:nth-child(5n+3){border-top:5px solid var(--c3)}.lvl:nth-child(5n+4){border-top:5px solid var(--c2)}.lvl:nth-child(5n+5){border-top:5px solid var(--c1)}
+.gpick{border-left:6px solid var(--gc,var(--c4))}
+.gpick:nth-child(6n+1){--gc:var(--c1)}.gpick:nth-child(6n+2){--gc:var(--c2)}.gpick:nth-child(6n+3){--gc:var(--c3)}.gpick:nth-child(6n+4){--gc:var(--c4)}.gpick:nth-child(6n+5){--gc:var(--c5)}.gpick:nth-child(6n+6){--gc:var(--c6)}
+.gpick .lv{color:var(--gc)}
+.gpick[aria-pressed="true"]{background:color-mix(in srgb,var(--gc) 14%,var(--bg));box-shadow:inset 0 0 0 2px var(--gc);border-color:var(--gc)}
+.gstage{background:linear-gradient(180deg,var(--c3s),var(--bg) 140px)}
+.score{background:var(--c6s);border-color:var(--c6)}
+.btn.pri{background:var(--c4);border-color:var(--c4);color:#ffffff}
+.btn.gold{background:var(--c6s);border-color:var(--c6)}
+.mbox{background:linear-gradient(135deg,var(--c1s),var(--c3s));border-color:var(--c3)}
+.chipq{border-color:var(--c3);background:var(--c3s)}
+.qblock .stem{background:var(--c4s)}
+.asp:nth-child(5n+1){border-top:4px solid var(--c1)}.asp:nth-child(5n+2){border-top:4px solid var(--c2)}.asp:nth-child(5n+3){border-top:4px solid var(--c3)}.asp:nth-child(5n+4){border-top:4px solid var(--c4)}.asp:nth-child(5n+5){border-top:4px solid var(--c5)}
+.modnav{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.modnav a{font-size:.8rem;font-weight:800;text-decoration:none;padding:4px 10px;border-radius:999px;border:1.5px solid var(--mc,var(--c4));color:var(--fg);background:var(--bg)}
+.modnav a:nth-child(5n+1){--mc:var(--c1)}.modnav a:nth-child(5n+2){--mc:var(--c2)}.modnav a:nth-child(5n+3){--mc:var(--c3)}.modnav a:nth-child(5n+4){--mc:var(--c4)}.modnav a:nth-child(5n+5){--mc:var(--c5)}
+.modnav a[aria-current="page"]{background:var(--mc);color:#ffffff}
+
+</style>
+</head>
+<body>
+
+
+<header class="band">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Fiqh Mastery Kit · Tingkatan 5 · Pelajaran 15</div>
+      <h1>Jenayah <span>dalam</span> Islam</h1>
+      <p>Modul lengkap berdasarkan Buku Teks Pendidikan Islam Tingkatan 5 (ms 153–161): maksud, hukum, dalil, hukuman hudud, qisas dan takzir, jenis kesalahan serta hikmah hukuman jenayah dalam Islam. Modul ini untuk pembelajaran akademik.</p>
+      <a class="back" href="index.html">← Kembali ke Analisis Induk 10 pelajaran</a>
+    </div>
+    <svg class="kaabah" viewBox="0 0 120 120" aria-hidden="true"><g stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round"><path d="M60 16v84M30 30h60M30 30 16 62h28ZM90 30 76 62h28Z"/><path d="M40 104h40"/></g><path d="M16 62h28a14 8 0 0 1-28 0ZM76 62h28a14 8 0 0 1-28 0Z" fill="#e3bd55"/></svg>
+  </div>
+</header>
+
+<div class="tabs" role="tablist" aria-label="Bahagian modul">
+  <div class="wrap">
+    <button class="tab" role="tab" id="tab-analisis" data-tab="analisis" aria-selected="true">Analisis Master <small>Fasa 2–3</small></button>
+    <button class="tab" role="tab" id="tab-slaid" data-tab="slaid" aria-selected="false">Slaid <small>18</small></button>
+    <button class="tab" role="tab" id="tab-lembaran" data-tab="lembaran" aria-selected="false">Lembaran Kerja <small>5 tahap</small></button>
+    <button class="tab" role="tab" id="tab-permainan" data-tab="permainan" aria-selected="false">Game Zone <small>10</small></button>
+    <button class="tab" role="tab" id="tab-spm" data-tab="spm" aria-selected="false">Latihan SPM</button>
+    <button class="tab" role="tab" id="tab-diagnostik" data-tab="diagnostik" aria-selected="false">Diagnostik</button>
+  </div>
+</div>
+
+<main>
+<!-- ============ ANALISIS ============ -->
+<section class="panel" id="p-analisis" role="tabpanel" aria-labelledby="tab-analisis">
+<div class="wrap">
+  <div class="note" style="margin-top:4px"><b>Penting:</b> Tajuk ini dipelajari sebagai ilmu fiqh berdasarkan buku teks dan prinsip syarak. Hukum fiqh berbeza daripada pelaksanaan undang-undang negara. Buku teks menegaskan bahawa <b>pelaksanaan hukuman hudud adalah di bawah pihak berkuasa dan tidak boleh dilaksanakan oleh orang awam</b>. Tiada individu boleh menghukum sendiri.</div>
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">A · Peta Konsep</div><h2>Gambaran keseluruhan tajuk</h2>
+    <p class="muted">Islam membahagikan hukuman jenayah kepada tiga: hudud dan qisas yang jenis dan bentuknya ditetapkan dalam al-Quran dan al-Sunnah, serta takzir yang diputuskan oleh mahkamah. Matlamatnya ialah keadilan, pendidikan dan keselamatan masyarakat.</p></div>
+    <div class="cmap">
+      <div class="core">Jenayah dalam Islam</div>
+      <div class="node l"><b>Maksud · Hukum · Dalil</b>Kesalahan yang dinyatakan hukumannya · wajib dilaksanakan · al-Baqarah 178</div>
+      <div class="node l"><b>Hudud</b>Zina, qazaf, mencuri, minum arak, merompak</div>
+      <div class="node l"><b>Qisas</b>Pembunuhan, perbuatan yang membawa kecederaan</div>
+      <div class="node r"><b>Takzir</b>Tidak ditetapkan dalam nas; diputuskan mahkamah</div>
+      <div class="node r"><b>Diat</b>Bayaran pampasan jika ada pengampunan</div>
+      <div class="node r"><b>Hikmah (4)</b>Keadilan, pendidikan, keselamatan, ekonomi</div>
+    </div>
+    <div style="margin-top:18px;display:grid;gap:8px"><b>Susunan pembelajaran, mudah ke sukar</b>
+      <div class="seq"><span>Maksud &amp; hukum</span><span>Dalil</span><span>Tiga jenis hukuman</span><span>Lima kesalahan hudud</span><span>Hukuman setiap kesalahan</span><span>Qisas &amp; diat</span><span>Takzir</span><span>Hudud vs qisas vs takzir</span><span>Hikmah</span><span>Situasi &amp; KBAT</span></div></div>
+    <div class="grid3" style="margin-top:18px">
+      <div class="card soft-gold"><h3>Fakta teras 1</h3>Hukum melaksanakan hukuman jenayah dalam Islam ialah <b>wajib</b> (oleh pihak berkuasa).</div>
+      <div class="card soft-gold"><h3>Fakta teras 2</h3>Tiga jenis hukuman: <b>hudud, qisas, takzir</b>.</div>
+      <div class="card soft-gold"><h3>Fakta teras 3</h3>Qisas boleh diganti dengan <b>diat</b> atau dimaafkan oleh mangsa atau waris mangsa.</div>
+    </div>
+  </div>
+  <div class="sec"><div class="sec-head"><div class="kicker">B · Master Istilah</div><h2>Istilah yang mesti dikuasai</h2></div><div class="grid2" id="istilah"></div></div>
+  <div class="sec"><div class="sec-head"><div class="kicker">C · Master Hukum</div><h2>Hukum dalam tajuk ini</h2></div>
+    <div class="tbox"><table><thead><tr><th>Perkara</th><th>Hukum</th><th>Maksud hukum</th><th>Sebab / dalil</th><th>Aplikasi</th><th>Contoh soalan</th></tr></thead><tbody id="hukum"></tbody></table></div></div>
+  <div class="sec"><div class="sec-head"><div class="kicker">D · Master Ketetapan</div><h2>Kesalahan dan hukuman mengikut buku teks</h2>
+    <p class="muted">Buku teks tidak menyenaraikan “rukun”. Yang diuji ialah maksud setiap jenis hukuman, kesalahan di bawahnya dan hukuman yang ditetapkan.</p></div>
+    <h3 style="font-size:1.1rem;margin-bottom:10px">Hudud: lima kesalahan</h3>
+    <div class="tbox"><table><thead><tr><th>Kesalahan</th><th>Takrif (buku teks)</th><th>Hukuman (buku teks)</th></tr></thead><tbody id="hudud"></tbody></table></div>
+    <h3 style="font-size:1.1rem;margin:20px 0 10px">Hukuman merompak mengikut kategori</h3>
+    <div class="tbox"><table><thead><tr><th>Kategori</th><th>Hukuman</th></tr></thead><tbody id="rompak"></tbody></table></div>
+    <h3 style="font-size:1.1rem;margin:20px 0 10px">Qisas: kesalahan dan hukuman</h3>
+    <div class="tbox"><table><thead><tr><th>Kesalahan</th><th>Maksud</th><th>Hukuman</th></tr></thead><tbody id="qisas"></tbody></table></div>
+    <div class="grid2" style="margin-top:16px" id="cardsA"></div>
+    <div class="tip" style="margin-top:14px"><b>Cara hafal:</b> Hukuman <b>“HU-QI-TA”</b> (Hudud, Qisas, Takzir). Kesalahan hudud <b>“ZI-QA-CU-MI-RO”</b> (Zina, Qazaf, Curi, Minum arak, Rompak). Sebat: arak <b>40</b>, qazaf <b>80</b>, zina bukan muhsan <b>100</b>.</div>
+  </div>
+  <div class="sec"><div class="sec-head"><div class="kicker">E · Master Perbezaan Istilah</div><h2>Hudud vs qisas vs takzir</h2></div>
+    <div class="tbox"><table><thead><tr><th>Istilah A</th><th>Istilah B</th><th>Maksud ringkas</th><th>Perbezaan utama</th><th>Contoh situasi</th><th>Kata kunci</th></tr></thead><tbody id="beza"></tbody></table></div></div>
+  <div class="sec"><div class="sec-head"><div class="kicker">F · Master Proses</div><h2>Mengenal pasti jenis hukuman</h2>
+    <p class="muted">Carta alir ini untuk analisis akademik sahaja. Keputusan sebenar dibuat oleh mahkamah.</p></div>
+    <div class="grid2"><div><h3 style="font-size:1.1rem;margin-bottom:12px">Kesalahan ini di bawah kategori apa?</h3><div class="flow" id="flowA"></div></div>
+    <div><h3 style="font-size:1.1rem;margin-bottom:12px">Peranan masyarakat mengurangkan jenayah</h3><div class="flow" id="flowB"></div></div></div>
+    <div class="note" style="margin-top:14px"><b>Kesalahan yang perlu dielakkan:</b> menyangka orang awam boleh menghukum sendiri; tertukar bilangan sebatan; menyangka qisas tidak boleh dimaafkan; menyangka takzir ditetapkan dalam al-Quran; menyamakan qazaf dengan zina.</div></div>
+  <div class="sec"><div class="sec-head"><div class="kicker">G · Master Soalan Hukum</div><h2>Situasi → Isu → Hukum → Alasan → Kesimpulan</h2></div><div class="sits" id="situasi"></div></div>
+  <div class="sec"><div class="sec-head"><div class="kicker">H · Master Dalil dan Hikmah</div><h2>Dalil dalam buku teks</h2></div>
+    <div class="grid2" id="dalil"></div>
+    <h3 style="margin:22px 0 10px;font-size:1.2rem">Hikmah hukuman jenayah dalam Islam</h3><div class="grid3" id="hikmah"></div>
+    <div class="tip" style="margin-top:14px"><b>Nota guru buku teks:</b> Bimbing murid menghindari jenayah secara beradab dan istiqamah.</div></div>
+</div>
+</section>
+
+<!-- ============ SLAID ============ -->
+<section class="panel" id="p-slaid" role="tabpanel" aria-labelledby="tab-slaid" hidden>
+<div class="wrap">
+  <div class="sec-head"><div class="kicker">Fasa 4 · Slaid Pembelajaran</div><h2>18 slaid Jenayah dalam Islam</h2><p class="muted">Gunakan butang atau kekunci anak panah. Setiap slaid ada isi, penerangan, kata kunci, contoh situasi dan soalan pemahaman.</p></div>
+  <div class="deck">
+    <div class="dcontrols">
+      <button class="btn" id="sPrev" type="button">← Sebelum</button>
+      <button class="btn pri" id="sNext" type="button">Seterusnya →</button>
+      <span class="muted" id="sCount" style="font-weight:800"></span>
+    </div>
+    <div class="stage" id="stage" tabindex="0" aria-live="polite"></div>
+    <div class="dots" id="sDots"></div>
+  </div>
+</div>
+</section>
+
+<!-- ============ LEMBARAN ============ -->
+<section class="panel" id="p-lembaran" role="tabpanel" aria-labelledby="tab-lembaran" hidden>
+<div class="wrap">
+  <div class="sec-head"><div class="kicker">Fasa 5 · Lembaran Kerja Master Fiqh</div><h2>Lima tahap: Kenali → Fahami → Bezakan → Aplikasi → KBAT</h2>
+  <p class="muted">Cetak atau paparkan di kelas. Tekan butang skema selepas murid mencuba.</p></div>
+  <div class="dcontrols" style="margin-bottom:14px"><button class="btn gold" id="toggleSkema" type="button" aria-pressed="false">Tunjuk skema jawapan</button></div>
+  <div class="ws" id="ws"></div>
+</div>
+</section>
+
+<!-- ============ PERMAINAN ============ -->
+<section class="panel" id="p-permainan" role="tabpanel" aria-labelledby="tab-permainan" hidden>
+<div class="wrap">
+  <div class="sec-head"><div class="kicker">Fasa 6 · Fiqh Game Zone</div><h2>Pilih permainan</h2><p class="muted">Semua soalan berdasarkan buku teks. Markah dikira automatik dan maklum balas dipaparkan selepas setiap jawapan.</p></div>
+  <div class="gamegrid" id="gamegrid"></div>
+  <div class="gstage" id="gstage"></div>
+</div>
+</section>
+
+<!-- ============ SPM ============ -->
+<section class="panel" id="p-spm" role="tabpanel" aria-labelledby="tab-spm" hidden>
+<div class="wrap">
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">Fasa 7 · Latihan Peperiksaan</div><h2>Soalan 3 format percubaan</h2>
+    <p class="muted">Soalan latihan rekaan guru mengikut format Kertas 1223/1 Soalan 3. Ini <b>bukan</b> soalan sebenar SPM.</p></div>
+    <div class="dcontrols" style="margin-bottom:14px"><button class="btn gold" id="toggleAns" type="button" aria-pressed="false">Tunjuk jawapan, skema dan teknik</button></div>
+    <div class="grid2" style="margin-bottom:16px">
+      <div class="tip"><b>Formula 4 markah:</b> 2 isi × (isi 1 markah + huraian/contoh 1 markah). Mulakan dengan kata kunci buku teks, kemudian huraikan dengan “kerana…”, “contohnya…”.</div>
+      <div class="tip"><b>Soalan hukum 2 markah:</b> nyatakan hukum (1) + alasan yang menyebut syarat/rukun/larangan yang terlibat (1).</div>
+    </div>
+    <div style="display:grid;gap:16px" id="struktur"></div>
+  </div>
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">Soalan objektif</div><h2>12 soalan aneka pilihan</h2></div>
+    <div class="mcq" id="mcq"></div>
+    <div class="dcontrols" style="margin-top:12px"><button class="btn pri" id="mcqCheck" type="button">Semak jawapan</button><span id="mcqScore" class="score" hidden></span></div>
+  </div>
+</div>
+</section>
+
+<!-- ============ DIAGNOSTIK ============ -->
+<section class="panel" id="p-diagnostik" role="tabpanel" aria-labelledby="tab-diagnostik" hidden>
+<div class="wrap">
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">Fasa 8 · Analisis Kelemahan Murid</div><h2>Ujian diagnostik lima aspek</h2>
+    <p class="muted">15 soalan, 3 bagi setiap aspek. Selepas disemak, halaman menunjukkan tahap penguasaan, analisis kesalahan dan aktiviti yang dicadangkan.</p></div>
+    <div class="dcontrols" style="margin-bottom:12px">
+      <button class="btn pri" type="button" id="dPre" aria-pressed="true">Ujian diagnostik (pra)</button>
+      <button class="btn" type="button" id="dPost" aria-pressed="false">Ujian selepas pembelajaran (pasca)</button>
+    </div>
+    <div class="dq" id="dq"></div>
+    <div class="dcontrols" style="margin-top:12px"><button class="btn pri" id="dCheck" type="button">Semak dan analisis</button><button class="btn" id="dReset" type="button">Set semula</button></div>
+    <div id="dResult" style="margin-top:18px;display:grid;gap:14px"></div>
+  </div>
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">Senarai Semak Penguasaan</div><h2>Saya boleh…</h2><p class="muted">Tanda yang sudah dikuasai. Tanda ini disimpan dalam pelayar anda sahaja.</p></div>
+    <div class="check" id="checklist"></div>
+  </div>
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">Aktiviti susulan</div><h2>Pemulihan dan pengayaan</h2></div>
+    <div class="tbox"><table><thead><tr><th>Aspek</th><th>Tanda kelemahan</th><th>Aktiviti pemulihan</th><th>Aktiviti pengayaan</th></tr></thead><tbody id="remedi"></tbody></table></div>
+  </div>
+</div>
+</section>
+</main>
+
+<footer><div class="wrap"><b>Modul lain:</b><nav class="modnav" id="modnav" aria-label="Modul lain"></nav><p style="margin-top:12px">Sumber: Buku Teks Pendidikan Islam KSSM Tingkatan 5, Pelajaran 15 (ms 153–161). Modul ini untuk pembelajaran akademik; pelaksanaan hukuman adalah di bawah pihak berkuasa dan mahkamah. Label <span class="add">Tambahan</span> atau <span class="add">Prinsip umum fiqh</span> menandakan perkara di luar buku teks. Soalan latihan ialah rekaan dan bukan soalan sebenar SPM.</p></div></footer>
+
+<script>
+/* ================= DATA ================= */
+const ISTILAH = [
+ ["Jenayah","Kesalahan-kesalahan yang dinyatakan hukumannya dalam al-Quran, al-Sunnah dan sebahagiannya daripada mahkamah (al-Ahkam al-Sultaniyyah).","Kesalahan yang ada hukumannya.","Mencuri, membunuh dan minum arak ialah jenayah.","kesalahan · al-Quran · al-Sunnah · mahkamah","Menyangka jenayah hanya ditentukan oleh al-Quran."],
+ ["Hudud","Hukuman keseksaan yang telah ditetapkan jenis dan bentuknya dalam al-Quran dan al-Sunnah.","Hukuman tetap daripada Allah.","Hukuman bagi kesalahan mencuri.","ditetapkan · al-Quran · al-Sunnah","Tertukar dengan takzir."],
+ ["Qisas","Hukuman keseksaan yang telah ditetapkan jenis dan bentuk hukumannya secara balasan yang sama seperti dalam al-Quran dan al-Sunnah.","Balasan yang setimpal.","Hukuman bagi pembunuhan atau kecederaan.","balasan yang sama","Menyangka qisas tidak boleh dimaafkan."],
+ ["Takzir","Hukuman keseksaan yang tidak ditetapkan jenis dan bentuk dalam al-Quran dan al-Sunnah, sebaliknya diputuskan oleh mahkamah.","Hukuman yang ditentukan hakim.","Contoh: teguran, denda, penjara, sebatan dan hukuman mati.","tidak ditetapkan · mahkamah","Menyangka takzir hanya denda."],
+ ["Diat","Jumlah bayaran berdasarkan persetujuan bersama atau ditetapkan oleh mahkamah.","Pampasan kepada mangsa atau waris.","Waris mangsa memilih diat sebagai ganti qisas.","bayaran · persetujuan/mahkamah","Menyangka diat ialah denda kepada kerajaan."],
+ ["Zina","Melakukan persetubuhan haram tanpa nikah yang sah antara lelaki dengan perempuan.","Hubungan tanpa nikah.","Kesalahan hudud.","tanpa nikah sah","Tertukar dengan qazaf."],
+ ["Muhsan","Penzina yang sudah berkahwin.","Orang yang telah berkahwin.","Hukuman berbeza bagi muhsan dan bukan muhsan.","sudah berkahwin","Tertukar dengan bukan muhsan."],
+ ["Qazaf","Tuduhan zina atau penafian nasab terhadap orang yang baik akhlaknya.","Menuduh orang berzina tanpa bukti.","Menyebarkan tuduhan zina di media sosial tanpa empat saksi.","tuduhan zina · tanpa bukti","Menyangka qazaf ialah zina."],
+ ["Mencuri","Mengambil harta orang lain secara tersembunyi (tanpa kerelaannya) dengan tujuan memilikinya.","Mengambil harta orang secara senyap.","Kesalahan hudud.","tersembunyi · memiliki","Tertukar dengan merompak (terbuka)."],
+ ["Minum arak","Meminum sebarang bahan yang memabukkan sama ada dinamakan arak atau tidak, banyak atau sedikit.","Mengambil minuman memabukkan.","Sedikit pun termasuk kesalahan.","memabukkan · banyak atau sedikit","Menyangka sedikit tidak mengapa."],
+ ["Merompak","Melakukan serangan dengan menggunakan kekerasan untuk merampas harta, membunuh atau menakutkan orang awam secara terbuka.","Serangan terbuka dengan kekerasan.","Hukuman mengikut empat kategori.","kekerasan · terbuka","Tertukar dengan mencuri."],
+ ["Pembunuhan","Serangan yang mengakibatkan kehilangan nyawa; jenisnya: dengan sengaja, separa sengaja, tanpa niat.","Mengakibatkan kematian.","Kesalahan di bawah qisas.","kehilangan nyawa","Tidak mengetahui tiga jenis pembunuhan."],
+ ["Buang daerah","Hukuman diasingkan ke daerah lain; bagi penzina bukan muhsan (setahun) dan perompak yang tidak merampas atau membunuh.","Diasingkan dari tempat tinggal.","Penzina bukan muhsan: sebat 100 dan buang daerah setahun.","diasingkan","Tidak mengaitkan dengan dua kesalahan."],
+ ["Ijtihad dan maslahah","Hakim harus menjatuhkan hukuman takzir berdasarkan ijtihad dan maslahah rakyat dan negara bagi kesalahan yang tiada peruntukannya.","Pertimbangan hakim demi kebaikan umum.","Mahkamah menentukan jenis hukuman takzir.","ijtihad · maslahah","Menyangka takzir ditentukan individu."]
+];
+const HUKUM = [
+ ["Melaksanakan hukuman jenayah dalam Islam","Wajib","Mesti dilaksanakan oleh pihak berkuasa.","al-Baqarah 2:178; hadis Ibn Mas'ud (Muslim).","Memahami peranan mahkamah dan pihak berkuasa.","Nyatakan hukum melaksanakan hukuman jenayah."],
+ ["Hudud","Wajib","Hukuman ditetapkan oleh Allah; dilaksanakan oleh pihak berkuasa.","al-Quran dan al-Sunnah.","Bukan untuk dilaksanakan oleh orang awam.","Apakah maksud hudud?"],
+ ["Qisas","Wajib jika mangsa atau waris mangsa mahukan balasan yang sama","Boleh diganti dengan diat atau dimaafkan.","al-Baqarah 2:178.","Waris memilih diat atau memaafkan.","Bilakah qisas boleh digantikan?"],
+ ["Takzir","Hakim harus menjatuhkan hukuman","Berdasarkan ijtihad dan maslahah rakyat dan negara.","Kesalahan yang tiada peruntukan hukuman dalam nas.","Mahkamah menentukan denda atau penjara.","Apakah maksud takzir?"],
+ ["Melaksanakan hukuman oleh orang awam","Tidak boleh","Pelaksanaan hudud di bawah pihak berkuasa.","Buku teks (Spektrum Ilmu).","Melaporkan jenayah kepada pihak berkuasa.","Siapakah yang berhak melaksanakan hukuman?"]
+];
+const TABLES = [
+ {id:"hudud",rows:[
+  ["Zina","Melakukan persetubuhan haram tanpa nikah yang sah antara lelaki dengan perempuan.","Bukan muhsan (belum berkahwin): sebat 100 kali dan buang daerah selama setahun. Muhsan (sudah berkahwin): rejam dengan batu sehingga mati."],
+  ["Qazaf","Tuduhan zina atau penafian nasab terhadap orang yang baik akhlaknya.","Sebat 80 kali; tidak diterima sebagai saksi."],
+  ["Mencuri","Mengambil harta orang lain secara tersembunyi (tanpa kerelaannya) dengan tujuan memilikinya.","Potong tangan; memulangkan barang yang dicuri."],
+  ["Minum arak","Meminum sebarang bahan yang memabukkan sama ada dinamakan arak atau tidak, banyak atau sedikit.","Sebat 40 kali."],
+  ["Merompak","Melakukan serangan dengan kekerasan untuk merampas harta, membunuh atau menakutkan orang awam secara terbuka.","Mengikut kategori (lihat jadual di bawah)."]
+ ]},
+ {id:"rompak",rows:[["Berlaku rampasan harta dan berlaku pembunuhan","Dibunuh kemudian disalib"],["Tidak berlaku rampasan harta tetapi berlaku pembunuhan","Dibunuh"],["Berlaku rampasan harta tetapi tidak berlaku pembunuhan","Dipotong tangan dan kaki secara bersilang"],["Tidak berlaku rampasan harta dan tidak berlaku pembunuhan","Buang daerah"]]},
+ {id:"qisas",rows:[["Pembunuhan","Serangan yang mengakibatkan kehilangan nyawa.","Mati; atau diat jika ada pengampunan daripada waris mangsa."],["Perbuatan yang membawa kepada kecederaan","Perbuatan yang mendatangkan kecederaan.","Balasan yang sama; atau diat jika ada pengampunan daripada mangsa atau waris mangsa."]]}
+];
+const CARDS = [{id:"cardsA",lab:"Nota",items:[
+ ["Jenis pembunuhan menurut syariat Islam",["Pembunuhan dengan sengaja","Pembunuhan separa sengaja","Pembunuhan tanpa niat"],"","soft-lilac"],
+ ["Takzir",["Hukuman tidak ditetapkan jenis dan bentuk dalam al-Quran dan al-Sunnah","Diputuskan oleh mahkamah berdasarkan ijtihad dan maslahah","Contoh: teguran, denda, penjara, sebatan, hukuman mati"],"","soft-sky"]
+]}];
+const BEZA = [
+ ["Hudud","Qisas","Kedua-duanya ditetapkan dalam al-Quran dan al-Sunnah.","Hudud: hukuman tetap bagi 5 kesalahan. Qisas: balasan yang sama bagi pembunuhan/kecederaan; boleh diganti diat atau dimaafkan.","Pembunuhan: qisas.","boleh dimaafkan?"],
+ ["Qisas","Takzir","Ditetapkan vs tidak ditetapkan.","Qisas ditetapkan dalam nas; takzir diputuskan mahkamah.","Kesalahan tiada peruntukan nas: takzir.","nas vs mahkamah"],
+ ["Hudud","Takzir","Ditetapkan vs tidak ditetapkan.","Hudud: jenis dan bentuk ditetapkan. Takzir: hakim memutuskan berdasarkan ijtihad dan maslahah.","Mencuri: hudud.","tetap vs ijtihad"],
+ ["Zina","Qazaf","Dua kesalahan hudud.","Zina: perbuatan persetubuhan haram. Qazaf: tuduhan zina tanpa bukti terhadap orang baik.","Menuduh jiran berzina tanpa saksi: qazaf.","perbuatan vs tuduhan"],
+ ["Mencuri","Merompak","Mengambil harta.","Mencuri: tersembunyi. Merompak: terbuka dengan kekerasan.","Merampas beg dengan pisau di khalayak: merompak.","senyap vs terbuka"],
+ ["Muhsan","Bukan muhsan","Status penzina.","Muhsan: sudah berkahwin, rejam. Bukan muhsan: belum berkahwin, sebat 100 dan buang daerah setahun.","Penzina bujang: bukan muhsan.","berkahwin?"],
+ ["Diat","Denda takzir","Bayaran.","Diat: pampasan kepada mangsa/waris ganti qisas. Denda: hukuman takzir oleh mahkamah.","Waris memilih bayaran: diat.","mangsa vs mahkamah"],
+ ["Sebat 40","Sebat 80","Bilangan sebatan.","40: minum arak. 80: qazaf. (100: zina bukan muhsan.)","Kesalahan minum arak: 40.","arak vs qazaf"]
+];
+const FLOW_A = [
+ ["1","Adakah kesalahan itu salah satu daripada lima?","Zina, qazaf, mencuri, minum arak, merompak → hudud.","p-r","Hudud"],
+ ["2","Adakah ia pembunuhan atau kecederaan?","Ya → qisas (balasan sama), atau diat/maaf daripada mangsa atau waris.","p-w","Qisas"],
+ ["3","Tiada peruntukan hukuman dalam nas?","Takzir: mahkamah memutuskan berdasarkan ijtihad dan maslahah.","p-s","Takzir"],
+ ["4","Siapa melaksanakan?","Pihak berkuasa dan mahkamah sahaja, bukan orang awam.","p-x","Peringatan"]
+];
+const FLOW_B = [
+ ["1","Individu","Menghindari jenayah; menjaga diri dan keluarga.","p-s","Diri"],
+ ["2","Keluarga","Mendidik anak dengan nilai agama dan akhlak.","p-s","Keluarga"],
+ ["3","Masyarakat","Prihatin dan melaporkan jenayah kepada pihak berkuasa.","p-s","Masyarakat"],
+ ["4","Pihak berkuasa","Melaksanakan undang-undang dengan adil.","p-r","Berkuasa"]
+];
+const SITUASI = [
+ ["Seorang lelaki mengambil telefon rakannya secara senyap dengan niat memilikinya.","Jenis kesalahan","Mencuri (hudud)","Mengambil harta orang lain secara tersembunyi dengan tujuan memilikinya.","Menurut fiqh: potong tangan dan memulangkan barang; dilaksanakan oleh mahkamah."],
+ ["Sekumpulan lelaki merampas beg pejalan kaki secara terbuka menggunakan senjata tetapi tiada pembunuhan.","Jenis kesalahan","Merompak (hudud)","Serangan terbuka dengan kekerasan; berlaku rampasan tanpa pembunuhan.","Menurut fiqh: dipotong tangan dan kaki secara bersilang; dilaksanakan pihak berkuasa."],
+ ["Seseorang meminum sedikit minuman yang memabukkan.","Jenis kesalahan","Minum arak (hudud)","Sebarang bahan memabukkan, banyak atau sedikit.","Menurut fiqh: sebat 40 kali."],
+ ["Seseorang menuduh jirannya yang berakhlak baik berzina tanpa bukti.","Jenis kesalahan","Qazaf (hudud)","Tuduhan zina terhadap orang baik akhlaknya.","Menurut fiqh: sebat 80 kali dan tidak diterima sebagai saksi."],
+ ["Penyebaran tuduhan zina terhadap seorang wanita di media sosial tanpa bukti.","Jenis kesalahan","Qazaf","Tuduhan zina tanpa bukti terhadap orang yang baik.","Masyarakat perlu berhati-hati menyebarkan tuduhan."],
+ ["Pasangan belum berkahwin didapati melakukan zina dan disabitkan oleh mahkamah.","Hukuman zina","Bukan muhsan","Belum berkahwin.","Menurut fiqh: sebat 100 kali dan buang daerah setahun."],
+ ["Seseorang membunuh dengan sengaja; waris mangsa memaafkan dan meminta bayaran.","Qisas","Diat","Qisas boleh digantikan dengan diat atau dimaafkan oleh waris mangsa.","Pembunuh membayar diat seperti dipersetujui atau ditetapkan mahkamah."],
+ ["Seseorang mencederakan orang lain; mangsa mahukan balasan yang sama.","Qisas","Balasan yang sama","Qisas wajib jika mangsa mahukan balasan yang sama.","Dilaksanakan melalui mahkamah."],
+ ["Kesalahan yang tiada peruntukan hukuman dalam al-Quran dan al-Sunnah.","Jenis hukuman","Takzir","Hukuman diputuskan oleh mahkamah berdasarkan ijtihad dan maslahah.","Contoh: teguran, denda atau penjara."],
+ ["Penduduk kampung ingin memukul pencuri yang ditangkap.","Pelaksanaan hukuman","Tidak boleh","Pelaksanaan hukuman di bawah pihak berkuasa; tidak boleh dilaksanakan oleh orang awam.","Serahkan kepada polis dan mahkamah."],
+ ["Perompak hanya menakutkan orang awam tanpa merampas harta atau membunuh.","Merompak (kategori 4)","Buang daerah","Tidak berlaku rampasan dan tidak berlaku pembunuhan.","Menurut fiqh: buang daerah."],
+ ["Perompak merampas harta dan membunuh mangsa.","Merompak (kategori 1)","Dibunuh kemudian disalib","Berlaku rampasan dan pembunuhan.","Hukuman paling berat bagi merompak, oleh pihak berkuasa."],
+ ["Seorang muslim bertanya mengapa hukuman jenayah Islam disebut “mendidik, bukan semata-mata menghukum”.","Hikmah","Mendidik masyarakat","Hikmah: mendidik dan menghukum supaya mendapat keampunan Allah; menjamin keselamatan.","Objektif hukuman ialah mencegah dan mendidik."],
+ ["Statistik jenayah meningkat dalam sebuah kawasan.","Peranan masyarakat","Tanggungjawab bersama","Hikmah: menjamin keselamatan, kestabilan dan kedamaian.","Setiap anggota masyarakat memainkan peranan (aktiviti buku teks)."],
+ ["Pembunuhan berlaku tanpa niat dalam satu kemalangan.","Jenis pembunuhan","Pembunuhan tanpa niat","Buku teks menyenaraikan tiga jenis: sengaja, separa sengaja, tanpa niat.","Mahkamah menilai berdasarkan jenis pembunuhan."]
+];
+const DALIL = [
+ ["Surah al-Baqarah 2:178","يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الْقِصَاصُ فِي الْقَتْلَى ۖ الْحُرُّ بِالْحُرِّ وَالْعَبْدُ بِالْعَبْدِ وَالْأُنثَىٰ بِالْأُنثَىٰ","Wahai orang yang beriman! Diwajibkan kamu menjalankan hukuman qisas (balasan yang seimbang) dalam perkara orang yang mati dibunuh: orang merdeka dengan orang merdeka, hamba dengan hamba, dan perempuan dengan perempuan…","Qisas ialah balasan yang seimbang.","Dalil hukuman jenayah."],
+ ["Hadis riwayat Muslim (Abdullah bin Mas'ud)","لَا يَحِلُّ دَمُ امْرِئٍ مُسْلِمٍ يَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَنِّي رَسُولُ اللَّهِ إِلَّا بِإِحْدَى ثَلَاثٍ: الثَّيِّبُ الزَّانِي، وَالنَّفْسُ بِالنَّفْسِ، وَالتَّارِكُ لِدِينِهِ الْمُفَارِقُ لِلْجَمَاعَةِ","Tidak halal darah (nyawa) seorang muslim yang bersaksi bahawa tiada Tuhan selain Allah dan aku Rasulullah, melainkan salah satu daripada tiga: orang yang sudah berkahwin melakukan zina, membunuh jiwa, dan orang yang meninggalkan agama serta keluar daripada jemaah Islam.","Nyawa muslim dilindungi; hukuman hanya melalui ketetapan syarak.","Dalil hukuman jenayah."]
+];
+const HIKMAH = [
+ ["Menegakkan keadilan","Menegakkan keadilan dalam kalangan manusia agar dapat hidup dengan sejahtera.","Mangsa mendapat pembelaan.","soft-mint"],
+ ["Mendidik","Mendidik dan menghukum bagi sebarang kesalahan dan maksiat yang dilakukan supaya mendapat keampunan daripada Allah.","Pesalah insaf dan bertaubat.","soft-teal"],
+ ["Keselamatan","Menjamin keselamatan, kestabilan dan kedamaian bagi masyarakat dan negara.","Masyarakat rasa selamat.","soft-gold"],
+ ["Ekonomi","Merancakkan pertumbuhan ekonomi tanpa bimbang kepada sebarang rompakan dan kecurian.","Pelabur dan peniaga yakin.","soft-lilac"]
+];
+const BANK = [
+ {q:"Apakah maksud jenayah dalam Islam?",o:["Kesalahan yang dinyatakan hukumannya dalam al-Quran, al-Sunnah dan sebahagiannya daripada mahkamah","Kesalahan lalu lintas sahaja","Dosa kecil","Perselisihan keluarga"],a:0,e:"al-Ahkam al-Sultaniyyah.",l:1,t:"is"},
+ {q:"Hudud bermaksud",o:["Hukuman yang diputuskan mahkamah tanpa nas","Hukuman keseksaan yang ditetapkan jenis dan bentuknya dalam al-Quran dan al-Sunnah","Bayaran pampasan","Teguran"],a:1,e:"Definisi hudud.",l:1,t:"is"},
+ {q:"Qisas bermaksud",o:["Balasan yang sama seperti ditetapkan dalam al-Quran dan al-Sunnah","Buang daerah","Teguran hakim","Hukuman denda"],a:0,e:"Definisi qisas.",l:1,t:"is"},
+ {q:"Takzir bermaksud",o:["Hukuman ditetapkan dalam al-Quran","Hukuman yang tidak ditetapkan dalam nas dan diputuskan oleh mahkamah","Hukuman bagi zina","Bayaran kepada waris"],a:1,e:"Definisi takzir.",l:1,t:"is"},
+ {q:"Diat ialah",o:["Jumlah bayaran berdasarkan persetujuan bersama atau ditetapkan mahkamah","Hukuman sebat","Penjara","Buang daerah"],a:0,e:"Definisi diat.",l:2,t:"is"},
+ {q:"Qazaf ialah",o:["Mencuri","Tuduhan zina atau penafian nasab terhadap orang yang baik akhlaknya","Minum arak","Merompak"],a:1,e:"Definisi qazaf.",l:2,t:"is"},
+ {q:"Hukum melaksanakan hukuman jenayah dalam Islam ialah",o:["Sunat","Harus","Wajib","Makruh"],a:2,e:"Buku teks.",l:1,t:"hk"},
+ {q:"Dalil hukuman qisas dalam al-Quran ialah",o:["al-Baqarah 2:178","an-Nur 24:32","al-Baqarah 2:275","al-Maidah 5:3"],a:0,e:"al-Baqarah 178.",l:2,t:"hk"},
+ {q:"Pelaksanaan hukuman hudud adalah di bawah",o:["Orang awam","Pihak berkuasa","Ketua kampung","Mangsa"],a:1,e:"Tidak boleh dilaksanakan oleh orang awam.",l:1,t:"hk"},
+ {q:"Hikmah hukuman jenayah yang berkaitan ekonomi ialah",o:["Menambah cukai","Merancakkan pertumbuhan ekonomi tanpa bimbang rompakan dan kecurian","Menjual harta pesalah","Mengurangkan gaji"],a:1,e:"Hikmah keempat.",l:2,t:"hk"},
+ {q:"Qisas wajib dilaksanakan apabila",o:["Hakim mahu","Mangsa atau waris mangsa mahukan balasan yang sama","Pesalah meminta","Masyarakat mendesak"],a:1,e:"Boleh diganti diat atau dimaafkan.",l:3,t:"hk"},
+ {q:"Hakim menjatuhkan hukuman takzir berdasarkan",o:["Kehendak peribadi","Ijtihad dan maslahah rakyat dan negara","Undian","Permintaan pesalah"],a:1,e:"Buku teks.",l:3,t:"hk"},
+ {q:"Lima kesalahan di bawah hudud ialah",o:["Zina, qazaf, mencuri, minum arak, merompak","Membunuh, mencederakan, mencuri, zina, judi","Rasuah, mencuri, zina, arak, judi","Membunuh, zina, rasuah, arak, qazaf"],a:0,e:"ZI-QA-CU-MI-RO.",l:1,t:"rk"},
+ {q:"Hukuman bagi minum arak ialah",o:["Sebat 40 kali","Sebat 80 kali","Sebat 100 kali","Potong tangan"],a:0,e:"Buku teks.",l:2,t:"rk"},
+ {q:"Hukuman bagi qazaf ialah",o:["Sebat 40 kali","Sebat 80 kali dan tidak diterima sebagai saksi","Rejam","Buang daerah"],a:1,e:"Buku teks.",l:2,t:"rk"},
+ {q:"Hukuman bagi penzina bukan muhsan ialah",o:["Rejam","Sebat 100 kali dan buang daerah setahun","Sebat 40 kali","Denda"],a:1,e:"Buku teks.",l:2,t:"rk"},
+ {q:"Hukuman bagi mencuri ialah",o:["Potong tangan dan memulangkan barang yang dicuri","Sebat 80","Buang daerah","Diat"],a:0,e:"Buku teks.",l:2,t:"rk"},
+ {q:"Kesalahan di bawah qisas ialah",o:["Mencuri dan merompak","Pembunuhan dan perbuatan yang membawa kecederaan","Zina dan qazaf","Minum arak"],a:1,e:"Dua kesalahan qisas.",l:2,t:"rk"},
+ {q:"Perbezaan hudud dengan takzir ialah",o:["Hudud ditetapkan dalam nas; takzir diputuskan mahkamah","Takzir ditetapkan dalam nas","Kedua-duanya sama","Hudud oleh orang awam"],a:0,e:"Nas vs mahkamah.",l:2,t:"bz"},
+ {q:"Ciri qisas yang tiada pada hudud ialah",o:["Ditetapkan dalam nas","Boleh diganti dengan diat atau dimaafkan","Dilaksanakan pihak berkuasa","Hukuman keseksaan"],a:1,e:"Pengampunan mangsa/waris.",l:3,t:"bz"},
+ {q:"Perbezaan mencuri dengan merompak ialah",o:["Mencuri terbuka; merompak tersembunyi","Mencuri tersembunyi; merompak terbuka dengan kekerasan","Kedua-duanya terbuka","Tiada beza"],a:1,e:"Rujuk takrif.",l:2,t:"bz"},
+ {q:"Perbezaan zina dengan qazaf ialah",o:["Zina perbuatan; qazaf tuduhan zina tanpa bukti","Zina tuduhan; qazaf perbuatan","Kedua-duanya tuduhan","Tiada beza"],a:0,e:"Perbuatan vs tuduhan.",l:2,t:"bz"},
+ {q:"Penzina muhsan berbeza daripada bukan muhsan kerana",o:["Muhsan belum berkahwin","Muhsan sudah berkahwin","Muhsan kanak-kanak","Tiada beza"],a:1,e:"Status perkahwinan.",l:2,t:"bz"},
+ {q:"Contoh hukuman takzir ialah",o:["Potong tangan","Teguran, denda, penjara","Sebat 40","Rejam"],a:1,e:"Buku teks.",l:2,t:"bz"},
+ {q:"Seorang mengambil telefon rakan secara senyap untuk dimiliki. Kesalahan ini ialah",o:["Merompak","Mencuri","Qazaf","Takzir"],a:1,e:"Tersembunyi.",l:2,t:"st"},
+ {q:"Seorang menuduh jirannya berzina tanpa bukti. Kesalahan ini ialah",o:["Zina","Qazaf","Mencuri","Merompak"],a:1,e:"Tuduhan zina.",l:2,t:"st"},
+ {q:"Waris mangsa bunuh memaafkan pembunuh dan meminta bayaran. Bayaran ini dinamakan",o:["Takzir","Diat","Zakat","Denda"],a:1,e:"Diat.",l:2,t:"st"},
+ {q:"Penduduk kampung ingin memukul pencuri yang ditangkap. Tindakan yang betul ialah",o:["Memukulnya","Menyerahkan kepada pihak berkuasa","Membebaskannya tanpa laporan","Memotong tangannya"],a:1,e:"Hukuman hanya oleh pihak berkuasa.",l:2,t:"st"},
+ {q:"Perompak merampas harta tetapi tidak membunuh. Hukuman menurut fiqh ialah",o:["Dibunuh","Dipotong tangan dan kaki secara bersilang","Buang daerah","Sebat 40"],a:1,e:"Kategori 3.",l:3,t:"st"},
+ {q:"Perompak hanya menakutkan orang awam tanpa merampas atau membunuh. Hukuman menurut fiqh ialah",o:["Buang daerah","Dibunuh","Potong tangan","Rejam"],a:0,e:"Kategori 4.",l:3,t:"st"}
+];
+const TF = [
+ ["Hukum melaksanakan hukuman jenayah dalam Islam ialah wajib.",true,"Oleh pihak berkuasa."],
+ ["Orang awam boleh melaksanakan hukuman hudud.",false,"Di bawah pihak berkuasa sahaja."],
+ ["Hudud ialah hukuman yang ditetapkan jenis dan bentuknya dalam al-Quran dan al-Sunnah.",true,"Definisi."],
+ ["Takzir ditetapkan dalam al-Quran.",false,"Diputuskan oleh mahkamah."],
+ ["Hukuman minum arak ialah sebat 40 kali.",true,"Buku teks."],
+ ["Hukuman qazaf ialah sebat 100 kali.",false,"80 kali dan tidak diterima sebagai saksi."],
+ ["Qisas boleh diganti dengan diat jika waris mangsa memaafkan.",true,"Betul."],
+ ["Mencuri ialah mengambil harta secara terbuka dengan kekerasan.",false,"Itu merompak; mencuri secara tersembunyi."],
+ ["Pembunuhan termasuk kesalahan di bawah qisas.",true,"Betul."],
+ ["Minum sedikit bahan memabukkan tidak termasuk kesalahan.",false,"Banyak atau sedikit."],
+ ["Diat ditetapkan berdasarkan persetujuan bersama atau oleh mahkamah.",true,"Definisi diat."],
+ ["Zina termasuk kesalahan takzir.",false,"Hudud."],
+ ["Hukuman jenayah Islam bertujuan menjamin keselamatan masyarakat.",true,"Hikmah."],
+ ["Terdapat tiga jenis pembunuhan menurut syariat Islam.",true,"Sengaja, separa sengaja, tanpa niat."],
+ ["Contoh takzir termasuk teguran dan denda.",true,"Buku teks."],
+ ["Penzina muhsan ialah penzina yang belum berkahwin.",false,"Sudah berkahwin."]
+];
+const PAIRS = [["Hudud","Ditetapkan dalam nas"],["Qisas","Balasan yang sama"],["Takzir","Diputuskan mahkamah"],["Diat","Bayaran pampasan"],["Minum arak","Sebat 40"],["Qazaf","Sebat 80"],["Zina bukan muhsan","Sebat 100 + buang daerah"],["Mencuri","Potong tangan, pulangkan barang"],["Pembunuhan","Qisas atau diat"],["Muhsan","Sudah berkahwin"]];
+const SORT_CATS = ["Hudud","Qisas","Takzir"];
+const SORT = [["Zina",0],["Qazaf",0],["Mencuri",0],["Minum arak",0],["Merompak",0],["Hukuman tetap dalam nas",0],["Pembunuhan",1],["Perbuatan yang mencederakan",1],["Balasan yang sama",1],["Boleh diganti diat",1],["Boleh dimaafkan waris",1],["Kesalahan tiada peruntukan nas",2],["Diputuskan mahkamah",2],["Ijtihad dan maslahah",2],["Teguran, denda, penjara",2]];
+const DETECT = [
+ {c:"Murid menulis: “Hudud ialah hukuman yang diputuskan oleh hakim berdasarkan ijtihad; contohnya denda dan penjara.”",t:["Menyebut hudud","Menyebut hakim berdasarkan ijtihad","Memberi contoh","Menulis ayat penuh"],s:1,e:"Itu maksud takzir; hudud ditetapkan dalam al-Quran dan al-Sunnah."},
+ {c:"Dalam jawapan, murid menulis hukuman minum arak ialah sebat 80 kali dan qazaf sebat 40 kali.",t:["Menyenaraikan minum arak","Menyenaraikan qazaf","Menukar bilangan sebatan","Menyebut sebatan"],s:2,e:"Minum arak 40; qazaf 80."},
+ {c:"Penduduk menangkap pencuri, lalu ketua kampung mengarahkan supaya tangan pencuri itu dipotong.",t:["Menangkap pencuri","Ketua kampung melaksanakan hukuman sendiri","Mencuri ialah hudud","Pencuri diserah"],s:1,e:"Pelaksanaan hukuman hanya oleh pihak berkuasa dan mahkamah."},
+ {c:"Murid menulis: “Qisas tidak boleh dimaafkan dan tiada pilihan lain.”",t:["Menyebut qisas","Menyatakan qisas tidak boleh dimaafkan","Menulis jawapan","Mengaitkan dengan nas"],s:1,e:"Qisas boleh diganti dengan diat atau dimaafkan."},
+ {c:"Murid mengelaskan pembunuhan sebagai kesalahan hudud dan mencuri sebagai qisas.",t:["Pembunuhan sebagai hudud dan mencuri sebagai qisas","Mengenal jenayah","Membuat jadual","Mengelaskan"],s:0,e:"Pembunuhan: qisas. Mencuri: hudud."},
+ {c:"Murid menyatakan merompak ialah mengambil harta secara tersembunyi tanpa kekerasan.",t:["Merompak secara tersembunyi tanpa kekerasan","Menyebut harta","Menyebut merompak","Menulis takrif"],s:0,e:"Merompak: terbuka dengan kekerasan; mencuri: tersembunyi."}
+];
+const ESCAPE = [
+ {q:"Berapakah jenis hukuman jenayah dalam Islam?",a:3,h:"HU-QI-TA",k:"jenis hukuman"},
+ {q:"Berapakah kesalahan di bawah hudud?",a:5,h:"ZI-QA-CU-MI-RO",k:"kesalahan hudud"},
+ {q:"Berapakah jenis pembunuhan menurut syariat Islam?",a:3,h:"Sengaja, separa sengaja, tanpa niat",k:"jenis pembunuhan"},
+ {q:"Berapakah kategori hukuman merompak?",a:4,h:"Rampas? Bunuh?",k:"kategori merompak"}
+];
+const WHEEL = {
+ "Istilah":[["Apakah maksud jenayah dalam Islam?","Kesalahan yang dinyatakan hukumannya dalam al-Quran, al-Sunnah dan sebahagiannya daripada mahkamah."],["Apakah maksud diat?","Jumlah bayaran berdasarkan persetujuan bersama atau ditetapkan oleh mahkamah."]],
+ "Hudud":[["Senaraikan lima kesalahan hudud.","Zina, qazaf, mencuri, minum arak, merompak."],["Apakah maksud hudud?","Hukuman yang telah ditetapkan jenis dan bentuknya dalam al-Quran dan al-Sunnah."]],
+ "Qisas":[["Apakah kesalahan di bawah qisas?","Pembunuhan dan perbuatan yang membawa kecederaan."],["Bilakah qisas boleh diganti?","Apabila mangsa atau waris mangsa memaafkan atau memilih diat."]],
+ "Takzir":[["Apakah maksud takzir?","Hukuman yang tidak ditetapkan dalam nas, diputuskan oleh mahkamah."],["Berikan contoh hukuman takzir.","Teguran, denda, penjara, sebatan, hukuman mati."]],
+ "Hukuman":[["Hukuman minum arak?","Sebat 40 kali."],["Hukuman qazaf?","Sebat 80 kali dan tidak diterima sebagai saksi."]],
+ "Dalil":[["Nyatakan dalil al-Quran hukuman jenayah.","Surah al-Baqarah 2:178."],["Siapakah perawi hadis tiga perkara yang menghalalkan darah?","Abdullah bin Mas'ud (riwayat Muslim)."]],
+ "Hikmah":[["Nyatakan dua hikmah hukuman jenayah.","Mana-mana dua: keadilan; mendidik; keselamatan; ekonomi."],["Mengapakah hukuman bertujuan mendidik?","Supaya pesalah insaf, mendapat keampunan dan masyarakat takut melakukan jenayah."]],
+ "Situasi":[["Penduduk ingin menghukum pencuri sendiri. Nasihat?","Tidak boleh; serahkan kepada pihak berkuasa."],["Ambil harta secara senyap. Kesalahan?","Mencuri (hudud)."]]
+};
+
+/* ================= HELPERS ================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const store = { get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}, set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}} };
+
+/* ================= TABS ================= */
+const TABS = ["analisis","slaid","lembaran","permainan","spm","diagnostik"];
+function openTab(id){
+  if(!TABS.includes(id)) id="analisis";
+  TABS.forEach(t=>{ $("#p-"+t).hidden = t!==id; $("#tab-"+t).setAttribute("aria-selected", t===id?"true":"false"); });
+}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{openTab(b.dataset.tab); try{history.replaceState(null,"","#"+b.dataset.tab)}catch(e){} window.scrollTo({top:0})}));
+openTab((location.hash||"").replace("#",""));
+
+/* ================= ANALISIS RENDER ================= */
+const _h=(id,html)=>{const el=document.getElementById(id); if(el) el.innerHTML=html;};
+const _td=(r)=>`<tr>${r.map((c,i)=>`<td>${i===0?`<b>${esc(c)}</b>`:esc(c)}</td>`).join("")}</tr>`;
+if(typeof ISTILAH!=="undefined") _h("istilah", ISTILAH.map(i=>`<div class="card term"><div class="t"><h3>${esc(i[0])}</h3><span class="k">${esc(i[4])}</span></div><dl><dt>Buku teks</dt><dd>${esc(i[1])}</dd><dt>Mudah</dt><dd>${esc(i[2])}</dd><dt>Contoh</dt><dd>${esc(i[3])}</dd><dt>Kesilapan</dt><dd class="x">${esc(i[5])}</dd></dl></div>`).join(""));
+if(typeof HUKUM!=="undefined") _h("hukum", HUKUM.map(_td).join(""));
+if(typeof BEZA!=="undefined") _h("beza", BEZA.map(b=>`<tr><td><b>${esc(b[0])}</b></td><td><b>${esc(b[1])}</b></td><td>${esc(b[2])}</td><td>${esc(b[3])}</td><td>${esc(b[4])}</td><td>${esc(b[5])}</td></tr>`).join(""));
+if(typeof SITUASI!=="undefined") _h("situasi", SITUASI.map((s,i)=>`<div class="sit"><div class="s1"><span class="lab"><span class="num">${i+1}</span>Situasi</span>${esc(s[0])}</div><div><span class="lab">Isu fiqh</span>${esc(s[1])}</div><div class="s3"><span class="lab">Hukum</span><b>${esc(s[2])}</b></div><div><span class="lab">Alasan</span>${esc(s[3])}</div><div class="s5"><span class="lab">Kesimpulan</span>${esc(s[4])}</div></div>`).join(""));
+if(typeof DALIL!=="undefined") _h("dalil", DALIL.map(d=>`<div class="card"><h3>${esc(d[0])}</h3><span class="ar">${d[1]}</span><p><b>Maksud:</b> ${esc(d[2])}</p><p style="margin-top:6px"><b>Huraian mudah:</b> ${esc(d[3])}</p><p style="margin-top:6px" class="muted"><b>Kaitan:</b> ${esc(d[4])}</p></div>`).join(""));
+if(typeof HIKMAH!=="undefined") _h("hikmah", HIKMAH.map(h=>`<div class="card ${h[3]||""}"><h3>${esc(h[0])}</h3><p>${esc(h[1])}</p>${h[2]?`<p style="margin-top:6px;font-size:.88rem"><b>Aplikasi:</b> ${esc(h[2])}</p>`:""}</div>`).join(""));
+const flow = arr => arr.map(f=>`<div class="fstep"><div class="d"><b>${esc(f[0])}</b>${esc(f[5]||"Langkah")}</div><div class="body"><b>${esc(f[1])}</b><span class="muted">${esc(f[2])}</span><br><span class="pill ${f[3]}">${esc(f[4])}</span></div></div>`).join("");
+if(typeof FLOW_A!=="undefined") _h("flowA", flow(FLOW_A));
+if(typeof FLOW_B!=="undefined") _h("flowB", flow(FLOW_B));
+if(typeof TABLES!=="undefined") TABLES.forEach(t=>_h(t.id, t.rows.map(_td).join("")));
+if(typeof CARDS!=="undefined") CARDS.forEach(c=>_h(c.id, c.items.map(x=>`<div class="card ${x[3]||""}"><h3>${esc(x[0])}</h3>${Array.isArray(x[1])?`<ul>${x[1].map(y=>`<li>${esc(y)}</li>`).join("")}</ul>`:`<p>${esc(x[1])}</p>`}${x[2]?`<p style="margin-top:6px;font-size:.88rem"><b>${esc(c.lab||"Contoh")}:</b> ${esc(x[2])}</p>`:""}</div>`).join("")));
+
+/* ================= SLIDES ================= */
+const ILL = {
+ kaabah:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><ellipse cx="100" cy="138" rx="90" ry="16" fill="none" stroke="#e3bd55" stroke-width="3" stroke-dasharray="6 7"/><path d="M50 60 100 40l50 20v62l-50 22-50-22Z" fill="#11161a"/><path d="M50 72l50 22 50-22" stroke="#e3bd55" stroke-width="8" fill="none"/><path d="M112 100h14v30l-14 6Z" fill="#e3bd55"/></svg>`,
+ arafah:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><path d="M10 130 70 60l30 30 30-50 60 90Z" fill="#e3bd55" fill-opacity=".85"/><path d="M40 130h30v-16l-15-12-15 12Zm50 0h30v-16l-15-12-15 12Zm50 0h30v-16l-15-12-15 12Z" fill="#ffffff" fill-opacity=".9"/><circle cx="160" cy="34" r="14" fill="#ffffff" fill-opacity=".8"/></svg>`,
+ batu:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><rect x="86" y="20" width="28" height="110" rx="6" fill="#ffffff" fill-opacity=".85"/><g fill="#e3bd55"><circle cx="40" cy="120" r="9"/><circle cx="60" cy="132" r="7"/><circle cx="150" cy="124" r="8"/><circle cx="168" cy="134" r="6"/><circle cx="135" cy="138" r="7"/><circle cx="30" cy="140" r="6"/><circle cx="62" cy="108" r="6"/></g></svg>`,
+ gunting:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><g fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round"><circle cx="60" cy="118" r="20"/><circle cx="140" cy="118" r="20"/><path d="M74 104 150 24M126 104 50 24"/></g><circle cx="100" cy="64" r="6" fill="#e3bd55"/></svg>`,
+ miqat:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><path d="M100 18c-26 0-44 20-44 42 0 30 44 78 44 78s44-48 44-78c0-22-18-42-44-42Z" fill="#e3bd55"/><circle cx="100" cy="60" r="16" fill="#0c3f34"/><path d="M20 146h160" stroke="#ffffff" stroke-width="4" stroke-dasharray="8 8"/></svg>`,
+ safa:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><path d="M10 120 40 80l30 40Zm120 0 30-40 30 40Z" fill="#e3bd55"/><g stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round"><path d="M70 92h60m-10-10 10 10-10 10"/><path d="M130 116H70m10-10-10 10 10 10"/></g><text x="40" y="146" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Safa</text><text x="160" y="146" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Marwah</text></svg>`,
+ timbang:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><g stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round"><path d="M100 24v110M50 44h100M50 44 30 94h40Zm100 0-20 50h40Z"/><path d="M70 134h60"/></g><path d="M30 94h40a20 12 0 0 1-40 0Zm100 0h40a20 12 0 0 1-40 0Z" fill="#e3bd55"/></svg>`,
+ kitab:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><path d="M100 40c-20-12-50-14-76-8v96c26-6 56-4 76 8 20-12 50-14 76-8V32c-26-6-56-4-76 8Z" fill="#ffffff" fill-opacity=".9"/><path d="M100 40v96" stroke="#e3bd55" stroke-width="5"/><path d="M40 60h44M40 78h44M116 60h44M116 78h44M40 96h44M116 96h44" stroke="#0c3f34" stroke-width="3" stroke-opacity=".5"/></svg>`,
+ mentol:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><path d="M100 20a40 40 0 0 0-22 74c6 4 8 10 8 16h28c0-6 2-12 8-16a40 40 0 0 0-22-74Z" fill="#e3bd55"/><rect x="86" y="114" width="28" height="10" rx="3" fill="#ffffff"/><rect x="88" y="128" width="24" height="8" rx="3" fill="#ffffff"/><g stroke="#ffffff" stroke-width="4" stroke-linecap="round"><path d="M40 60h-16M176 60h-16M56 26 46 16M144 26l10-10"/></g></svg>`,
+ soalan:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><circle cx="100" cy="80" r="62" fill="#e3bd55"/><text x="100" y="104" text-anchor="middle" font-size="72" font-weight="800" fill="#0c3f34">?</text></svg>`,
+ larang:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><circle cx="100" cy="80" r="58" fill="none" stroke="#e3bd55" stroke-width="12"/><path d="M60 40l80 80" stroke="#e3bd55" stroke-width="12"/><path d="M84 64h32v36H84Z" fill="#ffffff" fill-opacity=".8"/></svg>`,
+ dua:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><rect x="16" y="30" width="76" height="100" rx="12" fill="#ffffff" fill-opacity=".9"/><rect x="108" y="30" width="76" height="100" rx="12" fill="#e3bd55"/><text x="54" y="92" text-anchor="middle" font-size="22" font-weight="800" fill="#0c3f34">A</text><text x="146" y="92" text-anchor="middle" font-size="22" font-weight="800" fill="#0c3f34">B</text></svg>`
+};
+Object.assign(ILL,{neraca:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><g stroke="#ffffff" stroke-width="6" fill="none" stroke-linecap="round"><path d="M100 20v112M44 40h112M44 40 24 92h40ZM156 40l-20 52h40Z"/><path d="M66 136h68"/></g><path d="M24 92h40a20 12 0 0 1-40 0ZM136 92h40a20 12 0 0 1-40 0Z" fill="#e3bd55"/><circle cx="100" cy="20" r="8" fill="#e3bd55"/></svg>`});
+const SLIDES = [
+ {cover:true,t:"Jenayah dalam Islam",lead:"Pendidikan Islam Tingkatan 5 · Bidang Fiqah · Pelajaran 15 · Buku teks ms 153–161 · Pembelajaran akademik",ill:"neraca"},
+ {t:"Objektif: apa yang anda boleh buat selepas ini",isi:["Menyatakan maksud, hukum dan dalil hukuman jenayah dalam Islam","Menjelaskan hudud, qisas dan takzir","Menyatakan kesalahan dan hukuman mengikut buku teks","Membezakan tiga jenis hukuman","Menghuraikan hikmah hukuman jenayah"],terang:"Belum disoal dalam Soalan 3 set percubaan 2026, tetapi masih dalam sukatan.",kw:["Standard 4.29"],ex:"Soalan buku teks: jelaskan hukuman bagi mencuri, membunuh, minum arak.",q:"Mengapakah Islam menetapkan hukuman jenayah?",ill:"kitab"},
+ {t:"Peta konsep dalam satu pandangan",isi:["Hudud: 5 kesalahan, hukuman ditetapkan","Qisas: pembunuhan dan kecederaan; boleh diat atau maaf","Takzir: diputuskan mahkamah","Pelaksana: pihak berkuasa sahaja"],terang:"HU-QI-TA.",kw:["Hudud","Qisas","Takzir"],ex:"Takzir: teguran, denda, penjara, sebatan, hukuman mati.",q:"Apakah tiga jenis hukuman?",ill:"dua"},
+ {t:"Kenali tajuk: keadilan dan keselamatan",isi:["Hukuman jenayah melindungi nyawa, harta, maruah dan keturunan","Ia dilaksanakan oleh pihak berkuasa melalui mahkamah","Objektifnya mendidik, bukan semata-mata menghukum"],terang:"Bezakan konsep hukum fiqh dengan pelaksanaan undang-undang negara.",kw:["Akademik","Pihak berkuasa"],ex:"Forum buku teks: hukuman jenayah Islam bertujuan mendidik, bukan menghukum.",q:"Siapakah yang berhak melaksanakan hukuman?",ill:"neraca"},
+ {t:"Istilah penting",isi:["Jenayah: kesalahan yang dinyatakan hukumannya","Hudud, qisas, takzir","Diat: bayaran pampasan","Qazaf: tuduhan zina tanpa bukti","Muhsan: sudah berkahwin"],terang:"Hudud dan qisas ditetapkan dalam nas; takzir oleh mahkamah.",kw:["Diat","Qazaf"],ex:"Waris memilih diat: qisas tidak dilaksanakan.",q:"Apakah maksud diat?",ill:"kitab"},
+ {t:"Maksud dan hukum",isi:["Jenayah: kesalahan yang dinyatakan hukumannya dalam al-Quran, al-Sunnah dan sebahagiannya daripada mahkamah","Hukum melaksanakan hukuman: wajib","Hudud: wajib · Qisas: wajib jika mangsa/waris mahu · Takzir: hakim harus menjatuhkan"],terang:"Wajib bagi pihak berkuasa, bukan individu.",kw:["Wajib"],ex:"al-Ahkam al-Sultaniyyah.",q:"Nyatakan hukum melaksanakan hukuman jenayah.",ill:"timbang"},
+ {t:"Dalil",isi:["al-Baqarah 2:178: diwajibkan qisas","Hadis Ibn Mas'ud (Muslim): tidak halal darah seorang muslim kecuali salah satu daripada tiga"],terang:"Kedua-dua dalil menunjukkan nyawa dilindungi dan hukuman mengikut ketetapan syarak.",kw:["2:178"],ex:"كُتِبَ عَلَيْكُمُ الْقِصَاصُ فِي الْقَتْلَى",q:"Apakah maksud qisas menurut ayat ini?",ill:"kitab"},
+ {t:"Hudud: lima kesalahan",isi:["Zina","Qazaf","Mencuri","Minum arak","Merompak"],terang:"ZI-QA-CU-MI-RO.",kw:["5 kesalahan"],ex:"Pelaksanaan hudud di bawah pihak berkuasa.",q:"Senaraikan lima kesalahan hudud.",ill:"neraca"},
+ {t:"Hukuman hudud",isi:["Minum arak: sebat 40","Qazaf: sebat 80; tidak diterima sebagai saksi","Zina bukan muhsan: sebat 100 dan buang daerah setahun; muhsan: rejam","Mencuri: potong tangan; pulangkan barang","Merompak: ikut 4 kategori"],terang:"Hafal angka 40-80-100.",kw:["40","80","100"],ex:"Merompak tanpa rampas dan bunuh: buang daerah.",q:"Hukuman qazaf?",ill:"larang"},
+ {t:"Perbezaan: hudud vs qisas vs takzir",isi:["Hudud: ditetapkan nas; 5 kesalahan","Qisas: balasan sama; pembunuhan dan kecederaan; boleh diat atau maaf","Takzir: tiada dalam nas; mahkamah; ijtihad dan maslahah"],terang:"Soalan bezakan: sebut sumber penetapan dan contoh.",kw:["Nas","Mahkamah"],ex:"Kesalahan tiada peruntukan nas: takzir.",q:"Apakah ciri unik qisas?",ill:"dua"},
+ {t:"Qisas dan diat",isi:["Pembunuhan: mati; diat jika ada pengampunan waris","Kecederaan: balasan sama; diat jika ada pengampunan","Diat: bayaran ikut persetujuan atau ditetapkan mahkamah","Jenis pembunuhan: sengaja, separa sengaja, tanpa niat"],terang:"Islam memberi ruang pengampunan.",kw:["Diat","Maaf"],ex:"Waris memaafkan dan meminta bayaran.",q:"Siapakah yang boleh memaafkan dalam qisas?",ill:"neraca"},
+ {t:"Proses: mengenal pasti kategori",isi:["1. Salah satu daripada 5 kesalahan? → hudud","2. Pembunuhan/kecederaan? → qisas","3. Tiada peruntukan nas? → takzir","4. Pelaksana: pihak berkuasa"],terang:"Analisis akademik; keputusan sebenar oleh mahkamah.",kw:["Kategori"],ex:"Mengambil telefon secara senyap: mencuri (hudud).",q:"Apakah kategori kesalahan mencederakan?",ill:"timbang"},
+ {t:"Contoh situasi",isi:["Ambil harta secara senyap → mencuri","Rampas terbuka dengan senjata → merompak","Tuduh zina tanpa bukti → qazaf","Waris memaafkan pembunuh → diat","Penduduk ingin menghukum sendiri → tidak boleh"],terang:"Kenal pasti kesalahan, kategori dan pelaksana.",kw:["Isu","Kategori"],ex:"Sebarkan tuduhan zina di media sosial: qazaf.",q:"Mengapa orang awam tidak boleh menghukum?",ill:"larang"},
+ {t:"Kesalahan lazim murid",isi:["Tertukar maksud hudud dengan takzir","Tertukar bilangan sebatan arak dan qazaf","Menyangka qisas tidak boleh dimaafkan","Tertukar mencuri dengan merompak","Menyangka individu boleh melaksanakan hukuman"],terang:"Semak sumber penetapan dan pelaksana.",kw:["Semak"],ex:"Mencuri: tersembunyi. Merompak: terbuka.",q:"Apakah beza mencuri dan merompak?",ill:"larang"},
+ {t:"Teknik hafalan",isi:["Hukuman: HU-QI-TA","Hudud: ZI-QA-CU-MI-RO","Sebat: Arak 40, Qazaf 80, Zina 100","Qisas: “Nyawa & Luka”","Takzir: “Tegur-Denda-Penjara”"],terang:"Bina pengurusan grafik (aktiviti buku teks).",kw:["Akronim"],ex:"40-80-100 berganda.",q:"Apakah ZI-QA-CU-MI-RO?",ill:"mentol"},
+ {t:"Kuiz pantas",isi:["1. Hukum melaksanakan hukuman jenayah?","2. Hukuman minum arak?","3. Kesalahan qisas?","4. Pelaksana hudud?","5. Contoh takzir?"],terang:"Jawapan: 1) Wajib (pihak berkuasa) · 2) Sebat 40 · 3) Pembunuhan, kecederaan · 4) Pihak berkuasa · 5) Teguran/denda/penjara",kw:["Game Zone"],ex:"Teruskan di tab Game Zone.",q:"Berapa markah anda daripada 5?",ill:"soalan"},
+ {t:"Soalan aplikasi (KBAT)",isi:["“Objektif hukuman jenayah Islam bukan semata-mata menghukum, bahkan mendidik masyarakat.” Huraikan cara mencapainya.","Bagaimanakah masyarakat memainkan peranan mengurangkan jenayah?","Mengapakah hukuman perlu dilaksanakan oleh pihak berkuasa?"],terang:"Soalan penilaian buku teks. Formula: dua isi berhuraian.",kw:["Huraikan"],ex:"Isi: pendidikan agama sejak kecil. Huraian: membentuk akhlak supaya tidak terjebak jenayah.",q:"Bina satu isi lagi beserta huraian.",ill:"mentol"},
+ {t:"Rumusan",isi:["Jenayah: kesalahan yang dinyatakan hukumannya; hukuman wajib oleh pihak berkuasa","Hudud: zina, qazaf, mencuri, minum arak, merompak","Qisas: pembunuhan dan kecederaan; diat atau maaf","Takzir: diputuskan mahkamah","Hikmah: keadilan, pendidikan, keselamatan, ekonomi"],terang:"Nota guru buku teks: bimbing murid menghindari jenayah secara beradab dan istiqamah.",kw:["Hindari jenayah"],ex:"Laporkan jenayah kepada pihak berkuasa.",q:"Apakah peranan anda mengurangkan jenayah?",ill:"neraca"}
+];
+let sIdx = 0;
+function renderSlide(){
+  const s = SLIDES[sIdx], n = SLIDES.length;
+  if (s.cover) {
+    $("#stage").innerHTML = `<div class="slide cover"><div class="main"><div class="no">Fiqh Mastery Kit · T5 · P15</div><h3>Jenayah <span>dalam</span> Islam</h3><p class="lead">${esc(s.lead)}</p><div style="max-width:220px">${ILL[s.ill]}</div></div></div>`;
+  } else {
+    $("#stage").innerHTML = `<div class="slide"><div class="main"><div class="no">Slaid ${sIdx+1} / ${n}</div><h3>${esc(s.t)}</h3><p class="lead">${esc(s.terang)}</p><ul>${s.isi.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+    <div class="side">${ILL[s.ill]}<div class="kw">${s.kw.map(k=>`<span>${esc(k)}</span>`).join("")}</div><div class="ex"><b>Contoh:</b> ${/[؀-ۿ]/.test(s.ex)?`<span class="ar" style="text-align:left">${esc(s.ex)}</span>`:esc(s.ex)}</div><div class="q"><b>Soalan pemahaman:</b> ${esc(s.q)}</div></div></div>`;
+  }
+  $("#sCount").textContent = `Slaid ${sIdx+1} daripada ${n}`;
+  $("#sPrev").disabled = sIdx===0; $("#sNext").disabled = sIdx===n-1;
+  document.querySelectorAll("#sDots button").forEach((b,i)=>b.setAttribute("aria-current", i===sIdx?"true":"false"));
+}
+$("#sDots").innerHTML = SLIDES.map((_,i)=>`<button type="button" aria-label="Slaid ${i+1}">${i+1}</button>`).join("");
+document.querySelectorAll("#sDots button").forEach((b,i)=>b.addEventListener("click",()=>{sIdx=i;renderSlide()}));
+$("#sPrev").addEventListener("click",()=>{if(sIdx>0){sIdx--;renderSlide()}});
+$("#sNext").addEventListener("click",()=>{if(sIdx<SLIDES.length-1){sIdx++;renderSlide()}});
+document.addEventListener("keydown",e=>{ if($("#p-slaid").hidden) return; if(e.target.matches("input,select,textarea")) return; if(e.key==="ArrowRight"&&sIdx<SLIDES.length-1){sIdx++;renderSlide()} if(e.key==="ArrowLeft"&&sIdx>0){sIdx--;renderSlide()} });
+renderSlide();
+
+/* ================= WORKSHEET ================= */
+const WS = [
+ {b:"Tahap 1",h:"KENALI",tasks:[
+  {t:"A. Padankan.",body:`<div class="cols2"><ol><li>Hudud</li><li>Qisas</li><li>Takzir</li><li>Diat</li><li>Qazaf</li></ol><ol type="A"><li>Bayaran pampasan</li><li>Tuduhan zina tanpa bukti</li><li>Diputuskan mahkamah</li><li>Ditetapkan jenis dan bentuk dalam nas</li><li>Balasan yang sama</li></ol></div>`,s:"1–D, 2–E, 3–C, 4–A, 5–B"},
+  {t:"B. Isi tempat kosong.",body:`<ol><li>Hukum melaksanakan hukuman jenayah ialah <span class="blank"></span>.</li><li>Hukuman minum arak ialah sebat <span class="blank"></span> kali.</li><li>Hukuman qazaf ialah sebat <span class="blank"></span> kali.</li><li>Kesalahan di bawah qisas ialah pembunuhan dan <span class="blank"></span>.</li><li>Pelaksanaan hudud adalah di bawah <span class="blank"></span>.</li></ol>`,s:"1) wajib · 2) 40 · 3) 80 · 4) perbuatan yang membawa kecederaan · 5) pihak berkuasa"}
+ ]},
+ {b:"Tahap 2",h:"FAHAMI",tasks:[
+  {t:"A. Betul (B) atau Salah (S).",body:`<ol><li>Takzir ditetapkan dalam al-Quran.</li><li>Qisas boleh diganti dengan diat.</li><li>Merompak ialah kesalahan hudud.</li><li>Orang awam boleh melaksanakan hukuman hudud.</li><li>Terdapat tiga jenis pembunuhan.</li></ol>`,s:"1) S · 2) B · 3) B · 4) S · 5) B"},
+  {t:"B. Kelaskan: Hudud (H), Qisas (Q), Takzir (T).",body:`<p>Mencuri · Pembunuhan · Teguran · Qazaf · Mencederakan · Minum arak · Denda</p><div class="wbox"></div>`,s:"Mencuri (H) · Pembunuhan (Q) · Teguran (T) · Qazaf (H) · Mencederakan (Q) · Minum arak (H) · Denda (T)"},
+  {t:"C. Lengkapkan jadual hukuman merompak.",body:`<div class="tbox"><table style="min-width:360px"><thead><tr><th>Kategori</th><th>Hukuman</th></tr></thead><tbody><tr><td>Rampas + bunuh</td><td><span class="blank"></span></td></tr><tr><td>Bunuh sahaja</td><td><span class="blank"></span></td></tr><tr><td>Rampas sahaja</td><td><span class="blank"></span></td></tr><tr><td>Tiada rampas, tiada bunuh</td><td><span class="blank"></span></td></tr></tbody></table></div>`,s:"Dibunuh kemudian disalib · Dibunuh · Dipotong tangan dan kaki secara bersilang · Buang daerah"}
+ ]},
+ {b:"Tahap 3",h:"BEZAKAN",tasks:[
+  {t:"A. Bezakan pasangan berikut.",body:`<ol><li>Hudud dan takzir</li><li>Qisas dan hudud</li><li>Mencuri dan merompak</li><li>Zina dan qazaf</li></ol>`,s:"1) Hudud ditetapkan dalam nas; takzir diputuskan mahkamah. 2) Qisas balasan sama, boleh diat/maaf; hudud hukuman tetap bagi 5 kesalahan. 3) Mencuri tersembunyi; merompak terbuka dengan kekerasan. 4) Zina perbuatan; qazaf tuduhan zina tanpa bukti."},
+  {t:"B. Cari LIMA kesalahan dalam jawapan murid.",body:`<p class="card soft-peach">“Hudud ialah hukuman yang diputuskan oleh hakim. Hukuman minum arak ialah sebat 80 kali. Qisas tidak boleh dimaafkan. Mencuri ialah merampas harta secara terbuka. Penduduk kampung boleh menghukum pencuri sendiri.”</p>`,s:"1) Hudud ditetapkan dalam nas (itu takzir). 2) Minum arak 40 kali. 3) Qisas boleh dimaafkan/diat. 4) Mencuri tersembunyi (itu merompak). 5) Hukuman oleh pihak berkuasa sahaja."}
+ ]},
+ {b:"Tahap 4",h:"APLIKASI",tasks:[
+  {t:"A. Kenal pasti kategori dan hukuman menurut fiqh.",body:`<ol><li>Mengambil wang rakan secara senyap.</li><li>Menuduh orang baik berzina tanpa saksi.</li><li>Kesalahan yang tiada peruntukan hukuman dalam nas.</li></ol>`,s:"1) Mencuri (hudud): potong tangan, pulangkan barang. 2) Qazaf (hudud): sebat 80, tidak diterima sebagai saksi. 3) Takzir: diputuskan mahkamah (teguran, denda, penjara…)."},
+  {t:"B. Soalan struktur.",body:`<ol><li>Apakah maksud jenayah dalam Islam? [2]</li><li>Senaraikan tiga jenis hukuman jenayah. [3]</li><li>Jelaskan hukuman bagi minum arak dan mencuri. [2]</li></ol>`,s:"1) Kesalahan yang dinyatakan hukumannya dalam al-Quran, al-Sunnah dan sebahagiannya daripada mahkamah. 2) Hudud, qisas, takzir. 3) Minum arak: sebat 40; mencuri: potong tangan dan memulangkan barang."}
+ ]},
+ {b:"Tahap 5",h:"KBAT",tasks:[
+  {t:"A. “Objektif hukuman jenayah dalam Islam bukanlah semata-mata menghukum pelaku, bahkan bertujuan mendidik masyarakat.” Huraikan cara untuk mencapai objektif tersebut.",body:`<div class="wbox"></div>`,s:"Soalan penilaian buku teks. Isi: pendidikan agama dan akhlak sejak kecil; kesedaran tentang hikmah hukuman (keadilan, keselamatan); pelaksanaan yang adil oleh pihak berkuasa memberi pengajaran; masyarakat prihatin dan melaporkan jenayah. 2 isi berhuraian."},
+  {t:"B. Bincangkan peranan masyarakat untuk mengurangkan jenayah.",body:`<div class="wbox"></div>`,s:"Aktiviti buku teks. Isi: ibu bapa mendidik anak; jiran prihatin (rukun tetangga); melapor kepada polis; menjauhi pengaruh negatif; menyokong pihak berkuasa. 2 isi berhuraian."},
+  {t:"C. Mengapakah hukuman jenayah mesti dilaksanakan oleh pihak berkuasa dan tidak oleh orang awam?",body:`<div class="wbox"></div>`,s:"Isi: buku teks menegaskan pelaksanaan di bawah pihak berkuasa; memastikan keadilan melalui pembuktian di mahkamah; mengelakkan fitnah dan kezaliman; menjaga keselamatan dan kestabilan negara (hikmah). 2 isi berhuraian."}
+ ]}
+];
+$("#ws").innerHTML = WS.map(l=>`<div class="lvl"><div class="lvl-h"><span class="badge">${l.b}</span><h3>${l.h}</h3></div><div class="lvl-b">${l.tasks.map(t=>`<div class="task"><h4>${t.t}</h4>${t.body}<div class="skema">${esc(t.s)}</div></div>`).join("")}</div></div>`).join("");
+$("#toggleSkema").addEventListener("click",e=>{const on=$("#ws").classList.toggle("show-skema");e.currentTarget.setAttribute("aria-pressed",on);e.currentTarget.textContent=on?"Sembunyikan skema jawapan":"Tunjuk skema jawapan"});
+
+/* ================= GAMES ================= */
+const GAMES = [
+ ["match","Fiqh Matching","Padankan istilah dan maksud","Mudah"],
+ ["sort","Fiqh Sorting","Kelaskan kesalahan dan ciri: hudud, qisas atau takzir","Sederhana"],
+ ["escape","Fiqh Escape Room","Buka 4 kunci untuk mendapat kod","Sederhana"],
+ ["box","Mystery Box","Buka kotak, jawab soalan","Campuran"],
+ ["detect","Fiqh Detective","Cari kesalahan dalam situasi","Sukar"],
+ ["wheel","Fiqh Wheel","Putar roda, jawab soalan rawak","Campuran"],
+ ["tf","True or False","Betul atau salah","Mudah"],
+ ["champ","Fiqh Champion","Kuiz 10 tahap","Mudah → Sukar"],
+ ["memory","Fiqh Memory","Permainan ingatan kad","Mudah"],
+ ["boss","Final Boss","Kalahkan Raja Lupa","Sukar"]
+];
+$("#gamegrid").innerHTML = GAMES.map((g,i)=>`<button type="button" class="gpick" data-g="${g[0]}" aria-pressed="${i===0}"><span class="lv">${i+1} · ${g[3]}</span><b>${g[1]}</b><small>${g[2]}</small></button>`).join("");
+document.querySelectorAll(".gpick").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".gpick").forEach(x=>x.setAttribute("aria-pressed",x===b));startGame(b.dataset.g)}));
+const G = $("#gstage");
+function head(title,how,score){return `<div class="ghead"><div><h3>${title}</h3><p class="how">${how}</p></div><div class="score" id="gscore">${score}</div></div>`}
+function setScore(t){const el=$("#gscore");if(el)el.textContent=t}
+function fb(ok,msg){return `<div class="fb show ${ok?'ok':'no'}">${ok?"Betul! ":"Belum tepat. "}${esc(msg)}</div>`}
+function startGame(g){ ({match:gMatch,sort:gSort,escape:gEscape,box:gBox,detect:gDetect,wheel:gWheel,tf:gTF,champ:gChamp,memory:gMemory,boss:gBoss})[g](); }
+
+function gMatch(){
+  const ps = shuffle(PAIRS).slice(0,6); let left=null, score=0, tries=0, done=0;
+  const L = shuffle(ps.map((p,i)=>({i,t:p[0]}))), R = shuffle(ps.map((p,i)=>({i,t:p[1]})));
+  G.innerHTML = head("Fiqh Matching","Klik satu istilah, kemudian klik maksudnya. +10 bagi setiap padanan betul, −2 bagi cubaan salah.","Mata: 0") +
+   `<div class="cols2"><div id="mL">${L.map(x=>`<button class="opt" data-i="${x.i}">${esc(x.t)}</button>`).join("")}</div><div id="mR">${R.map(x=>`<button class="opt" data-i="${x.i}">${esc(x.t)}</button>`).join("")}</div></div><div id="mFb"></div>`;
+  G.querySelectorAll("#mL .opt").forEach(b=>b.addEventListener("click",()=>{if(b.disabled)return;G.querySelectorAll("#mL .opt").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");left=b}));
+  G.querySelectorAll("#mR .opt").forEach(b=>b.addEventListener("click",()=>{
+    if(!left||b.disabled)return; tries++;
+    if(left.dataset.i===b.dataset.i){score+=10;done++;[left,b].forEach(x=>{x.classList.remove("sel");x.classList.add("ok");x.disabled=true});$("#mFb").innerHTML=fb(true,`${left.textContent} = ${b.textContent}.`)}
+    else{score=Math.max(0,score-2);b.classList.add("no");setTimeout(()=>b.classList.remove("no"),500);$("#mFb").innerHTML=fb(false,`${left.textContent} bukan “${b.textContent}”. Cuba lagi.`)}
+    left=null; setScore(`Mata: ${score}`);
+    if(done===ps.length) $("#mFb").innerHTML += `<div class="fb show ok">Tahniah! Semua ${ps.length} padanan selesai dalam ${tries} cubaan. <button class="btn" type="button" onclick="gMatch()">Main semula</button></div>`;
+  }));
+}
+
+function gSort(){
+  const items = shuffle(SORT).slice(0,12); let i=0, score=0;
+  function draw(){
+    if(i>=items.length){G.innerHTML=head("Fiqh Sorting","Selesai!",`Mata: ${score}/${items.length*10}`)+`<div class="fb show ok">Anda mengelaskan ${score/10} daripada ${items.length} item dengan betul. <button class="btn" type="button" onclick="gSort()">Main semula</button></div>`;return}
+    G.innerHTML = head("Fiqh Sorting","Pilih kategori yang betul bagi item yang dipaparkan. +10 bagi setiap jawapan betul.",`Mata: ${score} · ${i+1}/${items.length}`) +
+      `<div class="chipq">${esc(items[i][0])}</div><div class="bins">${SORT_CATS.map((c,k)=>`<button class="bin" data-k="${k}">${c}</button>`).join("")}</div><div id="sFb"></div>`;
+    G.querySelectorAll(".bin").forEach(b=>b.addEventListener("click",()=>{
+      const ok = +b.dataset.k===items[i][1]; if(ok)score+=10;
+      G.querySelectorAll(".bin").forEach(x=>x.disabled=true);
+      $("#sFb").innerHTML = fb(ok,`“${items[i][0]}” ialah ${SORT_CATS[items[i][1]]}.`) + `<button class="btn pri" type="button" id="sNx" style="margin-top:8px">Seterusnya</button>`;
+      $("#sNx").addEventListener("click",()=>{i++;draw()});
+    }));
+  } draw();
+}
+
+function gEscape(){
+  const open=[false,false,false,false];
+  G.innerHTML = head("Fiqh Escape Room","Anda terkunci di bilik ulang kaji. Jawab 4 soalan (nombor sahaja). Setiap jawapan ialah satu digit kod pintu. Masukkan kod 4 digit untuk keluar.","Kunci: 0/4") +
+   `<div class="locks">${ESCAPE.map((e,k)=>`<div class="lock" id="lk${k}"><b>Kunci ${k+1}</b><span>${esc(e.q)}</span><input type="number" inputmode="numeric" id="lkin${k}" aria-label="Jawapan kunci ${k+1}"><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn" type="button" data-k="${k}">Cuba buka</button><button class="btn" type="button" data-h="${k}">Petunjuk</button></div><div id="lkfb${k}"></div></div>`).join("")}</div>
+   <div class="card"><b>Pintu keluar</b><p class="how">Kod = digit Kunci 1, 2, 3, 4 mengikut turutan.</p><div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap"><input class="codein" id="code" inputmode="numeric" maxlength="4" style="max-width:160px" aria-label="Kod pintu"><button class="btn pri" type="button" id="codeBtn">Buka pintu</button></div><div id="codeFb" style="margin-top:8px"></div></div>`;
+  G.querySelectorAll("[data-k]").forEach(b=>b.addEventListener("click",()=>{const k=+b.dataset.k,v=+$("#lkin"+k).value;const ok=v===ESCAPE[k].a;
+    $("#lkfb"+k).innerHTML=fb(ok,ok?`Kunci terbuka. Digit: ${ESCAPE[k].a}`:"Semak buku teks dan cuba lagi.");
+    if(ok){open[k]=true;$("#lk"+k).classList.add("open")} setScore(`Kunci: ${open.filter(Boolean).length}/4`)}));
+  G.querySelectorAll("[data-h]").forEach(b=>b.addEventListener("click",()=>{const k=+b.dataset.h;$("#lkfb"+k).innerHTML=`<div class="fb show ok">Petunjuk: ${esc(ESCAPE[k].h)}</div>`}));
+  $("#codeBtn").addEventListener("click",()=>{const ok=$("#code").value.trim()===ESCAPE.map(e=>e.a).join("");
+    $("#codeFb").innerHTML=ok?`<div class="fb show ok">Pintu terbuka! Kod ${ESCAPE.map(e=>e.a).join("")}: ${ESCAPE.map(e=>e.a+" "+e.k).join(", ")}. Misi berjaya.</div>`:fb(false,"Kod salah. Pastikan semua kunci dibuka dahulu.")});
+}
+
+function gBox(){
+  const qs = shuffle(BANK).slice(0,9), pts = shuffle([10,10,10,20,20,20,30,30,50]); let score=0, opened=0;
+  G.innerHTML = head("Mystery Box","Pilih kotak. Setiap kotak mengandungi soalan dengan nilai mata tersembunyi. Jawab betul untuk mendapat mata itu.","Mata: 0") +
+   `<div class="boxes">${qs.map((_,k)=>`<button class="mbox" type="button" data-k="${k}">?</button>`).join("")}</div><div id="bxQ"></div>`;
+  G.querySelectorAll(".mbox").forEach(b=>b.addEventListener("click",()=>{
+    const k=+b.dataset.k, q=qs[k]; b.disabled=true; b.textContent=`${pts[k]} mata`;
+    $("#bxQ").innerHTML = `<div class="card" style="margin-top:4px"><p class="qtext">${esc(q.q)} <span class="muted">(${pts[k]} mata)</span></p><div class="opts" style="margin-top:8px">${q.o.map((o,j)=>`<button class="opt" data-j="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</button>`).join("")}</div><div id="bxFb" style="margin-top:8px"></div></div>`;
+    G.querySelectorAll("#bxQ .opt").forEach(o=>o.addEventListener("click",()=>{
+      const ok=+o.dataset.j===q.a; if(ok)score+=pts[k]; opened++;
+      G.querySelectorAll("#bxQ .opt").forEach((x,j)=>{x.disabled=true;if(j===q.a)x.classList.add("ok");else if(x===o)x.classList.add("no")});
+      $("#bxFb").innerHTML=fb(ok,q.e)+(opened===9?`<div class="fb show ok">Semua kotak dibuka. Jumlah: ${score} mata. <button class="btn" type="button" onclick="gBox()">Main semula</button></div>`:"");
+      setScore(`Mata: ${score}`);
+    }));
+  }));
+}
+
+function gDetect(){
+  const cs = shuffle(DETECT); let i=0, score=0;
+  function draw(){
+    if(i>=cs.length){G.innerHTML=head("Fiqh Detective","Kes selesai.",`Kes: ${score}/${cs.length}`)+`<div class="fb show ok">Anda menyelesaikan ${score} daripada ${cs.length} kes. <button class="btn" type="button" onclick="gDetect()">Siasat semula</button></div>`;return}
+    const c=cs[i];
+    G.innerHTML = head("Fiqh Detective","Baca laporan kes. Klik tindakan yang menjadi KESALAHAN dari sudut fiqh. +1 kes bagi jawapan tepat.",`Kes ${i+1}/${cs.length} · Selesai: ${score}`) +
+     `<div class="card soft-peach"><b>Laporan kes #${i+1}</b><p>${esc(c.c)}</p></div><div class="opts">${c.t.map((t,j)=>`<button class="opt" data-j="${j}">${esc(t)}</button>`).join("")}</div><div id="dFb"></div>`;
+    G.querySelectorAll(".opt").forEach(o=>o.addEventListener("click",()=>{
+      const ok=+o.dataset.j===c.s; if(ok)score++;
+      G.querySelectorAll(".opt").forEach((x,j)=>{x.disabled=true;if(j===c.s)x.classList.add("ok");else if(x===o)x.classList.add("no")});
+      $("#dFb").innerHTML=fb(ok,c.e)+`<button class="btn pri" type="button" id="dNx" style="margin-top:8px">Kes seterusnya</button>`;
+      $("#dNx").addEventListener("click",()=>{i++;draw()});
+    }));
+  } draw();
+}
+
+function gWheel(){
+  const cats=Object.keys(WHEEL); let rot=0, spinning=false, score=0, played=0;
+  const colors=["#0f7a62","#b8891a","#138f8f","#0b5d4b","#c79a2a","#1d8a8a","#0d6b55","#a77c16"];
+  G.innerHTML = head("Fiqh Wheel","Putar roda. Jawab soalan dengan lisan atau di kertas, kemudian dedahkan jawapan dan nilai diri anda sendiri.","Betul: 0/0") +
+   `<div class="wheelwrap"><div class="wheel"><div class="ptr"></div><canvas id="wc" width="640" height="640" aria-label="Roda soalan"></canvas></div>
+    <div style="display:grid;gap:10px"><button class="btn pri" type="button" id="spin">Putar roda</button><div id="wQ"></div></div></div>`;
+  const cv=$("#wc"), ctx=cv.getContext("2d"), N=cats.length;
+  function paint(){ctx.clearRect(0,0,640,640);ctx.save();ctx.translate(320,320);ctx.rotate(rot);
+    for(let k=0;k<N;k++){ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,310,k*2*Math.PI/N,(k+1)*2*Math.PI/N);ctx.fillStyle=colors[k];ctx.fill();ctx.save();ctx.rotate((k+.5)*2*Math.PI/N);ctx.fillStyle="#ffffff";ctx.font="700 30px Nunito Sans, sans-serif";ctx.textAlign="right";ctx.fillText(cats[k],285,10);ctx.restore()}
+    ctx.beginPath();ctx.arc(0,0,46,0,2*Math.PI);ctx.fillStyle="#e3bd55";ctx.fill();ctx.restore()}
+  paint();
+  $("#spin").addEventListener("click",()=>{ if(spinning)return; spinning=true; $("#wQ").innerHTML="";
+    const target = rot + 2*Math.PI*(4+Math.random()*2); const start=rot, t0=performance.now(), dur=matchMedia("(prefers-reduced-motion: reduce)").matches?10:2600;
+    function step(t){const p=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-p,3); rot=start+(target-start)*e; paint(); if(p<1)requestAnimationFrame(step); else done()}
+    requestAnimationFrame(step);
+    function done(){spinning=false; const a=((-Math.PI/2-rot)%(2*Math.PI)+2*Math.PI)%(2*Math.PI); const k=Math.floor(a/(2*Math.PI/N)); const cat=cats[k]; const qa=WHEEL[cat][Math.floor(Math.random()*WHEEL[cat].length)];
+      $("#wQ").innerHTML=`<div class="card"><span class="pill p-w">${esc(cat)}</span><p class="qtext" style="margin-top:6px">${esc(qa[0])}</p><button class="btn" type="button" id="wRev" style="margin-top:8px">Dedahkan jawapan</button><div id="wAns"></div></div>`;
+      $("#wRev").addEventListener("click",()=>{$("#wAns").innerHTML=`<div class="fb show ok" style="margin-top:8px">${esc(qa[1])}</div><div style="display:flex;gap:6px;margin-top:8px"><button class="btn" type="button" id="wY">Saya betul</button><button class="btn" type="button" id="wN">Saya salah</button></div>`;
+        $("#wY").addEventListener("click",()=>{score++;played++;setScore(`Betul: ${score}/${played}`);$("#wAns").innerHTML+=`<p class="muted">Dicatat. Putar lagi!</p>`;$("#wY").disabled=$("#wN").disabled=true});
+        $("#wN").addEventListener("click",()=>{played++;setScore(`Betul: ${score}/${played}`);$("#wAns").innerHTML+=`<p class="muted">Ulang kaji bahagian “${esc(cat)}” di tab Analisis.</p>`;$("#wY").disabled=$("#wN").disabled=true});
+      })}
+  });
+}
+
+function gTF(){
+  const qs=shuffle(TF).slice(0,10); let i=0, score=0;
+  function draw(){
+    if(i>=qs.length){G.innerHTML=head("True or False","Tamat.",`Mata: ${score}/10`)+`<div class="fb show ${score>=7?'ok':'no'}">Skor anda ${score}/10. ${score>=7?"Mantap!":"Ulang kaji Master Istilah dan cuba lagi."} <button class="btn" type="button" onclick="gTF()">Main semula</button></div>`;return}
+    G.innerHTML = head("True or False","Adakah pernyataan ini betul? 1 mata bagi setiap jawapan tepat.",`Mata: ${score} · ${i+1}/10`) +
+     `<div class="chipq">${esc(qs[i][0])}</div><div class="opts"><button class="opt" data-v="1">Betul</button><button class="opt" data-v="0">Salah</button></div><div id="tFb"></div>`;
+    G.querySelectorAll(".opt").forEach(o=>o.addEventListener("click",()=>{
+      const ok=(o.dataset.v==="1")===qs[i][1]; if(ok)score++;
+      G.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if((x.dataset.v==="1")===qs[i][1])x.classList.add("ok");else x.classList.add("no")});
+      $("#tFb").innerHTML=fb(ok,qs[i][2])+`<button class="btn pri" type="button" id="tNx" style="margin-top:8px">Seterusnya</button>`;
+      $("#tNx").addEventListener("click",()=>{i++;draw()});
+    }));
+  } draw();
+}
+
+function gChamp(){
+  const pick=l=>shuffle(BANK.filter(q=>q.l===l));
+  const qs=[...pick(1).slice(0,3),...pick(2).slice(0,4),...pick(3).slice(0,3)];
+  const prize=[100,200,300,500,1000,2000,4000,8000,16000,32000]; let i=0, used50=false, usedHint=false;
+  function ladder(){return `<div class="ladder">${prize.map((p,k)=>`<div class="${k===i?'cur':k<i?'past':''}"><span>Tahap ${k+1}</span><span>${p.toLocaleString("ms-MY")}</span></div>`).reverse().join("")}</div>`}
+  function draw(){
+    if(i>=qs.length){G.innerHTML=head("Fiqh Champion","Anda menjawab semua 10 tahap!","32,000 mata")+`<div class="fb show ok">Anda ialah Fiqh Champion Jenayah dalam Islam! <button class="btn" type="button" onclick="gChamp()">Main semula</button></div>`;return}
+    const q=qs[i];
+    G.innerHTML = head("Who Wants To Be Fiqh Champion","10 tahap: mudah ke sukar. Satu jawapan salah menamatkan permainan. Bantuan: 50:50 dan Petunjuk, sekali setiap satu.",`${(i?prize[i-1]:0).toLocaleString("ms-MY")} mata`) +
+     `<div class="champ"><div style="display:grid;gap:10px"><p class="qtext">${esc(q.q)}</p><div class="opts">${q.o.map((o,j)=>`<button class="opt" data-j="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</button>`).join("")}</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn" type="button" id="l50" ${used50?"disabled":""}>50:50</button><button class="btn" type="button" id="lHint" ${usedHint?"disabled":""}>Petunjuk</button></div><div id="cFb"></div></div>${ladder()}</div>`;
+    $("#l50").addEventListener("click",()=>{used50=true;$("#l50").disabled=true;let rm=shuffle([0,1,2,3].filter(j=>j!==q.a)).slice(0,2);G.querySelectorAll(".champ .opt").forEach(x=>{if(rm.includes(+x.dataset.j)){x.disabled=true;x.classList.add("done")}})});
+    $("#lHint").addEventListener("click",()=>{usedHint=true;$("#lHint").disabled=true;$("#cFb").innerHTML=`<div class="fb show ok">Petunjuk: ${esc(q.e.split(/[.;:]/)[0])}…</div>`});
+    G.querySelectorAll(".champ .opt").forEach(o=>o.addEventListener("click",()=>{
+      const ok=+o.dataset.j===q.a; G.querySelectorAll(".champ .opt").forEach((x,j)=>{x.disabled=true;if(j===q.a)x.classList.add("ok");else if(x===o)x.classList.add("no")});
+      if(ok){$("#cFb").innerHTML=fb(true,q.e)+`<button class="btn pri" type="button" id="cNx" style="margin-top:8px">Ke tahap ${i+2>10?"akhir":i+2}</button>`;$("#cNx").addEventListener("click",()=>{i++;draw()})}
+      else{$("#cFb").innerHTML=fb(false,q.e)+`<div class="fb show no">Permainan tamat pada tahap ${i+1}. Mata dibawa pulang: ${(i?prize[i-1]:0).toLocaleString("ms-MY")}. <button class="btn" type="button" onclick="gChamp()">Cuba lagi</button></div>`}
+    }));
+  } draw();
+}
+
+function gMemory(){
+  const ps=shuffle(PAIRS).slice(0,6); const cards=shuffle(ps.flatMap((p,i)=>[{i,t:p[0]},{i,t:p[1]}])); let up=[], got=0, moves=0, lock=false;
+  G.innerHTML = head("Fiqh Memory","Terbalikkan dua kad. Jika istilah dan maksudnya sepadan, kad kekal terbuka. Selesaikan dengan langkah paling sedikit.","Langkah: 0") +
+   `<div class="mem">${cards.map((c,k)=>`<button class="mcard" type="button" data-k="${k}" aria-label="Kad ${k+1}">?</button>`).join("")}</div><div id="memFb"></div>`;
+  G.querySelectorAll(".mcard").forEach(b=>b.addEventListener("click",()=>{
+    const k=+b.dataset.k; if(lock||b.classList.contains("up")||b.classList.contains("got"))return;
+    b.classList.add("up"); b.textContent=cards[k].t; up.push(b);
+    if(up.length===2){moves++; setScore(`Langkah: ${moves}`); const [a,c]=up;
+      if(cards[+a.dataset.k].i===cards[+c.dataset.k].i){a.classList.replace("up","got");c.classList.replace("up","got");up=[];got++;
+        $("#memFb").innerHTML=fb(true,`${ps[cards[+a.dataset.k].i][0]}: ${ps[cards[+a.dataset.k].i][1]}.`);
+        if(got===ps.length)$("#memFb").innerHTML+=`<div class="fb show ok">Selesai dalam ${moves} langkah! <button class="btn" type="button" onclick="gMemory()">Main semula</button></div>`}
+      else{lock=true;setTimeout(()=>{up.forEach(x=>{x.classList.remove("up");x.textContent="?"});up=[];lock=false},900)}}
+  }));
+}
+
+function gBoss(){
+  const mix = shuffle([...shuffle(BANK.filter(q=>q.l>=2)).slice(0,8).map(q=>({...q,kind:"m"})),...shuffle(TF).slice(0,4).map(t=>({q:t[0],o:["Betul","Salah"],a:t[1]?0:1,e:t[2],kind:"t"}))]);
+  let hp=100, hearts=3, i=0; const dmg=Math.ceil(100/10);
+  function draw(){
+    if(hp<=0){G.innerHTML=head("Final Boss","Raja Lupa tumbang!","Menang")+`<div class="fb show ok">Hebat! Anda mengalahkan Raja Lupa dengan ${hearts} nyawa berbaki. Anda menguasai Jenayah dalam Islam. <button class="btn" type="button" onclick="gBoss()">Lawan semula</button></div>`;return}
+    if(hearts<=0||i>=mix.length){G.innerHTML=head("Final Boss","Raja Lupa masih berdiri.","Kalah")+`<div class="fb show no">HP Raja Lupa berbaki ${hp}. Ulang kaji maksud hudud, qisas dan takzir, kesalahan dan hukumannya, kemudian cuba lagi. <button class="btn" type="button" onclick="gBoss()">Lawan semula</button></div>`;return}
+    const q=mix[i];
+    G.innerHTML = head("Final Boss: Raja Lupa","Setiap jawapan betul mengurangkan 10 HP Raja Lupa. Setiap jawapan salah mengurangkan satu nyawa anda. Kalahkan dia sebelum nyawa habis.",`Nyawa: ${"♥".repeat(hearts)}${"♡".repeat(3-hearts)}`) +
+     `<div class="bossrow"><div class="card"><b>Raja Lupa · HP ${hp}/100</b><div class="hp" style="margin-top:6px"><i style="width:${hp}%"></i></div></div><div class="card"><b>Serangan ${i+1}</b><p class="muted">${q.kind==="t"?"Betul atau salah?":"Pilih jawapan."}</p></div></div>
+      <p class="qtext">${esc(q.q)}</p><div class="opts">${q.o.map((o,j)=>`<button class="opt" data-j="${j}">${esc(o)}</button>`).join("")}</div><div id="bFb"></div>`;
+    G.querySelectorAll(".opt").forEach(o=>o.addEventListener("click",()=>{
+      const ok=+o.dataset.j===q.a; if(ok)hp=Math.max(0,hp-dmg); else hearts--;
+      G.querySelectorAll(".opt").forEach((x,j)=>{x.disabled=true;if(j===q.a)x.classList.add("ok");else if(x===o)x.classList.add("no")});
+      $("#bFb").innerHTML=fb(ok,q.e)+`<button class="btn pri" type="button" id="bNx" style="margin-top:8px">Teruskan</button>`;
+      $("#bNx").addEventListener("click",()=>{i++;draw()});
+    }));
+  } draw();
+}
+gMatch();
+
+/* ================= SPM ================= */
+const STRUKTUR = [
+ {stem:"3 (a) Islam menetapkan hukuman bagi kesalahan jenayah untuk menjaga kesejahteraan masyarakat.",items:[
+  {n:"(i)",q:"Apakah maksud jenayah dalam Islam?",m:2,a:"Kesalahan-kesalahan yang dinyatakan hukumannya dalam al-Quran, al-Sunnah dan sebahagiannya daripada mahkamah.",s:"Kesalahan yang dinyatakan hukumannya [1] · dalam al-Quran, al-Sunnah dan sebahagiannya mahkamah [1]",t:"Sebut tiga sumber.",x:"Menulis “perbuatan jahat” sahaja."},
+  {n:"(ii)",q:"Senaraikan dua jenis hukuman jenayah dalam Islam selain takzir.",m:2,a:"Hudud dan qisas.",s:"Hudud [1] · Qisas [1]",t:"Baca “selain”.",x:"Menulis takzir."},
+  {n:"(iii)",q:"Jelaskan hukuman bagi kesalahan (a) minum arak (b) mencuri.",m:2,a:"(a) Sebat 40 kali. (b) Potong tangan dan memulangkan barang yang dicuri.",s:"(a) Sebat 40 [1] · (b) Potong tangan/pulangkan barang [1]",t:"Soalan penilaian buku teks.",x:"Menukar bilangan sebatan."},
+  {n:"(iv)",q:"Huraikan dua hikmah hukuman jenayah dalam Islam.",m:4,a:"Pertama, menegakkan keadilan dalam kalangan manusia supaya dapat hidup dengan sejahtera. Kedua, menjamin keselamatan, kestabilan dan kedamaian masyarakat serta negara.",s:"Mana-mana 2 isi berhuraian: keadilan [1+1] · mendidik/keampunan [1+1] · keselamatan [1+1] · ekonomi [1+1]",t:"Empat hikmah dalam buku teks.",x:"Menulis isi umum tanpa kaitan."}
+ ]},
+ {stem:"3 (b) Qisas merupakan hukuman yang berbentuk balasan yang sama.",items:[
+  {n:"(i)",q:"Nyatakan maksud qisas.",m:2,a:"Hukuman keseksaan yang telah ditetapkan jenis dan bentuk hukumannya secara balasan yang sama seperti dalam al-Quran dan al-Sunnah.",s:"Ditetapkan dalam al-Quran dan al-Sunnah [1] · balasan yang sama [1]",t:"Kata kunci: balasan yang sama.",x:"Menulis maksud hudud."},
+  {n:"(ii)",q:"Senaraikan dua kesalahan di bawah hukuman qisas.",m:2,a:"Pembunuhan; perbuatan yang membawa kepada kecederaan.",s:"Pembunuhan [1] · kecederaan [1]",t:"Dua sahaja dalam buku teks.",x:"Menulis mencuri."},
+  {n:"(iii)",q:"Waris mangsa pembunuhan memaafkan pembunuh dan meminta bayaran. Jelaskan istilah dan ketetapannya.",m:2,a:"Bayaran itu ialah diat, iaitu jumlah bayaran berdasarkan persetujuan bersama atau ditetapkan oleh mahkamah. Qisas boleh digantikan dengan diat atau dimaafkan oleh waris mangsa.",s:"Diat [1] · persetujuan/mahkamah; qisas boleh diganti [1]",t:"Sebut istilah dan maksudnya.",x:"Menyatakan qisas wajib walaupun waris memaafkan."},
+  {n:"(iv)",q:"“Hukuman jenayah Islam bertujuan untuk mendidik, bukan semata-mata menghukum.” Huraikan pandangan anda.",m:4,a:"Saya bersetuju. Pertama, hukuman mendidik pesalah supaya insaf dan mendapat keampunan Allah atas kesalahan yang dilakukan. Kedua, hukuman yang adil memberi pengajaran kepada masyarakat supaya takut melakukan jenayah, maka keselamatan terjamin.",s:"Mana-mana 2 isi berhuraian: mendidik pesalah [1+1] · pengajaran kepada masyarakat [1+1] · ruang pengampunan dalam qisas [1+1] · keselamatan dan kestabilan [1+1]",t:"Soalan forum buku teks.",x:"Menyatakan Islam kejam tanpa hujah."}
+ ]},
+ {stem:"3 (c) Hudud, qisas dan takzir mempunyai perbezaan yang jelas.",items:[
+  {n:"(i)",q:"Apakah maksud takzir?",m:2,a:"Hukuman keseksaan yang tidak ditetapkan jenis dan bentuknya dalam al-Quran dan al-Sunnah, sebaliknya diputuskan oleh mahkamah.",s:"Tidak ditetapkan dalam nas [1] · diputuskan oleh mahkamah [1]",t:"Dua frasa kunci.",x:"Menulis contoh sahaja."},
+  {n:"(ii)",q:"Bezakan hudud dengan takzir dari aspek penetapan hukuman.",m:2,a:"Hukuman hudud telah ditetapkan jenis dan bentuknya dalam al-Quran dan al-Sunnah, manakala hukuman takzir diputuskan oleh mahkamah berdasarkan ijtihad dan maslahah.",s:"Hudud: ditetapkan dalam nas [1] · takzir: mahkamah [1]",t:"Dua sisi.",x:"Satu sisi sahaja."},
+  {n:"(iii)",q:"Penduduk kampung ingin menghukum sendiri seorang pencuri yang ditangkap. Jelaskan tindakan yang sepatutnya.",m:2,a:"Penduduk sepatutnya menyerahkan pencuri itu kepada pihak berkuasa kerana pelaksanaan hukuman adalah di bawah pihak berkuasa dan tidak boleh dilaksanakan oleh orang awam.",s:"Serahkan kepada pihak berkuasa [1] · hukuman tidak boleh oleh orang awam [1]",t:"Rujuk Spektrum Ilmu buku teks.",x:"Menyokong tindakan menghukum sendiri."},
+  {n:"(iv)",q:"Bincangkan peranan masyarakat dalam mengurangkan jenayah.",m:4,a:"Pertama, ibu bapa mendidik anak dengan nilai agama dan akhlak sejak kecil supaya tidak terjebak dalam jenayah. Kedua, masyarakat prihatin terhadap persekitaran dan melaporkan aktiviti jenayah kepada pihak berkuasa.",s:"Mana-mana 2 isi berhuraian: didikan keluarga [1+1] · prihatin dan melapor [1+1] · menjauhi pengaruh negatif [1+1] · menyokong pihak berkuasa [1+1]",t:"Aktiviti perbincangan buku teks.",x:"Isi tanpa huraian."}
+ ]}
+];
+$("#struktur").innerHTML = STRUKTUR.map(b=>`<div class="qblock"><div class="stem">${esc(b.stem)}</div>${b.items.map(it=>`<div class="qitem"><div class="qrow"><span class="ql">${it.n}</span><span>${esc(it.q)}</span><span class="m">[${it.m} markah]</span></div>
+ <div class="ans"><div class="a1"><span class="lab">Jawapan contoh</span>${esc(it.a)}${it.tambahan?' <span class="add">Penilaian, bukan isi buku teks</span>':''}</div><div class="a2"><span class="lab">Skema pemarkahan</span>${esc(it.s)}</div><div class="a3"><span class="lab">Teknik mendapat markah</span>${esc(it.t)}</div><div class="a4"><span class="lab">Kesalahan lazim</span>${esc(it.x)}</div></div></div>`).join("")}</div>`).join("");
+$("#toggleAns").addEventListener("click",e=>{const on=$("#struktur").classList.toggle("show-ans");e.currentTarget.setAttribute("aria-pressed",on);e.currentTarget.textContent=on?"Sembunyikan jawapan":"Tunjuk jawapan, skema dan teknik"});
+
+const MCQ = shuffle(BANK).slice(0,12);
+$("#mcq").innerHTML = MCQ.map((q,k)=>`<div class="it" id="mq${k}"><b>${k+1}. ${esc(q.q)}</b><div class="opts">${q.o.map((o,j)=>`<label class="opt" style="display:flex;gap:8px;align-items:flex-start"><input type="radio" name="mq${k}" id="mq${k}o${j}" value="${j}"> <span>${String.fromCharCode(65+j)}. ${esc(o)}</span></label>`).join("")}</div><div class="fb" id="mqf${k}"></div></div>`).join("");
+$("#mcqCheck").addEventListener("click",()=>{let sc=0;MCQ.forEach((q,k)=>{const v=document.querySelector(`input[name="mq${k}"]:checked`);const ok=v&&+v.value===q.a;if(ok)sc++;
+  document.querySelectorAll(`#mq${k} .opt`).forEach((l,j)=>{l.classList.remove("ok","no");if(j===q.a)l.classList.add("ok");else if(v&&+v.value===j)l.classList.add("no")});
+  const f=$("#mqf"+k);f.className="fb show "+(ok?"ok":"no");f.textContent=(ok?"Betul. ":"Jawapan: "+String.fromCharCode(65+q.a)+". ")+q.e});
+  const s=$("#mcqScore");s.hidden=false;s.textContent=`Skor: ${sc}/12`});
+
+/* ================= DIAGNOSTIK ================= */
+const ASP = {is:"Penguasaan istilah",hk:"Penguasaan hukum",rk:"Ketetapan hukuman",bz:"Membezakan konsep",st:"Soalan situasi"};
+const REMEDI = {
+ is:["Tidak dapat menyatakan maksud jenayah, hudud, qisas, takzir, diat","Kad imbas; Fiqh Matching dan Memory","Graphic Organiser kesalahan jenayah (aktiviti buku teks)"],
+ hk:["Keliru hukum, dalil dan hikmah","Jadual Master Hukum; padankan dalil","Forum: hukuman jenayah Islam mendidik (aktiviti buku teks)"],
+ rk:["Tertukar kesalahan dan hukuman","Akronim ZI-QA-CU-MI-RO dan 40-80-100; jadual hukuman","Storyboard kisah hukuman zaman Rasulullah (aktiviti buku teks)"],
+ bz:["Tertukar hudud, qisas dan takzir","Fiqh Sorting; jadual Master Perbezaan","Da'i muda: penerangan qisas (aktiviti buku teks)"],
+ st:["Tidak dapat mengenal pasti kategori dalam situasi","Fiqh Detective; carta alir kategori","Perbincangan peranan masyarakat (aktiviti buku teks) dan Final Boss"]
+};
+function pickDiag(seed){ // 3 per aspect, different sets for pre/post
+  const out=[]; Object.keys(ASP).forEach(a=>{const pool=BANK.filter(q=>q.t===a); const half=Math.floor(pool.length/2); const set = seed==="pre"?pool.slice(0,Math.max(3,half)):pool.slice(Math.max(3,half)).concat(pool.slice(0,3)); out.push(...set.slice(0,3).map(q=>({...q,asp:a})))}); return out; }
+let DMODE="pre", DQ=pickDiag("pre");
+function renderDiag(){
+  $("#dq").innerHTML = DQ.map((q,k)=>`<div class="it" id="di${k}"><span class="tag">${ASP[q.asp]}</span><b>${k+1}. ${esc(q.q)}</b><select id="ds${k}" aria-label="Jawapan soalan ${k+1}"><option value="">— pilih jawapan —</option>${q.o.map((o,j)=>`<option value="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</option>`).join("")}</select><div class="why"></div></div>`).join("");
+  $("#dResult").innerHTML="";
+}
+renderDiag();
+$("#dPre").addEventListener("click",()=>{DMODE="pre";DQ=pickDiag("pre");$("#dPre").classList.add("pri");$("#dPost").classList.remove("pri");$("#dPre").setAttribute("aria-pressed","true");$("#dPost").setAttribute("aria-pressed","false");renderDiag()});
+$("#dPost").addEventListener("click",()=>{DMODE="post";DQ=pickDiag("post");$("#dPost").classList.add("pri");$("#dPre").classList.remove("pri");$("#dPost").setAttribute("aria-pressed","true");$("#dPre").setAttribute("aria-pressed","false");renderDiag()});
+$("#dReset").addEventListener("click",renderDiag);
+$("#dCheck").addEventListener("click",()=>{
+  const res={}; Object.keys(ASP).forEach(a=>res[a]=0); const wrong=[];
+  DQ.forEach((q,k)=>{const v=$("#ds"+k).value; const ok=v!==""&&+v===q.a; if(ok)res[q.asp]++; else wrong.push({k,q,v});
+    const it=$("#di"+k); it.classList.remove("ok","no"); it.classList.add(ok?"ok":"no"); it.querySelector(".why").textContent=(ok?"Betul. ":"Jawapan: "+String.fromCharCode(65+q.a)+". ")+q.e});
+  const tag=n=>n===3?["Mantap","t-high"]:n===2?["Sederhana","t-mid"]:["Lemah","t-low"];
+  const total=Object.values(res).reduce((a,b)=>a+b,0);
+  const prev=store.get("jenayah-diag-"+(DMODE==="pre"?"post":"pre"),null); store.set("jenayah-diag-"+DMODE,total);
+  const weak=Object.keys(ASP).filter(a=>res[a]<=1), mid=Object.keys(ASP).filter(a=>res[a]===2), strong=Object.keys(ASP).filter(a=>res[a]===3);
+  $("#dResult").innerHTML = `<div class="card soft-gold"><h3>Keputusan ${DMODE==="pre"?"ujian diagnostik":"ujian pasca"}: ${total}/15 (${Math.round(total/15*100)}%)</h3>
+   <p>${total>=12?"Tahap penguasaan tinggi.":total>=8?"Tahap penguasaan sederhana.":"Perlu pemulihan."}${prev!==null?` Skor ujian ${DMODE==="pre"?"pasca":"pra"} sebelum ini dalam pelayar ini: ${prev}/15.`:""}</p></div>
+   <div class="aspects">${Object.keys(ASP).map(a=>{const t=tag(res[a]);return `<div class="asp"><small>${ASP[a]}</small><b>${res[a]}/3</b><span class="lvl-tag ${t[1]}">${t[0]}</span></div>`}).join("")}</div>
+   <div class="card"><h3>Analisis kesalahan</h3>${wrong.length?`<ul>${wrong.map(w=>`<li><b>S${w.k+1} (${ASP[w.q.asp]}):</b> ${w.v===""?"tidak dijawab":"memilih "+String.fromCharCode(65+ +w.v)}; jawapan ${String.fromCharCode(65+w.q.a)}. ${esc(w.q.e)}</li>`).join("")}</ul>`:"<p>Tiada kesalahan. Tahniah!</p>"}</div>
+   ${weak.length?`<div class="card soft-peach"><h3>Aktiviti pemulihan dicadangkan</h3><ul>${weak.map(a=>`<li><b>${ASP[a]}:</b> ${esc(REMEDI[a][1])}</li>`).join("")}</ul></div>`:""}
+   ${(mid.length||strong.length)?`<div class="card soft-mint"><h3>Aktiviti pengayaan dicadangkan</h3><ul>${[...strong,...mid].map(a=>`<li><b>${ASP[a]}:</b> ${esc(REMEDI[a][2])}</li>`).join("")}</ul></div>`:""}`;
+  $("#dResult").scrollIntoView({behavior:"smooth",block:"start"});
+});
+$("#remedi").innerHTML = Object.keys(ASP).map(a=>`<tr><td><b>${ASP[a]}</b></td><td>${esc(REMEDI[a][0])}</td><td>${esc(REMEDI[a][1])}</td><td>${esc(REMEDI[a][2])}</td></tr>`).join("");
+const CHECK = ["Menyatakan maksud jenayah dalam Islam","Menyatakan hukum dan dalil hukuman jenayah","Menyatakan maksud hudud, qisas dan takzir","Menyenaraikan lima kesalahan hudud","Menyatakan hukuman bagi setiap kesalahan hudud","Menjelaskan hukuman merompak mengikut kategori","Menjelaskan qisas dan diat","Membezakan hudud, qisas dan takzir","Menghuraikan hikmah hukuman jenayah","Menegaskan bahawa hukuman dilaksanakan oleh pihak berkuasa"];
+const saved = store.get("jenayah-check",[]);
+$("#checklist").innerHTML = CHECK.map((c,k)=>`<label for="ck${k}"><input type="checkbox" id="ck${k}" ${saved.includes(k)?"checked":""}><span>${esc(c)}</span></label>`).join("");
+$("#checklist").addEventListener("change",()=>store.set("jenayah-check",CHECK.map((_,k)=>k).filter(k=>$("#ck"+k).checked)));
+
+/* ================= MODULE NAV ================= */
+const MODS=[["index.html","Analisis Induk"],["haji-umrah.html","T4 · Haji & Umrah"],["sembelihan.html","T4 · Sembelihan"],["korban-akikah.html","T4 · Korban & Akikah"],["muamalat.html","T4 · Muamalat"],["dhuha-gerhana.html","T4 · Dhuha & Gerhana"],["istikharah-tasbih.html","T5 · Istikharah & Tasbih"],["perkahwinan.html","T5 · Perkahwinan"],["isu-perkahwinan.html","T5 · Isu Perkahwinan"],["wasiat-faraid.html","T5 · Wasiat & Faraid"],["jenayah.html","T5 · Jenayah"]];
+(function(){const here=(location.pathname.split("/").pop()||"index.html");const n=document.getElementById("modnav");if(n)n.innerHTML=MODS.map(m=>`<a href="${m[0]}"${m[0]===here?' aria-current="page"':''}>${m[1]}</a>`).join("");})();
+</script>
+
+</body>
+</html>

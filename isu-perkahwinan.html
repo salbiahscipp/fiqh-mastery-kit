@@ -1,0 +1,1202 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Modul Isu Perkahwinan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=Amiri:wght@400;700&display=swap">
+<style>
+/* Layout: emerald title band + sticky tab bar; one tab visible at a time; content in a 1120px column, grids collapse to one column on phones */
+:root{
+  --emerald:#0b5d4b; --emerald-2:#0f7a62; --gold:#b8891a; --gold-soft:#f6ecd0;
+  --teal:#138f8f; --teal-soft:#dff3f1; --mint:#eaf6f0; --peach:#fdeee6; --lilac:#efeafb; --sky:#e6f2fb;
+  --bg:#ffffff; --surface:#f6faf8; --line:#d7e6df; --fg:#14302a; --muted:#4e6a62; --ink-on:#ffffff;
+  --ok:#1d7f4e; --ok-soft:#e1f4e9; --bad:#b4472b; --bad-soft:#fbe9e3;
+  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",sans-serif;
+  --body:"Nunito Sans","Segoe UI",system-ui,sans-serif;
+  --arab:"Amiri","Traditional Arabic","Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --emerald:#0c3f34; --emerald-2:#3fc49d; --gold:#e3bd55; --gold-soft:#3a3218;
+  --teal:#4fc9c4; --teal-soft:#10302f; --mint:#122a23; --peach:#33231c; --lilac:#25213a; --sky:#14273a;
+  --bg:#0c1714; --surface:#11211d; --line:#23403a; --fg:#e6f2ee; --muted:#9dbab1; --ink-on:#f4fbf8;
+  --ok:#5fd39a; --ok-soft:#143326; --bad:#f08a6c; --bad-soft:#3a1f18; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --emerald:#0c3f34; --emerald-2:#3fc49d; --gold:#e3bd55; --gold-soft:#3a3218;
+  --teal:#4fc9c4; --teal-soft:#10302f; --mint:#122a23; --peach:#33231c; --lilac:#25213a; --sky:#14273a;
+  --bg:#0c1714; --surface:#11211d; --line:#23403a; --fg:#e6f2ee; --muted:#9dbab1; --ink-on:#f4fbf8;
+  --ok:#5fd39a; --ok-soft:#143326; --bad:#f08a6c; --bad-soft:#3a1f18; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--emerald)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;line-height:1.15;margin:0}
+p{margin:0}
+ul,ol{margin:0;padding-left:1.2em}
+li::marker{color:var(--gold)}
+.ar{font-family:var(--arab);direction:rtl;font-size:1.35em;line-height:1.9;display:block;text-align:right}
+.muted{color:var(--muted)}
+.hl{color:var(--teal);font-weight:800}
+.add{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--bad);border:1px solid var(--bad);border-radius:4px;padding:0 5px;margin-left:4px;vertical-align:1px}
+
+/* band */
+.band{background:var(--emerald);color:var(--ink-on);position:relative;overflow:hidden}
+.band::before{content:"";position:absolute;inset:0;opacity:.13;background-image:repeating-conic-gradient(from 45deg,var(--gold) 0 25%,transparent 0 50%);background-size:28px 28px;mask-image:linear-gradient(90deg,transparent 40%,#000);-webkit-mask-image:linear-gradient(90deg,transparent 40%,#000)}
+.band .wrap{position:relative;padding-block:34px 28px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--gold)}
+.band h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;margin-top:6px}
+.band h1 span{color:var(--gold)}
+.band p{max-width:60ch;opacity:.92;margin-top:8px}
+.band .back{display:inline-block;margin-top:12px;color:var(--ink-on);font-weight:700;font-size:.88rem}
+.kaabah{width:120px;height:120px}
+@media (max-width:640px){.band .wrap{grid-template-columns:1fr}.kaabah{display:none}}
+
+/* tabs */
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--bg);border-bottom:1px solid var(--line)}
+.tabs .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px}
+.tab{font:inherit;font-weight:800;font-size:.9rem;white-space:nowrap;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--emerald);border-color:var(--emerald);color:var(--ink-on)}
+.tab:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.tab small{font-weight:700;opacity:.75;margin-left:4px}
+
+.panel{padding-block:30px 60px}
+.sec{padding-block:26px;border-bottom:1px solid var(--line)}
+.sec:last-child{border-bottom:0}
+.sec-head{display:grid;gap:6px;margin-bottom:18px;max-width:72ch}
+.kicker{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--gold)}
+.sec-head h2{font-size:clamp(1.4rem,3vw,1.95rem);font-weight:800}
+.sec-head h2 .lt{color:var(--teal)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:860px){.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:680px){.grid2,.grid3{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:12px;padding:14px 16px;min-width:0;background:var(--bg)}
+.card h3{font-size:1.08rem;margin-bottom:6px}
+.soft-mint{background:var(--mint)}.soft-gold{background:var(--gold-soft)}.soft-teal{background:var(--teal-soft)}.soft-lilac{background:var(--lilac)}.soft-peach{background:var(--peach)}.soft-sky{background:var(--sky)}
+.note{font-size:.88rem;padding:10px 12px;border-radius:8px;background:var(--bad-soft);border-left:3px solid var(--bad)}
+.note b{color:var(--bad)}
+.tip{font-size:.9rem;padding:10px 12px;border-radius:8px;background:var(--teal-soft);border-left:3px solid var(--teal)}
+
+/* concept map */
+.cmap{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center}
+.cmap .core{grid-column:2;grid-row:1/span 5;width:170px;height:170px;border-radius:50%;background:var(--emerald);color:var(--ink-on);display:grid;place-items:center;text-align:center;font-family:var(--display);font-weight:800;font-size:1.3rem;border:5px solid var(--gold);padding:12px}
+.cmap .node{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--surface);font-size:.9rem;min-width:0}
+.cmap .node b{display:block;font-family:var(--display);color:var(--teal)}
+.cmap .l{grid-column:1}.cmap .r{grid-column:3}
+@media (max-width:760px){.cmap{grid-template-columns:1fr}.cmap .core{grid-column:1;grid-row:auto;margin:0 auto}.cmap .l,.cmap .r{grid-column:1}}
+.seq{display:flex;flex-wrap:wrap;gap:8px;counter-reset:s}
+.seq span{counter-increment:s;font-size:.86rem;font-weight:700;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--bg)}
+.seq span::before{content:counter(s) " · ";color:var(--gold)}
+
+/* tables */
+.tbox{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.9rem}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+th{background:var(--surface);font-family:var(--display);font-size:.85rem;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td b{color:var(--teal)}
+
+/* istilah cards */
+.term{display:grid;gap:6px}
+.term .t{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.term .t h3{margin:0;font-size:1.1rem}
+.term .k{font-size:.74rem;font-weight:800;color:var(--gold);letter-spacing:.06em;text-transform:uppercase}
+.term dl{margin:0;display:grid;grid-template-columns:96px minmax(0,1fr);gap:4px 10px;font-size:.88rem}
+.term dt{font-weight:800;color:var(--muted);font-size:.78rem;padding-top:2px}
+.term dd{margin:0}
+.term dd.x{color:var(--bad)}
+
+/* flow */
+.flow{display:grid;gap:0;counter-reset:f}
+.fstep{display:grid;grid-template-columns:76px minmax(0,1fr);gap:14px;padding-bottom:16px;position:relative}
+.fstep::after{content:"";position:absolute;left:37px;top:54px;bottom:0;width:2px;background:var(--line)}
+.fstep:last-child::after{display:none}
+.fstep .d{width:76px;height:54px;border-radius:10px;background:var(--emerald);color:var(--ink-on);display:grid;place-items:center;text-align:center;font-family:var(--display);font-weight:800;font-size:.8rem;line-height:1.1}
+.fstep .d b{display:block;font-size:1.3rem}
+.fstep .d.gold{background:var(--gold-soft);color:var(--fg);border:1px solid var(--gold)}
+.fstep .body{padding-top:4px;min-width:0}
+.fstep .body b{display:block}
+.pill{display:inline-block;font-size:.72rem;font-weight:800;padding:1px 8px;border-radius:999px;margin:2px 4px 0 0}
+.p-r{background:var(--emerald);color:var(--ink-on)}
+.p-w{background:var(--gold-soft);color:var(--fg);border:1px solid var(--gold)}
+.p-s{background:var(--teal-soft);color:var(--fg);border:1px solid var(--teal)}
+.p-x{background:var(--bad-soft);color:var(--fg);border:1px solid var(--bad)}
+
+/* situations */
+.sit{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:.88rem}
+.sit>div{padding:10px 12px;min-width:0;border-right:1px solid var(--line)}
+.sit>div:last-child{border-right:0}
+.sit .lab{font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:2px}
+.sit .s1{background:var(--surface)}.sit .s3{background:var(--gold-soft)}.sit .s5{background:var(--mint)}
+.sits{display:grid;gap:10px}
+.sits .num{font-family:var(--display);font-weight:800;color:var(--gold);margin-right:4px}
+@media (max-width:860px){.sit{grid-template-columns:1fr}.sit>div{border-right:0;border-bottom:1px solid var(--line)}.sit>div:last-child{border-bottom:0}}
+
+/* slides */
+.deck{display:grid;gap:12px}
+.stage{position:relative;width:100%;max-width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--bg)}
+@media (max-width:760px){.stage{aspect-ratio:auto;min-height:520px}}
+.slide{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:0}
+@media (max-width:760px){.slide{position:relative;grid-template-columns:1fr}}
+.slide .main{padding:clamp(18px,3vw,36px);display:flex;flex-direction:column;gap:10px;min-width:0;overflow:auto}
+.slide .side{background:var(--emerald);color:var(--ink-on);padding:clamp(16px,2.6vw,30px);display:flex;flex-direction:column;gap:12px;justify-content:space-between;min-width:0;position:relative;overflow:auto}
+.slide .side::before{content:"";position:absolute;inset:0;opacity:.1;background-image:repeating-conic-gradient(from 45deg,var(--gold) 0 25%,transparent 0 50%);background-size:24px 24px;pointer-events:none}
+.slide .side>*{position:relative}
+.slide .no{font-size:.74rem;font-weight:800;letter-spacing:.14em;color:var(--gold);text-transform:uppercase}
+.slide h3{font-size:clamp(1.3rem,2.8vw,2.1rem);font-weight:800}
+.slide .lead{font-size:clamp(.92rem,1.4vw,1.05rem);color:var(--muted)}
+.slide ul{font-size:clamp(.88rem,1.35vw,1.02rem);display:grid;gap:4px}
+.slide .kw{display:flex;flex-wrap:wrap;gap:6px}
+.slide .kw span{font-size:.78rem;font-weight:800;padding:3px 10px;border-radius:999px;background:var(--gold);color:var(--emerald)}
+.slide .q{font-size:.88rem;border-top:1px solid color-mix(in srgb,var(--ink-on) 30%,transparent);padding-top:10px}
+.slide .q b{color:var(--gold)}
+.slide .ex{font-size:.86rem;padding:8px 10px;border-radius:8px;background:color-mix(in srgb,var(--ink-on) 12%,transparent)}
+.slide .ill{width:100%;max-width:200px;height:auto;align-self:center}
+.slide.cover{grid-template-columns:1fr}
+.slide.cover .main{background:var(--emerald);color:var(--ink-on);justify-content:center;align-items:flex-start;position:relative}
+.slide.cover .main::before{content:"";position:absolute;inset:0;opacity:.14;background-image:repeating-conic-gradient(from 45deg,var(--gold) 0 25%,transparent 0 50%);background-size:30px 30px;mask-image:linear-gradient(90deg,transparent 30%,#000);-webkit-mask-image:linear-gradient(90deg,transparent 30%,#000)}
+.slide.cover .main>*{position:relative}
+.slide.cover h3{font-size:clamp(2rem,5vw,3.6rem)}
+.slide.cover h3 span{color:var(--gold)}
+.slide.cover .lead{color:var(--ink-on);opacity:.9}
+.dcontrols{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{font:inherit;font-weight:800;font-size:.9rem;padding:8px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.btn:hover{border-color:var(--teal)}
+.btn.pri{background:var(--emerald);border-color:var(--emerald);color:var(--ink-on)}
+.btn.gold{background:var(--gold-soft);border-color:var(--gold)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.dots{display:flex;gap:5px;flex-wrap:wrap}
+.dots button{width:26px;height:26px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:inherit;font-size:.72rem;font-weight:800;cursor:pointer}
+.dots button[aria-current="true"]{background:var(--gold);border-color:var(--gold);color:var(--emerald)}
+
+/* worksheet */
+.ws{display:grid;gap:14px}
+.lvl{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.lvl-h{display:flex;gap:12px;align-items:center;padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--line)}
+.lvl-h .badge{font-family:var(--display);font-weight:800;padding:6px 10px;border-radius:8px;background:var(--emerald);color:var(--ink-on);white-space:nowrap}
+.lvl-h h3{font-size:1.1rem}
+.lvl-b{padding:14px 16px;display:grid;gap:16px}
+.task h4{font-family:var(--body);font-size:.95rem;font-weight:800;margin-bottom:6px}
+.task ol{display:grid;gap:6px}
+.skema{display:none;margin-top:8px;padding:10px 12px;border-radius:8px;background:var(--ok-soft);border-left:3px solid var(--ok);font-size:.9rem}
+.show-skema .skema{display:block}
+.skema::before{content:"Skema jawapan";display:block;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ok);margin-bottom:3px}
+.blank{display:inline-block;min-width:110px;border-bottom:1.5px dashed var(--muted);margin:0 3px}
+.wbox{min-height:54px;border:1px dashed var(--line);border-radius:8px;margin-top:6px}
+
+/* games */
+.gamegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:18px}
+.gpick{font:inherit;text-align:left;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer;display:grid;gap:2px}
+.gpick b{font-family:var(--display);font-size:1rem}
+.gpick small{color:var(--muted)}
+.gpick .lv{font-size:.7rem;font-weight:800;color:var(--gold);letter-spacing:.08em;text-transform:uppercase}
+.gpick[aria-pressed="true"]{border-color:var(--emerald);background:var(--mint);box-shadow:inset 0 0 0 1px var(--emerald)}
+.gstage{border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:14px;background:var(--surface)}
+.ghead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ghead h3{font-size:1.4rem}
+.score{font-family:var(--display);font-weight:800;font-size:1.1rem;padding:6px 12px;border-radius:10px;background:var(--gold-soft);border:1px solid var(--gold);white-space:nowrap;font-variant-numeric:tabular-nums}
+.how{font-size:.9rem;color:var(--muted)}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (max-width:560px){.opts{grid-template-columns:1fr}}
+.opt{font:inherit;text-align:left;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer;min-height:44px}
+.opt:hover:not(:disabled){border-color:var(--teal)}
+.opt.ok{background:var(--ok-soft);border-color:var(--ok)}
+.opt.no{background:var(--bad-soft);border-color:var(--bad)}
+.opt.sel{border-color:var(--gold);box-shadow:inset 0 0 0 2px var(--gold)}
+.opt.done{opacity:.45}
+.fb{font-size:.92rem;padding:10px 12px;border-radius:10px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--ok-soft);border-left:3px solid var(--ok)}
+.fb.no{background:var(--bad-soft);border-left:3px solid var(--bad)}
+.qtext{font-size:1.08rem;font-weight:700}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:560px){.cols2{grid-template-columns:1fr}}
+.cols2>div{display:grid;gap:8px;align-content:start}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+.bin{font:inherit;font-weight:800;padding:10px;border-radius:10px;border:2px dashed var(--line);background:var(--bg);color:var(--fg);cursor:pointer;text-align:center}
+.bin:hover{border-color:var(--teal)}
+.chipq{font-size:1.15rem;font-family:var(--display);font-weight:800;padding:14px;border-radius:12px;background:var(--bg);border:1px solid var(--gold);text-align:center}
+.locks{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.lock{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--bg);display:grid;gap:8px}
+.lock.open{border-color:var(--ok);background:var(--ok-soft)}
+.lock input,.codein{font:inherit;font-size:1.1rem;font-weight:800;width:100%;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font-variant-numeric:tabular-nums}
+.boxes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.mbox{font:inherit;font-family:var(--display);font-weight:800;font-size:1.4rem;aspect-ratio:1.4;max-width:100%;border-radius:12px;border:1px solid var(--gold);background:var(--gold-soft);color:var(--fg);cursor:pointer}
+.mbox:disabled{background:var(--surface);border-color:var(--line);color:var(--muted);cursor:default;font-size:.9rem}
+.wheelwrap{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:18px;align-items:center}
+@media (max-width:680px){.wheelwrap{grid-template-columns:1fr}}
+.wheel{position:relative;width:100%;max-width:320px;aspect-ratio:1;margin:0 auto}
+.wheel canvas{width:100%;height:100%;display:block}
+.wheel .ptr{position:absolute;left:50%;top:-6px;transform:translateX(-50%);width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-top:26px solid var(--bad)}
+.ladder{display:grid;gap:4px}
+.ladder div{display:flex;justify-content:space-between;font-size:.82rem;padding:3px 10px;border-radius:6px;font-variant-numeric:tabular-nums}
+.ladder .cur{background:var(--gold);color:var(--emerald);font-weight:800}
+.ladder .past{color:var(--ok);font-weight:700}
+.champ{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:16px}
+@media (max-width:680px){.champ{grid-template-columns:1fr}}
+.mem{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media (max-width:560px){.mem{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.mcard{font:inherit;min-height:92px;border-radius:10px;border:1px solid var(--line);background:var(--emerald);color:var(--ink-on);cursor:pointer;padding:8px;font-size:.8rem;font-weight:700;line-height:1.25}
+.mcard.up{background:var(--bg);color:var(--fg);border-color:var(--gold)}
+.mcard.got{background:var(--ok-soft);color:var(--fg);border-color:var(--ok);cursor:default}
+.hp{height:16px;border-radius:999px;background:var(--bg);border:1px solid var(--line);overflow:hidden}
+.hp i{display:block;height:100%;background:var(--bad);transition:width .3s}
+.hearts{font-weight:800;color:var(--bad);font-variant-numeric:tabular-nums}
+.bossrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media (max-width:560px){.bossrow{grid-template-columns:1fr}}
+
+/* spm */
+.qblock{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.qblock .stem{padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--line);font-weight:700}
+.qitem{padding:12px 16px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.qitem:last-child{border-bottom:0}
+.qrow{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;align-items:start}
+.qrow .ql{font-weight:800;color:var(--muted)}
+.qrow .m{font-weight:800;font-size:.84rem;white-space:nowrap;color:var(--gold)}
+.ans{display:none;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;font-size:.88rem}
+.show-ans .ans{display:grid}
+@media (max-width:680px){.ans{grid-template-columns:1fr}}
+.ans>div{padding:8px 10px;border-radius:8px;min-width:0}
+.ans .a1{background:var(--ok-soft)}.ans .a2{background:var(--mint)}.ans .a3{background:var(--teal-soft)}.ans .a4{background:var(--bad-soft)}
+.ans .lab{display:block;font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.stim{border:2px solid var(--fg);padding:10px 14px;border-radius:4px;font-weight:700;text-align:center;margin:4px 0;background:var(--bg)}
+.mcq{display:grid;gap:12px}
+.mcq .it{border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:8px}
+
+/* diag */
+.aspects{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+@media (max-width:760px){.aspects{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.asp{border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center;background:var(--bg)}
+.asp b{display:block;font-family:var(--display);font-size:1.5rem;font-variant-numeric:tabular-nums}
+.asp small{display:block;font-size:.76rem;color:var(--muted)}
+.asp .lvl-tag{display:inline-block;margin-top:4px;font-size:.72rem;font-weight:800;padding:1px 8px;border-radius:999px}
+.t-low{background:var(--bad-soft);color:var(--bad)}.t-mid{background:var(--gold-soft)}.t-high{background:var(--ok-soft);color:var(--ok)}
+.check{display:grid;gap:6px}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--bg)}
+.check input{margin-top:5px;width:18px;height:18px;accent-color:var(--emerald)}
+.dq{display:grid;gap:10px}
+.dq .it{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:grid;gap:6px;background:var(--bg)}
+.dq .it .tag{font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+.dq select{font:inherit;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);max-width:100%}
+.dq .it.ok{border-color:var(--ok);background:var(--ok-soft)}
+.dq .it.no{border-color:var(--bad);background:var(--bad-soft)}
+.dq .why{font-size:.86rem;display:none}
+.dq .it.ok .why,.dq .it.no .why{display:block}
+footer{padding-block:20px 40px;font-size:.84rem;color:var(--muted);border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ===== Tema ceria: lapisan warna tambahan ===== */
+:root{
+  --c1:#e8457a; --c1s:#fde7ef; --c2:#f0861f; --c2s:#fff0e0; --c3:#7b5cd6; --c3s:#efeafd;
+  --c4:#2f80ed; --c4s:#e5f0fe; --c5:#16a37a; --c5s:#e2f6ee; --c6:#e0a800; --c6s:#fff6d6;
+  --band-grad:linear-gradient(115deg,#0b5d4b 0%,#0f8f86 38%,#2f80ed 72%,#7b5cd6 100%);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --c1:#ff7aa3; --c1s:#3a1826; --c2:#ffa95a; --c2s:#3a2614; --c3:#a993ff; --c3s:#251d42;
+  --c4:#6aa8ff; --c4s:#132741; --c5:#4fd6a8; --c5s:#11322a; --c6:#ffd15a; --c6s:#3a3112;
+  --band-grad:linear-gradient(115deg,#0a3a30 0%,#0d5c57 38%,#173f78 72%,#3b2d73 100%);}}
+:root[data-theme="dark"]{
+  --c1:#ff7aa3; --c1s:#3a1826; --c2:#ffa95a; --c2s:#3a2614; --c3:#a993ff; --c3s:#251d42;
+  --c4:#6aa8ff; --c4s:#132741; --c5:#4fd6a8; --c5s:#11322a; --c6:#ffd15a; --c6s:#3a3112;
+  --band-grad:linear-gradient(115deg,#0a3a30 0%,#0d5c57 38%,#173f78 72%,#3b2d73 100%);}
+.band{background:var(--band-grad)}
+.band::after{content:"";position:absolute;inset:auto -40px -60px auto;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,var(--c6) 0 18%,transparent 19%),radial-gradient(circle at 70% 30%,var(--c1) 0 10%,transparent 11%);opacity:.35;pointer-events:none}
+body::before{background:#0b5d4b}
+.tab:nth-child(6n+1){--tc:var(--c5)}.tab:nth-child(6n+2){--tc:var(--c4)}.tab:nth-child(6n+3){--tc:var(--c2)}.tab:nth-child(6n+4){--tc:var(--c1)}.tab:nth-child(6n+5){--tc:var(--c3)}.tab:nth-child(6n+6){--tc:var(--c6)}
+.tab{border-color:var(--tc);border-width:2px}
+.tab[aria-selected="true"]{background:var(--tc);border-color:var(--tc);color:#ffffff}
+.panel .sec:nth-of-type(6n+1) .sec-head h2{color:var(--c5)}
+.panel .sec:nth-of-type(6n+2) .sec-head h2{color:var(--c4)}
+.panel .sec:nth-of-type(6n+3) .sec-head h2{color:var(--c3)}
+.panel .sec:nth-of-type(6n+4) .sec-head h2{color:var(--c1)}
+.panel .sec:nth-of-type(6n+5) .sec-head h2{color:var(--c2)}
+.panel .sec:nth-of-type(6n+6) .sec-head h2{color:var(--c4)}
+.kicker{display:inline-block;width:max-content;max-width:100%;padding:2px 10px;border-radius:999px;background:var(--c6s);color:var(--fg)}
+.card.term{border-top:5px solid var(--cc,var(--c5))}
+.card.term:nth-child(6n+1){--cc:var(--c1)}.card.term:nth-child(6n+2){--cc:var(--c2)}.card.term:nth-child(6n+3){--cc:var(--c3)}.card.term:nth-child(6n+4){--cc:var(--c4)}.card.term:nth-child(6n+5){--cc:var(--c5)}.card.term:nth-child(6n+6){--cc:var(--c6)}
+.card.term .k{color:var(--cc)}
+.cmap .node{border-left:5px solid var(--nc,var(--c4))}
+.cmap .node:nth-child(5n+1){--nc:var(--c1)}.cmap .node:nth-child(5n+2){--nc:var(--c2)}.cmap .node:nth-child(5n+3){--nc:var(--c3)}.cmap .node:nth-child(5n+4){--nc:var(--c4)}.cmap .node:nth-child(5n+5){--nc:var(--c5)}
+.cmap .node b{color:var(--nc)}
+.cmap .core{background:conic-gradient(var(--c5),var(--c4),var(--c3),var(--c1),var(--c2),var(--c6),var(--c5));color:#ffffff;text-shadow:0 1px 3px rgba(0,0,0,.45)}
+.seq span:nth-child(6n+1){background:var(--c1s)}.seq span:nth-child(6n+2){background:var(--c2s)}.seq span:nth-child(6n+3){background:var(--c6s)}.seq span:nth-child(6n+4){background:var(--c5s)}.seq span:nth-child(6n+5){background:var(--c4s)}.seq span:nth-child(6n+6){background:var(--c3s)}
+th{background:var(--c4s)}
+.sit .s1{background:var(--c4s)}.sit .s3{background:var(--c6s)}.sit .s5{background:var(--c5s)}
+.sit .num{color:var(--c1)}
+.fstep:nth-child(5n+1) .d{background:var(--c5)}.fstep:nth-child(5n+2) .d{background:var(--c4)}.fstep:nth-child(5n+3) .d{background:var(--c3)}.fstep:nth-child(5n+4) .d{background:var(--c1)}.fstep:nth-child(5n+5) .d{background:var(--c2)}
+.fstep .d,.fstep .d.gold{color:#ffffff;border:0}
+.slide .side{background:linear-gradient(160deg,#0b5d4b,#0f8f86 50%,#2f80ed)}
+.slide.cover .main{background:var(--band-grad)}
+.slide .kw span:nth-child(4n+1){background:var(--c6)}.slide .kw span:nth-child(4n+2){background:#ffd6e4}.slide .kw span:nth-child(4n+3){background:#d9ccff}.slide .kw span:nth-child(4n+4){background:#c9f2e2}
+.slide .kw span{color:#14302a}
+.slide h3{color:var(--c3)}
+.slide.cover h3{color:#ffffff}
+.dots button[aria-current="true"]{background:var(--c1);border-color:var(--c1);color:#ffffff}
+.lvl:nth-child(5n+1) .badge{background:var(--c5)}.lvl:nth-child(5n+2) .badge{background:var(--c4)}.lvl:nth-child(5n+3) .badge{background:var(--c3)}.lvl:nth-child(5n+4) .badge{background:var(--c2)}.lvl:nth-child(5n+5) .badge{background:var(--c1)}
+.lvl:nth-child(5n+1){border-top:5px solid var(--c5)}.lvl:nth-child(5n+2){border-top:5px solid var(--c4)}.lvl:nth-child(5n+3){border-top:5px solid var(--c3)}.lvl:nth-child(5n+4){border-top:5px solid var(--c2)}.lvl:nth-child(5n+5){border-top:5px solid var(--c1)}
+.gpick{border-left:6px solid var(--gc,var(--c4))}
+.gpick:nth-child(6n+1){--gc:var(--c1)}.gpick:nth-child(6n+2){--gc:var(--c2)}.gpick:nth-child(6n+3){--gc:var(--c3)}.gpick:nth-child(6n+4){--gc:var(--c4)}.gpick:nth-child(6n+5){--gc:var(--c5)}.gpick:nth-child(6n+6){--gc:var(--c6)}
+.gpick .lv{color:var(--gc)}
+.gpick[aria-pressed="true"]{background:color-mix(in srgb,var(--gc) 14%,var(--bg));box-shadow:inset 0 0 0 2px var(--gc);border-color:var(--gc)}
+.gstage{background:linear-gradient(180deg,var(--c3s),var(--bg) 140px)}
+.score{background:var(--c6s);border-color:var(--c6)}
+.btn.pri{background:var(--c4);border-color:var(--c4);color:#ffffff}
+.btn.gold{background:var(--c6s);border-color:var(--c6)}
+.mbox{background:linear-gradient(135deg,var(--c1s),var(--c3s));border-color:var(--c3)}
+.chipq{border-color:var(--c3);background:var(--c3s)}
+.qblock .stem{background:var(--c4s)}
+.asp:nth-child(5n+1){border-top:4px solid var(--c1)}.asp:nth-child(5n+2){border-top:4px solid var(--c2)}.asp:nth-child(5n+3){border-top:4px solid var(--c3)}.asp:nth-child(5n+4){border-top:4px solid var(--c4)}.asp:nth-child(5n+5){border-top:4px solid var(--c5)}
+.modnav{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.modnav a{font-size:.8rem;font-weight:800;text-decoration:none;padding:4px 10px;border-radius:999px;border:1.5px solid var(--mc,var(--c4));color:var(--fg);background:var(--bg)}
+.modnav a:nth-child(5n+1){--mc:var(--c1)}.modnav a:nth-child(5n+2){--mc:var(--c2)}.modnav a:nth-child(5n+3){--mc:var(--c3)}.modnav a:nth-child(5n+4){--mc:var(--c4)}.modnav a:nth-child(5n+5){--mc:var(--c5)}
+.modnav a[aria-current="page"]{background:var(--mc);color:#ffffff}
+
+</style>
+</head>
+<body>
+
+
+<header class="band">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Fiqh Mastery Kit · Tingkatan 5 · Pelajaran 13</div>
+      <h1>Isu-isu <span>dalam</span> Perkahwinan</h1>
+      <p>Modul lengkap berdasarkan Buku Teks Pendidikan Islam Tingkatan 5 (ms 123–136): talak, fasakh, khuluk, li'an, iddah, rujuk, nusyuz, poligami, hadanah, anak angkat dan implikasi perkahwinan yang tidak mengikut syariat. Tajuk paling kerap dalam Soalan 3 percubaan SPM 2026 (9 daripada 13 set).</p>
+      <a class="back" href="https://claude.ai/artifact/DRydjiegwABTm6WwHNx9L5">← Kembali ke Analisis Induk 10 pelajaran</a>
+    </div>
+    <svg class="kaabah" viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke-width="7"><circle cx="46" cy="64" r="26" stroke="#e3bd55"/><circle cx="76" cy="64" r="26" stroke="#ffffff" stroke-opacity=".85"/></g><path d="M40 30l6-10 6 10-6 6Z" fill="#e3bd55"/></svg>
+  </div>
+</header>
+
+<div class="tabs" role="tablist" aria-label="Bahagian modul">
+  <div class="wrap">
+    <button class="tab" role="tab" id="tab-analisis" data-tab="analisis" aria-selected="true">Analisis Master <small>Fasa 2–3</small></button>
+    <button class="tab" role="tab" id="tab-slaid" data-tab="slaid" aria-selected="false">Slaid <small>19</small></button>
+    <button class="tab" role="tab" id="tab-lembaran" data-tab="lembaran" aria-selected="false">Lembaran Kerja <small>5 tahap</small></button>
+    <button class="tab" role="tab" id="tab-permainan" data-tab="permainan" aria-selected="false">Game Zone <small>10</small></button>
+    <button class="tab" role="tab" id="tab-spm" data-tab="spm" aria-selected="false">Latihan SPM</button>
+    <button class="tab" role="tab" id="tab-diagnostik" data-tab="diagnostik" aria-selected="false">Diagnostik</button>
+  </div>
+</div>
+
+<main>
+<!-- ============ ANALISIS ============ -->
+<section class="panel" id="p-analisis" role="tabpanel" aria-labelledby="tab-analisis">
+<div class="wrap">
+
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">A · Peta Konsep</div><h2>Gambaran keseluruhan tajuk</h2>
+    <p class="muted">Pelajaran ini ada tiga bahagian. Bahagian pertama: empat cara perkahwinan dibubarkan. Bahagian kedua: enam isu yang timbul dalam dan selepas perkahwinan. Bahagian ketiga: implikasi perkahwinan yang tidak mengikut syariat dan undang-undang Islam.</p></div>
+    <div class="cmap">
+      <div class="core">Isu-isu dalam Perkahwinan</div>
+      <div class="node l"><b>Talak</b>Dibubarkan oleh suami dengan lafaz · hukum berubah ikut keadaan</div>
+      <div class="node l"><b>Fasakh</b>Dibubarkan melalui kuasa hakim dengan sebab tertentu</div>
+      <div class="node l"><b>Khuluk (tebus talak)</b>Atas kehendak isteri dengan bayaran ganti rugi</div>
+      <div class="node l"><b>Li'an</b>Sumpah suami menuduh zina tanpa 4 saksi / menafikan nasab</div>
+      <div class="node l"><b>Implikasi</b>Perkahwinan tidak ikut syariat &amp; undang-undang Islam</div>
+      <div class="node r"><b>Iddah</b>Tempoh menunggu isteri · wajib</div>
+      <div class="node r"><b>Rujuk</b>Sambung semula dalam iddah · 5 syarat</div>
+      <div class="node r"><b>Nusyuz</b>Isteri enggan mentaati perintah sah · haram</div>
+      <div class="node r"><b>Poligami</b>Beristeri lebih seorang · harus · 3 kelayakan</div>
+      <div class="node r"><b>Hadanah &amp; anak angkat</b>Penjagaan anak · hak anak angkat</div>
+    </div>
+    <div style="margin-top:18px;display:grid;gap:8px">
+      <b>Susunan pembelajaran, mudah ke sukar</b>
+      <div class="seq"><span>Maksud setiap istilah</span><span>Hukum setiap istilah</span><span>5 hukum talak</span><span>Jenis talak</span><span>Talak vs fasakh vs khuluk</span><span>Li'an: cara &amp; kesan</span><span>Jadual iddah</span><span>Syarat rujuk</span><span>Poligami, nusyuz, hadanah, anak angkat</span><span>Implikasi</span><span>Situasi &amp; KBAT</span></div>
+    </div>
+    <div class="grid3" style="margin-top:18px">
+      <div class="card soft-gold"><h3>Fakta teras 1</h3>Hukum asal talak ialah <b>harus</b>, tetapi boleh menjadi wajib, sunat, makruh atau haram mengikut keadaan.</div>
+      <div class="card soft-gold"><h3>Fakta teras 2</h3>Siapa yang membubarkan? <b>Talak</b>: suami. <b>Fasakh</b>: hakim. <b>Khuluk</b>: atas kehendak isteri dengan ganti rugi.</div>
+      <div class="card soft-gold"><h3>Fakta teras 3</h3>Rujuk hanya dalam <b>tempoh iddah</b>, bukan selepas fasakh atau khuluk, dan bukan selepas talak tiga.</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">B · Master Istilah</div><h2>17 istilah yang mesti dikuasai</h2>
+    <p class="muted">Definisi diambil daripada buku teks. Baris “Mudah” ialah bahasa murid. Baris merah ialah kesalahan lazim.</p></div>
+    <div class="grid2" id="istilah"></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">C · Master Hukum</div><h2>Hukum setiap isu</h2>
+    <p class="muted">Pelajaran ini banyak menguji hukum. Lima hukum talak ialah soalan situasi paling kerap dalam set percubaan.</p></div>
+    <h3 style="font-size:1.1rem;margin-bottom:10px">Lima keadaan hukum talak</h3>
+    <div class="grid3" id="hukumtalak" style="margin-bottom:18px"></div>
+    <div class="tbox"><table><thead><tr><th>Perkara</th><th>Hukum</th><th>Maksud hukum</th><th>Sebab / sumber</th><th>Aplikasi</th><th>Contoh soalan</th></tr></thead><tbody id="hukum"></tbody></table></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">D · Master Syarat dan Ketetapan</div><h2>Syarat, tempoh dan kelayakan</h2>
+    <p class="muted">Buku teks <b>tidak</b> menyenaraikan rukun bagi isu-isu dalam pelajaran ini. Yang diuji ialah syarat rujuk, kelayakan poligami, tempoh iddah, larangan iddah, cara li'an dan hak anak angkat. Jangan mereka rukun dalam jawapan.</p></div>
+    <h3 style="font-size:1.1rem;margin-bottom:10px">Lima syarat rujuk</h3>
+    <div class="tbox"><table><thead><tr><th>Syarat</th><th>Maksud</th><th>Contoh memenuhi</th><th>Contoh tidak memenuhi</th><th>Kesan jika tidak dipenuhi</th></tr></thead><tbody id="rujuk"></tbody></table></div>
+    <div class="grid2" style="margin-top:16px">
+      <div>
+        <h3 style="font-size:1.1rem;margin-bottom:10px">Jadual tempoh iddah</h3>
+        <div class="tbox"><table style="min-width:420px"><thead><tr><th>Situasi</th><th>Bercerai hidup</th><th>Bercerai mati</th></tr></thead><tbody id="iddah"></tbody></table></div>
+      </div>
+      <div style="display:grid;gap:12px">
+        <div class="card soft-peach"><h3>Larangan semasa iddah</h3><ol><li>Menerima pinangan lelaki lain secara terang atau kiasan.</li><li>Keluar dari rumah yang disediakan oleh suami kecuali untuk keperluan yang dibenarkan syarak.</li><li>Berhias diri, kecuali wanita yang dalam iddah raj'ie.</li></ol><p class="muted" style="margin-top:6px;font-size:.84rem">Sumber buku teks: al-Fiqh al-Manhaji</p></div>
+        <div class="card soft-teal"><h3>Kelayakan berpoligami</h3><ol><li>Tidak melebihi empat orang isteri.</li><li>Boleh berlaku adil terhadap isteri-isterinya dari aspek lahiriah seperti pakaian dan tempat tinggal.</li><li>Mampu memberi nafkah zahir dan batin.</li></ol></div>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:16px">
+      <div>
+        <h3 style="font-size:1.1rem;margin-bottom:10px">Hak anak kandung dan anak angkat</h3>
+        <div class="tbox"><table style="min-width:380px"><thead><tr><th>Hak</th><th>Anak kandung</th><th>Anak angkat</th></tr></thead><tbody id="anak"></tbody></table></div>
+      </div>
+      <div style="display:grid;gap:12px">
+        <div class="card soft-mint"><h3>Hadanah</h3><p>Ibu ialah orang yang paling berhak menjaga anak selepas perkahwinannya dibubarkan. Namun, terdapat sebab-sebab tertentu yang boleh menyebabkan haknya terbatal.</p></div>
+        <div class="card soft-lilac"><h3>Contoh bayaran ganti rugi khuluk</h3><p>Wang tunai, hartanah, emas, perak, saham, manfaat, atau apa-apa yang dipersetujui oleh kedua-dua pihak. <span class="muted">(Sumber: Jabatan Kehakiman Syariah Malaysia)</span></p></div>
+      </div>
+    </div>
+    <div class="grid3" style="margin-top:16px">
+      <div class="card"><h3>Syarat vs hukum</h3>Hukum menjawab “boleh atau tidak” (harus, wajib, haram). Syarat menjawab “bila sah” (contoh: rujuk sah jika isteri masih dalam iddah).</div>
+      <div class="card"><h3>Kesan syarat rujuk tidak dipenuhi</h3>Rujuk tidak sah. Untuk kembali bersama, pasangan perlu akad nikah dan mahar baharu, kecuali talak tiga yang mempunyai ketetapan tersendiri.</div>
+      <div class="card"><h3>Talak tiga (kaitan Pelajaran 12)</h3>Isteri yang ditalak tiga haram dikahwini semula sehingga dia berkahwin dengan lelaki lain, bercerai dan habis tempoh iddah dengan suami baharu.</div>
+    </div>
+    <div class="tip" style="margin-top:14px"><b>Cara hafal:</b> Pembubaran = <b>“TA-FA-KHU-LI”</b> (Talak, Fasakh, Khuluk, Li'an). Isu = <b>“I-RU-NU-PO-HA-AN”</b> (Iddah, Rujuk, Nusyuz, Poligami, Hadanah, Anak angkat). Syarat rujuk = <b>“RELA-BUKAN-BUKAN-MASIH-LAFAZ”</b> (rela; bukan fasakh/khuluk; bukan talak tiga; masih dalam iddah; ada lafaz).</div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">E · Master Perbezaan Istilah</div><h2>Istilah yang mudah dikelirukan</h2></div>
+    <div class="tbox"><table><thead><tr><th>Istilah A</th><th>Istilah B</th><th>Maksud ringkas</th><th>Perbezaan utama</th><th>Contoh situasi</th><th>Kata kunci</th></tr></thead><tbody id="beza"></tbody></table></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">F · Master Proses dan Tatacara</div><h2>Cara li'an dan laluan selepas talak</h2>
+    <p class="muted">Label: <span class="pill p-r">Ketetapan</span><span class="pill p-w">Syarat</span><span class="pill p-s">Hak</span><span class="pill p-x">Elakkan / kesan</span></p></div>
+    <div class="grid2">
+      <div><h3 style="font-size:1.1rem;margin-bottom:12px">Cara li'an (di hadapan hakim)</h3><div class="flow" id="flowA"></div></div>
+      <div><h3 style="font-size:1.1rem;margin-bottom:12px">Laluan selepas lafaz talak</h3><div class="flow" id="flowB"></div></div>
+    </div>
+    <div class="note" style="margin-top:14px"><b>Kesalahan yang perlu dielakkan:</b> menceraikan isteri ketika haid; melafazkan talak tiga ketika marah lalu menyangka boleh rujuk; rujuk selepas fasakh atau khuluk; menerima pinangan semasa iddah; berkahwin melalui sindiket tanpa mengikut saluran yang betul; menasabkan anak angkat kepada bapa angkat.</div>
+    <p class="muted" style="margin-top:8px;font-size:.86rem">Langkah 4 dalam laluan selepas talak ialah inferens daripada syarat rujuk dan maksud talak bain dalam buku teks.</p>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">G · Master Soalan Hukum</div><h2>20 situasi: Situasi → Isu → Hukum → Alasan → Kesimpulan</h2></div>
+    <div class="sits" id="situasi"></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">H · Master Dalil dan Hikmah</div><h2>Dalil dan rasional ketetapan</h2></div>
+    <div class="note" style="margin-bottom:16px"><b>Penting:</b> Buku teks Tingkatan 5 Pelajaran 13 tidak menyertakan dalil naqli (ayat al-Quran atau hadis) bagi isu-isu ini. Modul ini tidak menambah dalil supaya murid tidak menghafal dalil di luar sukatan. Rujukan yang dinyatakan dalam buku teks ialah al-Fiqh al-Manhaji dan Jabatan Kehakiman Syariah Malaysia.</div>
+    <h3 style="margin:0 0 10px;font-size:1.2rem">Rasional setiap ketetapan (berdasarkan isi buku teks)</h3>
+    <div class="grid3" id="rasional"></div>
+    <div class="tip" style="margin-top:14px"><b>Nota guru buku teks:</b> Bimbing murid berazam membina keluarga bahagia secara beradab dan istiqamah.</div>
+  </div>
+</div>
+</section>
+
+<!-- ============ SLAID ============ -->
+<section class="panel" id="p-slaid" role="tabpanel" aria-labelledby="tab-slaid" hidden>
+<div class="wrap">
+  <div class="sec-head"><div class="kicker">Fasa 4 · Slaid Pembelajaran</div><h2>19 slaid Isu-isu dalam Perkahwinan</h2><p class="muted">Gunakan butang atau kekunci anak panah. Setiap slaid ada isi, penerangan, kata kunci, contoh situasi dan soalan pemahaman.</p></div>
+  <div class="deck">
+    <div class="dcontrols">
+      <button class="btn" id="sPrev" type="button">← Sebelum</button>
+      <button class="btn pri" id="sNext" type="button">Seterusnya →</button>
+      <span class="muted" id="sCount" style="font-weight:800"></span>
+    </div>
+    <div class="stage" id="stage" tabindex="0" aria-live="polite"></div>
+    <div class="dots" id="sDots"></div>
+  </div>
+</div>
+</section>
+
+<!-- ============ LEMBARAN ============ -->
+<section class="panel" id="p-lembaran" role="tabpanel" aria-labelledby="tab-lembaran" hidden>
+<div class="wrap">
+  <div class="sec-head"><div class="kicker">Fasa 5 · Lembaran Kerja Master Fiqh</div><h2>Lima tahap: Kenali → Fahami → Bezakan → Aplikasi → KBAT</h2>
+  <p class="muted">Cetak atau paparkan di kelas. Tekan butang skema selepas murid mencuba.</p></div>
+  <div class="dcontrols" style="margin-bottom:14px"><button class="btn gold" id="toggleSkema" type="button" aria-pressed="false">Tunjuk skema jawapan</button></div>
+  <div class="ws" id="ws"></div>
+</div>
+</section>
+
+<!-- ============ PERMAINAN ============ -->
+<section class="panel" id="p-permainan" role="tabpanel" aria-labelledby="tab-permainan" hidden>
+<div class="wrap">
+  <div class="sec-head"><div class="kicker">Fasa 6 · Fiqh Game Zone</div><h2>Pilih permainan</h2><p class="muted">Semua soalan berdasarkan buku teks. Markah dikira automatik dan maklum balas dipaparkan selepas setiap jawapan.</p></div>
+  <div class="gamegrid" id="gamegrid"></div>
+  <div class="gstage" id="gstage"></div>
+</div>
+</section>
+
+<!-- ============ SPM ============ -->
+<section class="panel" id="p-spm" role="tabpanel" aria-labelledby="tab-spm" hidden>
+<div class="wrap">
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">Fasa 7 · Latihan Peperiksaan</div><h2>Soalan 3 format percubaan</h2>
+    <p class="muted">Soalan latihan rekaan guru mengikut format Kertas 1223/1 Soalan 3. Ini <b>bukan</b> soalan sebenar SPM.</p></div>
+    <div class="dcontrols" style="margin-bottom:14px"><button class="btn gold" id="toggleAns" type="button" aria-pressed="false">Tunjuk jawapan, skema dan teknik</button></div>
+    <div class="grid2" style="margin-bottom:16px">
+      <div class="tip"><b>Formula 4 markah:</b> 2 isi × (isi 1 markah + huraian/contoh 1 markah). Mulakan dengan kata kunci buku teks, kemudian huraikan dengan “kerana…”, “contohnya…”.</div>
+      <div class="tip"><b>Soalan hukum 2 markah:</b> nyatakan hukum (1) + alasan yang menyebut syarat/rukun/larangan yang terlibat (1).</div>
+    </div>
+    <div style="display:grid;gap:16px" id="struktur"></div>
+  </div>
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">Soalan objektif</div><h2>12 soalan aneka pilihan</h2></div>
+    <div class="mcq" id="mcq"></div>
+    <div class="dcontrols" style="margin-top:12px"><button class="btn pri" id="mcqCheck" type="button">Semak jawapan</button><span id="mcqScore" class="score" hidden></span></div>
+  </div>
+</div>
+</section>
+
+<!-- ============ DIAGNOSTIK ============ -->
+<section class="panel" id="p-diagnostik" role="tabpanel" aria-labelledby="tab-diagnostik" hidden>
+<div class="wrap">
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">Fasa 8 · Analisis Kelemahan Murid</div><h2>Ujian diagnostik lima aspek</h2>
+    <p class="muted">15 soalan, 3 bagi setiap aspek. Selepas disemak, halaman menunjukkan tahap penguasaan, analisis kesalahan dan aktiviti yang dicadangkan.</p></div>
+    <div class="dcontrols" style="margin-bottom:12px">
+      <button class="btn pri" type="button" id="dPre" aria-pressed="true">Ujian diagnostik (pra)</button>
+      <button class="btn" type="button" id="dPost" aria-pressed="false">Ujian selepas pembelajaran (pasca)</button>
+    </div>
+    <div class="dq" id="dq"></div>
+    <div class="dcontrols" style="margin-top:12px"><button class="btn pri" id="dCheck" type="button">Semak dan analisis</button><button class="btn" id="dReset" type="button">Set semula</button></div>
+    <div id="dResult" style="margin-top:18px;display:grid;gap:14px"></div>
+  </div>
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">Senarai Semak Penguasaan</div><h2>Saya boleh…</h2><p class="muted">Tanda yang sudah dikuasai. Tanda ini disimpan dalam pelayar anda sahaja.</p></div>
+    <div class="check" id="checklist"></div>
+  </div>
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">Aktiviti susulan</div><h2>Pemulihan dan pengayaan</h2></div>
+    <div class="tbox"><table><thead><tr><th>Aspek</th><th>Tanda kelemahan</th><th>Aktiviti pemulihan</th><th>Aktiviti pengayaan</th></tr></thead><tbody id="remedi"></tbody></table></div>
+  </div>
+</div>
+</section>
+</main>
+
+<footer><div class="wrap"><b>Modul lain:</b><nav class="modnav" id="modnav" aria-label="Modul lain"></nav><p style="margin-top:12px">Sumber: Buku Teks Pendidikan Islam KSSM Tingkatan 5, Pelajaran 13 (ms 123–136), dengan kaitan kepada Pelajaran 12 dan 15. Label <span class="add">Tambahan</span> atau <span class="add">Prinsip umum fiqh</span> menandakan perkara di luar buku teks. Soalan latihan ialah rekaan dan bukan soalan sebenar SPM.</p></div></footer>
+
+<script>
+/* ================= DATA ================= */
+const ISTILAH = [
+ ["Talak","Pembubaran perkahwinan oleh suami dengan lafaz talak yang jelas atau kiasan.","Suami memutuskan ikatan perkahwinan dengan perkataan cerai.","Lafaz jelas: “Aku ceraikan engkau.” Lafaz kiasan: “Aku lepaskan engkau mulai hari ini.”","suami · lafaz · jelas/kiasan","Menyangka talak hanya berlaku dengan lafaz jelas."],
+ ["Talak raj'ie","Talak yang boleh dirujuk dalam tempoh iddah tanpa akad nikah dan mahar yang baharu.","Talak yang masih boleh “patah balik” dalam iddah.","Suami melafazkan talak satu, kemudian rujuk sebulan kemudian ketika isteri masih beriddah.","boleh rujuk · dalam iddah · tanpa akad baharu","Menyangka rujuk memerlukan akad nikah baharu."],
+ ["Talak bain","Talak yang tidak boleh dirujuk kecuali dengan akad nikah dan mahar yang baharu.","Talak yang memerlukan nikah semula jika mahu bersama.","Ahmad dan Fatimah yang bercerai talak bain perlu akad nikah dan mahar baharu untuk bersatu semula.","tidak boleh rujuk · akad & mahar baharu","Menyangka cukup dengan lafaz rujuk."],
+ ["Talak tiga","Talak yang menyebabkan rujuk tidak dibenarkan; bekas isteri haram dikahwini semula sehingga dia berkahwin dengan lelaki lain, bercerai dan habis iddah (Pelajaran 12).","Cerai yang menutup pintu rujuk.","Ahmad melafazkan “Aku ceraikan kau dengan talak tiga!” lalu menyesal.","bukan syarat rujuk · haram sementara","Menyangka boleh rujuk jika masih dalam iddah."],
+ ["Fasakh","Pembubaran perkahwinan melalui kuasa hakim dengan sebab-sebab tertentu.","Mahkamah membubarkan perkahwinan kerana ada sebab.","Isteri memohon fasakh kerana suami sering memukul hingga menyebabkan kecederaan fizikal.","hakim · sebab tertentu","Menyangka fasakh dilafazkan oleh suami."],
+ ["Khuluk (tebus talak)","Pembubaran perkahwinan atas kehendak isteri dengan persetujuan membayar ganti rugi kepada suami.","Isteri “menebus” perceraian dengan bayaran.","Mahkamah meluluskan permohonan khuluk isteri dengan memulangkan bayaran mahar kepada suami.","kehendak isteri · ganti rugi","Tertukar dengan fasakh yang tidak melibatkan bayaran."],
+ ["Li'an","Lafaz sumpah suami apabila menuduh isterinya berzina tanpa ada empat orang saksi atau menafikan nasab.","Sumpah suami di mahkamah kerana menuduh isteri berzina tanpa saksi.","Suami bersumpah empat kali di hadapan hakim dan kali kelima menyebut laknat Allah.","sumpah · tuduh zina · tiada 4 saksi · nafi nasab","Menyangka li'an boleh dibuat di luar mahkamah atau tanpa sumpah kelima."],
+ ["Qazaf","Tuduhan zina atau penafian nasab terhadap orang yang baik akhlaknya (Pelajaran 15).","Menuduh orang berzina tanpa bukti.","Li'an wajib bagi suami untuk mengelakkan dirinya daripada hukuman qazaf.","tuduhan zina · tiada bukti","Tidak dapat mengaitkan li'an dengan qazaf."],
+ ["Iddah","Tempoh masa yang perlu dilalui oleh seorang isteri selepas pembubaran perkahwinan atau selepas kematian suami.","Tempoh menunggu bagi isteri selepas bercerai atau kematian suami.","Puan Salmah yang kematian suami (tidak hamil) beriddah 4 bulan 10 hari.","tempoh · isteri · pembubaran/kematian","Menyangka semua iddah tiga bulan."],
+ ["Rujuk","Hak suami untuk menyambung kembali ikatan perkahwinan dengan isteri yang diceraikannya dalam tempoh iddah.","Suami kembali bersama isteri sebelum iddah tamat.","Suami berkata: “Aku rujuk engkau untuk kembali kepangkuanku.”","hak suami · dalam iddah","Menyangka rujuk boleh selepas iddah tamat."],
+ ["Nusyuz","Keengganan isteri mentaati perintah atau permintaan suami yang sah.","Isteri ingkar arahan suami yang betul di sisi syarak.","Isteri enggan mematuhi perintah suaminya supaya menunaikan solat dan berpuasa.","enggan · perintah yang sah","Menganggap semua bantahan isteri ialah nusyuz walaupun perintah itu tidak sah."],
+ ["Poligami","Amalan beristeri lebih daripada seorang pada satu masa.","Suami mempunyai lebih daripada seorang isteri serentak.","Encik Razak mempunyai dua orang isteri dan berlaku adil dalam pakaian dan tempat tinggal.","lebih seorang · satu masa","Lupa tiga kelayakan berpoligami."],
+ ["Hadanah","Penjagaan kanak-kanak yang masih kecil dan belum berupaya untuk menguruskan dirinya sendiri.","Hak dan tanggungjawab menjaga anak kecil.","Selepas bercerai, ibu menjaga anaknya yang berumur tiga tahun.","penjagaan · belum berupaya","Menyangka hak ibu mutlak dan tidak boleh gugur."],
+ ["Anak angkat","Anak orang lain yang dipelihara seperti anggota keluarga sendiri tetapi tidak mempunyai hak seperti anak kandung yang ditetapkan oleh syarak.","Anak yang dibela tetapi bukan anak kandung di sisi syarak.","Encik Ali memberi nafkah dan mewasiatkan sebahagian harta kepada anak angkatnya.","dipelihara · tiada hak anak kandung","Menyangka anak angkat menerima faraid dan boleh dibinkan kepada bapa angkat."],
+ ["Ganti rugi (khuluk)","Bayaran isteri kepada suami dalam khuluk: wang tunai, hartanah, emas, perak, saham, manfaat atau apa-apa yang dipersetujui.","Bayaran tebus talak.","Puan Hana memulangkan mahar sebagai ganti rugi.","dipersetujui kedua-dua pihak","Menyangka hanya wang tunai."],
+ ["Pembubaran perkahwinan","Berakhirnya ikatan perkahwinan melalui talak, fasakh, khuluk atau li'an.","Cara-cara perkahwinan berakhir.","Empat cara: TA-FA-KHU-LI.","talak · fasakh · khuluk · li'an","Memasukkan iddah atau rujuk sebagai cara pembubaran."],
+ ["Nikah sindiket (ekspres)","Perkahwinan melalui khidmat sindiket yang tidak mengikut saluran betul; JAKIM menganggarkan kira-kira 70% tidak patuh syariah (stimulus buku teks).","Nikah “jalan pintas” yang tidak mengikut prosedur.","Pasangan bernikah di luar negara melalui ejen tanpa mendaftar perkahwinan.","tidak ikut saluran · tidak patuh syariah","Tidak dapat menyatakan implikasinya."]
+];
+
+const HUKUM_TALAK = [
+ ["Wajib","Apabila berlaku perbalahan antara suami isteri yang tidak dapat didamaikan setelah melalui proses mahkamah.","soft-mint"],
+ ["Sunat","Apabila isteri berakhlak buruk.","soft-teal"],
+ ["Harus","Hukum asal: syarak memberi kebenaran kepada pasangan membubarkan perkahwinan kerana sebab-sebab yang munasabah.","soft-sky"],
+ ["Makruh","Apabila suami menceraikan isteri yang berkelakuan baik atau menceraikan isteri tanpa sebab.","soft-gold"],
+ ["Haram","Apabila suami menceraikan isteri dalam keadaan haid, atau ketika suci tetapi telah disetubuhi tanpa diketahui hamil atau tidak.","soft-peach"]
+];
+
+const HUKUM = [
+ ["Talak (hukum asal)","Harus","Dibenarkan dengan sebab yang munasabah.","Buku teks: syarak memberi kebenaran kepada pasangan.","Menilai sebab perceraian.","Nyatakan hukum asal talak."],
+ ["Fasakh","Harus (isteri memohon)","Isteri boleh memohon kepada hakim.","Sebab tertentu, contohnya suami sering memukul.","Mangsa keganasan rumah tangga memohon fasakh.","Jelaskan sebab isteri memohon fasakh."],
+ ["Khuluk","Harus","Isteri boleh menebus talak dengan bayaran.","Atas kehendak isteri, dengan persetujuan ganti rugi.","Isteri yang ingin berpisah tetapi suami enggan.","Bezakan khuluk dengan fasakh."],
+ ["Li'an","Wajib","Wajib bagi suami untuk mengelakkan dirinya daripada hukuman qazaf.","Tuduhan zina tanpa empat saksi.","Suami yang menafikan anak dalam kandungan.","Jelaskan kesan li'an."],
+ ["Iddah","Wajib","Isteri mesti melalui tempoh iddah.","Selepas pembubaran atau kematian suami.","Menentukan tempoh iddah dalam situasi.","Nyatakan tempoh iddah X dan Y."],
+ ["Rujuk","Harus","Suami boleh menyambung semula perkahwinan.","Dalam iddah dan memenuhi 5 syarat (al-Fiqh al-Manhaji).","Pasangan yang menyesal selepas talak satu.","Jelaskan dua syarat rujuk."],
+ ["Nusyuz","Haram","Isteri berdosa jika enggan mentaati perintah sah suami.","Perintah suami yang sah di sisi syarak.","Isteri enggan solat walaupun disuruh suami.","Nyatakan hukum nusyuz."],
+ ["Poligami","Harus","Dibenarkan dengan kelayakan tertentu.","Tidak melebihi 4; adil lahiriah; mampu nafkah.","Menilai kelayakan suami yang ingin berpoligami.","Jelaskan dua kelayakan berpoligami."],
+ ["Hadanah","Wajib","Anak kecil mesti dijaga.","Anak belum berupaya mengurus diri.","Ibu paling berhak selepas pembubaran.","Siapakah paling berhak terhadap hadanah?"],
+ ["Anak angkat","Harus","Boleh memelihara anak orang lain.","Tidak mempunyai hak seperti anak kandung.","Memberi hibah atau wasiat, bukan faraid.","Bandingkan hak anak angkat dengan anak kandung."]
+];
+
+const RUJUK = [
+ ["1. Dengan kerelaan sendiri","Suami rujuk atas kehendaknya.","Suami sendiri memilih untuk kembali.","Suami dipaksa oleh keluarga untuk rujuk.","Rujuk tidak sah."],
+ ["2. Bukan perceraian kerana fasakh atau khuluk","Rujuk hanya bagi perceraian talak.","Perceraian dengan talak satu.","Perkahwinan dibubarkan melalui khuluk.","Tidak boleh rujuk; perlu akad nikah dan mahar baharu."],
+ ["3. Bukan diceraikan dengan talak tiga","Talak tiga menutup pintu rujuk.","Talak satu atau dua.","“Aku ceraikan kau dengan talak tiga!”","Tidak boleh rujuk; haram dikahwini sehingga berkahwin dengan lelaki lain, bercerai dan habis iddah."],
+ ["4. Isteri masih dalam tempoh iddah","Rujuk sebelum iddah tamat.","Rujuk pada bulan kedua iddah (masih haid, belum tiga kali suci).","Rujuk selepas iddah tamat.","Bukan rujuk; perlu akad nikah dan mahar baharu."],
+ ["5. Ada lafaz yang menunjukkan rujuk","Rujuk dinyatakan dengan lafaz.","“Aku rujuk engkau untuk kembali kepangkuanku.”","Kembali tinggal bersama tanpa sebarang lafaz rujuk.","Syarat lafaz tidak dipenuhi."]
+];
+
+const IDDAH = [
+ ["Belum putus haid","3 kali suci","4 bulan 10 hari"],
+ ["Telah putus haid","3 bulan hijrah","4 bulan 10 hari"],
+ ["Belum pernah disetubuhi","Tiada iddah","4 bulan 10 hari"],
+ ["Sedang hamil","Sehingga melahirkan anak","Sehingga melahirkan anak"]
+];
+
+const ANAK = [["Nafkah dan kebajikan",true,true],["Harta hibah",true,true],["Harta wasiat",true,true],["Pewarisan harta pusaka (faraid)",true,false],["Wali dalam perkahwinan",true,false],["Nasab",true,false]];
+
+const BEZA = [
+ ["Talak","Fasakh","Talak oleh suami; fasakh melalui kuasa hakim.","Siapa yang membubarkan: suami vs hakim.","Isteri dipukul memohon di mahkamah: fasakh.","suami vs hakim"],
+ ["Fasakh","Khuluk","Kedua-duanya melibatkan mahkamah atas permintaan isteri.","Khuluk ada bayaran ganti rugi kepada suami; fasakh berdasarkan sebab tertentu.","Isteri memulangkan mahar: khuluk.","ganti rugi"],
+ ["Talak","Khuluk","Talak atas kehendak suami; khuluk atas kehendak isteri.","Khuluk melibatkan persetujuan bayaran.","Puan Hana sanggup membayar untuk berpisah: khuluk.","kehendak siapa"],
+ ["Talak raj'ie","Talak bain","Boleh rujuk vs tidak boleh rujuk.","Raj'ie: rujuk dalam iddah tanpa akad baharu. Bain: perlu akad nikah dan mahar baharu.","Talak satu, rujuk dalam iddah: raj'ie.","rujuk vs akad baharu"],
+ ["Rujuk","Nikah semula","Menyambung semula vs akad baharu.","Rujuk: dalam iddah talak raj'ie, dengan lafaz. Nikah semula: akad dan mahar baharu.","Iddah sudah tamat: perlu nikah semula.","dalam iddah?"],
+ ["Li'an","Qazaf","Sumpah suami vs tuduhan zina tanpa bukti.","Li'an wajib bagi suami untuk mengelakkan hukuman qazaf.","Suami tiada 4 saksi tetapi yakin: li'an di hadapan hakim.","sumpah vs tuduhan"],
+ ["Iddah cerai hidup","Iddah cerai mati","Tempoh selepas talak vs selepas kematian suami.","Hidup: 3 suci / 3 bulan / tiada / hingga bersalin. Mati: 4 bulan 10 hari (hamil: hingga bersalin).","Belum disetubuhi: cerai hidup tiada iddah; kematian suami 4 bulan 10 hari.","hidup vs mati"],
+ ["Talak sunat","Talak makruh","Kedua-duanya hukum talak.","Sunat: isteri berakhlak buruk. Makruh: isteri berkelakuan baik atau tanpa sebab.","Puan Kamila berakhlak buruk: sunat.","akhlak isteri"],
+ ["Talak wajib","Talak haram","Hukum talak yang berlawanan.","Wajib: perbalahan tidak dapat didamaikan selepas proses mahkamah. Haram: semasa haid atau suci yang telah disetubuhi tanpa diketahui hamil.","Cerai ketika isteri haid: haram.","mahkamah vs haid"],
+ ["Anak kandung","Anak angkat","Anak sendiri vs anak orang lain yang dipelihara.","Anak angkat tiada hak faraid, wali dan nasab; boleh nafkah, hibah, wasiat.","Encik Ali mewasiatkan rumah kepada anak angkat: dibenarkan.","faraid · wali · nasab"],
+ ["Nusyuz","Taat","Enggan vs mematuhi perintah sah suami.","Nusyuz haram apabila perintah itu sah.","Isteri enggan solat walaupun disuruh: nusyuz.","perintah yang sah"]
+];
+
+const FLOW_A = [
+ ["1","Suami melafazkan sumpah di hadapan hakim","“Aku bersaksi bahawa tuduhan ke atas isteriku adalah benar… dan anak ini (jika ada) ialah anak zina dan bukan daripada zuriatku.”","p-r","Ketetapan"],
+ ["2","Lafaz diulang sebanyak empat kali","Jika isteri ada bersama, suami hendaklah menunjuk dengan tangannya ke arah isteri.","p-w","Syarat"],
+ ["3","Kali kelima: peringatan hakim","Hakim memberi peringatan tentang bahaya berdusta. Suami berkata: “Sesungguhnya laknat Allah akan menimpaku sekiranya aku termasuk orang-orang yang berdusta.”","p-r","Ketetapan"],
+ ["4","Isteri melafazkan sumpah di hadapan hakim","“Aku bersaksi dengan nama Allah bahawa … (nama suami) orang yang berdusta tentang tuduhan zinanya terhadapku.” Diulang empat kali.","p-s","Hak isteri"],
+ ["5","Kali kelima isteri","“Kemurkaan Allah akan menimpaku jika tuduhan suamiku benar.”","p-r","Ketetapan"],
+ ["6","Kesan li'an","Suami isteri tidak boleh rujuk selama-lamanya. Anak tidak dinasabkan kepada suami dan tidak berhak mendapat nafkah serta mewarisi pusaka daripadanya.","p-x","Kesan"]
+];
+const FLOW_B = [
+ ["1","Suami melafazkan talak","Lafaz jelas atau kiasan. Hukumnya bergantung kepada keadaan (wajib, sunat, harus, makruh, haram).","p-r","Ketetapan"],
+ ["2","Isteri menjalani iddah","Wajib. Elakkan menerima pinangan, keluar rumah tanpa keperluan syarak dan berhias (kecuali iddah raj'ie).","p-x","Larangan"],
+ ["3","Dalam iddah talak raj'ie: suami boleh rujuk","Dengan 5 syarat: rela, bukan fasakh/khuluk, bukan talak tiga, masih dalam iddah, ada lafaz rujuk.","p-w","Syarat"],
+ ["4","Iddah tamat tanpa rujuk / talak bain","Untuk bersatu semula: akad nikah dan mahar baharu.","p-w","Syarat"],
+ ["5","Talak tiga","Bekas isteri haram dikahwini sehingga dia berkahwin dengan lelaki lain, bercerai dan habis iddah (Pelajaran 12).","p-x","Kesan"],
+ ["6","Hadanah anak","Wajib. Ibu paling berhak, namun hak boleh terbatal dengan sebab tertentu.","p-s","Hak"]
+];
+
+const SITUASI = [
+ ["Encik Kamal menceraikan isterinya yang berkelakuan baik tanpa sebab.","Hukum talak","Makruh","Menceraikan isteri yang berkelakuan baik atau tanpa sebab hukumnya makruh.","Talak Encik Kamal sah tetapi makruh."],
+ ["Puan Kamila diceraikan oleh suaminya kerana dia berakhlak buruk.","Hukum talak","Sunat","Talak sunat apabila isteri berakhlak buruk.","Tindakan suami menepati hukum sunat."],
+ ["Suami menceraikan isterinya ketika isteri sedang haid.","Hukum talak","Haram","Talak haram apabila dilafazkan ketika isteri dalam keadaan haid.","Suami berdosa kerana memilih waktu yang diharamkan."],
+ ["Pasangan bertelagah bertahun-tahun dan proses mahkamah gagal mendamaikan mereka.","Hukum talak","Wajib","Perbalahan yang tidak dapat didamaikan setelah melalui proses mahkamah.","Talak menjadi wajib dalam keadaan ini."],
+ ["Suami menceraikan isterinya hanya kerana terpengaruh dengan hasutan kawan, sedangkan isterinya baik.","Hukum talak","Makruh","Isteri berkelakuan baik dan tiada sebab munasabah.","Suami sepatutnya tidak menceraikan isteri tanpa sebab."],
+ ["Puan Aini sering dipukul suami hingga cedera dan memohon pembubaran perkahwinan di mahkamah.","Fasakh","Harus","Fasakh ialah pembubaran melalui kuasa hakim dengan sebab tertentu, contohnya dipukul hingga kecederaan fizikal.","Puan Aini boleh memohon fasakh."],
+ ["Puan Hana ingin berpisah walaupun suaminya enggan menceraikannya. Dia sanggup memulangkan mahar.","Khuluk","Harus","Khuluk ialah pembubaran atas kehendak isteri dengan bayaran ganti rugi.","Puan Hana boleh memohon khuluk."],
+ ["Suami menuduh isterinya berzina tanpa empat orang saksi dan menafikan anak dalam kandungan.","Li'an","Wajib (li'an)","Li'an wajib bagi suami untuk mengelakkan dirinya daripada hukuman qazaf.","Jika li'an berlaku, mereka tidak boleh rujuk selama-lamanya dan anak tidak dinasabkan kepada suami."],
+ ["Ahmad melafazkan talak satu. Sebulan kemudian, ketika isteri masih beriddah, dia berkata, “Aku rujuk engkau.”","Rujuk","Sah","Memenuhi syarat: rela, talak satu, masih dalam iddah, ada lafaz.","Perkahwinan mereka bersambung semula."],
+ ["Ahmad berkata dalam keadaan marah, “Aku ceraikan kau dengan talak tiga!” kemudian ingin rujuk.","Rujuk selepas talak tiga","Tidak boleh rujuk","Salah satu syarat rujuk ialah bukan diceraikan dengan talak tiga.","Ahmad hilang hak rujuk; bekas isteri haram dikahwininya sehingga syarat Pelajaran 12 dipenuhi."],
+ ["Selepas mahkamah meluluskan khuluk, bekas suami mahu rujuk ketika bekas isteri masih dalam iddah.","Rujuk selepas khuluk","Tidak boleh rujuk","Syarat rujuk: bukan perceraian kerana fasakh atau khuluk.","Mereka perlu akad nikah dan mahar baharu jika mahu bersatu."],
+ ["Puan Salmah kematian suami. Dia tidak hamil.","Iddah","4 bulan 10 hari","Iddah bercerai mati bagi wanita yang tidak hamil.","Puan Salmah perlu beriddah 4 bulan 10 hari."],
+ ["Puan Rina diceraikan ketika hamil lima bulan.","Iddah","Sehingga melahirkan anak","Iddah wanita hamil berakhir apabila dia melahirkan anak.","Iddah Puan Rina tamat selepas bersalin."],
+ ["Pasangan bercerai hidup sebelum pernah bersetubuh.","Iddah","Tiada iddah","Jadual iddah: belum pernah disetubuhi, bercerai hidup, tiada iddah.","Isteri tidak perlu beriddah."],
+ ["Wanita dalam iddah talak bain menerima pinangan lelaki lain secara terang.","Larangan iddah","Dilarang","Menerima pinangan secara terang atau kiasan dilarang semasa iddah.","Pinangan itu tidak boleh diterima sehingga iddah tamat."],
+ ["Isteri enggan menunaikan solat walaupun disuruh oleh suami.","Nusyuz","Haram","Nusyuz ialah keengganan isteri mentaati perintah suami yang sah; perintah solat adalah sah.","Isteri tersebut nusyuz."],
+ ["Encik Razak ingin berkahwin seorang lagi tetapi tidak mampu memberi nafkah dan tidak mampu berlaku adil.","Poligami","Tidak layak berpoligami","Kelayakan: tidak melebihi 4, adil lahiriah, mampu nafkah zahir dan batin.","Encik Razak tidak memenuhi kelayakan."],
+ ["Pasangan bernikah melalui sindiket di luar negara tanpa mengikut saluran yang betul.","Implikasi perkahwinan tidak ikut syariat dan undang-undang","Boleh didenda; dipisahkan jika tidak sah","Pasangan boleh didenda; dipaksa berpisah jika tidak sah; isteri tiada dokumen untuk tuntutan hadanah dan pusaka; sukar mendaftar kelahiran anak.","Pasangan perlu mengikut saluran pernikahan yang betul."],
+ ["Encik Ali ingin memasukkan anak angkatnya dalam senarai waris faraid.","Hak anak angkat","Tidak boleh","Anak angkat tidak berhak menerima faraid, wali dan nasab.","Encik Ali boleh memberi hibah atau wasiat."],
+ ["Selepas bercerai, ibu dan bapa berebut hak menjaga anak berumur dua tahun.","Hadanah","Wajib; ibu paling berhak","Ibu ialah orang yang paling berhak menjaga anak selepas pembubaran perkahwinan.","Hak itu milik ibu kecuali ada sebab yang membatalkannya."]
+];
+
+const RASIONAL = [
+ ["Talak dengan hukum berubah","Islam membenarkan perceraian dengan sebab munasabah, tetapi melarangnya pada waktu tertentu (haid) dan memakruhkannya tanpa sebab. Ini menjaga hak isteri.","Murid tidak memandang ringan lafaz talak.","soft-mint"],
+ ["Fasakh","Memberi jalan keluar kepada isteri melalui mahkamah apabila ada sebab, contohnya suami sering memukul.","Mangsa keganasan rumah tangga mempunyai saluran yang sah.","soft-teal"],
+ ["Khuluk","Memberi peluang kepada isteri yang ingin berpisah dengan persetujuan membayar ganti rugi.","Hak isteri diiktiraf, dan hak suami dijaga melalui ganti rugi.","soft-lilac"],
+ ["Li'an","Melindungi suami daripada hukuman qazaf dan menentukan status nasab anak.","Tuduhan zina mesti melalui mahkamah, bukan secara peribadi.","soft-peach"],
+ ["Iddah dan larangannya","Memastikan tempoh menunggu dipatuhi sebelum isteri menerima pinangan atau berhias, dan memberi ruang rujuk dalam talak raj'ie.","Wanita beriddah tidak menerima pinangan.","soft-gold"],
+ ["Hadanah dan anak angkat","Anak kecil dijaga, manakala nasab dan hak pusaka dipelihara mengikut ketetapan syarak.","Anak angkat dibela dengan kasih sayang tanpa mengubah nasab.","soft-sky"]
+];
+
+/* ---------- Question bank ---------- */
+const BANK = [
+ {q:"Apakah maksud talak?",o:["Pembubaran perkahwinan melalui kuasa hakim","Pembubaran perkahwinan oleh suami dengan lafaz talak yang jelas atau kiasan","Pembubaran atas kehendak isteri dengan bayaran","Sumpah suami menuduh isteri berzina"],a:1,e:"Talak dibuat oleh suami dengan lafaz jelas atau kiasan.",l:1,t:"is"},
+ {q:"Pembubaran perkahwinan melalui kuasa hakim dengan sebab tertentu dinamakan",o:["Talak","Khuluk","Fasakh","Rujuk"],a:2,e:"Fasakh: kuasa hakim, sebab tertentu.",l:1,t:"is"},
+ {q:"Khuluk bermaksud",o:["Pembubaran atas kehendak isteri dengan persetujuan membayar ganti rugi kepada suami","Pembubaran oleh suami tanpa lafaz","Penjagaan anak kecil","Tempoh menunggu isteri"],a:0,e:"Khuluk juga disebut tebus talak.",l:1,t:"is"},
+ {q:"Li'an ialah",o:["Keengganan isteri mentaati suami","Lafaz sumpah suami apabila menuduh isterinya berzina tanpa empat saksi atau menafikan nasab","Hak suami menyambung perkahwinan","Bayaran ganti rugi isteri"],a:1,e:"Definisi li'an dalam buku teks.",l:2,t:"is"},
+ {q:"Iddah ialah",o:["Tempoh masa yang perlu dilalui isteri selepas pembubaran perkahwinan atau kematian suami","Tempoh pertunangan","Tempoh suami boleh berpoligami","Tempoh penjagaan anak"],a:0,e:"Definisi iddah.",l:1,t:"is"},
+ {q:"Rujuk bermaksud",o:["Akad nikah semula selepas iddah","Hak suami menyambung kembali ikatan perkahwinan dengan isteri yang diceraikan dalam tempoh iddah","Pembubaran oleh hakim","Penjagaan anak"],a:1,e:"Rujuk hanya dalam tempoh iddah.",l:1,t:"is"},
+ {q:"Keengganan isteri mentaati perintah atau permintaan suami yang sah dinamakan",o:["Nusyuz","Li'an","Hadanah","Qazaf"],a:0,e:"Nusyuz.",l:1,t:"is"},
+ {q:"Hadanah bermaksud",o:["Hak nafkah isteri","Penjagaan kanak-kanak yang masih kecil dan belum berupaya menguruskan dirinya","Pembahagian harta","Bayaran mahar"],a:1,e:"Definisi hadanah.",l:1,t:"is"},
+ {q:"Poligami ialah",o:["Berkahwin semula selepas bercerai","Amalan beristeri lebih daripada seorang pada satu masa","Memelihara anak angkat","Rujuk selepas talak"],a:1,e:"Definisi poligami.",l:1,t:"is"},
+ {q:"Hukum asal talak ialah",o:["Wajib","Haram","Harus","Makruh"],a:2,e:"Hukum asal talak harus, tetapi boleh berubah.",l:1,t:"hk"},
+ {q:"Hukum suami menceraikan isteri yang berakhlak buruk ialah",o:["Wajib","Sunat","Makruh","Haram"],a:1,e:"Talak sunat apabila isteri berakhlak buruk.",l:2,t:"hk"},
+ {q:"Hukum menceraikan isteri ketika isteri sedang haid ialah",o:["Harus","Sunat","Makruh","Haram"],a:3,e:"Talak haram ketika isteri haid.",l:2,t:"hk"},
+ {q:"Hukum nusyuz ialah",o:["Harus","Makruh","Haram","Sunat"],a:2,e:"Nusyuz haram.",l:1,t:"hk"},
+ {q:"Hukum hadanah ialah",o:["Wajib","Sunat","Harus","Makruh"],a:0,e:"Hadanah wajib.",l:2,t:"hk"},
+ {q:"Li'an diwajibkan ke atas suami untuk",o:["Mendapatkan harta isteri","Mengelakkan dirinya daripada hukuman qazaf","Memudahkan rujuk","Mendapatkan hak hadanah"],a:1,e:"Buku teks: wajib untuk mengelakkan suami daripada hukuman qazaf.",l:3,t:"hk"},
+ {q:"Hukum mengambil anak angkat ialah",o:["Haram","Wajib","Harus","Makruh"],a:2,e:"Anak angkat: harus.",l:1,t:"hk"},
+ {q:"Hukum iddah ialah",o:["Sunat","Wajib","Harus","Makruh"],a:1,e:"Iddah wajib.",l:1,t:"hk"},
+ {q:"Yang manakah BUKAN syarat rujuk?",o:["Dengan kerelaan sendiri","Bukan perceraian kerana fasakh atau khuluk","Isteri telah tamat tempoh iddah","Ada lafaz yang menunjukkan rujuk"],a:2,e:"Isteri mesti MASIH dalam tempoh iddah.",l:2,t:"rk"},
+ {q:"Bilangan maksimum isteri dalam satu masa bagi lelaki yang berpoligami ialah",o:["2","3","4","5"],a:2,e:"Tidak melebihi empat orang isteri.",l:1,t:"rk"},
+ {q:"Kelayakan berpoligami termasuk berlaku adil dari aspek",o:["Kasih sayang di dalam hati","Lahiriah seperti pakaian dan tempat tinggal","Jumlah anak","Keturunan isteri"],a:1,e:"Buku teks: adil dari aspek lahiriah seperti pakaian dan tempat tinggal.",l:2,t:"rk"},
+ {q:"Dalam li'an, suami melafazkan kesaksian sebanyak ___ kali sebelum lafaz laknat pada kali kelima.",o:["2","3","4","7"],a:2,e:"Empat kali, kemudian kali kelima.",l:2,t:"rk"},
+ {q:"Larangan berhias semasa iddah TIDAK terpakai bagi wanita dalam",o:["Iddah kematian suami","Iddah talak raj'ie","Iddah talak bain","Iddah fasakh"],a:1,e:"Berhias dilarang kecuali wanita dalam iddah raj'ie.",l:3,t:"rk"},
+ {q:"Iddah isteri yang diceraikan hidup dan belum putus haid ialah",o:["3 kali suci","3 bulan hijrah","4 bulan 10 hari","Tiada iddah"],a:0,e:"Rujuk jadual iddah.",l:2,t:"rk"},
+ {q:"Iddah isteri yang diceraikan hidup dan telah putus haid ialah",o:["3 kali suci","3 bulan hijrah","4 bulan 10 hari","Sehingga bersalin"],a:1,e:"3 bulan hijrah.",l:2,t:"rk"},
+ {q:"Iddah isteri yang kematian suami dan tidak hamil ialah",o:["3 bulan hijrah","3 kali suci","4 bulan 10 hari","Tiada iddah"],a:2,e:"4 bulan 10 hari.",l:1,t:"rk"},
+ {q:"Perbezaan utama talak dengan fasakh ialah",o:["Talak oleh hakim, fasakh oleh suami","Talak oleh suami, fasakh melalui kuasa hakim","Kedua-duanya oleh isteri","Fasakh melibatkan bayaran"],a:1,e:"Suami vs hakim.",l:2,t:"bz"},
+ {q:"Perbezaan talak raj'ie dengan talak bain ialah",o:["Raj'ie boleh dirujuk dalam iddah tanpa akad baharu; bain perlukan akad nikah dan mahar baharu","Raj'ie perlukan akad baharu","Bain boleh dirujuk bila-bila masa","Tiada perbezaan"],a:0,e:"Rujuk vs akad baharu.",l:2,t:"bz"},
+ {q:"Ciri yang ada pada khuluk tetapi TIADA pada fasakh ialah",o:["Melibatkan mahkamah","Bayaran ganti rugi isteri kepada suami","Pembubaran perkahwinan","Berlaku selepas akad nikah"],a:1,e:"Khuluk = tebus talak dengan ganti rugi.",l:3,t:"bz"},
+ {q:"Hak yang diterima oleh anak kandung DAN anak angkat ialah",o:["Faraid","Harta wasiat","Wali dalam perkahwinan","Nasab"],a:1,e:"Anak angkat boleh menerima nafkah, hibah dan wasiat.",l:2,t:"bz"},
+ {q:"Hak yang TIDAK diterima oleh anak angkat ialah",o:["Nafkah dan kebajikan","Harta hibah","Pewarisan harta pusaka (faraid)","Harta wasiat"],a:2,e:"Anak angkat tiada hak faraid, wali dan nasab.",l:2,t:"bz"},
+ {q:"Iddah wanita yang sedang hamil, sama ada bercerai hidup atau mati, ialah",o:["3 bulan","4 bulan 10 hari","Sehingga melahirkan anak","Tiada iddah"],a:2,e:"Jadual iddah: sehingga melahirkan anak.",l:2,t:"bz"},
+ {q:"Isteri yang belum pernah disetubuhi: iddah cerai hidup ___ manakala iddah kematian suami ___.",o:["3 bulan; 3 bulan","Tiada iddah; 4 bulan 10 hari","4 bulan 10 hari; tiada iddah","Tiada iddah; tiada iddah"],a:1,e:"Rujuk jadual iddah buku teks.",l:3,t:"bz"},
+ {q:"Encik Kamal menceraikan isterinya yang berkelakuan baik tanpa sebab. Hukumnya",o:["Wajib","Sunat","Makruh","Haram"],a:2,e:"Makruh: isteri berkelakuan baik atau tanpa sebab.",l:2,t:"st"},
+ {q:"Ahmad melafazkan talak tiga ketika marah, kemudian mahu rujuk. Apakah kedudukannya?",o:["Boleh rujuk dalam iddah","Tidak boleh rujuk kerana talak tiga","Boleh rujuk selepas iddah","Perlu fasakh dahulu"],a:1,e:"Syarat rujuk: bukan diceraikan dengan talak tiga.",l:3,t:"st"},
+ {q:"Puan Aini sering dipukul suami hingga cedera. Saluran yang sesuai baginya ialah memohon",o:["Rujuk","Fasakh di mahkamah","Nusyuz","Li'an"],a:1,e:"Contoh buku teks: fasakh kerana suami sering memukul.",l:2,t:"st"},
+ {q:"Puan Hana mahu berpisah dan sanggup memulangkan mahar walaupun suami enggan menceraikannya. Ini ialah",o:["Talak","Khuluk","Li'an","Iddah"],a:1,e:"Khuluk: kehendak isteri dengan ganti rugi.",l:2,t:"st"},
+ {q:"Suami melafazkan rujuk sebulan selepas iddah talak raj'ie tamat. Rujuk itu",o:["Sah","Tidak sah kerana iddah telah tamat","Sah jika isteri setuju","Wajib"],a:1,e:"Syarat: isteri masih dalam iddah. Selepas iddah, perlu akad baharu.",l:3,t:"st"},
+ {q:"Pasangan bernikah melalui sindiket tanpa mengikut saluran betul. Antara implikasinya ialah",o:["Mudah mendaftar kelahiran anak","Kesukaran mendaftarkan kelahiran anak untuk mendapatkan sijil kelahiran","Isteri mudah menuntut harta pusaka","Tiada sebarang kesan"],a:1,e:"Salah satu implikasi dalam buku teks.",l:2,t:"st"},
+ {q:"Isteri enggan menunaikan solat walaupun disuruh oleh suaminya. Isteri itu dikatakan",o:["Nusyuz","Li'an","Khuluk","Hadanah"],a:0,e:"Contoh nusyuz dalam buku teks.",l:2,t:"st"},
+ {q:"Encik Ali mahu memberikan harta kepada anak angkatnya. Cara yang dibenarkan syarak ialah",o:["Faraid","Hibah atau wasiat","Menasabkan anak itu kepadanya","Menjadikan dia wali"],a:1,e:"Anak angkat boleh menerima hibah dan wasiat.",l:3,t:"st"}
+];
+
+const TF = [
+ ["Hukum asal talak ialah haram.",false,"Hukum asal talak ialah harus."],
+ ["Fasakh ialah pembubaran perkahwinan melalui kuasa hakim.",true,"Betul, dengan sebab-sebab tertentu."],
+ ["Khuluk melibatkan bayaran ganti rugi isteri kepada suami.",true,"Khuluk juga dikenali sebagai tebus talak."],
+ ["Suami boleh rujuk selepas perceraian secara khuluk.",false,"Syarat rujuk: bukan perceraian kerana fasakh atau khuluk."],
+ ["Rujuk mesti dilakukan dalam tempoh iddah.",true,"Isteri mesti masih dalam iddah."],
+ ["Iddah wanita kematian suami yang tidak hamil ialah 3 bulan.",false,"4 bulan 10 hari."],
+ ["Wanita yang dicerai hidup sebelum disetubuhi tidak perlu beriddah.",true,"Jadual iddah: tiada iddah."],
+ ["Menceraikan isteri ketika haid hukumnya makruh.",false,"Hukumnya haram."],
+ ["Menceraikan isteri yang berkelakuan baik tanpa sebab hukumnya makruh.",true,"Betul."],
+ ["Nusyuz hukumnya harus.",false,"Nusyuz haram."],
+ ["Lelaki boleh mempunyai lima isteri dalam satu masa.",false,"Tidak melebihi empat."],
+ ["Anak angkat berhak menerima harta wasiat.",true,"Anak angkat boleh menerima nafkah, hibah dan wasiat."],
+ ["Anak angkat boleh dinasabkan kepada bapa angkatnya.",false,"Anak angkat tiada hak nasab."],
+ ["Selepas li'an, suami isteri tidak boleh rujuk selama-lamanya.",true,"Salah satu kesan li'an."],
+ ["Li'an dilafazkan oleh suami sebanyak tiga kali sahaja.",false,"Empat kali, kemudian lafaz kali kelima."],
+ ["Ibu ialah orang yang paling berhak terhadap hadanah selepas perceraian.",true,"Namun hak itu boleh terbatal dengan sebab tertentu."],
+ ["Wanita dalam iddah talak raj'ie dibenarkan berhias.",true,"Larangan berhias dikecualikan bagi iddah raj'ie."],
+ ["Talak bain boleh dirujuk tanpa akad nikah baharu.",false,"Talak bain memerlukan akad nikah dan mahar baharu."],
+ ["Wanita dalam iddah boleh menerima pinangan secara kiasan.",false,"Pinangan secara terang atau kiasan dilarang."],
+ ["Perkahwinan tanpa mengikut saluran betul boleh menyebabkan pasangan didenda.",true,"Implikasi dalam buku teks."]
+];
+
+const PAIRS = [["Talak","Dibubarkan suami dengan lafaz"],["Fasakh","Dibubarkan melalui kuasa hakim"],["Khuluk","Kehendak isteri dengan ganti rugi"],["Li'an","Sumpah suami tuduh zina tanpa 4 saksi"],["Iddah","Tempoh menunggu isteri"],["Rujuk","Sambung semula dalam iddah"],["Nusyuz","Isteri enggan taat perintah sah"],["Poligami","Beristeri lebih seorang"],["Hadanah","Penjagaan anak kecil"],["Anak angkat","Dibela tanpa hak anak kandung"]];
+
+const SORT_CATS = ["Wajib","Sunat","Harus","Makruh","Haram"];
+const SORT = [
+ ["Iddah",0],["Hadanah",0],["Li'an bagi suami (elak qazaf)",0],["Talak apabila perbalahan tidak dapat didamaikan selepas proses mahkamah",0],
+ ["Talak kerana isteri berakhlak buruk",1],
+ ["Hukum asal talak",2],["Isteri memohon fasakh",2],["Khuluk",2],["Rujuk",2],["Poligami",2],["Mengambil anak angkat",2],
+ ["Menceraikan isteri yang berkelakuan baik",3],["Menceraikan isteri tanpa sebab",3],
+ ["Talak ketika isteri haid",4],["Talak ketika suci tetapi telah disetubuhi tanpa diketahui hamil",4],["Nusyuz",4]
+];
+
+const DETECT = [
+ {c:"Amin dan isterinya berpisah melalui khuluk yang diluluskan mahkamah. Ketika bekas isterinya masih dalam iddah, Amin melafazkan rujuk.",t:["Berpisah melalui khuluk","Bekas isteri masih dalam iddah","Melafazkan rujuk selepas khuluk","Mahkamah meluluskan khuluk"],s:2,e:"Syarat rujuk: bukan perceraian kerana fasakh atau khuluk."},
+ {c:"Ahmad dan isterinya bergaduh. Dia melafazkan talak tiga. Selepas reda, dia melafazkan rujuk kerana isteri masih dalam iddah.",t:["Isteri masih dalam iddah","Ada lafaz rujuk","Rujuk selepas talak tiga","Ahmad rela rujuk"],s:2,e:"Syarat rujuk: bukan diceraikan dengan talak tiga."},
+ {c:"Puan Mira kematian suami. Dia tidak hamil. Selepas tiga bulan, dia menganggap iddahnya tamat dan menerima pinangan.",t:["Tinggal di rumah keluarga suami","Menganggap iddah tamat selepas tiga bulan","Tidak hamil","Bersedih atas kematian suami"],s:1,e:"Iddah kematian suami (tidak hamil) ialah 4 bulan 10 hari; menerima pinangan semasa iddah juga dilarang."},
+ {c:"Encik Hisyam marah kepada isterinya dan menceraikannya ketika isteri sedang haid. Dia kemudian mendaftarkan perceraian di pejabat agama.",t:["Menceraikan ketika isteri haid","Mendaftarkan perceraian","Melafazkan talak dengan jelas","Tiada kesalahan"],s:0,e:"Talak ketika isteri haid hukumnya haram."},
+ {c:"Encik Ali memberi nafkah kepada anak angkatnya, mewasiatkan sebuah rumah kepadanya, dan memasukkan namanya dalam senarai waris faraid.",t:["Memberi nafkah","Mewasiatkan rumah","Memasukkan dalam senarai waris faraid","Membela anak angkat"],s:2,e:"Anak angkat tidak berhak menerima faraid."},
+ {c:"Puan Zura dalam iddah talak bain. Dia tinggal di rumah yang disediakan suami, keluar ke klinik ketika sakit, dan berhias untuk menghadiri majlis.",t:["Tinggal di rumah yang disediakan suami","Keluar ke klinik ketika sakit","Berhias untuk menghadiri majlis","Tiada kesalahan"],s:2,e:"Berhias dilarang semasa iddah kecuali iddah raj'ie."}
+];
+
+const ESCAPE = [
+ {q:"Berapakah bilangan syarat rujuk dalam buku teks?",a:5,h:"Rela, bukan fasakh/khuluk, bukan talak tiga, masih iddah, ada lafaz",k:"syarat rujuk"},
+ {q:"Berapa kali suami melafazkan kesaksian li'an sebelum lafaz laknat?",a:4,h:"Lafaz laknat ialah kali kelima",k:"lafaz kesaksian li'an"},
+ {q:"Berapakah bilangan maksimum isteri dalam poligami?",a:4,h:"Kelayakan pertama berpoligami",k:"isteri maksimum"},
+ {q:"Berapa bulan hijrah iddah wanita yang telah putus haid (cerai hidup)?",a:3,h:"Lihat jadual iddah",k:"bulan iddah putus haid"}
+];
+
+const WHEEL = {
+ "Istilah":[["Apakah maksud fasakh?","Pembubaran perkahwinan melalui kuasa hakim dengan sebab-sebab tertentu."],["Apakah maksud hadanah?","Penjagaan kanak-kanak yang masih kecil dan belum berupaya menguruskan dirinya sendiri."]],
+ "Hukum talak":[["Bilakah talak menjadi wajib?","Apabila perbalahan suami isteri tidak dapat didamaikan setelah melalui proses mahkamah."],["Bilakah talak menjadi haram?","Ketika isteri haid, atau ketika suci tetapi telah disetubuhi tanpa diketahui hamil atau tidak."]],
+ "Pembubaran":[["Senaraikan empat cara pembubaran perkahwinan.","Talak, fasakh, khuluk, li'an."],["Berikan dua contoh bayaran khuluk.","Mana-mana dua: wang tunai, hartanah, emas, perak, saham, manfaat."]],
+ "Iddah":[["Nyatakan tiga larangan semasa iddah.","Menerima pinangan; keluar rumah tanpa keperluan syarak; berhias (kecuali iddah raj'ie)."],["Apakah iddah wanita hamil?","Sehingga melahirkan anak."]],
+ "Rujuk":[["Nyatakan dua syarat rujuk.","Mana-mana dua: rela; bukan fasakh/khuluk; bukan talak tiga; masih dalam iddah; ada lafaz."],["Berikan contoh lafaz rujuk.","“Aku rujuk engkau untuk kembali kepangkuanku.”"]],
+ "Isu lain":[["Nyatakan tiga kelayakan berpoligami.","Tidak melebihi 4 isteri; adil lahiriah; mampu nafkah zahir dan batin."],["Berikan contoh nusyuz.","Isteri enggan mematuhi perintah suami supaya menunaikan solat dan berpuasa."]],
+ "Anak angkat":[["Apakah hak yang tidak diterima anak angkat?","Faraid, wali dalam perkahwinan dan nasab."],["Bagaimanakah bapa angkat boleh memberi harta kepada anak angkat?","Melalui hibah atau wasiat."]],
+ "Situasi":[["Suami cerai isteri kerana hasutan kawan. Hukumnya?","Makruh: isteri berkelakuan baik dan tiada sebab munasabah."],["Nyatakan dua implikasi nikah sindiket.","Mana-mana dua: didenda; dipisahkan jika tidak sah; isteri tiada dokumen untuk tuntutan hadanah dan pusaka; sukar daftar kelahiran anak."]]
+};
+
+/* ================= HELPERS ================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const store = { get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}, set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}} };
+
+/* ================= TABS ================= */
+const TABS = ["analisis","slaid","lembaran","permainan","spm","diagnostik"];
+function openTab(id){
+  if(!TABS.includes(id)) id="analisis";
+  TABS.forEach(t=>{ $("#p-"+t).hidden = t!==id; $("#tab-"+t).setAttribute("aria-selected", t===id?"true":"false"); });
+}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{openTab(b.dataset.tab); try{history.replaceState(null,"","#"+b.dataset.tab)}catch(e){} window.scrollTo({top:0})}));
+openTab((location.hash||"").replace("#",""));
+
+/* ================= ANALISIS RENDER ================= */
+$("#istilah").innerHTML = ISTILAH.map(i=>`<div class="card term"><div class="t"><h3>${esc(i[0])}</h3><span class="k">${esc(i[4])}</span></div>
+ <dl><dt>Buku teks</dt><dd>${esc(i[1])}</dd><dt>Mudah</dt><dd>${esc(i[2])}</dd><dt>Contoh</dt><dd>${esc(i[3])}</dd><dt>Kesilapan</dt><dd class="x">${esc(i[5])}</dd></dl></div>`).join("");
+$("#hukumtalak").innerHTML = HUKUM_TALAK.map(h=>`<div class="card ${h[2]}"><h3>${esc(h[0])}</h3><p>${esc(h[1])}</p></div>`).join("");
+$("#hukum").innerHTML = HUKUM.map(h=>`<tr><td><b>${esc(h[0])}</b></td><td>${esc(h[1])}</td><td>${esc(h[2])}</td><td>${esc(h[3])}</td><td>${esc(h[4])}</td><td>${esc(h[5])}</td></tr>`).join("");
+$("#rujuk").innerHTML = RUJUK.map(r=>`<tr><td><b>${esc(r[0])}</b></td><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td>${esc(r[3])}</td><td>${esc(r[4])}</td></tr>`).join("");
+$("#iddah").innerHTML = IDDAH.map(r=>`<tr><td><b>${esc(r[0])}</b></td><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join("");
+$("#anak").innerHTML = ANAK.map(r=>`<tr><td><b>${esc(r[0])}</b></td><td>${r[1]?"✓":"✗"}</td><td>${r[2]?"✓":"✗"}</td></tr>`).join("");
+$("#beza").innerHTML = BEZA.map(b=>`<tr><td><b>${esc(b[0])}</b></td><td><b>${esc(b[1])}</b></td><td>${esc(b[2])}</td><td>${esc(b[3])}</td><td>${esc(b[4])}</td><td>${esc(b[5])}</td></tr>`).join("");
+const flow = arr => arr.map(f=>`<div class="fstep"><div class="d gold"><b>${esc(f[0])}</b>Langkah</div><div class="body"><b>${esc(f[1])}</b><span class="muted">${esc(f[2])}</span><br><span class="pill ${f[3]}">${esc(f[4])}</span></div></div>`).join("");
+$("#flowA").innerHTML = flow(FLOW_A);
+$("#flowB").innerHTML = flow(FLOW_B);
+$("#situasi").innerHTML = SITUASI.map((s,i)=>`<div class="sit"><div class="s1"><span class="lab"><span class="num">${i+1}</span>Situasi</span>${esc(s[0])}</div><div><span class="lab">Isu fiqh</span>${esc(s[1])}</div><div class="s3"><span class="lab">Hukum</span><b>${esc(s[2])}</b></div><div><span class="lab">Alasan</span>${esc(s[3])}</div><div class="s5"><span class="lab">Kesimpulan</span>${esc(s[4])}</div></div>`).join("");
+$("#rasional").innerHTML = RASIONAL.map(h=>`<div class="card ${h[3]}"><h3>${esc(h[0])}</h3><p>${esc(h[1])}</p><p style="margin-top:6px;font-size:.88rem"><b>Aplikasi:</b> ${esc(h[2])}</p></div>`).join("");
+
+/* ================= SLIDES ================= */
+const ILL = {
+ kaabah:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><ellipse cx="100" cy="138" rx="90" ry="16" fill="none" stroke="#e3bd55" stroke-width="3" stroke-dasharray="6 7"/><path d="M50 60 100 40l50 20v62l-50 22-50-22Z" fill="#11161a"/><path d="M50 72l50 22 50-22" stroke="#e3bd55" stroke-width="8" fill="none"/><path d="M112 100h14v30l-14 6Z" fill="#e3bd55"/></svg>`,
+ arafah:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><path d="M10 130 70 60l30 30 30-50 60 90Z" fill="#e3bd55" fill-opacity=".85"/><path d="M40 130h30v-16l-15-12-15 12Zm50 0h30v-16l-15-12-15 12Zm50 0h30v-16l-15-12-15 12Z" fill="#ffffff" fill-opacity=".9"/><circle cx="160" cy="34" r="14" fill="#ffffff" fill-opacity=".8"/></svg>`,
+ batu:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><rect x="86" y="20" width="28" height="110" rx="6" fill="#ffffff" fill-opacity=".85"/><g fill="#e3bd55"><circle cx="40" cy="120" r="9"/><circle cx="60" cy="132" r="7"/><circle cx="150" cy="124" r="8"/><circle cx="168" cy="134" r="6"/><circle cx="135" cy="138" r="7"/><circle cx="30" cy="140" r="6"/><circle cx="62" cy="108" r="6"/></g></svg>`,
+ gunting:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><g fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round"><circle cx="60" cy="118" r="20"/><circle cx="140" cy="118" r="20"/><path d="M74 104 150 24M126 104 50 24"/></g><circle cx="100" cy="64" r="6" fill="#e3bd55"/></svg>`,
+ miqat:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><path d="M100 18c-26 0-44 20-44 42 0 30 44 78 44 78s44-48 44-78c0-22-18-42-44-42Z" fill="#e3bd55"/><circle cx="100" cy="60" r="16" fill="#0c3f34"/><path d="M20 146h160" stroke="#ffffff" stroke-width="4" stroke-dasharray="8 8"/></svg>`,
+ safa:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><path d="M10 120 40 80l30 40Zm120 0 30-40 30 40Z" fill="#e3bd55"/><g stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round"><path d="M70 92h60m-10-10 10 10-10 10"/><path d="M130 116H70m10-10-10 10 10 10"/></g><text x="40" y="146" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Safa</text><text x="160" y="146" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Marwah</text></svg>`,
+ timbang:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><g stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round"><path d="M100 24v110M50 44h100M50 44 30 94h40Zm100 0-20 50h40Z"/><path d="M70 134h60"/></g><path d="M30 94h40a20 12 0 0 1-40 0Zm100 0h40a20 12 0 0 1-40 0Z" fill="#e3bd55"/></svg>`,
+ kitab:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><path d="M100 40c-20-12-50-14-76-8v96c26-6 56-4 76 8 20-12 50-14 76-8V32c-26-6-56-4-76 8Z" fill="#ffffff" fill-opacity=".9"/><path d="M100 40v96" stroke="#e3bd55" stroke-width="5"/><path d="M40 60h44M40 78h44M116 60h44M116 78h44M40 96h44M116 96h44" stroke="#0c3f34" stroke-width="3" stroke-opacity=".5"/></svg>`,
+ mentol:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><path d="M100 20a40 40 0 0 0-22 74c6 4 8 10 8 16h28c0-6 2-12 8-16a40 40 0 0 0-22-74Z" fill="#e3bd55"/><rect x="86" y="114" width="28" height="10" rx="3" fill="#ffffff"/><rect x="88" y="128" width="24" height="8" rx="3" fill="#ffffff"/><g stroke="#ffffff" stroke-width="4" stroke-linecap="round"><path d="M40 60h-16M176 60h-16M56 26 46 16M144 26l10-10"/></g></svg>`,
+ soalan:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><circle cx="100" cy="80" r="62" fill="#e3bd55"/><text x="100" y="104" text-anchor="middle" font-size="72" font-weight="800" fill="#0c3f34">?</text></svg>`,
+ larang:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><circle cx="100" cy="80" r="58" fill="none" stroke="#e3bd55" stroke-width="12"/><path d="M60 40l80 80" stroke="#e3bd55" stroke-width="12"/><path d="M84 64h32v36H84Z" fill="#ffffff" fill-opacity=".8"/></svg>`,
+ dua:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><rect x="16" y="30" width="76" height="100" rx="12" fill="#ffffff" fill-opacity=".9"/><rect x="108" y="30" width="76" height="100" rx="12" fill="#e3bd55"/><text x="54" y="92" text-anchor="middle" font-size="22" font-weight="800" fill="#0c3f34">A</text><text x="146" y="92" text-anchor="middle" font-size="22" font-weight="800" fill="#0c3f34">B</text></svg>`
+};
+Object.assign(ILL, {
+ cincin:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><g fill="none" stroke-width="12"><circle cx="78" cy="92" r="40" stroke="#e3bd55"/><circle cx="124" cy="92" r="40" stroke="#ffffff" stroke-opacity=".9"/></g><path d="M70 36l8-16 8 16-8 8Z" fill="#e3bd55"/></svg>`,
+ hati:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><path d="M100 140 30 72a36 36 0 0 1 52-50l18 18 18-18a36 36 0 0 1 52 50Z" fill="#e3bd55"/><path d="M100 40 88 70l20 16-14 22 6 32" stroke="#0c3f34" stroke-width="7" fill="none" stroke-linejoin="round"/></svg>`,
+ mahkamah:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><g transform="rotate(-35 100 70)"><rect x="60" y="40" width="80" height="34" rx="8" fill="#e3bd55"/><rect x="94" y="74" width="12" height="70" rx="5" fill="#ffffff"/></g><rect x="40" y="132" width="120" height="14" rx="5" fill="#ffffff" fill-opacity=".85"/></svg>`,
+ keluarga:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><g fill="#ffffff" fill-opacity=".9"><circle cx="60" cy="48" r="18"/><path d="M34 140v-40a26 26 0 0 1 52 0v40Z"/><circle cx="140" cy="48" r="18"/><path d="M114 140v-40a26 26 0 0 1 52 0v40Z"/></g><g fill="#e3bd55"><circle cx="100" cy="84" r="13"/><path d="M82 140v-24a18 18 0 0 1 36 0v24Z"/></g></svg>`,
+ kalendar:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><rect x="36" y="30" width="128" height="114" rx="12" fill="#ffffff" fill-opacity=".9"/><rect x="36" y="30" width="128" height="30" rx="12" fill="#e3bd55"/><g fill="#0c3f34" fill-opacity=".55"><rect x="52" y="74" width="18" height="16" rx="3"/><rect x="80" y="74" width="18" height="16" rx="3"/><rect x="108" y="74" width="18" height="16" rx="3"/><rect x="52" y="100" width="18" height="16" rx="3"/><rect x="80" y="100" width="18" height="16" rx="3"/></g><text x="130" y="128" font-size="26" font-weight="800" fill="#b8891a">4:10</text></svg>`
+});
+const SLIDES = [
+ {cover:true,t:"Isu-isu dalam Perkahwinan",lead:"Pendidikan Islam Tingkatan 5 · Bidang Fiqah · Pelajaran 13 · Buku teks ms 123–136",ill:"cincin"},
+ {t:"Objektif: apa yang anda boleh buat selepas ini",isi:["Menjelaskan maksud dan hukum talak, fasakh, khuluk dan li'an","Menjelaskan maksud dan hukum iddah, rujuk, nusyuz, poligami, hadanah dan anak angkat","Menentukan hukum talak mengikut keadaan","Menghuraikan implikasi perkahwinan yang tidak mengikut syariat dan undang-undang Islam"],terang:"Tajuk ini paling kerap disoal dalam Soalan 3 percubaan SPM 2026 (9 daripada 13 set).",kw:["Standard 4.27","Fiqah"],ex:"Soalan percubaan: hukum talak, jenis talak, syarat rujuk, fasakh, li'an, nikah sindiket.",q:"Isu manakah yang paling anda kurang faham?",ill:"kitab"},
+ {t:"Peta konsep dalam satu pandangan",isi:["Pembubaran: TA-FA-KHU-LI (talak, fasakh, khuluk, li'an)","Isu: I-RU-NU-PO-HA-AN (iddah, rujuk, nusyuz, poligami, hadanah, anak angkat)","Implikasi perkahwinan tidak ikut syariat dan undang-undang"],terang:"Bezakan dahulu cara perkahwinan berakhir daripada isu yang berlaku selepasnya.",kw:["Pembubaran","Isu","Implikasi"],ex:"Iddah dan rujuk bukan cara pembubaran; ia isu selepas pembubaran.",q:"Senaraikan empat cara pembubaran perkahwinan.",ill:"dua"},
+ {t:"Kenali tajuk: apabila rumah tangga diuji",isi:["Islam mengatur cara berpisah dengan adil","Ada jalan keluar bagi suami (talak) dan isteri (fasakh, khuluk)","Ada tempoh (iddah) dan peluang kembali (rujuk)"],terang:"Pelajaran 12 tentang membina perkahwinan; Pelajaran 13 tentang menangani masalahnya.",kw:["Kaitan P12","Keluarga"],ex:"Pengurusan perkahwinan di Malaysia tertakluk kepada enakmen undang-undang keluarga Islam negeri.",q:"Mengapakah Islam mengatur cara perceraian?",ill:"hati"},
+ {t:"Istilah penting yang selalu disoal",isi:["Talak: oleh suami dengan lafaz jelas/kiasan","Fasakh: melalui kuasa hakim dengan sebab tertentu","Khuluk: kehendak isteri dengan ganti rugi","Li'an: sumpah suami menuduh zina tanpa 4 saksi","Iddah, rujuk, nusyuz, poligami, hadanah, anak angkat"],terang:"Kata kunci menentukan markah: suami / hakim / ganti rugi / sumpah.",kw:["Talak","Fasakh","Khuluk","Li'an"],ex:"“Aku lepaskan engkau mulai hari ini” ialah lafaz talak kiasan.",q:"Apakah kata kunci yang membezakan khuluk?",ill:"mahkamah"},
+ {t:"Maksud dan hukum: satu jadual",isi:["Talak: harus (asal) · Fasakh: harus · Khuluk: harus","Li'an: wajib (elak hukuman qazaf)","Iddah: wajib · Rujuk: harus","Nusyuz: haram · Poligami: harus","Hadanah: wajib · Anak angkat: harus"],terang:"Tiga yang wajib: li'an, iddah, hadanah. Satu yang haram: nusyuz. Selebihnya harus.",kw:["3 wajib","1 haram"],ex:"Isteri enggan solat walaupun disuruh suami: nusyuz, haram.",q:"Apakah hukum hadanah?",ill:"timbang"},
+ {t:"Lima hukum talak",isi:["Wajib: perbalahan tidak dapat didamaikan selepas proses mahkamah","Sunat: isteri berakhlak buruk","Harus: hukum asal","Makruh: cerai isteri berkelakuan baik / tanpa sebab","Haram: ketika haid, atau suci yang telah disetubuhi tanpa diketahui hamil"],terang:"Soalan situasi paling kerap. Baca keadaan isteri dan sebab perceraian.",kw:["Wajib","Sunat","Harus","Makruh","Haram"],ex:"Encik Kamal cerai isteri yang baik tanpa sebab: makruh.",q:"Apakah hukum menceraikan isteri ketika haid?",ill:"timbang"},
+ {t:"Dalil dan rujukan",isi:["Buku teks P13 tidak menyertakan ayat al-Quran atau hadis bagi isu-isu ini","Rujukan buku teks: al-Fiqh al-Manhaji (iddah, rujuk)","Rujukan buku teks: Jabatan Kehakiman Syariah Malaysia (bayaran khuluk)"],terang:"Jangan menghafal atau menulis dalil yang tiada dalam sukatan. Fokus kepada maksud, hukum dan syarat.",kw:["Tiada dalil naqli","Ikut sukatan"],ex:"Kaitan: qazaf dibincangkan dalam Pelajaran 15 (Jenayah).",q:"Mengapakah li'an berkait dengan hukuman qazaf?",ill:"kitab"},
+ {t:"Pembubaran: TA-FA-KHU-LI",isi:["Talak: suami melafazkan; jenis raj'ie dan bain","Fasakh: hakim memutuskan atas sebab tertentu","Khuluk: isteri menebus dengan ganti rugi (tunai, hartanah, emas, perak, saham, manfaat)","Li'an: sumpah 4 kali + kali kelima di hadapan hakim"],terang:"Siapa yang memulakan? Suami (talak), isteri melalui hakim (fasakh, khuluk), suami bersumpah (li'an).",kw:["Suami","Hakim","Ganti rugi","Sumpah"],ex:"Isteri sering dipukul memohon fasakh.",q:"Bezakan fasakh dengan khuluk.",ill:"mahkamah"},
+ {t:"Syarat rujuk dan kelayakan poligami",isi:["Syarat rujuk: rela; bukan fasakh/khuluk; bukan talak tiga; isteri masih dalam iddah; ada lafaz rujuk","Kelayakan poligami: tidak melebihi 4 isteri; adil lahiriah (pakaian, tempat tinggal); mampu nafkah zahir dan batin"],terang:"Buku teks tidak menyenaraikan rukun bagi isu ini; yang diuji ialah syarat dan kelayakan.",kw:["5 syarat rujuk","3 kelayakan"],ex:"Lafaz rujuk: “Aku rujuk engkau untuk kembali kepangkuanku.”",q:"Bolehkah suami rujuk selepas khuluk?",ill:"cincin"},
+ {t:"Perbezaan istilah: jangan tertukar",isi:["Talak raj'ie: rujuk dalam iddah tanpa akad baharu","Talak bain: perlu akad nikah dan mahar baharu","Rujuk vs nikah semula: dalam iddah vs selepas iddah","Anak kandung vs anak angkat: faraid, wali, nasab"],terang:"Bezakan dengan satu soalan kunci: “boleh rujuk tanpa akad baharu atau tidak?”",kw:["Raj'ie","Bain","Rujuk"],ex:"Iddah tamat tanpa rujuk: perlu akad nikah baharu.",q:"Apakah beza talak raj'ie dengan talak bain?",ill:"dua"},
+ {t:"Iddah, larangan dan kesan li'an",isi:["Cerai hidup: 3 kali suci / 3 bulan hijrah / tiada iddah (belum disetubuhi)","Cerai mati: 4 bulan 10 hari","Hamil: sehingga melahirkan anak","Larangan iddah: terima pinangan, keluar rumah tanpa keperluan syarak, berhias (kecuali raj'ie)","Kesan li'an: tidak boleh rujuk selama-lamanya; anak tidak dinasabkan kepada suami"],terang:"Perangkap: wanita belum disetubuhi tiada iddah jika cerai hidup, tetapi 4 bulan 10 hari jika suami meninggal.",kw:["4 bulan 10 hari","3 suci"],ex:"Puan Salmah kematian suami, tidak hamil: 4 bulan 10 hari.",q:"Apakah iddah wanita hamil yang kematian suami?",ill:"kalendar"},
+ {t:"Proses: laluan selepas talak",isi:["1. Suami melafazkan talak","2. Isteri menjalani iddah","3. Talak raj'ie: suami boleh rujuk dalam iddah (5 syarat)","4. Iddah tamat / talak bain: akad dan mahar baharu","5. Talak tiga: haram dikahwini sehingga isteri berkahwin lain, bercerai dan habis iddah","6. Hadanah: ibu paling berhak"],terang:"Lukis carta alir ini di buku latihan anda.",kw:["Talak","Iddah","Rujuk","Hadanah"],ex:"Ahmad rujuk sebulan selepas talak satu: sah.",q:"Apakah langkah jika iddah sudah tamat tetapi pasangan mahu bersatu?",ill:"keluarga"},
+ {t:"Contoh situasi: anda hakimnya",isi:["Cerai isteri baik kerana hasutan kawan → makruh","Rujuk selepas talak tiga → tidak boleh","Isteri dipukul → boleh memohon fasakh","Anak angkat dalam senarai faraid → tidak boleh; beri hibah atau wasiat"],terang:"Langkah: kenal pasti isu, nyatakan hukum, beri alasan daripada definisi atau syarat buku teks.",kw:["Isu","Hukum","Alasan"],ex:"Isteri enggan solat walaupun disuruh suami: nusyuz, haram.",q:"Wanita iddah bain berhias ke majlis. Apakah kesalahannya?",ill:"mahkamah"},
+ {t:"Kesalahan lazim murid",isi:["Menulis “hukum talak ialah haram” untuk semua keadaan","Menyangka rujuk boleh selepas fasakh atau khuluk","Menyangka semua iddah 3 bulan","Menasabkan anak angkat atau memberi faraid","Menulis dalil yang tiada dalam buku teks"],terang:"Semak semula: siapa membubarkan, adakah dalam iddah, adakah talak tiga.",kw:["Semak syarat"],ex:"Soalan: “Senaraikan dua jenis talak.” Jawapan: talak raj'ie dan talak bain.",q:"Mengapakah rujuk selepas khuluk tidak dibenarkan?",ill:"hati"},
+ {t:"Teknik hafalan",isi:["Pembubaran: TA-FA-KHU-LI","Isu: I-RU-NU-PO-HA-AN","Hukum talak: “Wajib Mahkamah, Sunat Buruk, Makruh Baik, Haram Haid”","Syarat rujuk: RELA-BUKAN-BUKAN-MASIH-LAFAZ","Iddah: “3S-3B-0-4:10-Lahir”"],terang:"Tulis setiap akronim di kad imbas dan uji rakan sebelah.",kw:["Akronim","Kad imbas"],ex:"3S = 3 kali suci; 3B = 3 bulan; 0 = tiada iddah; 4:10 = 4 bulan 10 hari.",q:"Apakah maksud “3B” dalam akronim iddah?",ill:"mentol"},
+ {t:"Kuiz pantas",isi:["1. Siapakah yang membubarkan perkahwinan dalam fasakh?","2. Hukum nusyuz?","3. Iddah cerai mati (tidak hamil)?","4. Bolehkah rujuk selepas talak tiga?","5. Bolehkah anak angkat menerima wasiat?"],terang:"Jawapan: 1) Hakim · 2) Haram · 3) 4 bulan 10 hari · 4) Tidak · 5) Boleh",kw:["Game Zone"],ex:"Teruskan di tab Game Zone untuk 10 permainan.",q:"Berapa markah anda daripada 5?",ill:"soalan"},
+ {t:"Soalan aplikasi (KBAT)",isi:["Infografik perceraian meningkat: cadangkan langkah mengurangkannya.","“70% nikah sindiket tidak patuh syariah”: huraikan implikasinya.","Isteri menjadi mangsa keganasan rumah tangga: bincangkan tindakan yang boleh diambil."],terang:"Formula 4 markah: dua isi, setiap isi ada huraian atau contoh.",kw:["Huraikan","Cadangkan","Bincangkan"],ex:"Isi: memohon fasakh di mahkamah. Huraian: buku teks memberi contoh isteri dipukul hingga cedera.",q:"Bina satu isi lagi beserta huraian.",ill:"mentol"},
+ {t:"Rumusan",isi:["Pembubaran: talak (suami), fasakh (hakim), khuluk (isteri + ganti rugi), li'an (sumpah)","Hukum talak berubah ikut keadaan: wajib, sunat, harus, makruh, haram","Rujuk dalam iddah dengan 5 syarat; iddah mengikut jadual","Poligami 3 kelayakan; nusyuz haram; hadanah wajib; anak angkat tiada faraid, wali, nasab","Nikah tidak ikut saluran membawa implikasi undang-undang dan sosial"],terang:"Nota guru buku teks: bimbing murid berazam membina keluarga bahagia secara beradab dan istiqamah.",kw:["Keluarga bahagia","Istiqamah"],ex:"Pilih pasangan dengan cermat dan tunaikan tanggungjawab (kaitan Pelajaran 12).",q:"Apakah satu azam anda untuk membina keluarga bahagia?",ill:"keluarga"}
+];
+let sIdx = 0;
+function renderSlide(){
+  const s = SLIDES[sIdx], n = SLIDES.length;
+  if (s.cover) {
+    $("#stage").innerHTML = `<div class="slide cover"><div class="main"><div class="no">Fiqh Mastery Kit · T5 · P13</div><h3>Isu-isu <span>dalam</span> Perkahwinan</h3><p class="lead">${esc(s.lead)}</p><div style="max-width:220px">${ILL[s.ill]}</div></div></div>`;
+  } else {
+    $("#stage").innerHTML = `<div class="slide"><div class="main"><div class="no">Slaid ${sIdx+1} / ${n}</div><h3>${esc(s.t)}</h3><p class="lead">${esc(s.terang)}</p><ul>${s.isi.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+    <div class="side">${ILL[s.ill]}<div class="kw">${s.kw.map(k=>`<span>${esc(k)}</span>`).join("")}</div><div class="ex"><b>Contoh:</b> ${/[؀-ۿ]/.test(s.ex)?`<span class="ar" style="text-align:left">${esc(s.ex)}</span>`:esc(s.ex)}</div><div class="q"><b>Soalan pemahaman:</b> ${esc(s.q)}</div></div></div>`;
+  }
+  $("#sCount").textContent = `Slaid ${sIdx+1} daripada ${n}`;
+  $("#sPrev").disabled = sIdx===0; $("#sNext").disabled = sIdx===n-1;
+  document.querySelectorAll("#sDots button").forEach((b,i)=>b.setAttribute("aria-current", i===sIdx?"true":"false"));
+}
+$("#sDots").innerHTML = SLIDES.map((_,i)=>`<button type="button" aria-label="Slaid ${i+1}">${i+1}</button>`).join("");
+document.querySelectorAll("#sDots button").forEach((b,i)=>b.addEventListener("click",()=>{sIdx=i;renderSlide()}));
+$("#sPrev").addEventListener("click",()=>{if(sIdx>0){sIdx--;renderSlide()}});
+$("#sNext").addEventListener("click",()=>{if(sIdx<SLIDES.length-1){sIdx++;renderSlide()}});
+document.addEventListener("keydown",e=>{ if($("#p-slaid").hidden) return; if(e.target.matches("input,select,textarea")) return; if(e.key==="ArrowRight"&&sIdx<SLIDES.length-1){sIdx++;renderSlide()} if(e.key==="ArrowLeft"&&sIdx>0){sIdx--;renderSlide()} });
+renderSlide();
+
+/* ================= WORKSHEET ================= */
+const WS = [
+ {b:"Tahap 1",h:"KENALI",tasks:[
+  {t:"A. Padankan istilah dengan maksud.",body:`<div class="cols2"><ol>${["Fasakh","Khuluk","Li'an","Hadanah","Nusyuz"].map(x=>`<li>${x}</li>`).join("")}</ol><ol type="A"><li>Keengganan isteri mentaati perintah sah suami</li><li>Pembubaran perkahwinan melalui kuasa hakim dengan sebab tertentu</li><li>Penjagaan kanak-kanak yang masih kecil</li><li>Pembubaran atas kehendak isteri dengan bayaran ganti rugi</li><li>Sumpah suami menuduh isteri berzina tanpa empat saksi</li></ol></div>`,s:"1–B, 2–D, 3–E, 4–C, 5–A"},
+  {t:"B. Isi tempat kosong.",body:`<ol><li>Talak ialah pembubaran perkahwinan oleh <span class="blank"></span> dengan lafaz talak yang jelas atau <span class="blank"></span>.</li><li>Rujuk ialah hak suami menyambung kembali perkahwinan dalam tempoh <span class="blank"></span>.</li><li>Iddah wanita yang kematian suami dan tidak hamil ialah <span class="blank"></span>.</li><li>Poligami tidak boleh melebihi <span class="blank"></span> orang isteri.</li><li>Hukum li'an ialah <span class="blank"></span> untuk mengelakkan suami daripada hukuman <span class="blank"></span>.</li></ol>`,s:"1) suami; kiasan · 2) iddah · 3) 4 bulan 10 hari · 4) empat · 5) wajib; qazaf"}
+ ]},
+ {b:"Tahap 2",h:"FAHAMI",tasks:[
+  {t:"A. Tandakan Betul (B) atau Salah (S).",body:`<ol><li>Hukum asal talak ialah harus.</li><li>Rujuk boleh dilakukan selepas perceraian secara fasakh.</li><li>Wanita dalam iddah raj'ie dibenarkan berhias.</li><li>Anak angkat berhak menerima harta faraid.</li><li>Isteri yang dicerai hidup sebelum disetubuhi tidak perlu beriddah.</li><li>Nusyuz hukumnya harus.</li></ol>`,s:"1) B · 2) S (bukan fasakh/khuluk) · 3) B · 4) S (tiada hak faraid) · 5) B · 6) S (haram)"},
+  {t:"B. Kelaskan hukum: Wajib (W), Sunat (S), Harus (H), Makruh (M), Haram (X).",body:`<p>Iddah · Talak kerana isteri berakhlak buruk · Poligami · Menceraikan isteri tanpa sebab · Talak ketika haid · Hadanah · Khuluk · Nusyuz</p><div class="wbox"></div>`,s:"Iddah (W) · Talak isteri berakhlak buruk (S) · Poligami (H) · Cerai tanpa sebab (M) · Talak ketika haid (X) · Hadanah (W) · Khuluk (H) · Nusyuz (X)"},
+  {t:"C. Lengkapkan jadual iddah.",body:`<div class="tbox"><table style="min-width:380px"><thead><tr><th>Situasi</th><th>Bercerai hidup</th><th>Bercerai mati</th></tr></thead><tbody><tr><td>Belum putus haid</td><td><span class="blank"></span></td><td rowspan="3"><span class="blank"></span></td></tr><tr><td>Telah putus haid</td><td><span class="blank"></span></td></tr><tr><td>Belum pernah disetubuhi</td><td><span class="blank"></span></td></tr><tr><td>Sedang hamil</td><td colspan="2"><span class="blank"></span></td></tr></tbody></table></div>`,s:"3 kali suci · 3 bulan hijrah · tiada iddah · 4 bulan 10 hari (semua situasi cerai mati yang tidak hamil) · sehingga melahirkan anak"}
+ ]},
+ {b:"Tahap 3",h:"BEZAKAN",tasks:[
+  {t:"A. Bezakan pasangan istilah berikut.",body:`<ol><li>Talak dan fasakh</li><li>Fasakh dan khuluk</li><li>Talak raj'ie dan talak bain</li><li>Anak kandung dan anak angkat (dari aspek hak)</li></ol>`,s:"1) Talak oleh suami dengan lafaz; fasakh melalui kuasa hakim dengan sebab tertentu. 2) Khuluk atas kehendak isteri dengan bayaran ganti rugi; fasakh berdasarkan sebab tertentu tanpa disebut bayaran. 3) Raj'ie boleh dirujuk dalam iddah tanpa akad baharu; bain perlu akad nikah dan mahar baharu. 4) Kedua-duanya boleh menerima nafkah, hibah, wasiat; anak angkat tiada hak faraid, wali dan nasab."},
+  {t:"B. Kenal pasti: syarat rujuk (R) atau kelayakan poligami (P).",body:`<p>Isteri masih dalam iddah · Mampu memberi nafkah zahir dan batin · Ada lafaz rujuk · Tidak melebihi empat isteri · Bukan talak tiga · Adil dari aspek lahiriah</p>`,s:"R: isteri masih dalam iddah, ada lafaz rujuk, bukan talak tiga. P: mampu nafkah, tidak melebihi empat isteri, adil lahiriah."},
+  {t:"C. Cari LIMA kesalahan dalam situasi berikut.",body:`<p class="card soft-peach">Encik Rizal menceraikan isterinya ketika isterinya sedang haid. Isterinya menganggap iddahnya hanya sebulan, lalu menerima pinangan lelaki lain. Encik Rizal ingin rujuk selepas iddah tamat tanpa akad baharu. Dia juga memasukkan anak angkat mereka dalam senarai waris faraid dan menamakannya “bin Rizal”.</p>`,s:"1) Talak ketika haid hukumnya haram. 2) Iddah bukan sebulan (belum putus haid: 3 kali suci). 3) Menerima pinangan semasa iddah dilarang. 4) Rujuk mesti dalam iddah; selepas iddah perlu akad dan mahar baharu. 5) Anak angkat tiada hak faraid dan nasab."}
+ ]},
+ {b:"Tahap 4",h:"APLIKASI",tasks:[
+  {t:"A. Tentukan hukum dan berikan alasan.",body:`<ol><li>Suami menceraikan isteri yang solehah kerana terpengaruh dengan hasutan kawan.</li><li>Isteri enggan berpuasa Ramadan walaupun disuruh suami.</li><li>Pasangan bercerai melalui khuluk, kemudian suami mahu rujuk dalam iddah.</li><li>Suami menuduh isteri berzina tanpa empat saksi.</li></ol>`,s:"1) Makruh — isteri berkelakuan baik / tiada sebab munasabah. 2) Haram (nusyuz) — enggan mentaati perintah sah suami. 3) Tidak boleh rujuk — syarat rujuk: bukan perceraian kerana khuluk. 4) Wajib li'an — untuk mengelakkan suami daripada hukuman qazaf."},
+  {t:"B. Soalan struktur.",body:`<p>Puan Aminah diceraikan oleh suaminya dengan talak satu. Dia masih belum putus haid.</p><ol><li>Nyatakan tempoh iddah Puan Aminah. [2]</li><li>Jelaskan dua larangan yang perlu dipatuhi semasa iddah. [2]</li><li>Suaminya ingin kembali. Jelaskan dua syarat yang perlu dipenuhi. [2]</li></ol>`,s:"1) Tiga kali suci. 2) Mana-mana dua: tidak menerima pinangan secara terang/kiasan; tidak keluar dari rumah yang disediakan suami kecuali keperluan syarak; (berhias dibenarkan kerana iddah raj'ie). 3) Mana-mana dua: rela; bukan fasakh/khuluk; bukan talak tiga; masih dalam iddah; ada lafaz rujuk."}
+ ]},
+ {b:"Tahap 5",h:"KBAT",tasks:[
+  {t:"A. Analisis: Mengapakah Islam menjadikan hukum talak berbeza mengikut keadaan?",body:`<div class="wbox"></div>`,s:"Jawapan terbuka berasaskan buku teks: talak harus sebagai jalan keluar yang munasabah; diwajibkan apabila perbalahan tidak dapat didamaikan selepas proses mahkamah supaya kemudaratan berhenti; dimakruhkan tanpa sebab untuk menjaga hak isteri yang baik; diharamkan ketika haid untuk melindungi isteri. 2 isi berhuraian."},
+  {t:"B. Penilaian: “Lafaz talak tiga ketika marah ialah penyelesaian segera kepada pergaduhan.” Nilaikan pernyataan ini.",body:`<div class="wbox"></div>`,s:"Tidak setuju. Isi 1: talak tiga menutup peluang rujuk (syarat rujuk: bukan talak tiga). Isi 2: bekas isteri haram dikahwini semula sehingga berkahwin dengan lelaki lain, bercerai dan habis iddah (P12). Isi 3: talak tanpa sebab munasabah boleh menjadi makruh dan merosakkan institusi keluarga. 2 isi × 2 markah."},
+  {t:"C. Cadangan penyelesaian: “JAKIM menganggarkan kira-kira 70% pernikahan melalui sindiket nikah ekspres tidak patuh syariah.” Cadangkan langkah mengatasi masalah ini.",body:`<div class="wbox"></div>`,s:"Jawapan penilaian (sebahagian maklumat tambahan): berkahwin mengikut saluran yang betul di negeri masing-masing; mendaftarkan perkahwinan; menyedarkan masyarakat tentang implikasi (denda, dipisahkan jika tidak sah, tiada dokumen untuk hadanah & pusaka, sukar daftar kelahiran); melaporkan sindiket kepada pihak berkuasa agama. Mana-mana 2 isi berhuraian."},
+  {t:"D. Huraian berdasarkan prinsip fiqh: Huraikan bagaimana ketetapan anak angkat dalam Islam menjaga keadilan.",body:`<div class="wbox"></div>`,s:"Isi: anak angkat masih mendapat nafkah dan kebajikan → kasih sayang terjaga. Isi: boleh menerima hibah dan wasiat → bapa angkat boleh memberi harta secara sah. Isi: tiada hak faraid, wali dan nasab → hak waris sebenar dan nasab terpelihara. 2 isi berhuraian."}
+ ]}
+];
+$("#ws").innerHTML = WS.map(l=>`<div class="lvl"><div class="lvl-h"><span class="badge">${l.b}</span><h3>${l.h}</h3></div><div class="lvl-b">${l.tasks.map(t=>`<div class="task"><h4>${t.t}</h4>${t.body}<div class="skema">${esc(t.s)}</div></div>`).join("")}</div></div>`).join("");
+$("#toggleSkema").addEventListener("click",e=>{const on=$("#ws").classList.toggle("show-skema");e.currentTarget.setAttribute("aria-pressed",on);e.currentTarget.textContent=on?"Sembunyikan skema jawapan":"Tunjuk skema jawapan"});
+
+/* ================= GAMES ================= */
+const GAMES = [
+ ["match","Fiqh Matching","Padankan istilah dan maksud","Mudah"],
+ ["sort","Fiqh Sorting","Kelaskan hukum: wajib, sunat, harus, makruh, haram","Sederhana"],
+ ["escape","Fiqh Escape Room","Buka 4 kunci untuk mendapat kod","Sederhana"],
+ ["box","Mystery Box","Buka kotak, jawab soalan","Campuran"],
+ ["detect","Fiqh Detective","Cari kesalahan dalam situasi","Sukar"],
+ ["wheel","Fiqh Wheel","Putar roda, jawab soalan rawak","Campuran"],
+ ["tf","True or False","Betul atau salah","Mudah"],
+ ["champ","Fiqh Champion","Kuiz 10 tahap","Mudah → Sukar"],
+ ["memory","Fiqh Memory","Permainan ingatan kad","Mudah"],
+ ["boss","Final Boss","Kalahkan Raja Lupa","Sukar"]
+];
+$("#gamegrid").innerHTML = GAMES.map((g,i)=>`<button type="button" class="gpick" data-g="${g[0]}" aria-pressed="${i===0}"><span class="lv">${i+1} · ${g[3]}</span><b>${g[1]}</b><small>${g[2]}</small></button>`).join("");
+document.querySelectorAll(".gpick").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".gpick").forEach(x=>x.setAttribute("aria-pressed",x===b));startGame(b.dataset.g)}));
+const G = $("#gstage");
+function head(title,how,score){return `<div class="ghead"><div><h3>${title}</h3><p class="how">${how}</p></div><div class="score" id="gscore">${score}</div></div>`}
+function setScore(t){const el=$("#gscore");if(el)el.textContent=t}
+function fb(ok,msg){return `<div class="fb show ${ok?'ok':'no'}">${ok?"Betul! ":"Belum tepat. "}${esc(msg)}</div>`}
+function startGame(g){ ({match:gMatch,sort:gSort,escape:gEscape,box:gBox,detect:gDetect,wheel:gWheel,tf:gTF,champ:gChamp,memory:gMemory,boss:gBoss})[g](); }
+
+function gMatch(){
+  const ps = shuffle(PAIRS).slice(0,6); let left=null, score=0, tries=0, done=0;
+  const L = shuffle(ps.map((p,i)=>({i,t:p[0]}))), R = shuffle(ps.map((p,i)=>({i,t:p[1]})));
+  G.innerHTML = head("Fiqh Matching","Klik satu istilah, kemudian klik maksudnya. +10 bagi setiap padanan betul, −2 bagi cubaan salah.","Mata: 0") +
+   `<div class="cols2"><div id="mL">${L.map(x=>`<button class="opt" data-i="${x.i}">${esc(x.t)}</button>`).join("")}</div><div id="mR">${R.map(x=>`<button class="opt" data-i="${x.i}">${esc(x.t)}</button>`).join("")}</div></div><div id="mFb"></div>`;
+  G.querySelectorAll("#mL .opt").forEach(b=>b.addEventListener("click",()=>{if(b.disabled)return;G.querySelectorAll("#mL .opt").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");left=b}));
+  G.querySelectorAll("#mR .opt").forEach(b=>b.addEventListener("click",()=>{
+    if(!left||b.disabled)return; tries++;
+    if(left.dataset.i===b.dataset.i){score+=10;done++;[left,b].forEach(x=>{x.classList.remove("sel");x.classList.add("ok");x.disabled=true});$("#mFb").innerHTML=fb(true,`${left.textContent} = ${b.textContent}.`)}
+    else{score=Math.max(0,score-2);b.classList.add("no");setTimeout(()=>b.classList.remove("no"),500);$("#mFb").innerHTML=fb(false,`${left.textContent} bukan “${b.textContent}”. Cuba lagi.`)}
+    left=null; setScore(`Mata: ${score}`);
+    if(done===ps.length) $("#mFb").innerHTML += `<div class="fb show ok">Tahniah! Semua ${ps.length} padanan selesai dalam ${tries} cubaan. <button class="btn" type="button" onclick="gMatch()">Main semula</button></div>`;
+  }));
+}
+
+function gSort(){
+  const items = shuffle(SORT).slice(0,12); let i=0, score=0;
+  function draw(){
+    if(i>=items.length){G.innerHTML=head("Fiqh Sorting","Selesai!",`Mata: ${score}/${items.length*10}`)+`<div class="fb show ok">Anda mengelaskan ${score/10} daripada ${items.length} item dengan betul. <button class="btn" type="button" onclick="gSort()">Main semula</button></div>`;return}
+    G.innerHTML = head("Fiqh Sorting","Pilih kategori yang betul bagi item yang dipaparkan. +10 bagi setiap jawapan betul.",`Mata: ${score} · ${i+1}/${items.length}`) +
+      `<div class="chipq">${esc(items[i][0])}</div><div class="bins">${SORT_CATS.map((c,k)=>`<button class="bin" data-k="${k}">${c}</button>`).join("")}</div><div id="sFb"></div>`;
+    G.querySelectorAll(".bin").forEach(b=>b.addEventListener("click",()=>{
+      const ok = +b.dataset.k===items[i][1]; if(ok)score+=10;
+      G.querySelectorAll(".bin").forEach(x=>x.disabled=true);
+      $("#sFb").innerHTML = fb(ok,`“${items[i][0]}” ialah ${SORT_CATS[items[i][1]]}.`) + `<button class="btn pri" type="button" id="sNx" style="margin-top:8px">Seterusnya</button>`;
+      $("#sNx").addEventListener("click",()=>{i++;draw()});
+    }));
+  } draw();
+}
+
+function gEscape(){
+  const open=[false,false,false,false];
+  G.innerHTML = head("Fiqh Escape Room","Anda terkunci di bilik ulang kaji. Jawab 4 soalan (nombor sahaja). Setiap jawapan ialah satu digit kod pintu. Masukkan kod 4 digit untuk keluar.","Kunci: 0/4") +
+   `<div class="locks">${ESCAPE.map((e,k)=>`<div class="lock" id="lk${k}"><b>Kunci ${k+1}</b><span>${esc(e.q)}</span><input type="number" inputmode="numeric" id="lkin${k}" aria-label="Jawapan kunci ${k+1}"><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn" type="button" data-k="${k}">Cuba buka</button><button class="btn" type="button" data-h="${k}">Petunjuk</button></div><div id="lkfb${k}"></div></div>`).join("")}</div>
+   <div class="card"><b>Pintu keluar</b><p class="how">Kod = digit Kunci 1, 2, 3, 4 mengikut turutan.</p><div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap"><input class="codein" id="code" inputmode="numeric" maxlength="4" style="max-width:160px" aria-label="Kod pintu"><button class="btn pri" type="button" id="codeBtn">Buka pintu</button></div><div id="codeFb" style="margin-top:8px"></div></div>`;
+  G.querySelectorAll("[data-k]").forEach(b=>b.addEventListener("click",()=>{const k=+b.dataset.k,v=+$("#lkin"+k).value;const ok=v===ESCAPE[k].a;
+    $("#lkfb"+k).innerHTML=fb(ok,ok?`Kunci terbuka. Digit: ${ESCAPE[k].a}`:"Semak buku teks dan cuba lagi.");
+    if(ok){open[k]=true;$("#lk"+k).classList.add("open")} setScore(`Kunci: ${open.filter(Boolean).length}/4`)}));
+  G.querySelectorAll("[data-h]").forEach(b=>b.addEventListener("click",()=>{const k=+b.dataset.h;$("#lkfb"+k).innerHTML=`<div class="fb show ok">Petunjuk: ${esc(ESCAPE[k].h)}</div>`}));
+  $("#codeBtn").addEventListener("click",()=>{const ok=$("#code").value.trim()===ESCAPE.map(e=>e.a).join("");
+    $("#codeFb").innerHTML=ok?`<div class="fb show ok">Pintu terbuka! Kod ${ESCAPE.map(e=>e.a).join("")}: ${ESCAPE.map(e=>e.a+" "+e.k).join(", ")}. Misi berjaya.</div>`:fb(false,"Kod salah. Pastikan semua kunci dibuka dahulu.")});
+}
+
+function gBox(){
+  const qs = shuffle(BANK).slice(0,9), pts = shuffle([10,10,10,20,20,20,30,30,50]); let score=0, opened=0;
+  G.innerHTML = head("Mystery Box","Pilih kotak. Setiap kotak mengandungi soalan dengan nilai mata tersembunyi. Jawab betul untuk mendapat mata itu.","Mata: 0") +
+   `<div class="boxes">${qs.map((_,k)=>`<button class="mbox" type="button" data-k="${k}">?</button>`).join("")}</div><div id="bxQ"></div>`;
+  G.querySelectorAll(".mbox").forEach(b=>b.addEventListener("click",()=>{
+    const k=+b.dataset.k, q=qs[k]; b.disabled=true; b.textContent=`${pts[k]} mata`;
+    $("#bxQ").innerHTML = `<div class="card" style="margin-top:4px"><p class="qtext">${esc(q.q)} <span class="muted">(${pts[k]} mata)</span></p><div class="opts" style="margin-top:8px">${q.o.map((o,j)=>`<button class="opt" data-j="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</button>`).join("")}</div><div id="bxFb" style="margin-top:8px"></div></div>`;
+    G.querySelectorAll("#bxQ .opt").forEach(o=>o.addEventListener("click",()=>{
+      const ok=+o.dataset.j===q.a; if(ok)score+=pts[k]; opened++;
+      G.querySelectorAll("#bxQ .opt").forEach((x,j)=>{x.disabled=true;if(j===q.a)x.classList.add("ok");else if(x===o)x.classList.add("no")});
+      $("#bxFb").innerHTML=fb(ok,q.e)+(opened===9?`<div class="fb show ok">Semua kotak dibuka. Jumlah: ${score} mata. <button class="btn" type="button" onclick="gBox()">Main semula</button></div>`:"");
+      setScore(`Mata: ${score}`);
+    }));
+  }));
+}
+
+function gDetect(){
+  const cs = shuffle(DETECT); let i=0, score=0;
+  function draw(){
+    if(i>=cs.length){G.innerHTML=head("Fiqh Detective","Kes selesai.",`Kes: ${score}/${cs.length}`)+`<div class="fb show ok">Anda menyelesaikan ${score} daripada ${cs.length} kes. <button class="btn" type="button" onclick="gDetect()">Siasat semula</button></div>`;return}
+    const c=cs[i];
+    G.innerHTML = head("Fiqh Detective","Baca laporan kes. Klik tindakan yang menjadi KESALAHAN dari sudut fiqh. +1 kes bagi jawapan tepat.",`Kes ${i+1}/${cs.length} · Selesai: ${score}`) +
+     `<div class="card soft-peach"><b>Laporan kes #${i+1}</b><p>${esc(c.c)}</p></div><div class="opts">${c.t.map((t,j)=>`<button class="opt" data-j="${j}">${esc(t)}</button>`).join("")}</div><div id="dFb"></div>`;
+    G.querySelectorAll(".opt").forEach(o=>o.addEventListener("click",()=>{
+      const ok=+o.dataset.j===c.s; if(ok)score++;
+      G.querySelectorAll(".opt").forEach((x,j)=>{x.disabled=true;if(j===c.s)x.classList.add("ok");else if(x===o)x.classList.add("no")});
+      $("#dFb").innerHTML=fb(ok,c.e)+`<button class="btn pri" type="button" id="dNx" style="margin-top:8px">Kes seterusnya</button>`;
+      $("#dNx").addEventListener("click",()=>{i++;draw()});
+    }));
+  } draw();
+}
+
+function gWheel(){
+  const cats=Object.keys(WHEEL); let rot=0, spinning=false, score=0, played=0;
+  const colors=["#0f7a62","#b8891a","#138f8f","#0b5d4b","#c79a2a","#1d8a8a","#0d6b55","#a77c16"];
+  G.innerHTML = head("Fiqh Wheel","Putar roda. Jawab soalan dengan lisan atau di kertas, kemudian dedahkan jawapan dan nilai diri anda sendiri.","Betul: 0/0") +
+   `<div class="wheelwrap"><div class="wheel"><div class="ptr"></div><canvas id="wc" width="640" height="640" aria-label="Roda soalan"></canvas></div>
+    <div style="display:grid;gap:10px"><button class="btn pri" type="button" id="spin">Putar roda</button><div id="wQ"></div></div></div>`;
+  const cv=$("#wc"), ctx=cv.getContext("2d"), N=cats.length;
+  function paint(){ctx.clearRect(0,0,640,640);ctx.save();ctx.translate(320,320);ctx.rotate(rot);
+    for(let k=0;k<N;k++){ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,310,k*2*Math.PI/N,(k+1)*2*Math.PI/N);ctx.fillStyle=colors[k];ctx.fill();ctx.save();ctx.rotate((k+.5)*2*Math.PI/N);ctx.fillStyle="#ffffff";ctx.font="700 30px Nunito Sans, sans-serif";ctx.textAlign="right";ctx.fillText(cats[k],285,10);ctx.restore()}
+    ctx.beginPath();ctx.arc(0,0,46,0,2*Math.PI);ctx.fillStyle="#e3bd55";ctx.fill();ctx.restore()}
+  paint();
+  $("#spin").addEventListener("click",()=>{ if(spinning)return; spinning=true; $("#wQ").innerHTML="";
+    const target = rot + 2*Math.PI*(4+Math.random()*2); const start=rot, t0=performance.now(), dur=matchMedia("(prefers-reduced-motion: reduce)").matches?10:2600;
+    function step(t){const p=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-p,3); rot=start+(target-start)*e; paint(); if(p<1)requestAnimationFrame(step); else done()}
+    requestAnimationFrame(step);
+    function done(){spinning=false; const a=((-Math.PI/2-rot)%(2*Math.PI)+2*Math.PI)%(2*Math.PI); const k=Math.floor(a/(2*Math.PI/N)); const cat=cats[k]; const qa=WHEEL[cat][Math.floor(Math.random()*WHEEL[cat].length)];
+      $("#wQ").innerHTML=`<div class="card"><span class="pill p-w">${esc(cat)}</span><p class="qtext" style="margin-top:6px">${esc(qa[0])}</p><button class="btn" type="button" id="wRev" style="margin-top:8px">Dedahkan jawapan</button><div id="wAns"></div></div>`;
+      $("#wRev").addEventListener("click",()=>{$("#wAns").innerHTML=`<div class="fb show ok" style="margin-top:8px">${esc(qa[1])}</div><div style="display:flex;gap:6px;margin-top:8px"><button class="btn" type="button" id="wY">Saya betul</button><button class="btn" type="button" id="wN">Saya salah</button></div>`;
+        $("#wY").addEventListener("click",()=>{score++;played++;setScore(`Betul: ${score}/${played}`);$("#wAns").innerHTML+=`<p class="muted">Dicatat. Putar lagi!</p>`;$("#wY").disabled=$("#wN").disabled=true});
+        $("#wN").addEventListener("click",()=>{played++;setScore(`Betul: ${score}/${played}`);$("#wAns").innerHTML+=`<p class="muted">Ulang kaji bahagian “${esc(cat)}” di tab Analisis.</p>`;$("#wY").disabled=$("#wN").disabled=true});
+      })}
+  });
+}
+
+function gTF(){
+  const qs=shuffle(TF).slice(0,10); let i=0, score=0;
+  function draw(){
+    if(i>=qs.length){G.innerHTML=head("True or False","Tamat.",`Mata: ${score}/10`)+`<div class="fb show ${score>=7?'ok':'no'}">Skor anda ${score}/10. ${score>=7?"Mantap!":"Ulang kaji Master Istilah dan cuba lagi."} <button class="btn" type="button" onclick="gTF()">Main semula</button></div>`;return}
+    G.innerHTML = head("True or False","Adakah pernyataan ini betul? 1 mata bagi setiap jawapan tepat.",`Mata: ${score} · ${i+1}/10`) +
+     `<div class="chipq">${esc(qs[i][0])}</div><div class="opts"><button class="opt" data-v="1">Betul</button><button class="opt" data-v="0">Salah</button></div><div id="tFb"></div>`;
+    G.querySelectorAll(".opt").forEach(o=>o.addEventListener("click",()=>{
+      const ok=(o.dataset.v==="1")===qs[i][1]; if(ok)score++;
+      G.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if((x.dataset.v==="1")===qs[i][1])x.classList.add("ok");else x.classList.add("no")});
+      $("#tFb").innerHTML=fb(ok,qs[i][2])+`<button class="btn pri" type="button" id="tNx" style="margin-top:8px">Seterusnya</button>`;
+      $("#tNx").addEventListener("click",()=>{i++;draw()});
+    }));
+  } draw();
+}
+
+function gChamp(){
+  const pick=l=>shuffle(BANK.filter(q=>q.l===l));
+  const qs=[...pick(1).slice(0,3),...pick(2).slice(0,4),...pick(3).slice(0,3)];
+  const prize=[100,200,300,500,1000,2000,4000,8000,16000,32000]; let i=0, used50=false, usedHint=false;
+  function ladder(){return `<div class="ladder">${prize.map((p,k)=>`<div class="${k===i?'cur':k<i?'past':''}"><span>Tahap ${k+1}</span><span>${p.toLocaleString("ms-MY")}</span></div>`).reverse().join("")}</div>`}
+  function draw(){
+    if(i>=qs.length){G.innerHTML=head("Fiqh Champion","Anda menjawab semua 10 tahap!","32,000 mata")+`<div class="fb show ok">Anda ialah Fiqh Champion Isu-isu dalam Perkahwinan! <button class="btn" type="button" onclick="gChamp()">Main semula</button></div>`;return}
+    const q=qs[i];
+    G.innerHTML = head("Who Wants To Be Fiqh Champion","10 tahap: mudah ke sukar. Satu jawapan salah menamatkan permainan. Bantuan: 50:50 dan Petunjuk, sekali setiap satu.",`${(i?prize[i-1]:0).toLocaleString("ms-MY")} mata`) +
+     `<div class="champ"><div style="display:grid;gap:10px"><p class="qtext">${esc(q.q)}</p><div class="opts">${q.o.map((o,j)=>`<button class="opt" data-j="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</button>`).join("")}</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn" type="button" id="l50" ${used50?"disabled":""}>50:50</button><button class="btn" type="button" id="lHint" ${usedHint?"disabled":""}>Petunjuk</button></div><div id="cFb"></div></div>${ladder()}</div>`;
+    $("#l50").addEventListener("click",()=>{used50=true;$("#l50").disabled=true;let rm=shuffle([0,1,2,3].filter(j=>j!==q.a)).slice(0,2);G.querySelectorAll(".champ .opt").forEach(x=>{if(rm.includes(+x.dataset.j)){x.disabled=true;x.classList.add("done")}})});
+    $("#lHint").addEventListener("click",()=>{usedHint=true;$("#lHint").disabled=true;$("#cFb").innerHTML=`<div class="fb show ok">Petunjuk: ${esc(q.e.split(/[.;:]/)[0])}…</div>`});
+    G.querySelectorAll(".champ .opt").forEach(o=>o.addEventListener("click",()=>{
+      const ok=+o.dataset.j===q.a; G.querySelectorAll(".champ .opt").forEach((x,j)=>{x.disabled=true;if(j===q.a)x.classList.add("ok");else if(x===o)x.classList.add("no")});
+      if(ok){$("#cFb").innerHTML=fb(true,q.e)+`<button class="btn pri" type="button" id="cNx" style="margin-top:8px">Ke tahap ${i+2>10?"akhir":i+2}</button>`;$("#cNx").addEventListener("click",()=>{i++;draw()})}
+      else{$("#cFb").innerHTML=fb(false,q.e)+`<div class="fb show no">Permainan tamat pada tahap ${i+1}. Mata dibawa pulang: ${(i?prize[i-1]:0).toLocaleString("ms-MY")}. <button class="btn" type="button" onclick="gChamp()">Cuba lagi</button></div>`}
+    }));
+  } draw();
+}
+
+function gMemory(){
+  const ps=shuffle(PAIRS).slice(0,6); const cards=shuffle(ps.flatMap((p,i)=>[{i,t:p[0]},{i,t:p[1]}])); let up=[], got=0, moves=0, lock=false;
+  G.innerHTML = head("Fiqh Memory","Terbalikkan dua kad. Jika istilah dan maksudnya sepadan, kad kekal terbuka. Selesaikan dengan langkah paling sedikit.","Langkah: 0") +
+   `<div class="mem">${cards.map((c,k)=>`<button class="mcard" type="button" data-k="${k}" aria-label="Kad ${k+1}">?</button>`).join("")}</div><div id="memFb"></div>`;
+  G.querySelectorAll(".mcard").forEach(b=>b.addEventListener("click",()=>{
+    const k=+b.dataset.k; if(lock||b.classList.contains("up")||b.classList.contains("got"))return;
+    b.classList.add("up"); b.textContent=cards[k].t; up.push(b);
+    if(up.length===2){moves++; setScore(`Langkah: ${moves}`); const [a,c]=up;
+      if(cards[+a.dataset.k].i===cards[+c.dataset.k].i){a.classList.replace("up","got");c.classList.replace("up","got");up=[];got++;
+        $("#memFb").innerHTML=fb(true,`${ps[cards[+a.dataset.k].i][0]}: ${ps[cards[+a.dataset.k].i][1]}.`);
+        if(got===ps.length)$("#memFb").innerHTML+=`<div class="fb show ok">Selesai dalam ${moves} langkah! <button class="btn" type="button" onclick="gMemory()">Main semula</button></div>`}
+      else{lock=true;setTimeout(()=>{up.forEach(x=>{x.classList.remove("up");x.textContent="?"});up=[];lock=false},900)}}
+  }));
+}
+
+function gBoss(){
+  const mix = shuffle([...shuffle(BANK.filter(q=>q.l>=2)).slice(0,8).map(q=>({...q,kind:"m"})),...shuffle(TF).slice(0,4).map(t=>({q:t[0],o:["Betul","Salah"],a:t[1]?0:1,e:t[2],kind:"t"}))]);
+  let hp=100, hearts=3, i=0; const dmg=Math.ceil(100/10);
+  function draw(){
+    if(hp<=0){G.innerHTML=head("Final Boss","Raja Lupa tumbang!","Menang")+`<div class="fb show ok">Hebat! Anda mengalahkan Raja Lupa dengan ${hearts} nyawa berbaki. Anda menguasai Isu-isu dalam Perkahwinan. <button class="btn" type="button" onclick="gBoss()">Lawan semula</button></div>`;return}
+    if(hearts<=0||i>=mix.length){G.innerHTML=head("Final Boss","Raja Lupa masih berdiri.","Kalah")+`<div class="fb show no">HP Raja Lupa berbaki ${hp}. Ulang kaji hukum talak, syarat rujuk dan jadual iddah, kemudian cuba lagi. <button class="btn" type="button" onclick="gBoss()">Lawan semula</button></div>`;return}
+    const q=mix[i];
+    G.innerHTML = head("Final Boss: Raja Lupa","Setiap jawapan betul mengurangkan 10 HP Raja Lupa. Setiap jawapan salah mengurangkan satu nyawa anda. Kalahkan dia sebelum nyawa habis.",`Nyawa: ${"♥".repeat(hearts)}${"♡".repeat(3-hearts)}`) +
+     `<div class="bossrow"><div class="card"><b>Raja Lupa · HP ${hp}/100</b><div class="hp" style="margin-top:6px"><i style="width:${hp}%"></i></div></div><div class="card"><b>Serangan ${i+1}</b><p class="muted">${q.kind==="t"?"Betul atau salah?":"Pilih jawapan."}</p></div></div>
+      <p class="qtext">${esc(q.q)}</p><div class="opts">${q.o.map((o,j)=>`<button class="opt" data-j="${j}">${esc(o)}</button>`).join("")}</div><div id="bFb"></div>`;
+    G.querySelectorAll(".opt").forEach(o=>o.addEventListener("click",()=>{
+      const ok=+o.dataset.j===q.a; if(ok)hp=Math.max(0,hp-dmg); else hearts--;
+      G.querySelectorAll(".opt").forEach((x,j)=>{x.disabled=true;if(j===q.a)x.classList.add("ok");else if(x===o)x.classList.add("no")});
+      $("#bFb").innerHTML=fb(ok,q.e)+`<button class="btn pri" type="button" id="bNx" style="margin-top:8px">Teruskan</button>`;
+      $("#bNx").addEventListener("click",()=>{i++;draw()});
+    }));
+  } draw();
+}
+gMatch();
+
+/* ================= SPM ================= */
+const STRUKTUR = [
+ {stem:"3 (a) Talak merupakan jalan terakhir bagi konflik rumah tangga yang tiada penyelesaian.",items:[
+  {n:"(i)",q:"Apakah maksud talak?",m:2,a:"Talak ialah pembubaran perkahwinan oleh suami dengan lafaz talak yang jelas atau kiasan.",s:"Pembubaran perkahwinan oleh suami [1] · dengan lafaz talak yang jelas atau kiasan [1]",t:"Soalan maksud: sebut siapa (suami) dan bagaimana (lafaz).",x:"Tidak menyebut “oleh suami”, menyebabkan jawapan sama dengan fasakh."},
+  {n:"(ii)",q:"Senaraikan dua jenis talak.",m:2,a:"Talak raj'ie dan talak bain.",s:"Talak raj'ie [1] · Talak bain [1]",t:"Senaraikan: tidak perlu huraian.",x:"Menulis “talak satu, talak dua” sebagai jenis talak."},
+  {n:"(iii)",q:"Tentukan hukum bagi situasi berikut: (a) Encik Kamal menceraikan isterinya yang berkelakuan baik tanpa sebab. (b) Encik Hisyam menceraikan isterinya ketika isterinya sedang haid.",m:2,a:"(a) Makruh. (b) Haram.",s:"(a) Makruh [1] · (b) Haram [1]",t:"Padankan keadaan dengan lima hukum talak.",x:"Menulis “haram” bagi (a)."},
+  {n:"(iv)",q:"“Kes perceraian dalam kalangan pasangan muda semakin meningkat.” Cadangkan dua langkah untuk mengurangkan kes perceraian.",m:4,a:"Pertama, memilih pasangan berdasarkan ciri yang digariskan Islam seperti pegangan agama dan akhlak yang mulia, kerana pasangan yang baik agamanya lebih mudah bertolak ansur. Kedua, suami dan isteri menunaikan tanggungjawab masing-masing, contohnya suami menyediakan nafkah dan isteri menjaga maruah suami, supaya rumah tangga harmoni.",s:"Mana-mana 2 isi berhuraian: pemilihan pasangan ikut ciri Islam (P12) [1+1] · tunaikan tanggungjawab suami isteri (P12) [1+1] · rujuk proses mahkamah/sulh sebelum talak [1+1] · kaunseling rumah tangga [1+1] · ilmu agama dalam keluarga [1+1]",t:"Soalan KBAT: kaitkan dengan isi Pelajaran 12 untuk isi yang kukuh.",x:"Memberi isi tanpa huraian, maka hanya mendapat 2 markah.",tambahan:true}
+ ]},
+ {stem:"3 (b) Pembubaran perkahwinan juga boleh berlaku melalui fasakh, khuluk dan li'an.",items:[
+  {n:"(i)",q:"Nyatakan maksud fasakh.",m:2,a:"Fasakh ialah pembubaran perkahwinan melalui kuasa hakim dengan sebab-sebab tertentu.",s:"Pembubaran melalui kuasa hakim [1] · dengan sebab tertentu [1]",t:"Kata kunci: hakim + sebab.",x:"Menulis “isteri menceraikan suami”."},
+  {n:"(ii)",q:"Jelaskan perbezaan khuluk dengan fasakh.",m:2,a:"Khuluk berlaku atas kehendak isteri dengan persetujuan membayar ganti rugi kepada suami, manakala fasakh ialah pembubaran melalui kuasa hakim dengan sebab tertentu.",s:"Khuluk: kehendak isteri + ganti rugi [1] · Fasakh: kuasa hakim + sebab tertentu [1]",t:"Soalan bezakan: dua sisi, satu markah setiap sisi.",x:"Hanya menerangkan satu istilah."},
+  {n:"(iii)",q:"Seorang suami menuduh isterinya berzina tanpa empat orang saksi lalu mereka melakukan li'an. Jelaskan dua kesan li'an.",m:2,a:"Suami isteri tidak boleh rujuk selama-lamanya. Anak tidak boleh dinasabkan kepada suami dan tidak berhak mendapat nafkah serta mewarisi pusaka daripadanya.",s:"Tidak boleh rujuk selama-lamanya [1] · anak tidak dinasabkan / tiada hak nafkah & pusaka daripada suami [1]",t:"Hafal dua kesan li'an dalam buku teks.",x:"Menulis hukuman sebat sebagai kesan li'an."},
+  {n:"(iv)",q:"Poster: “HENTIKAN KEGANASAN RUMAH TANGGA.” Bincangkan tindakan yang boleh diambil oleh seorang isteri yang menjadi mangsa keganasan rumah tangga.",m:4,a:"Pertama, isteri boleh memohon fasakh di mahkamah kerana buku teks menyatakan suami yang sering memukul hingga menyebabkan kecederaan fizikal ialah antara sebab fasakh. Kedua, jika suami enggan menceraikannya, isteri boleh memohon khuluk dengan bersetuju membayar ganti rugi seperti memulangkan mahar.",s:"Isi 1: memohon fasakh [1] + huraian (contoh buku teks) [1] · Isi 2: memohon khuluk [1] + huraian (ganti rugi) [1] · Isi lain: membuat laporan dan mendapatkan perlindungan pihak berkuasa [1+1] · mendapatkan nasihat pegawai agama/kaunselor [1+1]",t:"Utamakan isi daripada buku teks (fasakh, khuluk) sebelum isi umum.",x:"Mencadangkan isteri bertindak balas sendiri tanpa saluran yang sah.",tambahan:true}
+ ]},
+ {stem:"3 (c) Islam menetapkan iddah dan rujuk sebagai sebahagian daripada pengurusan selepas pembubaran perkahwinan.",items:[
+  {n:"(i)",q:"Apakah maksud rujuk?",m:2,a:"Rujuk ialah hak suami untuk menyambung kembali ikatan perkahwinan dengan isteri yang diceraikannya dalam tempoh iddah.",s:"Hak suami menyambung kembali perkahwinan [1] · dalam tempoh iddah [1]",t:"Mesti ada frasa “dalam tempoh iddah”.",x:"Menyamakan rujuk dengan nikah semula."},
+  {n:"(ii)",q:"Jelaskan dua syarat rujuk.",m:2,a:"Isteri yang diceraikan masih dalam tempoh iddah. Perceraian itu bukan kerana fasakh atau khuluk.",s:"Mana-mana dua: rela [1] · bukan fasakh/khuluk [1] · bukan talak tiga [1] · masih dalam iddah [1] · ada lafaz rujuk [1]",t:"Pilih syarat yang paling mudah dihuraikan.",x:"Menulis “mendapat persetujuan wali” yang bukan syarat rujuk dalam buku teks."},
+  {n:"(iii)",q:"Nyatakan tempoh iddah bagi: X — wanita yang telah putus haid dan diceraikan hidup; Y — wanita yang kematian suami dan tidak hamil.",m:2,a:"X: 3 bulan hijrah. Y: 4 bulan 10 hari.",s:"X: 3 bulan hijrah [1] · Y: 4 bulan 10 hari [1]",t:"Bayangkan jadual iddah: baris situasi, lajur hidup/mati.",x:"Menulis “3 kali suci” bagi wanita yang telah putus haid."},
+  {n:"(iv)",q:"“JAKIM menganggarkan kira-kira 70% pernikahan yang menggunakan khidmat sindiket nikah ekspres tidak patuh syariah.” Huraikan dua implikasi perkahwinan yang tidak mengikut syariat dan undang-undang Islam.",m:4,a:"Pertama, pasangan boleh didenda jika disabitkan dengan kesalahan berkahwin tanpa mengikut saluran yang betul di negeri masing-masing. Kedua, isteri tidak mempunyai dokumen yang sah untuk membuat tuntutan seperti hadanah dan harta pusaka jika suami meninggal dunia.",s:"Mana-mana 2 isi berhuraian: didenda [1+1] · dipaksa berpisah jika tidak sah [1+1] · isteri tiada dokumen untuk tuntutan hadanah & pusaka [1+1] · sukar mendaftar kelahiran anak / sijil kelahiran [1+1]",t:"Semua empat implikasi ada dalam buku teks. Hafal dan huraikan dengan contoh.",x:"Menulis implikasi umum tanpa kaitan dengan undang-undang (contoh: “rumah tangga tidak bahagia”)."}
+ ]}
+];
+$("#struktur").innerHTML = STRUKTUR.map(b=>`<div class="qblock"><div class="stem">${esc(b.stem)}</div>${b.items.map(it=>`<div class="qitem"><div class="qrow"><span class="ql">${it.n}</span><span>${esc(it.q)}</span><span class="m">[${it.m} markah]</span></div>
+ <div class="ans"><div class="a1"><span class="lab">Jawapan contoh</span>${esc(it.a)}${it.tambahan?' <span class="add">Penilaian, bukan isi buku teks</span>':''}</div><div class="a2"><span class="lab">Skema pemarkahan</span>${esc(it.s)}</div><div class="a3"><span class="lab">Teknik mendapat markah</span>${esc(it.t)}</div><div class="a4"><span class="lab">Kesalahan lazim</span>${esc(it.x)}</div></div></div>`).join("")}</div>`).join("");
+$("#toggleAns").addEventListener("click",e=>{const on=$("#struktur").classList.toggle("show-ans");e.currentTarget.setAttribute("aria-pressed",on);e.currentTarget.textContent=on?"Sembunyikan jawapan":"Tunjuk jawapan, skema dan teknik"});
+
+const MCQ = shuffle(BANK).slice(0,12);
+$("#mcq").innerHTML = MCQ.map((q,k)=>`<div class="it" id="mq${k}"><b>${k+1}. ${esc(q.q)}</b><div class="opts">${q.o.map((o,j)=>`<label class="opt" style="display:flex;gap:8px;align-items:flex-start"><input type="radio" name="mq${k}" id="mq${k}o${j}" value="${j}"> <span>${String.fromCharCode(65+j)}. ${esc(o)}</span></label>`).join("")}</div><div class="fb" id="mqf${k}"></div></div>`).join("");
+$("#mcqCheck").addEventListener("click",()=>{let sc=0;MCQ.forEach((q,k)=>{const v=document.querySelector(`input[name="mq${k}"]:checked`);const ok=v&&+v.value===q.a;if(ok)sc++;
+  document.querySelectorAll(`#mq${k} .opt`).forEach((l,j)=>{l.classList.remove("ok","no");if(j===q.a)l.classList.add("ok");else if(v&&+v.value===j)l.classList.add("no")});
+  const f=$("#mqf"+k);f.className="fb show "+(ok?"ok":"no");f.textContent=(ok?"Betul. ":"Jawapan: "+String.fromCharCode(65+q.a)+". ")+q.e});
+  const s=$("#mcqScore");s.hidden=false;s.textContent=`Skor: ${sc}/12`});
+
+/* ================= DIAGNOSTIK ================= */
+const ASP = {is:"Penguasaan istilah",hk:"Penguasaan hukum",rk:"Syarat dan ketetapan",bz:"Membezakan konsep",st:"Soalan situasi"};
+const REMEDI = {
+ is:["Tidak dapat menyatakan maksud talak, fasakh, khuluk, li'an, iddah, rujuk","Kad imbas 17 istilah; Fiqh Matching dan Fiqh Memory; garis kata kunci (suami / hakim / ganti rugi / sumpah)","Bina glosari bergambar dan ajar rakan sebaya"],
+ hk:["Keliru lima hukum talak dan hukum setiap isu","Fiqh Sorting (kelaskan hukum); hafal “Wajib Mahkamah, Sunat Buruk, Makruh Baik, Haram Haid”","Forum mini: mengapa hukum talak berubah mengikut keadaan"],
+ rk:["Tidak hafal syarat rujuk, jadual iddah, kelayakan poligami","Lengkapkan jadual iddah berulang kali; akronim RELA-BUKAN-BUKAN-MASIH-LAFAZ","Bina infografik jadual iddah dan larangan iddah"],
+ bz:["Tertukar talak/fasakh/khuluk, raj'ie/bain, anak kandung/anak angkat","Jadual Master Perbezaan; Tahap 3 Lembaran Kerja","Hasilkan peta pemikiran perbandingan empat cara pembubaran (aktiviti buku teks)"],
+ st:["Tidak dapat menentukan hukum dalam situasi","Latih format Situasi → Isu → Hukum → Alasan → Kesimpulan; Fiqh Detective","Aktiviti Back & Forth (buku teks); cipta 3 situasi baharu dan Final Boss"]
+};
+function pickDiag(seed){ // 3 per aspect, different sets for pre/post
+  const out=[]; Object.keys(ASP).forEach(a=>{const pool=BANK.filter(q=>q.t===a); const half=Math.floor(pool.length/2); const set = seed==="pre"?pool.slice(0,Math.max(3,half)):pool.slice(Math.max(3,half)).concat(pool.slice(0,3)); out.push(...set.slice(0,3).map(q=>({...q,asp:a})))}); return out; }
+let DMODE="pre", DQ=pickDiag("pre");
+function renderDiag(){
+  $("#dq").innerHTML = DQ.map((q,k)=>`<div class="it" id="di${k}"><span class="tag">${ASP[q.asp]}</span><b>${k+1}. ${esc(q.q)}</b><select id="ds${k}" aria-label="Jawapan soalan ${k+1}"><option value="">— pilih jawapan —</option>${q.o.map((o,j)=>`<option value="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</option>`).join("")}</select><div class="why"></div></div>`).join("");
+  $("#dResult").innerHTML="";
+}
+renderDiag();
+$("#dPre").addEventListener("click",()=>{DMODE="pre";DQ=pickDiag("pre");$("#dPre").classList.add("pri");$("#dPost").classList.remove("pri");$("#dPre").setAttribute("aria-pressed","true");$("#dPost").setAttribute("aria-pressed","false");renderDiag()});
+$("#dPost").addEventListener("click",()=>{DMODE="post";DQ=pickDiag("post");$("#dPost").classList.add("pri");$("#dPre").classList.remove("pri");$("#dPost").setAttribute("aria-pressed","true");$("#dPre").setAttribute("aria-pressed","false");renderDiag()});
+$("#dReset").addEventListener("click",renderDiag);
+$("#dCheck").addEventListener("click",()=>{
+  const res={}; Object.keys(ASP).forEach(a=>res[a]=0); const wrong=[];
+  DQ.forEach((q,k)=>{const v=$("#ds"+k).value; const ok=v!==""&&+v===q.a; if(ok)res[q.asp]++; else wrong.push({k,q,v});
+    const it=$("#di"+k); it.classList.remove("ok","no"); it.classList.add(ok?"ok":"no"); it.querySelector(".why").textContent=(ok?"Betul. ":"Jawapan: "+String.fromCharCode(65+q.a)+". ")+q.e});
+  const tag=n=>n===3?["Mantap","t-high"]:n===2?["Sederhana","t-mid"]:["Lemah","t-low"];
+  const total=Object.values(res).reduce((a,b)=>a+b,0);
+  const prev=store.get("nikah-diag-"+(DMODE==="pre"?"post":"pre"),null); store.set("nikah-diag-"+DMODE,total);
+  const weak=Object.keys(ASP).filter(a=>res[a]<=1), mid=Object.keys(ASP).filter(a=>res[a]===2), strong=Object.keys(ASP).filter(a=>res[a]===3);
+  $("#dResult").innerHTML = `<div class="card soft-gold"><h3>Keputusan ${DMODE==="pre"?"ujian diagnostik":"ujian pasca"}: ${total}/15 (${Math.round(total/15*100)}%)</h3>
+   <p>${total>=12?"Tahap penguasaan tinggi.":total>=8?"Tahap penguasaan sederhana.":"Perlu pemulihan."}${prev!==null?` Skor ujian ${DMODE==="pre"?"pasca":"pra"} sebelum ini dalam pelayar ini: ${prev}/15.`:""}</p></div>
+   <div class="aspects">${Object.keys(ASP).map(a=>{const t=tag(res[a]);return `<div class="asp"><small>${ASP[a]}</small><b>${res[a]}/3</b><span class="lvl-tag ${t[1]}">${t[0]}</span></div>`}).join("")}</div>
+   <div class="card"><h3>Analisis kesalahan</h3>${wrong.length?`<ul>${wrong.map(w=>`<li><b>S${w.k+1} (${ASP[w.q.asp]}):</b> ${w.v===""?"tidak dijawab":"memilih "+String.fromCharCode(65+ +w.v)}; jawapan ${String.fromCharCode(65+w.q.a)}. ${esc(w.q.e)}</li>`).join("")}</ul>`:"<p>Tiada kesalahan. Tahniah!</p>"}</div>
+   ${weak.length?`<div class="card soft-peach"><h3>Aktiviti pemulihan dicadangkan</h3><ul>${weak.map(a=>`<li><b>${ASP[a]}:</b> ${esc(REMEDI[a][1])}</li>`).join("")}</ul></div>`:""}
+   ${(mid.length||strong.length)?`<div class="card soft-mint"><h3>Aktiviti pengayaan dicadangkan</h3><ul>${[...strong,...mid].map(a=>`<li><b>${ASP[a]}:</b> ${esc(REMEDI[a][2])}</li>`).join("")}</ul></div>`:""}`;
+  $("#dResult").scrollIntoView({behavior:"smooth",block:"start"});
+});
+$("#remedi").innerHTML = Object.keys(ASP).map(a=>`<tr><td><b>${ASP[a]}</b></td><td>${esc(REMEDI[a][0])}</td><td>${esc(REMEDI[a][1])}</td><td>${esc(REMEDI[a][2])}</td></tr>`).join("");
+const CHECK = ["Menyatakan maksud talak, fasakh, khuluk dan li'an","Menyatakan lima keadaan hukum talak","Membezakan talak raj'ie dengan talak bain","Menjelaskan cara dan kesan li'an","Melengkapkan jadual tempoh iddah tanpa melihat nota","Menyatakan tiga larangan semasa iddah","Menyenaraikan lima syarat rujuk","Menyatakan hukum nusyuz, poligami, hadanah dan anak angkat","Membandingkan hak anak kandung dengan anak angkat","Menghuraikan implikasi perkahwinan yang tidak mengikut syariat dan undang-undang"];
+const saved = store.get("nikah-check",[]);
+$("#checklist").innerHTML = CHECK.map((c,k)=>`<label for="ck${k}"><input type="checkbox" id="ck${k}" ${saved.includes(k)?"checked":""}><span>${esc(c)}</span></label>`).join("");
+$("#checklist").addEventListener("change",()=>store.set("nikah-check",CHECK.map((_,k)=>k).filter(k=>$("#ck"+k).checked)));
+
+/* ================= MODULE NAV ================= */
+const MODS=[["index.html","Analisis Induk"],["haji-umrah.html","T4 · Haji & Umrah"],["sembelihan.html","T4 · Sembelihan"],["korban-akikah.html","T4 · Korban & Akikah"],["muamalat.html","T4 · Muamalat"],["dhuha-gerhana.html","T4 · Dhuha & Gerhana"],["istikharah-tasbih.html","T5 · Istikharah & Tasbih"],["perkahwinan.html","T5 · Perkahwinan"],["isu-perkahwinan.html","T5 · Isu Perkahwinan"],["wasiat-faraid.html","T5 · Wasiat & Faraid"],["jenayah.html","T5 · Jenayah"]];
+(function(){const here=(location.pathname.split("/").pop()||"index.html");const n=document.getElementById("modnav");if(n)n.innerHTML=MODS.map(m=>`<a href="${m[0]}"${m[0]===here?' aria-current="page"':''}>${m[1]}</a>`).join("");})();
+</script>
+
+</body>
+</html>

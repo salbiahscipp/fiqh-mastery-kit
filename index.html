@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Fiqh Mastery Kit KSSM</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&family=Amiri:wght@400;700&display=swap">
+<style>
+/* Layout: emerald title band, then a single reading column of sections; lesson cards in a 2-col grid that stacks on phones */
+:root{
+  --emerald:#0b5d4b; --emerald-2:#0f7a62; --gold:#b8891a; --gold-soft:#f6ecd0;
+  --teal:#138f8f; --teal-soft:#dff3f1; --mint:#eaf6f0; --peach:#fdeee6; --lilac:#efeafb;
+  --bg:#ffffff; --surface:#f6faf8; --line:#d7e6df; --fg:#14302a; --muted:#4e6a62;
+  --band-fg:#ffffff; --bar:#0f7a62; --bar-2:#c79a2a; --warn:#b4472b; --warn-soft:#fbe9e3;
+  --display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --body:"Nunito Sans", "Segoe UI", system-ui, sans-serif;
+  --arab:"Amiri", "Traditional Arabic", "Times New Roman", serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --emerald:#0c3f34; --emerald-2:#3fc49d; --gold:#e3bd55; --gold-soft:#3a3218;
+  --teal:#4fc9c4; --teal-soft:#10302f; --mint:#122a23; --peach:#33231c; --lilac:#25213a;
+  --bg:#0c1714; --surface:#11211d; --line:#23403a; --fg:#e6f2ee; --muted:#9dbab1;
+  --band-fg:#f4fbf8; --bar:#3fc49d; --bar-2:#e3bd55; --warn:#f08a6c; --warn-soft:#3a1f18; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --emerald:#0c3f34; --emerald-2:#3fc49d; --gold:#e3bd55; --gold-soft:#3a3218;
+  --teal:#4fc9c4; --teal-soft:#10302f; --mint:#122a23; --peach:#33231c; --lilac:#25213a;
+  --bg:#0c1714; --surface:#11211d; --line:#23403a; --fg:#e6f2ee; --muted:#9dbab1;
+  --band-fg:#f4fbf8; --bar:#3fc49d; --bar-2:#e3bd55; --warn:#f08a6c; --warn-soft:#3a1f18; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;line-height:1.15;margin:0}
+p{margin:0}
+.ar{font-family:var(--arab);direction:rtl;font-size:1.25em}
+
+/* band */
+.band{background:var(--emerald);color:var(--band-fg);position:relative;overflow:hidden}
+.band::before{content:"";position:absolute;inset:0;opacity:.13;
+  background-image:repeating-conic-gradient(from 45deg, var(--gold) 0 25%, transparent 0 50%);background-size:28px 28px;
+  mask-image:linear-gradient(90deg,transparent 35%,#000);-webkit-mask-image:linear-gradient(90deg,transparent 35%,#000)}
+.band .wrap{position:relative;padding-block:44px 36px;display:grid;gap:18px}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--gold)}
+.band h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;max-width:18ch}
+.band h1 span{color:var(--gold)}
+.band .lead{max-width:62ch;font-size:1.06rem;opacity:.92}
+.src{display:flex;flex-wrap:wrap;gap:8px}
+.src span{border:1px solid color-mix(in srgb, var(--band-fg) 35%, transparent);border-radius:999px;padding:4px 12px;font-size:.84rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:6px}
+.stat{border-top:2px solid var(--gold);padding-top:8px}
+.stat b{display:block;font-family:var(--display);font-size:1.9rem;font-weight:800;font-variant-numeric:tabular-nums}
+.stat small{opacity:.85}
+
+nav.toc{position:sticky;top:env(safe-area-inset-top, 0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:10;background:var(--emerald)}
+nav.toc .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px}
+nav.toc a{white-space:nowrap;text-decoration:none;color:var(--fg);font-weight:700;font-size:.88rem;padding:6px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+nav.toc a:hover,nav.toc a:focus-visible{background:var(--teal-soft);outline:2px solid var(--teal);outline-offset:1px}
+
+section{padding-block:44px;border-bottom:1px solid var(--line)}
+.sec-head{display:grid;gap:8px;margin-bottom:22px;max-width:70ch}
+.sec-head h2{font-size:clamp(1.5rem,3.2vw,2.1rem);font-weight:800;color:var(--emerald-2)}
+:root:not([data-theme="dark"]) .sec-head h2{color:var(--emerald)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .sec-head h2{color:var(--emerald-2)}}
+.kicker{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--gold)}
+.muted{color:var(--muted)}
+
+/* Q3 radar */
+.radar{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:28px}
+@media (max-width:820px){.radar{grid-template-columns:1fr}}
+.bars{display:grid;gap:10px}
+.barrow{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr) 44px;gap:10px;align-items:center;font-size:.92rem}
+.barrow .lbl{font-weight:700;line-height:1.25}
+.barrow .lbl small{display:block;font-weight:400;color:var(--muted)}
+.track{height:18px;background:var(--surface);border:1px solid var(--line);border-radius:4px;position:relative;overflow:hidden}
+.fill{position:absolute;inset:0 auto 0 0;background:var(--bar);border-radius:3px 0 0 3px}
+.fill.t5{background:var(--bar-2)}
+.barrow .n{font-variant-numeric:tabular-nums;font-weight:700;text-align:right}
+.legend{display:flex;gap:16px;font-size:.84rem;color:var(--muted);margin-top:10px;flex-wrap:wrap}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.ladder{display:grid;gap:8px}
+.rung{display:grid;grid-template-columns:52px minmax(0,1fr);gap:12px;align-items:start;padding:10px 12px;border-radius:8px;background:var(--surface);border:1px solid var(--line)}
+.rung .m{font-family:var(--display);font-weight:800;font-size:1.25rem;color:var(--gold);text-align:center;line-height:1}
+.rung .m small{display:block;font-size:.66rem;letter-spacing:.08em;color:var(--muted);font-family:var(--body);font-weight:700}
+.rung b{display:block}
+.rung.top{background:var(--gold-soft);border-color:var(--gold)}
+.insights{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:26px}
+.insight{padding:14px 16px;border-left:3px solid var(--teal);background:var(--teal-soft);border-radius:0 8px 8px 0}
+.insight b{display:block;margin-bottom:2px}
+
+.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin-top:22px}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:.9rem}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+th{background:var(--surface);font-family:var(--display);font-weight:700;font-size:.85rem;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.chip{display:inline-block;font-size:.76rem;font-weight:700;padding:2px 8px;border-radius:999px;margin:0 4px 4px 0;white-space:nowrap}
+.c4{background:var(--mint);color:var(--emerald-2);border:1px solid var(--line)}
+:root:not([data-theme="dark"]) .c4{color:var(--emerald)}
+.c5{background:var(--gold-soft);color:var(--fg);border:1px solid color-mix(in srgb,var(--gold) 45%,transparent)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+
+/* lesson cards */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.filters button{font:inherit;font-weight:700;font-size:.9rem;padding:7px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--emerald);color:var(--band-fg);border-color:var(--emerald)}
+.filters button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.lessons{display:grid;gap:22px}
+.lesson{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg)}
+.lesson-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:16px 18px;background:var(--surface);border-bottom:1px solid var(--line)}
+.lno{font-family:var(--display);font-weight:800;font-size:.8rem;line-height:1.1;text-align:center;padding:8px 10px;border-radius:10px;background:var(--emerald);color:var(--band-fg);min-width:64px}
+.lno b{display:block;font-size:1.6rem}
+.lesson-head h3{font-size:1.35rem;font-weight:800}
+.lesson-head .meta{font-size:.85rem;color:var(--muted)}
+.heat{font-size:.78rem;font-weight:700;text-align:center;padding:6px 10px;border-radius:8px;white-space:nowrap}
+.heat b{display:block;font-family:var(--display);font-size:1.2rem}
+.h3{background:var(--gold-soft);border:1px solid var(--gold)}
+.h2{background:var(--teal-soft);border:1px solid var(--teal)}
+.h1{background:var(--surface);border:1px solid var(--line)}
+@media (max-width:560px){.lesson-head{grid-template-columns:auto minmax(0,1fr)}.heat{grid-column:1/-1;justify-self:start}}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0}
+@media (max-width:760px){.fields{grid-template-columns:1fr}}
+.field{padding:14px 18px;border-bottom:1px solid var(--line);min-width:0}
+.fields .field:nth-child(odd){border-right:1px solid var(--line)}
+@media (max-width:760px){.fields .field:nth-child(odd){border-right:0}}
+.field.wide{grid-column:1/-1;border-right:0!important}
+.field h4{font-family:var(--body);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--teal);margin-bottom:6px}
+.field ul{margin:0;padding-left:1.1em;display:grid;gap:3px}
+.field li::marker{color:var(--gold)}
+.terms{display:flex;flex-wrap:wrap;gap:6px}
+.terms span{font-size:.84rem;padding:3px 10px;border-radius:6px;background:var(--lilac);border:1px solid var(--line)}
+.f-rukun{background:var(--mint)}
+.f-syarat{background:color-mix(in srgb,var(--teal-soft) 60%,transparent)}
+.note{margin-top:8px;font-size:.84rem;padding:8px 10px;border-radius:6px;background:var(--warn-soft);color:var(--fg);border-left:3px solid var(--warn)}
+.note b{color:var(--warn)}
+.tag-add{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--warn)}
+
+/* twins + traps */
+.twins{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.twin{border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:8px}
+.twin .pair{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--display);font-weight:800;font-size:1.05rem}
+.twin .vs{font-family:var(--body);font-size:.72rem;font-weight:700;color:var(--gold);letter-spacing:.1em}
+.twin .key{font-size:.9rem}
+.twin .key b{color:var(--teal)}
+.traps{display:grid;gap:10px}
+.trap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.trap div{padding:10px 14px;font-size:.92rem;min-width:0}
+.trap .x{background:var(--warn-soft)}
+.trap .x::before{content:"Salah faham: ";font-weight:700;color:var(--warn)}
+.trap .y{background:var(--mint)}
+.trap .y::before{content:"Fakta buku teks: ";font-weight:700;color:var(--emerald-2)}
+:root:not([data-theme="dark"]) .trap .y::before{color:var(--emerald)}
+@media (max-width:640px){.trap{grid-template-columns:1fr}}
+
+/* roadmap */
+.road{display:grid;gap:10px;counter-reset:r}
+.step{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:start;padding:12px 14px;border:1px solid var(--line);border-radius:10px}
+.step::before{counter-increment:r;content:counter(r);font-family:var(--display);font-weight:800;font-size:1.1rem;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--gold-soft);border:1px solid var(--gold)}
+.step.now{border-color:var(--emerald-2);background:var(--mint)}
+.step b{display:block}
+footer{padding-block:28px 48px;font-size:.86rem;color:var(--muted)}
+footer p+p{margin-top:8px}
+@media (prefers-reduced-motion:no-preference){.fill{transition:width .6s ease}}
+
+/* ===== Tema ceria: lapisan warna tambahan ===== */
+:root{
+  --c1:#e8457a; --c1s:#fde7ef; --c2:#f0861f; --c2s:#fff0e0; --c3:#7b5cd6; --c3s:#efeafd;
+  --c4:#2f80ed; --c4s:#e5f0fe; --c5:#16a37a; --c5s:#e2f6ee; --c6:#e0a800; --c6s:#fff6d6;
+  --band-grad:linear-gradient(115deg,#0b5d4b 0%,#0f8f86 38%,#2f80ed 72%,#7b5cd6 100%);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --c1:#ff7aa3; --c1s:#3a1826; --c2:#ffa95a; --c2s:#3a2614; --c3:#a993ff; --c3s:#251d42;
+  --c4:#6aa8ff; --c4s:#132741; --c5:#4fd6a8; --c5s:#11322a; --c6:#ffd15a; --c6s:#3a3112;
+  --band-grad:linear-gradient(115deg,#0a3a30 0%,#0d5c57 38%,#173f78 72%,#3b2d73 100%);}}
+:root[data-theme="dark"]{
+  --c1:#ff7aa3; --c1s:#3a1826; --c2:#ffa95a; --c2s:#3a2614; --c3:#a993ff; --c3s:#251d42;
+  --c4:#6aa8ff; --c4s:#132741; --c5:#4fd6a8; --c5s:#11322a; --c6:#ffd15a; --c6s:#3a3112;
+  --band-grad:linear-gradient(115deg,#0a3a30 0%,#0d5c57 38%,#173f78 72%,#3b2d73 100%);}
+.band{background:var(--band-grad)}
+.band::after{content:"";position:absolute;inset:auto -40px -60px auto;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,var(--c6) 0 18%,transparent 19%),radial-gradient(circle at 70% 30%,var(--c1) 0 10%,transparent 11%);opacity:.35;pointer-events:none}
+body::before{background:#0b5d4b}
+.tab:nth-child(6n+1){--tc:var(--c5)}.tab:nth-child(6n+2){--tc:var(--c4)}.tab:nth-child(6n+3){--tc:var(--c2)}.tab:nth-child(6n+4){--tc:var(--c1)}.tab:nth-child(6n+5){--tc:var(--c3)}.tab:nth-child(6n+6){--tc:var(--c6)}
+.tab{border-color:var(--tc);border-width:2px}
+.tab[aria-selected="true"]{background:var(--tc);border-color:var(--tc);color:#ffffff}
+.panel .sec:nth-of-type(6n+1) .sec-head h2{color:var(--c5)}
+.panel .sec:nth-of-type(6n+2) .sec-head h2{color:var(--c4)}
+.panel .sec:nth-of-type(6n+3) .sec-head h2{color:var(--c3)}
+.panel .sec:nth-of-type(6n+4) .sec-head h2{color:var(--c1)}
+.panel .sec:nth-of-type(6n+5) .sec-head h2{color:var(--c2)}
+.panel .sec:nth-of-type(6n+6) .sec-head h2{color:var(--c4)}
+.kicker{display:inline-block;width:max-content;max-width:100%;padding:2px 10px;border-radius:999px;background:var(--c6s);color:var(--fg)}
+.card.term{border-top:5px solid var(--cc,var(--c5))}
+.card.term:nth-child(6n+1){--cc:var(--c1)}.card.term:nth-child(6n+2){--cc:var(--c2)}.card.term:nth-child(6n+3){--cc:var(--c3)}.card.term:nth-child(6n+4){--cc:var(--c4)}.card.term:nth-child(6n+5){--cc:var(--c5)}.card.term:nth-child(6n+6){--cc:var(--c6)}
+.card.term .k{color:var(--cc)}
+.cmap .node{border-left:5px solid var(--nc,var(--c4))}
+.cmap .node:nth-child(5n+1){--nc:var(--c1)}.cmap .node:nth-child(5n+2){--nc:var(--c2)}.cmap .node:nth-child(5n+3){--nc:var(--c3)}.cmap .node:nth-child(5n+4){--nc:var(--c4)}.cmap .node:nth-child(5n+5){--nc:var(--c5)}
+.cmap .node b{color:var(--nc)}
+.cmap .core{background:conic-gradient(var(--c5),var(--c4),var(--c3),var(--c1),var(--c2),var(--c6),var(--c5));color:#ffffff;text-shadow:0 1px 3px rgba(0,0,0,.45)}
+.seq span:nth-child(6n+1){background:var(--c1s)}.seq span:nth-child(6n+2){background:var(--c2s)}.seq span:nth-child(6n+3){background:var(--c6s)}.seq span:nth-child(6n+4){background:var(--c5s)}.seq span:nth-child(6n+5){background:var(--c4s)}.seq span:nth-child(6n+6){background:var(--c3s)}
+th{background:var(--c4s)}
+.sit .s1{background:var(--c4s)}.sit .s3{background:var(--c6s)}.sit .s5{background:var(--c5s)}
+.sit .num{color:var(--c1)}
+.fstep:nth-child(5n+1) .d{background:var(--c5)}.fstep:nth-child(5n+2) .d{background:var(--c4)}.fstep:nth-child(5n+3) .d{background:var(--c3)}.fstep:nth-child(5n+4) .d{background:var(--c1)}.fstep:nth-child(5n+5) .d{background:var(--c2)}
+.fstep .d,.fstep .d.gold{color:#ffffff;border:0}
+.slide .side{background:linear-gradient(160deg,#0b5d4b,#0f8f86 50%,#2f80ed)}
+.slide.cover .main{background:var(--band-grad)}
+.slide .kw span:nth-child(4n+1){background:var(--c6)}.slide .kw span:nth-child(4n+2){background:#ffd6e4}.slide .kw span:nth-child(4n+3){background:#d9ccff}.slide .kw span:nth-child(4n+4){background:#c9f2e2}
+.slide .kw span{color:#14302a}
+.slide h3{color:var(--c3)}
+.slide.cover h3{color:#ffffff}
+.dots button[aria-current="true"]{background:var(--c1);border-color:var(--c1);color:#ffffff}
+.lvl:nth-child(5n+1) .badge{background:var(--c5)}.lvl:nth-child(5n+2) .badge{background:var(--c4)}.lvl:nth-child(5n+3) .badge{background:var(--c3)}.lvl:nth-child(5n+4) .badge{background:var(--c2)}.lvl:nth-child(5n+5) .badge{background:var(--c1)}
+.lvl:nth-child(5n+1){border-top:5px solid var(--c5)}.lvl:nth-child(5n+2){border-top:5px solid var(--c4)}.lvl:nth-child(5n+3){border-top:5px solid var(--c3)}.lvl:nth-child(5n+4){border-top:5px solid var(--c2)}.lvl:nth-child(5n+5){border-top:5px solid var(--c1)}
+.gpick{border-left:6px solid var(--gc,var(--c4))}
+.gpick:nth-child(6n+1){--gc:var(--c1)}.gpick:nth-child(6n+2){--gc:var(--c2)}.gpick:nth-child(6n+3){--gc:var(--c3)}.gpick:nth-child(6n+4){--gc:var(--c4)}.gpick:nth-child(6n+5){--gc:var(--c5)}.gpick:nth-child(6n+6){--gc:var(--c6)}
+.gpick .lv{color:var(--gc)}
+.gpick[aria-pressed="true"]{background:color-mix(in srgb,var(--gc) 14%,var(--bg));box-shadow:inset 0 0 0 2px var(--gc);border-color:var(--gc)}
+.gstage{background:linear-gradient(180deg,var(--c3s),var(--bg) 140px)}
+.score{background:var(--c6s);border-color:var(--c6)}
+.btn.pri{background:var(--c4);border-color:var(--c4);color:#ffffff}
+.btn.gold{background:var(--c6s);border-color:var(--c6)}
+.mbox{background:linear-gradient(135deg,var(--c1s),var(--c3s));border-color:var(--c3)}
+.chipq{border-color:var(--c3);background:var(--c3s)}
+.qblock .stem{background:var(--c4s)}
+.asp:nth-child(5n+1){border-top:4px solid var(--c1)}.asp:nth-child(5n+2){border-top:4px solid var(--c2)}.asp:nth-child(5n+3){border-top:4px solid var(--c3)}.asp:nth-child(5n+4){border-top:4px solid var(--c4)}.asp:nth-child(5n+5){border-top:4px solid var(--c5)}
+.modnav{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.modnav a{font-size:.8rem;font-weight:800;text-decoration:none;padding:4px 10px;border-radius:999px;border:1.5px solid var(--mc,var(--c4));color:var(--fg);background:var(--bg)}
+.modnav a:nth-child(5n+1){--mc:var(--c1)}.modnav a:nth-child(5n+2){--mc:var(--c2)}.modnav a:nth-child(5n+3){--mc:var(--c3)}.modnav a:nth-child(5n+4){--mc:var(--c4)}.modnav a:nth-child(5n+5){--mc:var(--c5)}
+.modnav a[aria-current="page"]{background:var(--mc);color:#ffffff}
+
+.stat{border-top-color:var(--sc,var(--c6))}
+.stat:nth-child(1){--sc:var(--c6)}.stat:nth-child(2){--sc:#ffd6e4}.stat:nth-child(3){--sc:#d9ccff}.stat:nth-child(4){--sc:#c9f2e2}
+nav.toc a:nth-child(6n+1){border-color:var(--c1)}nav.toc a:nth-child(6n+2){border-color:var(--c2)}nav.toc a:nth-child(6n+3){border-color:var(--c3)}nav.toc a:nth-child(6n+4){border-color:var(--c4)}nav.toc a:nth-child(6n+5){border-color:var(--c5)}nav.toc a:nth-child(6n+6){border-color:var(--c6)}
+nav.toc a{border-width:2px}
+section:nth-of-type(6n+1) .sec-head h2{color:var(--c1)!important}section:nth-of-type(6n+2) .sec-head h2{color:var(--c4)!important}section:nth-of-type(6n+3) .sec-head h2{color:var(--c5)!important}section:nth-of-type(6n+4) .sec-head h2{color:var(--c3)!important}section:nth-of-type(6n+5) .sec-head h2{color:var(--c2)!important}section:nth-of-type(6n+6) .sec-head h2{color:var(--c4)!important}
+.fill{background:linear-gradient(90deg,var(--c5),var(--c4))}.fill.t5{background:linear-gradient(90deg,var(--c2),var(--c1))}
+.lesson{border-top:6px solid var(--lc,var(--c4))}
+.lesson:nth-child(5n+1){--lc:var(--c1)}.lesson:nth-child(5n+2){--lc:var(--c2)}.lesson:nth-child(5n+3){--lc:var(--c3)}.lesson:nth-child(5n+4){--lc:var(--c4)}.lesson:nth-child(5n+5){--lc:var(--c5)}
+.lno{background:var(--lc,var(--emerald))}
+.twin{border-left:6px solid var(--tc2,var(--c3))}
+.twin:nth-child(5n+1){--tc2:var(--c1)}.twin:nth-child(5n+2){--tc2:var(--c2)}.twin:nth-child(5n+3){--tc2:var(--c3)}.twin:nth-child(5n+4){--tc2:var(--c4)}.twin:nth-child(5n+5){--tc2:var(--c5)}
+.modgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.mod{display:grid;gap:6px;padding:16px;border-radius:14px;text-decoration:none;color:var(--fg);background:color-mix(in srgb,var(--mc) 12%,var(--bg));border:2px solid var(--mc);transition:transform .15s}
+.mod:hover,.mod:focus-visible{transform:translateY(-3px)}
+.mod .t{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mc)}
+.mod b{font-family:var(--display);font-size:1.15rem;line-height:1.2}
+.mod small{color:var(--muted)}
+.mod .go{font-weight:800;color:var(--mc);font-size:.88rem}
+.mod:nth-child(5n+1){--mc:var(--c1)}.mod:nth-child(5n+2){--mc:var(--c2)}.mod:nth-child(5n+3){--mc:var(--c3)}.mod:nth-child(5n+4){--mc:var(--c4)}.mod:nth-child(5n+5){--mc:var(--c5)}
+.openmod{display:inline-block;margin-top:6px;font-size:.82rem;font-weight:800;text-decoration:none;padding:4px 12px;border-radius:999px;background:var(--lc,var(--c4));color:#ffffff}
+
+</style>
+</head>
+<body>
+
+
+<header class="band">
+  <div class="wrap">
+    <div class="eyebrow">Fiqh Mastery Kit · KSSM Tingkatan 4 &amp; 5 · Fasa 1</div>
+    <h1>Analisis Induk <span>Bidang Fiqah</span></h1>
+    <p class="lead">Peta lengkap 10 pelajaran Fiqah: istilah, hukum, rukun, syarat, perkara hafalan dan aplikasi, disusun daripada buku teks rasmi dan dipadankan dengan corak Soalan 3 Percubaan SPM 2026.</p>
+    <div class="src">
+      <span>Buku Teks PI Tingkatan 4 (KPM) · ms 90–150</span>
+      <span>Buku Teks PI Tingkatan 5 (DBP/KPM, 2020) · ms 90–161</span>
+      <span>Set Soalan Percubaan SPM 2026 · Kertas 1223/1</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>10</b><small>pelajaran Fiqah dianalisis</small></div>
+      <div class="stat"><b>13</b><small>set Soalan 3 percubaan dibaca</small></div>
+      <div class="stat"><b>9/13</b><small>set menyoal Isu-isu Perkahwinan</small></div>
+      <div class="stat"><b>4 m</b><small>markah tertinggi setiap bahagian, sentiasa soalan KBAT</small></div>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Kandungan">
+  <div class="wrap">
+    <a href="#modul">10 Modul Lengkap</a>
+    <a href="#radar">Radar Soalan 3</a>
+    <a href="#ringkas">Jadual Ringkas</a>
+    <a href="#induk">Jadual Induk 10 Pelajaran</a>
+    <a href="#kembar">Istilah Kembar</a>
+    <a href="#perangkap">Perangkap Lazim</a>
+      </div>
+</nav>
+
+<main>
+<section id="modul">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Modul Lengkap</div>
+      <h2>Pilih pelajaran untuk mula belajar</h2>
+      <p class="muted">Setiap modul mengandungi analisis master, slaid, lembaran kerja 5 tahap dengan skema, 10 permainan, latihan format SPM dan ujian diagnostik.</p>
+    </div>
+    <div class="modgrid" id="modgrid"></div>
+  </div>
+</section>
+<section id="radar">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Analisis Soalan 3 · Percubaan SPM 2026</div>
+      <h2>Apa yang Soalan 3 benar-benar uji</h2>
+      <p class="muted">Soalan 3 Kertas 1223/1 ialah soalan Bidang Fiqah. Setiap set mengambil 2 hingga 3 tajuk, lazimnya satu dari Tingkatan 4 dan satu dari Tingkatan 5. Bilangan di bawah ialah berapa set (daripada 13) yang menyoal tajuk itu.</p>
+    </div>
+    <div class="radar">
+      <div>
+        <div class="bars" id="bars"></div>
+        <div class="legend"><span><i style="background:var(--bar)"></i>Tingkatan 4</span><span><i style="background:var(--bar-2)"></i>Tingkatan 5</span></div>
+      </div>
+      <div>
+        <h3 style="font-size:1.1rem;margin-bottom:10px">Tangga markah setiap bahagian (a), (b), (c)</h3>
+        <div class="ladder">
+          <div class="rung"><div class="m">2<small>MARKAH</small></div><div><b>(i) Nyatakan / Apakah maksud</b>Definisi buku teks, satu jenis, hukum. Jawapan mesti tepat kata kunci.</div></div>
+          <div class="rung"><div class="m">2<small>MARKAH</small></div><div><b>(ii) Senaraikan / Jelaskan dua</b>Dua rukun, dua syarat, dua jenis, dua hikmah. 1 markah satu isi.</div></div>
+          <div class="rung"><div class="m">2<small>MARKAH</small></div><div><b>(iii) Situasi / gambar / akhbar</b>Tentukan hukum + alasan, atau tindakan yang sepatutnya. Kenal pasti isu Fiqh dahulu.</div></div>
+          <div class="rung top"><div class="m">4<small>KBAT</small></div><div><b>(iv) Huraikan / Ramalkan / Cadangkan / Kemukakan hujah</b>Dua isi berhuraian (isi + huraian + contoh). Stimulus: infografik perceraian, skim cepat kaya, penipuan pakej umrah, nikah sindiket, status halal.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="insights">
+      <div class="insight"><b>Gandingan paling kerap</b>Haji atau Sembelihan (T4) bersama Talak dan isu perkahwinan (T5). 11 daripada 13 set mengikut corak ini.</div>
+      <div class="insight"><b>Rukun dan syarat ialah markah mudah</b>Syarat sah sembelihan, rukun akad, syarat rujuk, jenis miqat, wajib haji: semuanya soalan (ii) 2 markah.</div>
+      <div class="insight"><b>Hukum taklifi bertukar ikut keadaan</b>Hukum talak (wajib, sunat, makruh, haram) muncul dalam 3 set sebagai soalan situasi. Murid mesti hafal syarat setiap hukum.</div>
+      <div class="insight"><b>Belum disoal dalam set ini</b>Korban dan Akikah, Solat Dhuha, Istikharah, Perkahwinan (P12), Faraid dan Jenayah. Masih dalam sukatan, jadi jangan diabaikan.</div>
+    </div>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Set (penerbit)</th><th>Tajuk yang disoal</th><th>Contoh soalan KBAT 4 markah</th></tr></thead>
+        <tbody id="settable"></tbody>
+      </table>
+    </div>
+    <p class="muted" style="margin-top:10px;font-size:.86rem">Dua set tidak memaparkan nama penerbit pada halaman yang diimbas, jadi dilabel “tidak dinyatakan”. Set Melaka tidak dapat dibaca daripada imbasan. Ini analisis set percubaan negeri, bukan soalan sebenar SPM.</p>
+  </div>
+</section>
+
+<section id="ringkas">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Jadual Ringkas</div>
+      <h2>10 pelajaran dalam satu pandangan</h2>
+    </div>
+    <div class="tablebox" style="margin-top:0">
+      <table>
+        <thead><tr><th>Ting.</th><th>Pelajaran</th><th>Tajuk</th><th>Muka surat</th><th>Rukun</th><th class="num">Soalan 3 (set)</th><th>Keutamaan</th></tr></thead>
+        <tbody id="sumtable"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="induk">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Jadual Induk</div>
+      <h2>Analisis setiap pelajaran</h2>
+      <p class="muted">Setiap kad mengikut susunan yang sama: subtopik, istilah, hukum, rukun, syarat, perkara hafalan, perkara fahaman, kemahiran aplikasi dan bentuk soalan. Kotak merah jambu menanda perkara yang tiada dalam buku teks atau perlu disemak.</p>
+    </div>
+    <div class="filters" role="group" aria-label="Tapis tingkatan">
+      <button type="button" id="f-all" data-f="all" aria-pressed="true">Semua</button>
+      <button type="button" id="f-4" data-f="4" aria-pressed="false">Tingkatan 4</button>
+      <button type="button" id="f-5" data-f="5" aria-pressed="false">Tingkatan 5</button>
+    </div>
+    <div class="lessons" id="lessons"></div>
+  </div>
+</section>
+
+<section id="kembar">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Master Perbezaan Istilah · Pratonton</div>
+      <h2>Istilah kembar yang selalu tertukar</h2>
+      <p class="muted">Kata kunci biru ialah petanda untuk mengenal pasti jawapan dalam soalan situasi. Jadual perbandingan penuh akan dibina dalam modul setiap pelajaran.</p>
+    </div>
+    <div class="twins" id="twins"></div>
+  </div>
+</section>
+
+<section id="perangkap">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Kesalahan Lazim</div>
+      <h2>Perangkap yang menghilangkan markah</h2>
+    </div>
+    <div class="traps" id="traps"></div>
+  </div>
+</section>
+
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>Sumber:</b> Buku Teks Pendidikan Islam KSSM Tingkatan 4 dan Tingkatan 5 (tulisan Jawi, dirumikan untuk analisis ini) serta Set Soalan Percubaan SPM 2026 pelbagai negeri. Isi Fiqh di halaman ini diambil daripada buku teks sahaja. Perkara yang tiada dalam buku teks ditanda dengan jelas.</p>
+    <p><b>Jenayah dalam Islam</b> dibincangkan sebagai pembelajaran akademik. Buku teks menegaskan pelaksanaan hukuman hudud adalah di bawah pihak berkuasa dan tidak boleh dilaksanakan oleh orang awam.</p>
+  </div>
+</footer>
+
+<script>
+const T4 = "4", T5 = "5";
+const freq = [
+  {t:"Isu-isu dalam Perkahwinan", s:"T5 P13 · talak, rujuk, fasakh, li'an, iddah, poligami", n:9, f:T5},
+  {t:"Haji dan Umrah", s:"T4 P13 · jenis haji, miqat, wajib haji, larangan ihram", n:7, f:T4},
+  {t:"Sembelihan", s:"T4 P14 · syarat sah, sunat, makruh, alat", n:6, f:T4},
+  {t:"Solat Sunat Dhuha & Gerhana", s:"T4 P17 · semuanya Gerhana", n:3, f:T4},
+  {t:"Muamalat Islam", s:"T4 P16 · rukun & syarat akad", n:2, f:T4},
+  {t:"Wasiat dan Faraid", s:"T5 P14 · semuanya Wasiat", n:2, f:T5},
+  {t:"Solat Istikharah & Tasbih", s:"T5 P11 · Tasbih", n:1, f:T5},
+  {t:"Korban dan Akikah", s:"T4 P15", n:0, f:T4},
+  {t:"Perkahwinan", s:"T5 P12", n:0, f:T5},
+  {t:"Jenayah dalam Islam", s:"T5 P15", n:0, f:T5}
+];
+const sets = [
+  ["Johor (JPNJ)", ["Sembelihan","Gerhana","Wasiat"], "Ramalkan kemungkinan jika amalan berwasiat (untuk masjid, anak yatim, fakir miskin) diamalkan."],
+  ["Kelantan (PEKDIS)", ["Poligami","Haji"], "Huraikan langkah yang perlu diambil oleh lelaki tersebut (berpoligami) bagi memastikan…"],
+  ["Negeri Sembilan (MPSM)", ["Haji (miqat)","Sembelihan"], "Mengapa perlu memilih pakej haji dilesenkan Lembaga Tabung Haji? Huraikan."],
+  ["Perlis (MPSM)", ["Talak","Sembelihan"], "Implikasi sembelihan Ali (pisau tumpul, tidak sebut nama Allah, urat tidak putus sempurna)."],
+  ["Pulau Pinang", ["Sembelihan","Iddah","Wasiat"], "Akibat kepada pengguna jika produk dijual tanpa pengesahan halal."],
+  ["Sabah", ["Haji (Tamattu')","Solat Tasbih","Talak"], "“Ibadah haji lambang jihad yang menyeluruh.” Huraikan pandangan anda."],
+  ["Selangor (MPSM)", ["Haji (wukuf, hikmah)","Rujuk"], "Berdasarkan syarat wajib haji, bagaimana jemaah merealisasikan impian menunaikan haji?"],
+  ["Tidak dinyatakan (A)", ["Haji & Umrah","Gerhana","Talak & Li'an"], "Implikasi lafaz “Aku ceraikan kau dengan talak tiga!” oleh Ahmad."],
+  ["Pahang (MPSM)", ["Akad","Fasakh"], "Punca masyarakat masih terpedaya dengan skim cepat kaya; membantu membanteras nikah sindiket."],
+  ["Tidak dinyatakan (B)", ["Sembelihan","Talak"], "Bandingkan data faktor utama kes perceraian di Malaysia berdasarkan infografik."],
+  ["Kuala Lumpur (MPSM)", ["Haji","Akad"], "Jelaskan dua perbezaan muamalat Islam dengan konvensional."],
+  ["Sarawak (set 1)", ["Gerhana","Sembelihan (alat)","Talak"], "Huraikan kesan data perceraian terhadap institusi kekeluargaan di Malaysia."],
+  ["Sarawak (set 2)", ["Umrah"], "Stimulus: berita 178 mangsa penipuan pakej umrah."]
+];
+const t5set = new Set(["Talak","Iddah","Wasiat","Solat Tasbih","Rujuk","Talak & Li'an","Fasakh","Poligami"]);
+
+const L = [
+{ting:T4,no:13,tajuk:"Haji dan Umrah",ms:"90–108",q3:7,rukunRingkas:"Haji 6 · Umrah 5",
+ sub:["Maksud, hukum dan dalil","Syarat wajib haji dan umrah","Rukun haji dan umrah","Perkara wajib haji dan umrah (termasuk larangan ihram)","Amalan sunat haji dan umrah","Perbandingan haji dengan umrah","Jenis haji","Kaifiat haji Tamattu'","Hikmah haji dan umrah"],
+ istilah:["Haji","Umrah","Ihram","Miqat zamani","Miqat makani","Wukuf","Tawaf","Sa'ie","Tahallul awal","Tahallul thani","Mabit","Jamrah kubra / wusta / sughra","Hari tasyrik","Istita'ah","Ifrad","Tamattu'","Qiran","Talbiah","Idtiba'","Tawaf ifadah","Tawaf wada'"],
+ hukum:["Haji & umrah: wajib sekali seumur hidup bagi mukallaf yang berkemampuan","Dalil: al-Baqarah 2:196; Ali 'Imran 3:97; hadis rukun Islam (riwayat Muslim)","Haji disyariatkan pada tahun ke-5 Hijrah; bulan haji: Syawal, Zulkaedah, 1–13 Zulhijjah"],
+ rukun:["Haji (6): niat, wukuf di Arafah, tawaf, sa'ie, bercukur/bergunting (sekurang-kurangnya 3 helai), tertib","Umrah (5): niat, tawaf, sa'ie, bercukur/bergunting, tertib (tiada wukuf)"],
+ syarat:["Syarat wajib (5): Islam, baligh, berakal, merdeka, berkemampuan (istita'ah)","Ciri berkemampuan: cukup belanja pergi-balik, cukup nafkah tanggungan, ada kenderaan, aman perjalanan, sihat tubuh badan","Khusus wanita: izin suami/wali; ditemani suami, mahram atau kumpulan wanita yang dipercayai"],
+ hafal:["Wajib haji: niat ihram di miqat, mabit Muzdalifah, lontar jamrah kubra (10 Zulhijjah), mabit Mina hari tasyrik, lontar 3 jamrah hari tasyrik, menjauhi larangan ihram","Wajib umrah: niat ihram di miqat, menjauhi larangan ihram","5 miqat makani: Zulhulaifah/Bir Ali (Madinah), Zatu 'Irq (Iraq), Qarnul Manazil (Malaysia & Asia Tenggara), Juhfah (Mesir & Tunisia), Yalamlam (Yaman)","Miqat zamani: 1 Syawal hingga subuh 10 Zulhijjah","Wukuf: gelincir matahari 9 Zulhijjah hingga sebelum subuh 10 Zulhijjah","Larangan ihram 5 aspek: kecantikan, wangian, pakaian, alam sekitar, hubungan seksual","Sunat: mandi sunat ihram, solat sunat ihram 2 rakaat, talbiah, kutip anak batu di Muzdalifah, solat sunat tawaf di belakang Maqam Ibrahim","Jenis haji: Ifrad, Tamattu', Qiran"],
+ fahami:["Rukun ditinggal: haji tidak sah. Wajib ditinggal: haji sah tetapi berdosa","Tahallul awal: selepas 2 daripada 3 perkara (lontar jamrah kubra; tawaf & sa'ie; bercukur). Tahallul thani: selepas ketiga-tiganya","Haji dan umrah sama pada larangan ihram, miqat makani, tawaf, sa'ie, bercukur; beza pada waktu, wukuf, mabit dan melontar","Tertib Tamattu': 6 Zulhijjah ihram & laksana umrah → 8 niat ihram haji di Masjidil Haram → 9 wukuf → 10 Muzdalifah, lontar kubra, bercukur, tawaf ifadah, sa'ie → 11–12 lontar 3 jamrah & mabit Mina → tawaf wada'","Hikmah 5 aspek: rohani, sosial, politik, dakwah, ekonomi (Tabung Haji)"],
+ aplikasi:["Menentukan hukum perbuatan semasa ihram (contoh: memakai minyak wangi, menutup kepala bagi lelaki)","Merancang simpanan Tabung Haji sebagai istita'ah","Menilai pakej haji/umrah yang sah dan berlesen"],
+ soalan:["Nyatakan maksud haji / umrah","Senaraikan dua jenis haji / dua jenis miqat","Nyatakan miqat penduduk arah Madinah, Yaman","Jelaskan dua kaifiat haji Tamattu'","Dua persamaan haji & umrah dari aspek wajib","Dua larangan ihram aspek kecantikan","KBAT: pakej haji berlesen, penipuan pakej umrah, haji sebagai jihad"],
+ nota:"Dam tidak dibincangkan dalam buku teks Tingkatan 4. Jika diajar, labelkan sebagai maklumat tambahan."},
+
+{ting:T4,no:14,tajuk:"Sembelihan",ms:"109–116",q3:6,rukunRingkas:"3",
+ sub:["Maksud, hukum dan dalil","Rukun sembelihan","Syarat sah sembelihan","Perkara sunat sembelihan","Perkara makruh sembelihan","Hikmah dari sudut syarak dan sains"],
+ istilah:["Sembelihan","Urat halkum (saluran pernafasan)","Urat mari' (saluran makanan)","Hayat mustaqirrah","Ahli Kitab","Ihsan","Water stunner","Electrical stunning"],
+ hukum:["Wajib (supaya halal dimakan dagingnya)","Dalil: al-Ma'idah 5:3; hadis Rafi' bin Khadij (al-Bukhari); hadis Syaddad bin Aus tentang ihsan (Muslim)","Water stunner (ayam) dan electrical stunning (lembu): harus (Muzakarah Jawatankuasa Fatwa, 1988)"],
+ rukun:["Penyembelih","Binatang sembelihan","Alat sembelihan"],
+ syarat:["Penyembelih: beragama Islam atau Ahli Kitab; menyembelih hanya kerana Allah SWT","Binatang: masih mempunyai hayat mustaqirrah; putus urat halkum dan mari' dengan segera dan sekali sembelih","Alat: boleh melukakan, kecuali kuku, gigi dan tulang"],
+ hafal:["Maksud: menyembelih binatang yang halal dimakan dagingnya dengan memutuskan urat halkum dan urat mari'","Sunat: tajamkan pisau, siang hari, menghadap kiblat, membaca basmalah, baringkan binatang di rusuk kiri, alat tajam seperti pisau","Makruh: di hadapan binatang lain, menyeksa binatang, pisau tumpul, waktu malam, tidak menghadap kiblat, tidak membaca basmalah","Contoh menyeksa: mematahkan leher, mematahkan kaki, mengheret kaki ke tempat sembelihan, menajamkan pisau di hadapan binatang"],
+ fahami:["Basmalah ialah perkara sunat; tidak membacanya makruh, bukan membatalkan","Sembelihan anak-anak dan wanita sah dan halal","Janin yang mati selepas ibunya disembelih halal dimakan","Hikmah: membezakan daging halal dan haram; mengeluarkan toksin & bakteria dalam darah; mempercepat kematian binatang"],
+ aplikasi:["Menilai status halal premis penyembelihan","Menentukan hukum situasi: pisau tumpul, urat tidak putus, sembelih untuk kubur keramat","Bersifat ihsan terhadap haiwan"],
+ soalan:["Nyatakan maksud / hukum sembelihan","Senaraikan dua urat yang wajib diputuskan","Dua syarat sah / dua sunat / dua makruh","Hukum penggunaan alat (stunning) dan alasan","KBAT: status halal produk, implikasi sembelihan tidak sempurna"]},
+
+{ting:T4,no:15,tajuk:"Korban dan Akikah",ms:"117–128",q3:0,rukunRingkas:"Ikut sembelihan",
+ sub:["Korban: maksud, hukum, dalil, binatang","Korban: syarat sah, perkara sunat, tempoh","Korban: pembahagian daging, hikmah","Akikah: maksud, hukum, dalil","Akikah: syarat sah, sunat, tempoh","Akikah: pembahagian daging, hikmah"],
+ istilah:["Korban","Akikah","Al-an'am (binatang ternakan)","Hari tasyrik","Korban nazar","Al-murtahan (tergadai)"],
+ hukum:["Korban: sunat muakkad; wajib jika bernazar. Dalil al-Kauthar 108:2; hadis Aisyah (al-Tirmizi & Ibn Majah)","Akikah: sunat muakkad; wajib jika bernazar. Dalil hadis Samurah bin Jundub (al-Tirmizi)","Korban disyariatkan tahun ke-2 Hijrah"],
+ rukun:["Buku teks tidak menyenaraikan rukun korban/akikah secara khusus; ia dilaksanakan melalui sembelihan (lihat rukun sembelihan)"],
+ syarat:["Syarat sah korban (4): berniat ketika menyembelih; masa: selepas solat Aidiladha 10 Zulhijjah hingga terbenam matahari 13 Zulhijjah; cukup umur; sifat binatang bebas penyakit & kecacatan","Syarat sah akikah (4): berniat ketika menyembelih; masa: setelah bayi dilahirkan; cukup umur; sifat binatang","Umur: unta 5 tahun+; lembu/kerbau 2 tahun+; kambing 2 tahun+; biri-biri 1 tahun atau bersalin gigi hadapan selepas umur 6 bulan"],
+ hafal:["Binatang: unta, lembu, kerbau, kambing, biri-biri","Cacat yang tidak sah: buta sebelah, berpenyakit teruk, tempang, kurus melampau","Daging korban: 1/3 dimakan keluarga, 1/3 dihadiahkan, 1/3 disedekahkan kepada fakir miskin","Korban nazar: wajib semua daging disedekahkan kepada fakir miskin","Akikah: 2 ekor kambing untuk bayi lelaki, 1 ekor untuk perempuan; hari ketujuh; cukur rambut; beri nama baik; sedekah emas/perak seberat rambut","Daging akikah: sunat dimasak manis dan disedekahkan sesudah dimasak"],
+ fahami:["Haram menjual apa-apa bahagian korban (kulit, lemak, susu, kaki, kepala, bulu)","Bahagian korban tidak boleh diberi kepada tukang sembelih sebagai upah","Orang yang berkorban makruh bercukur & memotong kuku dari awal Zulhijjah hingga selesai berkorban","Tempoh akikah: sunat dari kelahiran hingga baligh; sunat muakkad hari ketujuh","Hikmah korban: syiar Islam, hayati pengorbanan Nabi Ibrahim, eratkan persaudaraan, syukur. Hikmah akikah: syukur, hebahkan kelahiran, suburkan sifat pemurah"],
+ aplikasi:["Menentukan kelayakan binatang korban berdasarkan umur dan kecacatan","Menyusun pembahagian daging","Situasi: korban berkongsi lembu, korban di luar negara, memberi daging kepada bukan Islam"],
+ soalan:["Maksud korban / akikah","Dua syarat sah korban","Cara pembahagian daging korban","Perbezaan korban dan akikah","KBAT: bagaimana korban memajukan ekonomi umat; ibu bapa tidak mampu berakikah"]},
+
+{ting:T4,no:16,tajuk:"Muamalat Islam",ms:"129–142",q3:2,rukunRingkas:"Akad 3",
+ sub:["Maksud, hukum dan dalil muamalat","Matlamat pensyariatan muamalat","Kepentingan memahami & mengamalkan muamalat","Perbezaan muamalat Islam dan konvensional","Unsur yang diharamkan","Pengertian, rukun dan syarat akad","Jenis akad dalam muamalat Islam"],
+ istilah:["Muamalat","Akad","Ijab","Qabul","Sighah","Riba","Gharar","Judi","Darar","Batil","Jual beli","Sewaan","Hibah","Qard","Wakaf","Wadiah","Musyarakah","Mudarabah","Wakalah","Kafalah","Rahn"],
+ hukum:["Muamalat Islam: harus","Dalil: al-Baqarah 2:275 (Allah menghalalkan jual beli, mengharamkan riba); an-Nisa' 4:29; al-Mutaffifin 83:1–6; hadis longgokan makanan “sesiapa menipu bukan daripada golonganku” (Muslim)","Skim cepat kaya: haram (unsur judi, riba dan gharar)"],
+ rukun:["Rukun akad (3): pihak yang berakad (penjual, pembeli); sesuatu yang diakadkan (harga, barang); sighah (ijab, qabul)"],
+ syarat:["Pihak berakad: baligh, berakal, mampu memelihara & mengurus harta, melibatkan dua pihak dan bebas membuat pilihan","Perkara diakadkan: wujud ketika akad, halal, dapat diserahkan ketika akad","Sighah: ijab dan qabul sepadan; tidak diikat dengan syarat tertentu; dalam satu pertemuan (majlis)"],
+ hafal:["Maksud muamalat: hukum syarak berkaitan urusan kewangan seperti jual beli, sewaan, simpanan","Maksud akad: ijab dan qabul dalam urusan perniagaan dan kewangan","4 unsur haram: riba, gharar, judi, darar","5 kumpulan akad: pertukaran (jual beli, sewaan); kebajikan (hibah, qard, wakaf, wadiah); perkongsian (musyarakah, mudarabah); agensi (wakalah); jaminan (kafalah, rahn)","Matlamat (4): keadilan Allah; iktiraf pemilikan melalui akad sah; jaga kepentingan semua pihak; mendapat keredaan Allah"],
+ fahami:["Islam vs konvensional: sumber (al-Quran & Sunnah vs teori manusia); riba (haram vs diamalkan); judi & gharar (bebas vs ada); teras (keimanan vs keuntungan)","Contoh riba: pinjam RM100 dengan syarat bayar RM110","Contoh gharar: menjual burung liar di udara","Contoh sighah tidak sah: “Saya jual basikal ini … apabila saya sambung belajar ke luar negara”","Mudarabah: pemodal + pengusaha, untung dibahagi ikut nisbah (contoh 60:40)"],
+ aplikasi:["Menilai skim pelaburan sebelum menyertai","Mengenal pasti akad dalam transaksi harian (kantin, sewa rumah, pajak gadai)","Menentukan hukum jual beli dalam talian, jual beli secara video"],
+ soalan:["Maksud akad / muamalat","Dua rukun akad selain perkara yang diakadkan","Dua syarat perkara yang diakadkan","Dua perbezaan muamalat Islam dan konvensional","KBAT: skim cepat kaya, penipuan dalam talian"]},
+
+{ting:T4,no:17,tajuk:"Solat Sunat Dhuha dan Solat Sunat Gerhana",ms:"143–150",q3:3,rukunRingkas:"Ikut rukun solat",
+ sub:["Dhuha: maksud, hukum, dalil","Dhuha: kaifiat dan hikmah","Gerhana: maksud, hukum, dalil","Gerhana: kaifiat dan hikmah"],
+ istilah:["Solat Dhuha","Syuruk","Solat Gerhana","Kusuf (gerhana matahari)","Khusuf (gerhana bulan)","Khutbah gerhana","Khurafat"],
+ hukum:["Dhuha: sunat muakkad. Dalil hadis Abu Hurairah (al-Bukhari); hadis qudsi Abu Zar (al-Tirmizi)","Gerhana: sunat muakkad. Dalil hadis al-Mughirah bin Syu'bah (Muslim)","Gerhana matahari disyariatkan tahun ke-2 Hijrah; gerhana bulan tahun ke-5 Hijrah"],
+ rukun:["Rukun solat biasa. Ciri khusus Gerhana: setiap rakaat ada dua kali qiam dan dua kali rukuk"],
+ syarat:["Waktu Dhuha: naik matahari selepas syuruk hingga sebelum gelincir matahari (kira-kira 28 minit selepas syuruk hingga masuk Zohor)","Waktu Gerhana: ketika berlaku gerhana matahari atau bulan"],
+ hafal:["Dhuha: 2, 4, 6 atau 8 rakaat; sendirian; rakaat 1 Surah al-Syams, rakaat 2 Surah al-Dhuha (atau surah lain)","Gerhana: 2 rakaat; berjemaah; niat kusuf/khusuf sebagai imam/makmum","Rukuk dipanjangkan sekadar panjang bacaan surah sebelumnya","Selepas solat gerhana: sunat dua khutbah ikut rukun & syarat khutbah Jumaat","Amalan ketika gerhana: solat, istighfar, doa, takbir, sedekah"],
+ fahami:["Gerhana bukan kerana kematian atau kelahiran seseorang; ia tanda kekuasaan Allah","Hikmah Dhuha: dekatkan diri, bukti ketaatan setiap masa, rahmat dan rezeki","Hikmah Gerhana: insafi kekuasaan Allah, mohon ampun, peringatan, mentauhidkan Allah dan tinggalkan khurafat, pahala ikut sunnah"],
+ aplikasi:["Tindakan muslim ketika gerhana (bukan sekadar merakam di media sosial)","Membetulkan anggapan Dhuha semata-mata untuk menjadi kaya","Mengaitkan sains astronomi dengan keyakinan kepada Allah"],
+ soalan:["Maksud solat sunat Gerhana","Dua amalan selain solat ketika gerhana","Perbezaan solat Dhuha dan Gerhana","KBAT: remaja meremehkan ibadah ketika gerhana; sains meningkatkan keyakinan"]},
+
+{ting:T5,no:11,tajuk:"Solat Sunat Istikharah dan Solat Sunat Tasbih",ms:"90–98",q3:1,rukunRingkas:"Ikut rukun solat",
+ sub:["Istikharah: maksud, hukum, dalil","Istikharah: kaifiat, doa, hikmah","Tasbih: maksud, hukum, dalil","Tasbih: kaifiat satu salam & dua salam, hikmah"],
+ istilah:["Istikharah","Doa istikharah","Solat Tasbih","Duduk istirahah","Iktidal"],
+ hukum:["Istikharah: sunat. Dalil hadis Jabir bin Abdullah (Muslim, sebagaimana dalam buku teks)","Tasbih: sunat. Dalil hadis kepada al-Abbas (Abu Daud, Ibn Majah, al-Tirmizi)"],
+ rukun:["Rukun solat biasa, ditambah bacaan khusus"],
+ syarat:["Istikharah: dilakukan apabila hendak memilih atau memutuskan sesuatu perkara","Tasbih: 4 rakaat 1 salam (sesuai siang) atau 4 rakaat 2 salam (sesuai malam)"],
+ hafal:["Maksud Istikharah: solat untuk memohon petunjuk Allah dalam menentukan pilihan","Istikharah: 2 rakaat, sendirian; rakaat 1 al-Kafirun, rakaat 2 al-Ikhlas; diikuti doa istikharah","Maksud Tasbih: solat sunat khusus yang mengandungi tasbih 300 kali","Tasbih: 75 kali setiap rakaat = 15 (selepas surah) + 10 (rukuk) + 10 (iktidal) + 10 (sujud) + 10 (duduk antara dua sujud) + 10 (sujud kedua) + 10 (duduk istirahah/tasyahhud)","Kekerapan: sehari sekali; atau setiap Jumaat; atau sebulan sekali; atau sekali seumur hidup"],
+ fahami:["Istikharah menjauhkan syirik (bergantung kepada bomoh) dan mendidik bergantung kepada Allah","Hikmah Tasbih: keampunan dosa, ganjaran besar, ketenangan jiwa"],
+ aplikasi:["Istikharah sebelum memilih aliran/kursus, pasangan atau keputusan besar, selepas berusaha","Menyusun kiraan tasbih dengan betul"],
+ soalan:["Maksud solat Tasbih / Istikharah","Kaifiat Tasbih dari aspek niat dan bilangan rakaat","Perbezaan Istikharah dan Tasbih","KBAT: Istikharah membantu pencapaian akademik; individu enggan solat Tasbih kerana lama"]},
+
+{ting:T5,no:12,tajuk:"Perkahwinan",ms:"99–122",q3:0,rukunRingkas:"5",
+ sub:["Maksud dan dalil","Hukum berkahwin (5 keadaan)","Hikmah perkahwinan","Golongan wanita yang haram dikahwini","Rukun nikah dan syarat setiap rukun","Wali dan susunan wali","Ciri pemilihan pasangan, merisik, meminang","Mahar dan walimatulurus","Kemahiran keibubapaan: tanggungjawab suami, isteri, bersama"],
+ istilah:["Nikah","Wali mujbir","Wali bukan mujbir","Wali hakim","Marhalah","Sighah","Ijab","Qabul","Kufu","Merisik","Meminang","Mahar","Walimatulurus","Mahram","Persemendaan","Penyusuan","Talak raj'ie"],
+ hukum:["Harus: tiada desakan atau halangan","Sunat: ingin berkahwin dan mampu nafkah zahir dan batin","Wajib: bimbang terjerumus maksiat dan mampu memberi nafkah","Makruh: ingin tetapi tidak mampu memberi nafkah","Haram: bertujuan menzalimi atau memudaratkan pasangan","Mahar: wajib; menyebut mahar: sunat. Walimatulurus: sunat muakkad; memenuhi undangan: fardu ain. Melihat perempuan yang dipinang: sunat","Dalil: an-Nur 24:32; hadis “Wahai pemuda…” (Abu Daud)"],
+ rukun:["Bakal suami","Bakal isteri","Wali","Dua orang saksi","Lafaz akad nikah (sighah: ijab dan qabul)"],
+ syarat:["Bakal suami: Islam; lelaki yang pasti; bukan mahram; tidak dalam ihram; tidak mempunyai empat isteri dalam satu masa","Bakal isteri: Islam; perempuan yang pasti; bukan mahram; tidak dalam ihram; bukan isteri orang atau dalam iddah talak raj'ie","Wali (10): Islam, lelaki, baligh, berakal, adil, merdeka, tidak berihram, tidak dipaksa, tiada penyakit yang menjejaskan fikiran, mampu mengurus harta","Saksi (8): Islam, lelaki, baligh, berakal, adil, pendengaran baik, penglihatan baik, merdeka","Sighah: lafaz nikah/kahwin atau terjemahan tepat; jelas bukan kiasan; berturutan tanpa diselangi; berkuat kuasa serta-merta; kelayakan wali & bakal suami kekal hingga selesai; tidak dibataskan tempoh"],
+ hafal:["Maksud perkahwinan: akad yang menghalalkan persetubuhan antara lelaki dengan perempuan menurut hukum syarak","Haram selama-lamanya: sebab keturunan, penyusuan, persemendaan","Haram sementara: adik-beradik isteri dalam satu masa; isteri orang; wanita musyrik hingga masuk Islam; isteri yang ditalak tiga sebelum berkahwin dengan suami baharu dan habis iddah","Susunan wali: bapa, datuk (mujbir) → adik-beradik lelaki → anak saudara lelaki → bapa saudara → sepupu lelaki → wali hakim (13 tingkat)","8 sebab berpindah kepada wali hakim: tiada wali nasab; wali jauh melebihi dua marhalah; wali hilang; mualaf tiada wali layak; anak tidak sah taraf; wali dalam ihram; wali enggan; wali sendiri hendak berkahwin dengan perempuan itu tanpa wali lain sedarjat","Ciri pemilihan: agama, rupa paras, akhlak, keturunan, sihat, sekufu"],
+ fahami:["Contoh sighah tidak sah: ditangguhkan (“apabila tiba Ramadan”), ta'liq (“sekiranya anak berjaya peperiksaan”), wali pengsan selepas ijab sebelum qabul","Mahar tiada kadar tertentu dan tidak semestinya tunai","Tanggungjawab suami, isteri dan bersama dari aspek akidah, ibadah dan akhlak","Adab walimah: tidak khususkan orang kaya, tiada perkara mungkar"],
+ aplikasi:["Menyusun wali yang berhak dalam sesuatu keluarga","Menentukan sah atau tidak sesuatu akad nikah","Menilai adat dalam walimah"],
+ soalan:["Maksud perkahwinan / mahar / walimatulurus","Lima rukun nikah; dua syarat bagi setiap rukun","Tiga golongan haram dikahwini selama-lamanya","Hukum lafaz qabul mendahului ijab; wali pengsan","KBAT: adat melebihi syariat dalam walimah; suami urus rumah, isteri bekerja"]},
+
+{ting:T5,no:13,tajuk:"Isu-isu dalam Perkahwinan",ms:"123–136",q3:9,rukunRingkas:"—",
+ sub:["Pembubaran: talak, fasakh, khuluk, li'an","Isu: iddah, rujuk, nusyuz, poligami, hadanah, anak angkat","Implikasi perkahwinan yang tidak mengikut syariat dan undang-undang Islam"],
+ istilah:["Talak","Talak raj'ie","Talak bain","Fasakh","Khuluk (tebus talak)","Li'an","Qazaf","Iddah","Rujuk","Nusyuz","Poligami","Hadanah","Anak angkat"],
+ hukum:["Talak: asalnya harus. Wajib: perbalahan tidak dapat didamaikan selepas proses mahkamah. Sunat: isteri berakhlak buruk. Makruh: menceraikan isteri yang baik atau tanpa sebab. Haram: ketika isteri haid, atau ketika suci yang telah disetubuhi tanpa diketahui hamil atau tidak","Fasakh: harus isteri memohon. Khuluk: harus. Li'an: wajib untuk mengelakkan suami daripada hukuman qazaf","Iddah: wajib. Rujuk: harus. Nusyuz: haram. Poligami: harus. Hadanah: wajib. Anak angkat: harus"],
+ rukun:["Buku teks tidak menyenaraikan rukun bagi isu-isu ini; yang diuji ialah maksud, hukum, jenis, syarat, kesan"],
+ syarat:["Syarat rujuk (5): dengan kerelaan sendiri; bukan perceraian fasakh atau khuluk; bukan talak tiga; isteri masih dalam iddah; ada lafaz yang menunjukkan rujuk","Kelayakan poligami (3): tidak melebihi empat isteri; berlaku adil dari aspek lahiriah (pakaian, tempat tinggal); mampu nafkah zahir dan batin"],
+ hafal:["Talak: pembubaran oleh suami dengan lafaz talak yang jelas atau kiasan","Fasakh: pembubaran melalui kuasa hakim dengan sebab tertentu (contoh: suami sering memukul)","Khuluk: pembubaran atas kehendak isteri dengan persetujuan membayar ganti rugi kepada suami","Li'an: sumpah suami apabila menuduh isteri berzina tanpa empat saksi atau menafikan nasab (4 kali + kali kelima)","Iddah: cerai hidup — 3 kali suci (masih haid), 3 bulan hijrah (putus haid), tiada iddah (belum disetubuhi), hingga bersalin (hamil); kematian suami — 4 bulan 10 hari","Larangan iddah: menerima pinangan, keluar rumah tanpa keperluan syarak, berhias (kecuali iddah raj'ie)"],
+ fahami:["Talak raj'ie boleh dirujuk dalam iddah tanpa akad & mahar baharu; talak bain tidak boleh kecuali dengan akad & mahar baharu","Kesan li'an: tidak boleh rujuk selama-lamanya; anak tidak dinasabkan kepada suami, tiada hak nafkah dan pusaka daripadanya","Ibu paling berhak terhadap hadanah, tetapi hak boleh gugur dengan sebab tertentu","Anak angkat boleh menerima nafkah, hibah dan wasiat; tidak boleh menerima faraid, tidak berhak wali dan nasab","Implikasi nikah tidak ikut saluran: denda, dipisahkan jika tidak sah, isteri tiada dokumen untuk tuntutan hadanah & pusaka, sukar daftar kelahiran"],
+ aplikasi:["Menentukan hukum talak dalam situasi","Menilai lafaz “talak tiga” dalam keadaan marah","Membaca infografik perceraian dan mencadangkan intervensi","Mengenal pasti nikah sindiket dan langkah membanteras"],
+ soalan:["Maksud talak / fasakh / rujuk / poligami","Senaraikan dua jenis talak","Hukum talak terhadap isteri berakhlak buruk","Dua syarat rujuk; tempoh iddah dalam jadual","KBAT: infografik perceraian, nikah sindiket, keganasan rumah tangga, talak tiga"]},
+
+{ting:T5,no:14,tajuk:"Pengurusan Harta Selepas Kematian: Wasiat dan Faraid",ms:"137–152",q3:2,rukunRingkas:"Wasiat 4 · Faraid 3",
+ sub:["Wasiat: maksud, hukum, dalil","Galakan dan cara berwasiat","Rukun dan syarat wasiat","Pembahagian harta wasiat (1/3)","Hikmah wasiat","Faraid: maksud, hukum, dalil","Rukun dan syarat faraid","Jenis waris dan pembahagian","Hikmah faraid"],
+ istilah:["Wasiat","Pewasiat","Penerima wasiat","Faraid","Muwarrith (orang yang mewariskan)","Waris","Harta pusaka","Ashab al-furud","Asabah","Asabah bi al-nafs","Asabah bi al-ghair","Asabah ma'a al-ghair"],
+ hukum:["Wasiat: sunat. Dalil al-Baqarah 2:180; hadis Ibn Umar (al-Bukhari); galakan hadis Jabir (Ibn Majah); kadar 1/3 hadis Sa'ad bin Abi Waqqas (muttafaq 'alaih)","Faraid: wajib. Dalil an-Nisa' 4:7; hadis Ibn Abbas “Serahkan bahagian pusaka kepada yang berhak…” (muttafaq 'alaih)"],
+ rukun:["Wasiat (4): pewasiat, penerima wasiat, harta yang diwasiatkan, sighah (ijab dan qabul)","Faraid (3): orang yang mewariskan harta, waris, harta pusaka"],
+ syarat:["Pewasiat: berakal, baligh, sukarela, merdeka","Penerima wasiat: diketahui dengan jelas (individu atau organisasi; tidak sah wasiat umum); masih hidup; layak memiliki & mengurus harta (tidak sah kepada janin)","Harta wasiat: bernilai; boleh berpindah milik; harus dan bukan haram","Sighah wasiat: jelas atau kiasan; penerimaan berlaku selepas kematian pewasiat","Faraid: kematian telah disahkan; waris masih hidup & diketahui hubungannya; harta benar-benar dimiliki si mati"],
+ hafal:["Maksud wasiat: ikrar seseorang semasa hidup untuk mengagihkan harta selepas kematiannya menurut hukum syarak","Maksud faraid: pembahagian harta seorang Islam yang meninggal dunia kepada ahli warisnya menurut hukum syarak","Cara pengurusan wasiat: harta dikira sebaik kematian; tidak melebihi 1/3; dilaksanakan selepas belanja jenazah dan hutang","Suami 1/2 (tiada anak) / 1/4 (ada anak). Isteri 1/4 (tiada anak) / 1/8 (ada anak)","Anak perempuan: 1/2 (tunggal), 2/3 (dua atau lebih), asabah bi al-ghair (ada anak lelaki). Anak lelaki: asabah bi al-nafs","Bapa: 1/6 (ada anak lelaki), asabah (tiada anak), 1/6 + asabah (anak perempuan sahaja). Ibu: 1/3, 1/6, atau 1/3 baki (hanya ibu, bapa, suami/isteri)"],
+ fahami:["Ashab al-furud menerima kadar tetap; asabah menerima baki","Kajian kes buku teks: isteri meninggal (suami, bapa, ibu, seorang anak perempuan) → suami 1/4, bapa 1/6 + asabah, ibu 1/6, anak perempuan 1/2","Hikmah wasiat: pahala berpanjangan, kelangsungan organisasi, kebajikan masyarakat, jaga orang hampir yang bukan waris (contoh anak angkat)","Hikmah faraid: elak perbalahan, jamin kelangsungan waris, tegak keadilan, eratkan kasih sayang"],
+ aplikasi:["Menentukan sah wasiat (contoh: wasiat melalui media sosial; kepada ibu bapa bukan Islam)","Mengira bahagian faraid kes mudah","Menangani isu berebut harta pusaka"],
+ soalan:["Maksud wasiat / faraid","Cara pengurusan wasiat","Hukum dan alasan wasiat untuk masjid & anak yatim","Rukun faraid; jenis waris","KBAT: kesan tidak menulis wasiat; anak derhaka berebut harta"],
+ nota:"Buku teks menulis kadar 1/6 bagi ibu berlaku apabila terdapat “lebih daripada dua orang saudara”, manakala 1/3 apabila hanya seorang saudara. Sila semak lafaz ini dengan panitia sebelum membina soalan pengiraan."},
+
+{ting:T5,no:15,tajuk:"Jenayah dalam Islam",ms:"153–161",q3:0,rukunRingkas:"—",
+ sub:["Maksud, hukum dan dalil","Hukuman hudud dan jenis kesalahan","Hukuman qisas dan jenis kesalahan","Hukuman takzir","Hikmah hukuman jenayah"],
+ istilah:["Jenayah","Hudud","Qisas","Takzir","Diat","Muhsan","Bukan muhsan","Qazaf","Rejam","Sebat","Buang daerah","Ijtihad","Maslahah"],
+ hukum:["Melaksanakan hukuman jenayah: wajib (oleh pihak berkuasa)","Hudud: wajib. Qisas: wajib jika mangsa/waris mahukan balasan yang sama; boleh diganti diat atau dimaafkan. Takzir: hakim harus menjatuhkan hukuman berdasarkan ijtihad dan maslahah","Dalil: al-Baqarah 2:178; hadis Ibn Mas'ud (Muslim)"],
+ rukun:["Tiada rukun; yang diuji ialah jenis hukuman, kesalahan dan hukumannya"],
+ syarat:["Pelaksanaan hudud di bawah pihak berkuasa, tidak boleh dilaksanakan oleh orang awam","Qisas bergantung kepada pilihan mangsa atau waris: balasan sama, diat, atau maaf"],
+ hafal:["Maksud jenayah: kesalahan yang dinyatakan hukumannya dalam al-Quran, al-Sunnah dan sebahagiannya daripada mahkamah","Hudud: hukuman yang telah ditetapkan jenis dan bentuknya dalam al-Quran dan al-Sunnah","5 kesalahan hudud: zina, qazaf, mencuri, minum arak, merompak","Minum arak: sebat 40. Mencuri: potong tangan & pulangkan barang. Qazaf: sebat 80 & tidak diterima sebagai saksi. Zina bukan muhsan: sebat 100 & buang daerah setahun; muhsan: rejam","Qisas: pembunuhan (bunuh balas atau diat) dan perbuatan yang mencederakan (balasan sama atau diat)","Takzir: hukuman yang tidak ditetapkan dalam al-Quran dan al-Sunnah, diputuskan oleh mahkamah (contoh: teguran, denda, penjara, sebatan, hukuman mati)"],
+ fahami:["Merompak 4 kategori: rampas + bunuh; bunuh sahaja; rampas sahaja; tidak rampas & tidak bunuh (buang daerah)","Jenis pembunuhan: sengaja, separa sengaja, tanpa niat","Hikmah: tegak keadilan, mendidik supaya mendapat keampunan, jamin keselamatan, rancakkan ekonomi","Konsep hukum Fiqh berbeza dengan pelaksanaan undang-undang negara; individu tidak boleh menghukum sendiri"],
+ aplikasi:["Membezakan kesalahan hudud, qisas dan takzir dalam kes","Peranan masyarakat mengurangkan jenayah","Menghuraikan objektif hukuman: mendidik, bukan semata-mata menghukum"],
+ soalan:["Maksud jenayah / hudud / qisas / takzir","Hukuman bagi mencuri, membunuh, minum arak","Perbezaan hudud, qisas, takzir","KBAT: “Hukuman jenayah Islam bertujuan mendidik, bukan menghukum.” Huraikan"]}
+];
+
+const twins = [
+  ["Haji","Umrah","Haji ada <b>wukuf</b>, mabit dan melontar; hanya dalam bulan haji. Umrah boleh bila-bila masa, tiada wukuf."],
+  ["Rukun haji","Wajib haji","Rukun ditinggal: <b>tidak sah</b>. Wajib ditinggal: haji sah tetapi <b>berdosa</b>. Niat = rukun; niat ihram <b>di miqat</b> = wajib."],
+  ["Miqat zamani","Miqat makani","Zamani = <b>masa</b> (1 Syawal hingga subuh 10 Zulhijjah). Makani = <b>tempat</b> (5 lokasi)."],
+  ["Tahallul awal","Tahallul thani","Awal: <b>2 daripada 3</b> perkara. Thani: <b>ketiga-tiga</b> perkara."],
+  ["Ifrad","Tamattu'","Ifrad: <b>haji dahulu</b>, umrah kemudian. Tamattu': <b>umrah dahulu</b> dalam bulan haji. Qiran: <b>serentak</b>."],
+  ["Syarat sah sembelihan","Sunat sembelihan","Putus halkum & mari', hayat mustaqirrah = <b>syarat</b>. Basmalah, kiblat, pisau tajam = <b>sunat</b>."],
+  ["Korban","Akikah","Korban: sebab <b>Aidiladha</b>, 10–13 Zulhijjah, daging <b>mentah</b>. Akikah: sebab <b>kelahiran</b>, daging sunat <b>dimasak manis</b>."],
+  ["Jual beli","Riba","Jual beli: pertukaran barang dengan persetujuan. Riba: <b>tambahan bayaran</b> dalam pertukaran atau hutang."],
+  ["Gharar","Judi","Gharar: <b>kesamaran</b> (burung di udara). Judi: <b>pertaruhan</b> sesuatu yang berharga."],
+  ["Musyarakah","Mudarabah","Musyarakah: <b>semua pihak</b> berkongsi modal. Mudarabah: <b>pemodal</b> menyerahkan modal kepada <b>pengusaha</b>."],
+  ["Kafalah","Rahn","Kafalah: <b>orang</b> menjadi penjamin. Rahn: <b>barang</b> digadai sebagai jaminan hutang."],
+  ["Hibah","Wasiat","Hibah: <b>semasa hidup</b>, berkuat kuasa segera. Wasiat: berkuat kuasa <b>selepas mati</b>, maksimum 1/3."],
+  ["Wasiat","Faraid","Wasiat: <b>sunat</b>, pilihan pewasiat, bukan waris. Faraid: <b>wajib</b>, kadar ditetapkan syarak untuk waris."],
+  ["Kusuf","Khusuf","Kusuf = gerhana <b>matahari</b>. Khusuf = gerhana <b>bulan</b>."],
+  ["Istikharah","Tasbih","Istikharah: <b>memohon petunjuk</b>, 2 rakaat. Tasbih: <b>300 tasbih</b>, 4 rakaat."],
+  ["Talak","Fasakh","Talak: dibubarkan oleh <b>suami</b> melalui lafaz. Fasakh: dibubarkan oleh <b>hakim</b> atas sebab tertentu."],
+  ["Fasakh","Khuluk","Fasakh: <b>sebab</b> tertentu, keputusan hakim. Khuluk: kehendak isteri dengan <b>bayaran ganti rugi</b>."],
+  ["Talak raj'ie","Talak bain","Raj'ie: boleh <b>rujuk dalam iddah</b>. Bain: perlu <b>akad & mahar baharu</b>."],
+  ["Rujuk","Nikah semula","Rujuk: dalam iddah talak raj'ie, <b>tanpa akad baharu</b>. Selepas iddah atau talak bain: perlu akad nikah baharu."],
+  ["Wali mujbir","Wali hakim","Mujbir: <b>bapa & datuk</b>. Wali hakim: apabila wali nasab tiada atau ada <b>8 sebab</b> perpindahan."],
+  ["Hudud","Qisas","Hudud: hak Allah, hukuman tetap, <b>tiada pilihan</b>. Qisas: balasan sama, waris boleh pilih <b>diat atau maaf</b>."],
+  ["Qisas","Takzir","Qisas: <b>ditetapkan</b> al-Quran & Sunnah. Takzir: <b>diputuskan mahkamah</b>."]
+];
+
+const traps = [
+  ["Tidak membaca basmalah menjadikan sembelihan tidak sah.","Membaca basmalah ialah perkara sunat; meninggalkannya makruh. Yang menentukan sah ialah syarat sah (penyembelih, putus dua urat, hayat mustaqirrah, alat)."],
+  ["Tawaf dan sa'ie ialah wajib haji.","Tawaf dan sa'ie ialah rukun haji. Wajib haji ialah niat ihram di miqat, mabit, melontar dan menjauhi larangan ihram."],
+  ["Rukun umrah sama dengan rukun haji.","Umrah tiada wukuf. Rukun umrah hanya 5."],
+  ["Biri-biri dan kambing sama umurnya untuk korban.","Kambing 2 tahun; biri-biri 1 tahun atau telah bersalin gigi hadapan selepas 6 bulan."],
+  ["Daging korban nazar boleh dimakan sendiri.","Korban nazar: wajib semua daging disedekahkan kepada fakir miskin."],
+  ["Kulit korban boleh dijual atau diberi sebagai upah penyembelih.","Haram menjual mana-mana bahagian korban; tidak boleh dijadikan upah."],
+  ["Hukum talak sentiasa haram atau makruh.","Hukum asal talak harus, dan berubah menjadi wajib, sunat, makruh atau haram mengikut keadaan."],
+  ["Suami boleh rujuk selepas fasakh atau khuluk.","Syarat rujuk: bukan perceraian fasakh atau khuluk, bukan talak tiga, dan isteri masih dalam iddah."],
+  ["Iddah semua wanita ialah tiga bulan.","Iddah bergantung kepada keadaan: 3 kali suci, 3 bulan hijrah, hingga bersalin, 4 bulan 10 hari, atau tiada iddah."],
+  ["Wasiat boleh untuk seluruh harta.","Wasiat tidak melebihi 1/3 dan dilaksanakan selepas belanja jenazah dan hutang."],
+  ["Anak angkat menerima faraid seperti anak kandung.","Anak angkat boleh menerima hibah dan wasiat, tetapi tidak menerima faraid, wali atau nasab."],
+  ["Lafaz qabul boleh disebut sebelum ijab atau dengan selang lama.","Ijab dan qabul mesti berturutan dan tidak diselangi perkataan lain."]
+];
+
+const road = [
+  ["T5 P13 · Isu-isu dalam Perkahwinan","Tajuk paling kerap (9/13 set). Banyak istilah kembar dan hukum yang berubah ikut keadaan.",true],
+  ["T4 P13 · Haji dan Umrah","7/13 set. Fokus rukun vs wajib, miqat, larangan ihram, haji Tamattu'."],
+  ["T4 P14 · Sembelihan","6/13 set. Fokus syarat sah vs sunat vs makruh, isu status halal."],
+  ["T4 P16 · Muamalat Islam","Rukun & syarat akad, 11 jenis akad, unsur haram."],
+  ["T5 P14 · Wasiat dan Faraid","Rukun & syarat wasiat, kadar faraid, pengiraan kes mudah."],
+  ["T4 P17 · Dhuha & Gerhana","Kaifiat khusus solat Gerhana, isu khurafat dan media sosial."],
+  ["T5 P12 · Perkahwinan","Rukun nikah, syarat setiap rukun, susunan wali."],
+  ["T4 P15 · Korban dan Akikah","Umur & cacat binatang, pembahagian daging, perbezaan korban–akikah."],
+  ["T5 P11 · Istikharah & Tasbih","Kiraan tasbih 75 × 4, doa istikharah."],
+  ["T5 P15 · Jenayah dalam Islam","Hudud, qisas, takzir sebagai pembelajaran akademik."],
+  ["Penutup · Final Boss & Ujian Diagnostik","Ujian rentas 10 pelajaran, analisis kelemahan murid dan aktiviti pemulihan/pengayaan."]
+];
+
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+const max = 13;
+document.getElementById("bars").innerHTML = freq.map(r =>
+  `<div class="barrow"><div class="lbl">${esc(r.t)}<small>${esc(r.s)}</small></div>
+   <div class="track" role="img" aria-label="${r.n} daripada 13 set"><div class="fill ${r.f===T5?'t5':''}" style="width:${(r.n/max*100).toFixed(1)}%"></div></div>
+   <div class="n">${r.n}</div></div>`).join("");
+
+document.getElementById("settable").innerHTML = sets.map(s =>
+  `<tr><td><b>${esc(s[0])}</b></td><td>${s[1].map(t=>`<span class="chip ${t5set.has(t)?'c5':'c4'}">${esc(t)}</span>`).join("")}</td><td>${esc(s[2])}</td></tr>`).join("");
+
+function prio(n){return n>=6?["Sangat tinggi","h3"]:n>=2?["Tinggi","h2"]:["Wajib kuasai","h1"]}
+document.getElementById("sumtable").innerHTML = L.map(l =>
+  `<tr><td>${l.ting}</td><td>${l.no}</td><td><b>${esc(l.tajuk)}</b></td><td>${l.ms}</td><td>${esc(l.rukunRingkas)}</td><td class="num">${l.q3}</td><td><span class="chip ${l.ting===T5?'c5':'c4'}">${prio(l.q3)[0]}</span></td></tr>`).join("");
+
+function list(a){return `<ul>${a.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`}
+function render(f){
+  document.getElementById("lessons").innerHTML = L.filter(l=>f==="all"||l.ting===f).map(l=>{
+    const p = prio(l.q3);
+    return `<article class="lesson" id="t${l.ting}p${l.no}">
+      <div class="lesson-head">
+        <div class="lno">T${l.ting} · P<b>${l.no}</b></div>
+        <div><h3>${esc(l.tajuk)}</h3><div class="meta">Buku teks Tingkatan ${l.ting}, ms ${l.ms}</div></div>
+        <div class="heat ${p[1]}"><b>${l.q3}/13</b>Soalan 3 · ${p[0]}</div>
+      </div>
+      <div class="fields">
+        <div class="field"><h4>Subtopik</h4>${list(l.sub)}</div>
+        <div class="field"><h4>Istilah penting</h4><div class="terms">${l.istilah.map(t=>`<span>${esc(t)}</span>`).join("")}</div></div>
+        <div class="field wide"><h4>Hukum &amp; dalil</h4>${list(l.hukum)}</div>
+        <div class="field f-rukun"><h4>Rukun</h4>${list(l.rukun)}</div>
+        <div class="field f-syarat"><h4>Syarat</h4>${list(l.syarat)}</div>
+        <div class="field wide"><h4>Perlu dihafal</h4>${list(l.hafal)}</div>
+        <div class="field wide"><h4>Perlu difahami</h4>${list(l.fahami)}</div>
+        <div class="field"><h4>Kemahiran aplikasi</h4>${list(l.aplikasi)}</div>
+        <div class="field"><h4>Bentuk soalan peperiksaan</h4>${list(l.soalan)}
+          ${l.nota?`<div class="note"><b>Perlu perhatian:</b> ${esc(l.nota)}</div>`:""}</div>
+      </div></article>`}).join("");
+}
+render("all");
+
+const FILE = {"4-13":"haji-umrah.html","4-14":"sembelihan.html","4-15":"korban-akikah.html","4-16":"muamalat.html","4-17":"dhuha-gerhana.html","5-11":"istikharah-tasbih.html","5-12":"perkahwinan.html","5-13":"isu-perkahwinan.html","5-14":"wasiat-faraid.html","5-15":"jenayah.html"};
+document.getElementById("modgrid").innerHTML = L.map(l=>`<a class="mod" href="${FILE[l.ting+"-"+l.no]}"><span class="t">Tingkatan ${l.ting} · Pelajaran ${l.no}</span><b>${esc(l.tajuk)}</b><small>Buku teks ms ${l.ms} · Soalan 3: ${l.q3}/13 set</small><span class="go">Buka modul →</span></a>`).join("");
+document.querySelectorAll(".lesson").forEach(a=>{const k=a.id.replace("t","").replace("p","-");const h=a.querySelector(".lesson-head > div:nth-child(2)");if(h&&FILE[k])h.insertAdjacentHTML("beforeend",`<a class="openmod" href="${FILE[k]}">Buka modul lengkap →</a>`)});
+
+document.querySelectorAll(".filters button").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".filters button").forEach(x=>x.setAttribute("aria-pressed", x===b?"true":"false"));
+  render(b.dataset.f);
+  document.querySelectorAll(".lesson").forEach(a=>{const k=a.id.replace("t","").replace("p","-");const h=a.querySelector(".lesson-head > div:nth-child(2)");if(h&&FILE[k]&&!h.querySelector(".openmod"))h.insertAdjacentHTML("beforeend",`<a class="openmod" href="${FILE[k]}">Buka modul lengkap →</a>`)});
+}));
+
+document.getElementById("twins").innerHTML = twins.map(t=>
+  `<div class="twin"><div class="pair">${esc(t[0])}<span class="vs">VS</span>${esc(t[1])}</div><div class="key">${t[2]}</div></div>`).join("");
+document.getElementById("traps").innerHTML = traps.map(t=>`<div class="trap"><div class="x">${esc(t[0])}</div><div class="y">${esc(t[1])}</div></div>`).join("");
+
+</script>
+
+</body>
+</html>

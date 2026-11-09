@@ -1,0 +1,1083 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Modul Sembelihan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=Amiri:wght@400;700&display=swap">
+<style>
+/* Layout: emerald title band + sticky tab bar; one tab visible at a time; content in a 1120px column, grids collapse to one column on phones */
+:root{
+  --emerald:#0b5d4b; --emerald-2:#0f7a62; --gold:#b8891a; --gold-soft:#f6ecd0;
+  --teal:#138f8f; --teal-soft:#dff3f1; --mint:#eaf6f0; --peach:#fdeee6; --lilac:#efeafb; --sky:#e6f2fb;
+  --bg:#ffffff; --surface:#f6faf8; --line:#d7e6df; --fg:#14302a; --muted:#4e6a62; --ink-on:#ffffff;
+  --ok:#1d7f4e; --ok-soft:#e1f4e9; --bad:#b4472b; --bad-soft:#fbe9e3;
+  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",sans-serif;
+  --body:"Nunito Sans","Segoe UI",system-ui,sans-serif;
+  --arab:"Amiri","Traditional Arabic","Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --emerald:#0c3f34; --emerald-2:#3fc49d; --gold:#e3bd55; --gold-soft:#3a3218;
+  --teal:#4fc9c4; --teal-soft:#10302f; --mint:#122a23; --peach:#33231c; --lilac:#25213a; --sky:#14273a;
+  --bg:#0c1714; --surface:#11211d; --line:#23403a; --fg:#e6f2ee; --muted:#9dbab1; --ink-on:#f4fbf8;
+  --ok:#5fd39a; --ok-soft:#143326; --bad:#f08a6c; --bad-soft:#3a1f18; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --emerald:#0c3f34; --emerald-2:#3fc49d; --gold:#e3bd55; --gold-soft:#3a3218;
+  --teal:#4fc9c4; --teal-soft:#10302f; --mint:#122a23; --peach:#33231c; --lilac:#25213a; --sky:#14273a;
+  --bg:#0c1714; --surface:#11211d; --line:#23403a; --fg:#e6f2ee; --muted:#9dbab1; --ink-on:#f4fbf8;
+  --ok:#5fd39a; --ok-soft:#143326; --bad:#f08a6c; --bad-soft:#3a1f18; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--emerald)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;line-height:1.15;margin:0}
+p{margin:0}
+ul,ol{margin:0;padding-left:1.2em}
+li::marker{color:var(--gold)}
+.ar{font-family:var(--arab);direction:rtl;font-size:1.35em;line-height:1.9;display:block;text-align:right}
+.muted{color:var(--muted)}
+.hl{color:var(--teal);font-weight:800}
+.add{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--bad);border:1px solid var(--bad);border-radius:4px;padding:0 5px;margin-left:4px;vertical-align:1px}
+
+/* band */
+.band{background:var(--emerald);color:var(--ink-on);position:relative;overflow:hidden}
+.band::before{content:"";position:absolute;inset:0;opacity:.13;background-image:repeating-conic-gradient(from 45deg,var(--gold) 0 25%,transparent 0 50%);background-size:28px 28px;mask-image:linear-gradient(90deg,transparent 40%,#000);-webkit-mask-image:linear-gradient(90deg,transparent 40%,#000)}
+.band .wrap{position:relative;padding-block:34px 28px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--gold)}
+.band h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;margin-top:6px}
+.band h1 span{color:var(--gold)}
+.band p{max-width:60ch;opacity:.92;margin-top:8px}
+.band .back{display:inline-block;margin-top:12px;color:var(--ink-on);font-weight:700;font-size:.88rem}
+.kaabah{width:120px;height:120px}
+@media (max-width:640px){.band .wrap{grid-template-columns:1fr}.kaabah{display:none}}
+
+/* tabs */
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--bg);border-bottom:1px solid var(--line)}
+.tabs .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px}
+.tab{font:inherit;font-weight:800;font-size:.9rem;white-space:nowrap;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--emerald);border-color:var(--emerald);color:var(--ink-on)}
+.tab:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.tab small{font-weight:700;opacity:.75;margin-left:4px}
+
+.panel{padding-block:30px 60px}
+.sec{padding-block:26px;border-bottom:1px solid var(--line)}
+.sec:last-child{border-bottom:0}
+.sec-head{display:grid;gap:6px;margin-bottom:18px;max-width:72ch}
+.kicker{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--gold)}
+.sec-head h2{font-size:clamp(1.4rem,3vw,1.95rem);font-weight:800}
+.sec-head h2 .lt{color:var(--teal)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:860px){.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:680px){.grid2,.grid3{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:12px;padding:14px 16px;min-width:0;background:var(--bg)}
+.card h3{font-size:1.08rem;margin-bottom:6px}
+.soft-mint{background:var(--mint)}.soft-gold{background:var(--gold-soft)}.soft-teal{background:var(--teal-soft)}.soft-lilac{background:var(--lilac)}.soft-peach{background:var(--peach)}.soft-sky{background:var(--sky)}
+.note{font-size:.88rem;padding:10px 12px;border-radius:8px;background:var(--bad-soft);border-left:3px solid var(--bad)}
+.note b{color:var(--bad)}
+.tip{font-size:.9rem;padding:10px 12px;border-radius:8px;background:var(--teal-soft);border-left:3px solid var(--teal)}
+
+/* concept map */
+.cmap{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center}
+.cmap .core{grid-column:2;grid-row:1/span 5;width:170px;height:170px;border-radius:50%;background:var(--emerald);color:var(--ink-on);display:grid;place-items:center;text-align:center;font-family:var(--display);font-weight:800;font-size:1.3rem;border:5px solid var(--gold);padding:12px}
+.cmap .node{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--surface);font-size:.9rem;min-width:0}
+.cmap .node b{display:block;font-family:var(--display);color:var(--teal)}
+.cmap .l{grid-column:1}.cmap .r{grid-column:3}
+@media (max-width:760px){.cmap{grid-template-columns:1fr}.cmap .core{grid-column:1;grid-row:auto;margin:0 auto}.cmap .l,.cmap .r{grid-column:1}}
+.seq{display:flex;flex-wrap:wrap;gap:8px;counter-reset:s}
+.seq span{counter-increment:s;font-size:.86rem;font-weight:700;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--bg)}
+.seq span::before{content:counter(s) " · ";color:var(--gold)}
+
+/* tables */
+.tbox{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.9rem}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+th{background:var(--surface);font-family:var(--display);font-size:.85rem;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td b{color:var(--teal)}
+
+/* istilah cards */
+.term{display:grid;gap:6px}
+.term .t{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.term .t h3{margin:0;font-size:1.1rem}
+.term .k{font-size:.74rem;font-weight:800;color:var(--gold);letter-spacing:.06em;text-transform:uppercase}
+.term dl{margin:0;display:grid;grid-template-columns:96px minmax(0,1fr);gap:4px 10px;font-size:.88rem}
+.term dt{font-weight:800;color:var(--muted);font-size:.78rem;padding-top:2px}
+.term dd{margin:0}
+.term dd.x{color:var(--bad)}
+
+/* flow */
+.flow{display:grid;gap:0;counter-reset:f}
+.fstep{display:grid;grid-template-columns:76px minmax(0,1fr);gap:14px;padding-bottom:16px;position:relative}
+.fstep::after{content:"";position:absolute;left:37px;top:54px;bottom:0;width:2px;background:var(--line)}
+.fstep:last-child::after{display:none}
+.fstep .d{width:76px;height:54px;border-radius:10px;background:var(--emerald);color:var(--ink-on);display:grid;place-items:center;text-align:center;font-family:var(--display);font-weight:800;font-size:.8rem;line-height:1.1}
+.fstep .d b{display:block;font-size:1.3rem}
+.fstep .d.gold{background:var(--gold-soft);color:var(--fg);border:1px solid var(--gold)}
+.fstep .body{padding-top:4px;min-width:0}
+.fstep .body b{display:block}
+.pill{display:inline-block;font-size:.72rem;font-weight:800;padding:1px 8px;border-radius:999px;margin:2px 4px 0 0}
+.p-r{background:var(--emerald);color:var(--ink-on)}
+.p-w{background:var(--gold-soft);color:var(--fg);border:1px solid var(--gold)}
+.p-s{background:var(--teal-soft);color:var(--fg);border:1px solid var(--teal)}
+.p-x{background:var(--bad-soft);color:var(--fg);border:1px solid var(--bad)}
+
+/* situations */
+.sit{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:.88rem}
+.sit>div{padding:10px 12px;min-width:0;border-right:1px solid var(--line)}
+.sit>div:last-child{border-right:0}
+.sit .lab{font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:2px}
+.sit .s1{background:var(--surface)}.sit .s3{background:var(--gold-soft)}.sit .s5{background:var(--mint)}
+.sits{display:grid;gap:10px}
+.sits .num{font-family:var(--display);font-weight:800;color:var(--gold);margin-right:4px}
+@media (max-width:860px){.sit{grid-template-columns:1fr}.sit>div{border-right:0;border-bottom:1px solid var(--line)}.sit>div:last-child{border-bottom:0}}
+
+/* slides */
+.deck{display:grid;gap:12px}
+.stage{position:relative;width:100%;max-width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--bg)}
+@media (max-width:760px){.stage{aspect-ratio:auto;min-height:520px}}
+.slide{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:0}
+@media (max-width:760px){.slide{position:relative;grid-template-columns:1fr}}
+.slide .main{padding:clamp(18px,3vw,36px);display:flex;flex-direction:column;gap:10px;min-width:0;overflow:auto}
+.slide .side{background:var(--emerald);color:var(--ink-on);padding:clamp(16px,2.6vw,30px);display:flex;flex-direction:column;gap:12px;justify-content:space-between;min-width:0;position:relative;overflow:auto}
+.slide .side::before{content:"";position:absolute;inset:0;opacity:.1;background-image:repeating-conic-gradient(from 45deg,var(--gold) 0 25%,transparent 0 50%);background-size:24px 24px;pointer-events:none}
+.slide .side>*{position:relative}
+.slide .no{font-size:.74rem;font-weight:800;letter-spacing:.14em;color:var(--gold);text-transform:uppercase}
+.slide h3{font-size:clamp(1.3rem,2.8vw,2.1rem);font-weight:800}
+.slide .lead{font-size:clamp(.92rem,1.4vw,1.05rem);color:var(--muted)}
+.slide ul{font-size:clamp(.88rem,1.35vw,1.02rem);display:grid;gap:4px}
+.slide .kw{display:flex;flex-wrap:wrap;gap:6px}
+.slide .kw span{font-size:.78rem;font-weight:800;padding:3px 10px;border-radius:999px;background:var(--gold);color:var(--emerald)}
+.slide .q{font-size:.88rem;border-top:1px solid color-mix(in srgb,var(--ink-on) 30%,transparent);padding-top:10px}
+.slide .q b{color:var(--gold)}
+.slide .ex{font-size:.86rem;padding:8px 10px;border-radius:8px;background:color-mix(in srgb,var(--ink-on) 12%,transparent)}
+.slide .ill{width:100%;max-width:200px;height:auto;align-self:center}
+.slide.cover{grid-template-columns:1fr}
+.slide.cover .main{background:var(--emerald);color:var(--ink-on);justify-content:center;align-items:flex-start;position:relative}
+.slide.cover .main::before{content:"";position:absolute;inset:0;opacity:.14;background-image:repeating-conic-gradient(from 45deg,var(--gold) 0 25%,transparent 0 50%);background-size:30px 30px;mask-image:linear-gradient(90deg,transparent 30%,#000);-webkit-mask-image:linear-gradient(90deg,transparent 30%,#000)}
+.slide.cover .main>*{position:relative}
+.slide.cover h3{font-size:clamp(2rem,5vw,3.6rem)}
+.slide.cover h3 span{color:var(--gold)}
+.slide.cover .lead{color:var(--ink-on);opacity:.9}
+.dcontrols{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{font:inherit;font-weight:800;font-size:.9rem;padding:8px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.btn:hover{border-color:var(--teal)}
+.btn.pri{background:var(--emerald);border-color:var(--emerald);color:var(--ink-on)}
+.btn.gold{background:var(--gold-soft);border-color:var(--gold)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.dots{display:flex;gap:5px;flex-wrap:wrap}
+.dots button{width:26px;height:26px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:inherit;font-size:.72rem;font-weight:800;cursor:pointer}
+.dots button[aria-current="true"]{background:var(--gold);border-color:var(--gold);color:var(--emerald)}
+
+/* worksheet */
+.ws{display:grid;gap:14px}
+.lvl{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.lvl-h{display:flex;gap:12px;align-items:center;padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--line)}
+.lvl-h .badge{font-family:var(--display);font-weight:800;padding:6px 10px;border-radius:8px;background:var(--emerald);color:var(--ink-on);white-space:nowrap}
+.lvl-h h3{font-size:1.1rem}
+.lvl-b{padding:14px 16px;display:grid;gap:16px}
+.task h4{font-family:var(--body);font-size:.95rem;font-weight:800;margin-bottom:6px}
+.task ol{display:grid;gap:6px}
+.skema{display:none;margin-top:8px;padding:10px 12px;border-radius:8px;background:var(--ok-soft);border-left:3px solid var(--ok);font-size:.9rem}
+.show-skema .skema{display:block}
+.skema::before{content:"Skema jawapan";display:block;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ok);margin-bottom:3px}
+.blank{display:inline-block;min-width:110px;border-bottom:1.5px dashed var(--muted);margin:0 3px}
+.wbox{min-height:54px;border:1px dashed var(--line);border-radius:8px;margin-top:6px}
+
+/* games */
+.gamegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:18px}
+.gpick{font:inherit;text-align:left;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer;display:grid;gap:2px}
+.gpick b{font-family:var(--display);font-size:1rem}
+.gpick small{color:var(--muted)}
+.gpick .lv{font-size:.7rem;font-weight:800;color:var(--gold);letter-spacing:.08em;text-transform:uppercase}
+.gpick[aria-pressed="true"]{border-color:var(--emerald);background:var(--mint);box-shadow:inset 0 0 0 1px var(--emerald)}
+.gstage{border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:14px;background:var(--surface)}
+.ghead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.ghead h3{font-size:1.4rem}
+.score{font-family:var(--display);font-weight:800;font-size:1.1rem;padding:6px 12px;border-radius:10px;background:var(--gold-soft);border:1px solid var(--gold);white-space:nowrap;font-variant-numeric:tabular-nums}
+.how{font-size:.9rem;color:var(--muted)}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (max-width:560px){.opts{grid-template-columns:1fr}}
+.opt{font:inherit;text-align:left;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer;min-height:44px}
+.opt:hover:not(:disabled){border-color:var(--teal)}
+.opt.ok{background:var(--ok-soft);border-color:var(--ok)}
+.opt.no{background:var(--bad-soft);border-color:var(--bad)}
+.opt.sel{border-color:var(--gold);box-shadow:inset 0 0 0 2px var(--gold)}
+.opt.done{opacity:.45}
+.fb{font-size:.92rem;padding:10px 12px;border-radius:10px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--ok-soft);border-left:3px solid var(--ok)}
+.fb.no{background:var(--bad-soft);border-left:3px solid var(--bad)}
+.qtext{font-size:1.08rem;font-weight:700}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:560px){.cols2{grid-template-columns:1fr}}
+.cols2>div{display:grid;gap:8px;align-content:start}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+.bin{font:inherit;font-weight:800;padding:10px;border-radius:10px;border:2px dashed var(--line);background:var(--bg);color:var(--fg);cursor:pointer;text-align:center}
+.bin:hover{border-color:var(--teal)}
+.chipq{font-size:1.15rem;font-family:var(--display);font-weight:800;padding:14px;border-radius:12px;background:var(--bg);border:1px solid var(--gold);text-align:center}
+.locks{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.lock{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--bg);display:grid;gap:8px}
+.lock.open{border-color:var(--ok);background:var(--ok-soft)}
+.lock input,.codein{font:inherit;font-size:1.1rem;font-weight:800;width:100%;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font-variant-numeric:tabular-nums}
+.boxes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.mbox{font:inherit;font-family:var(--display);font-weight:800;font-size:1.4rem;aspect-ratio:1.4;max-width:100%;border-radius:12px;border:1px solid var(--gold);background:var(--gold-soft);color:var(--fg);cursor:pointer}
+.mbox:disabled{background:var(--surface);border-color:var(--line);color:var(--muted);cursor:default;font-size:.9rem}
+.wheelwrap{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:18px;align-items:center}
+@media (max-width:680px){.wheelwrap{grid-template-columns:1fr}}
+.wheel{position:relative;width:100%;max-width:320px;aspect-ratio:1;margin:0 auto}
+.wheel canvas{width:100%;height:100%;display:block}
+.wheel .ptr{position:absolute;left:50%;top:-6px;transform:translateX(-50%);width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-top:26px solid var(--bad)}
+.ladder{display:grid;gap:4px}
+.ladder div{display:flex;justify-content:space-between;font-size:.82rem;padding:3px 10px;border-radius:6px;font-variant-numeric:tabular-nums}
+.ladder .cur{background:var(--gold);color:var(--emerald);font-weight:800}
+.ladder .past{color:var(--ok);font-weight:700}
+.champ{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:16px}
+@media (max-width:680px){.champ{grid-template-columns:1fr}}
+.mem{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media (max-width:560px){.mem{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.mcard{font:inherit;min-height:92px;border-radius:10px;border:1px solid var(--line);background:var(--emerald);color:var(--ink-on);cursor:pointer;padding:8px;font-size:.8rem;font-weight:700;line-height:1.25}
+.mcard.up{background:var(--bg);color:var(--fg);border-color:var(--gold)}
+.mcard.got{background:var(--ok-soft);color:var(--fg);border-color:var(--ok);cursor:default}
+.hp{height:16px;border-radius:999px;background:var(--bg);border:1px solid var(--line);overflow:hidden}
+.hp i{display:block;height:100%;background:var(--bad);transition:width .3s}
+.hearts{font-weight:800;color:var(--bad);font-variant-numeric:tabular-nums}
+.bossrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media (max-width:560px){.bossrow{grid-template-columns:1fr}}
+
+/* spm */
+.qblock{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.qblock .stem{padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--line);font-weight:700}
+.qitem{padding:12px 16px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.qitem:last-child{border-bottom:0}
+.qrow{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;align-items:start}
+.qrow .ql{font-weight:800;color:var(--muted)}
+.qrow .m{font-weight:800;font-size:.84rem;white-space:nowrap;color:var(--gold)}
+.ans{display:none;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;font-size:.88rem}
+.show-ans .ans{display:grid}
+@media (max-width:680px){.ans{grid-template-columns:1fr}}
+.ans>div{padding:8px 10px;border-radius:8px;min-width:0}
+.ans .a1{background:var(--ok-soft)}.ans .a2{background:var(--mint)}.ans .a3{background:var(--teal-soft)}.ans .a4{background:var(--bad-soft)}
+.ans .lab{display:block;font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.stim{border:2px solid var(--fg);padding:10px 14px;border-radius:4px;font-weight:700;text-align:center;margin:4px 0;background:var(--bg)}
+.mcq{display:grid;gap:12px}
+.mcq .it{border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:8px}
+
+/* diag */
+.aspects{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+@media (max-width:760px){.aspects{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.asp{border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center;background:var(--bg)}
+.asp b{display:block;font-family:var(--display);font-size:1.5rem;font-variant-numeric:tabular-nums}
+.asp small{display:block;font-size:.76rem;color:var(--muted)}
+.asp .lvl-tag{display:inline-block;margin-top:4px;font-size:.72rem;font-weight:800;padding:1px 8px;border-radius:999px}
+.t-low{background:var(--bad-soft);color:var(--bad)}.t-mid{background:var(--gold-soft)}.t-high{background:var(--ok-soft);color:var(--ok)}
+.check{display:grid;gap:6px}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--bg)}
+.check input{margin-top:5px;width:18px;height:18px;accent-color:var(--emerald)}
+.dq{display:grid;gap:10px}
+.dq .it{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:grid;gap:6px;background:var(--bg)}
+.dq .it .tag{font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+.dq select{font:inherit;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);max-width:100%}
+.dq .it.ok{border-color:var(--ok);background:var(--ok-soft)}
+.dq .it.no{border-color:var(--bad);background:var(--bad-soft)}
+.dq .why{font-size:.86rem;display:none}
+.dq .it.ok .why,.dq .it.no .why{display:block}
+footer{padding-block:20px 40px;font-size:.84rem;color:var(--muted);border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ===== Tema ceria: lapisan warna tambahan ===== */
+:root{
+  --c1:#e8457a; --c1s:#fde7ef; --c2:#f0861f; --c2s:#fff0e0; --c3:#7b5cd6; --c3s:#efeafd;
+  --c4:#2f80ed; --c4s:#e5f0fe; --c5:#16a37a; --c5s:#e2f6ee; --c6:#e0a800; --c6s:#fff6d6;
+  --band-grad:linear-gradient(115deg,#0b5d4b 0%,#0f8f86 38%,#2f80ed 72%,#7b5cd6 100%);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --c1:#ff7aa3; --c1s:#3a1826; --c2:#ffa95a; --c2s:#3a2614; --c3:#a993ff; --c3s:#251d42;
+  --c4:#6aa8ff; --c4s:#132741; --c5:#4fd6a8; --c5s:#11322a; --c6:#ffd15a; --c6s:#3a3112;
+  --band-grad:linear-gradient(115deg,#0a3a30 0%,#0d5c57 38%,#173f78 72%,#3b2d73 100%);}}
+:root[data-theme="dark"]{
+  --c1:#ff7aa3; --c1s:#3a1826; --c2:#ffa95a; --c2s:#3a2614; --c3:#a993ff; --c3s:#251d42;
+  --c4:#6aa8ff; --c4s:#132741; --c5:#4fd6a8; --c5s:#11322a; --c6:#ffd15a; --c6s:#3a3112;
+  --band-grad:linear-gradient(115deg,#0a3a30 0%,#0d5c57 38%,#173f78 72%,#3b2d73 100%);}
+.band{background:var(--band-grad)}
+.band::after{content:"";position:absolute;inset:auto -40px -60px auto;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,var(--c6) 0 18%,transparent 19%),radial-gradient(circle at 70% 30%,var(--c1) 0 10%,transparent 11%);opacity:.35;pointer-events:none}
+body::before{background:#0b5d4b}
+.tab:nth-child(6n+1){--tc:var(--c5)}.tab:nth-child(6n+2){--tc:var(--c4)}.tab:nth-child(6n+3){--tc:var(--c2)}.tab:nth-child(6n+4){--tc:var(--c1)}.tab:nth-child(6n+5){--tc:var(--c3)}.tab:nth-child(6n+6){--tc:var(--c6)}
+.tab{border-color:var(--tc);border-width:2px}
+.tab[aria-selected="true"]{background:var(--tc);border-color:var(--tc);color:#ffffff}
+.panel .sec:nth-of-type(6n+1) .sec-head h2{color:var(--c5)}
+.panel .sec:nth-of-type(6n+2) .sec-head h2{color:var(--c4)}
+.panel .sec:nth-of-type(6n+3) .sec-head h2{color:var(--c3)}
+.panel .sec:nth-of-type(6n+4) .sec-head h2{color:var(--c1)}
+.panel .sec:nth-of-type(6n+5) .sec-head h2{color:var(--c2)}
+.panel .sec:nth-of-type(6n+6) .sec-head h2{color:var(--c4)}
+.kicker{display:inline-block;width:max-content;max-width:100%;padding:2px 10px;border-radius:999px;background:var(--c6s);color:var(--fg)}
+.card.term{border-top:5px solid var(--cc,var(--c5))}
+.card.term:nth-child(6n+1){--cc:var(--c1)}.card.term:nth-child(6n+2){--cc:var(--c2)}.card.term:nth-child(6n+3){--cc:var(--c3)}.card.term:nth-child(6n+4){--cc:var(--c4)}.card.term:nth-child(6n+5){--cc:var(--c5)}.card.term:nth-child(6n+6){--cc:var(--c6)}
+.card.term .k{color:var(--cc)}
+.cmap .node{border-left:5px solid var(--nc,var(--c4))}
+.cmap .node:nth-child(5n+1){--nc:var(--c1)}.cmap .node:nth-child(5n+2){--nc:var(--c2)}.cmap .node:nth-child(5n+3){--nc:var(--c3)}.cmap .node:nth-child(5n+4){--nc:var(--c4)}.cmap .node:nth-child(5n+5){--nc:var(--c5)}
+.cmap .node b{color:var(--nc)}
+.cmap .core{background:conic-gradient(var(--c5),var(--c4),var(--c3),var(--c1),var(--c2),var(--c6),var(--c5));color:#ffffff;text-shadow:0 1px 3px rgba(0,0,0,.45)}
+.seq span:nth-child(6n+1){background:var(--c1s)}.seq span:nth-child(6n+2){background:var(--c2s)}.seq span:nth-child(6n+3){background:var(--c6s)}.seq span:nth-child(6n+4){background:var(--c5s)}.seq span:nth-child(6n+5){background:var(--c4s)}.seq span:nth-child(6n+6){background:var(--c3s)}
+th{background:var(--c4s)}
+.sit .s1{background:var(--c4s)}.sit .s3{background:var(--c6s)}.sit .s5{background:var(--c5s)}
+.sit .num{color:var(--c1)}
+.fstep:nth-child(5n+1) .d{background:var(--c5)}.fstep:nth-child(5n+2) .d{background:var(--c4)}.fstep:nth-child(5n+3) .d{background:var(--c3)}.fstep:nth-child(5n+4) .d{background:var(--c1)}.fstep:nth-child(5n+5) .d{background:var(--c2)}
+.fstep .d,.fstep .d.gold{color:#ffffff;border:0}
+.slide .side{background:linear-gradient(160deg,#0b5d4b,#0f8f86 50%,#2f80ed)}
+.slide.cover .main{background:var(--band-grad)}
+.slide .kw span:nth-child(4n+1){background:var(--c6)}.slide .kw span:nth-child(4n+2){background:#ffd6e4}.slide .kw span:nth-child(4n+3){background:#d9ccff}.slide .kw span:nth-child(4n+4){background:#c9f2e2}
+.slide .kw span{color:#14302a}
+.slide h3{color:var(--c3)}
+.slide.cover h3{color:#ffffff}
+.dots button[aria-current="true"]{background:var(--c1);border-color:var(--c1);color:#ffffff}
+.lvl:nth-child(5n+1) .badge{background:var(--c5)}.lvl:nth-child(5n+2) .badge{background:var(--c4)}.lvl:nth-child(5n+3) .badge{background:var(--c3)}.lvl:nth-child(5n+4) .badge{background:var(--c2)}.lvl:nth-child(5n+5) .badge{background:var(--c1)}
+.lvl:nth-child(5n+1){border-top:5px solid var(--c5)}.lvl:nth-child(5n+2){border-top:5px solid var(--c4)}.lvl:nth-child(5n+3){border-top:5px solid var(--c3)}.lvl:nth-child(5n+4){border-top:5px solid var(--c2)}.lvl:nth-child(5n+5){border-top:5px solid var(--c1)}
+.gpick{border-left:6px solid var(--gc,var(--c4))}
+.gpick:nth-child(6n+1){--gc:var(--c1)}.gpick:nth-child(6n+2){--gc:var(--c2)}.gpick:nth-child(6n+3){--gc:var(--c3)}.gpick:nth-child(6n+4){--gc:var(--c4)}.gpick:nth-child(6n+5){--gc:var(--c5)}.gpick:nth-child(6n+6){--gc:var(--c6)}
+.gpick .lv{color:var(--gc)}
+.gpick[aria-pressed="true"]{background:color-mix(in srgb,var(--gc) 14%,var(--bg));box-shadow:inset 0 0 0 2px var(--gc);border-color:var(--gc)}
+.gstage{background:linear-gradient(180deg,var(--c3s),var(--bg) 140px)}
+.score{background:var(--c6s);border-color:var(--c6)}
+.btn.pri{background:var(--c4);border-color:var(--c4);color:#ffffff}
+.btn.gold{background:var(--c6s);border-color:var(--c6)}
+.mbox{background:linear-gradient(135deg,var(--c1s),var(--c3s));border-color:var(--c3)}
+.chipq{border-color:var(--c3);background:var(--c3s)}
+.qblock .stem{background:var(--c4s)}
+.asp:nth-child(5n+1){border-top:4px solid var(--c1)}.asp:nth-child(5n+2){border-top:4px solid var(--c2)}.asp:nth-child(5n+3){border-top:4px solid var(--c3)}.asp:nth-child(5n+4){border-top:4px solid var(--c4)}.asp:nth-child(5n+5){border-top:4px solid var(--c5)}
+.modnav{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.modnav a{font-size:.8rem;font-weight:800;text-decoration:none;padding:4px 10px;border-radius:999px;border:1.5px solid var(--mc,var(--c4));color:var(--fg);background:var(--bg)}
+.modnav a:nth-child(5n+1){--mc:var(--c1)}.modnav a:nth-child(5n+2){--mc:var(--c2)}.modnav a:nth-child(5n+3){--mc:var(--c3)}.modnav a:nth-child(5n+4){--mc:var(--c4)}.modnav a:nth-child(5n+5){--mc:var(--c5)}
+.modnav a[aria-current="page"]{background:var(--mc);color:#ffffff}
+
+</style>
+</head>
+<body>
+
+
+<header class="band">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Fiqh Mastery Kit · Tingkatan 4 · Pelajaran 14</div>
+      <h1>Sem<span>be</span>lihan</h1>
+      <p>Modul lengkap berdasarkan Buku Teks Pendidikan Islam Tingkatan 4 (ms 109–116): maksud, hukum, dalil, rukun, syarat sah, perkara sunat dan makruh, serta hikmah sembelihan dari sudut syarak dan sains. Disoal dalam 6 daripada 13 set Soalan 3 percubaan SPM 2026.</p>
+      <a class="back" href="index.html">← Kembali ke Analisis Induk 10 pelajaran</a>
+    </div>
+    <svg class="kaabah" viewBox="0 0 120 120" aria-hidden="true"><path d="M20 70h62l20-16v10L84 82H20Z" fill="#ffffff" fill-opacity=".92"/><rect x="10" y="66" width="16" height="20" rx="4" fill="#e3bd55"/><path d="M30 92h70" stroke="#e3bd55" stroke-width="4" stroke-dasharray="6 6"/></svg>
+  </div>
+</header>
+
+<div class="tabs" role="tablist" aria-label="Bahagian modul">
+  <div class="wrap">
+    <button class="tab" role="tab" id="tab-analisis" data-tab="analisis" aria-selected="true">Analisis Master <small>Fasa 2–3</small></button>
+    <button class="tab" role="tab" id="tab-slaid" data-tab="slaid" aria-selected="false">Slaid <small>18</small></button>
+    <button class="tab" role="tab" id="tab-lembaran" data-tab="lembaran" aria-selected="false">Lembaran Kerja <small>5 tahap</small></button>
+    <button class="tab" role="tab" id="tab-permainan" data-tab="permainan" aria-selected="false">Game Zone <small>10</small></button>
+    <button class="tab" role="tab" id="tab-spm" data-tab="spm" aria-selected="false">Latihan SPM</button>
+    <button class="tab" role="tab" id="tab-diagnostik" data-tab="diagnostik" aria-selected="false">Diagnostik</button>
+  </div>
+</div>
+
+<main>
+<!-- ============ ANALISIS ============ -->
+<section class="panel" id="p-analisis" role="tabpanel" aria-labelledby="tab-analisis">
+<div class="wrap">
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">A · Peta Konsep</div><h2>Gambaran keseluruhan tajuk</h2>
+    <p class="muted">Sembelihan menentukan sama ada daging halal dimakan. Murid perlu membezakan dengan tepat empat lapisan: rukun (apa yang mesti ada), syarat sah (menentukan halal), sunat (menambah kesempurnaan) dan makruh (dibenci tetapi tidak membatalkan).</p></div>
+    <div class="cmap">
+      <div class="core">Sembelihan</div>
+      <div class="node l"><b>Maksud · Hukum · Dalil</b>Putus urat halkum dan mari' · wajib · al-Maidah 5:3</div>
+      <div class="node l"><b>Rukun (3)</b>Penyembelih · binatang · alat</div>
+      <div class="node l"><b>Syarat sah</b>Bagi setiap rukun</div>
+      <div class="node l"><b>Istilah sokongan</b>Hayat mustaqirrah, Ahli Kitab, ihsan</div>
+      <div class="node r"><b>Perkara sunat</b>Tajam pisau, siang, kiblat, basmalah, rusuk kiri</div>
+      <div class="node r"><b>Perkara makruh</b>Di depan binatang lain, menyeksa, pisau tumpul, malam</div>
+      <div class="node r"><b>Fatwa</b>Water stunner (ayam) dan electrical stunning (lembu) harus</div>
+      <div class="node r"><b>Hikmah (3)</b>Halal-haram, kesihatan, cepat mati</div>
+    </div>
+    <div style="margin-top:18px;display:grid;gap:8px"><b>Susunan pembelajaran, mudah ke sukar</b>
+      <div class="seq"><span>Maksud &amp; hukum</span><span>Dalil</span><span>Rukun</span><span>Syarat sah</span><span>Sunat</span><span>Makruh</span><span>Contoh menyeksa</span><span>Fatwa stunning</span><span>Hikmah</span><span>Situasi &amp; KBAT</span></div></div>
+    <div class="grid3" style="margin-top:18px">
+      <div class="card soft-gold"><h3>Fakta teras 1</h3>Hukum sembelihan <b>wajib</b> supaya daging halal dimakan.</div>
+      <div class="card soft-gold"><h3>Fakta teras 2</h3>Dua urat wajib diputuskan: <b>halkum</b> (saluran pernafasan) dan <b>mari'</b> (saluran makanan).</div>
+      <div class="card soft-gold"><h3>Fakta teras 3</h3>Membaca basmalah dan menghadap kiblat ialah <b>sunat</b>. Meninggalkannya hukumnya <b>makruh</b> dan tidak membatalkan sembelihan.</div>
+    </div>
+  </div>
+  <div class="sec"><div class="sec-head"><div class="kicker">B · Master Istilah</div><h2>Istilah yang mesti dikuasai</h2><p class="muted">Definisi daripada buku teks. Baris merah ialah kesalahan lazim.</p></div><div class="grid2" id="istilah"></div></div>
+  <div class="sec"><div class="sec-head"><div class="kicker">C · Master Hukum</div><h2>Hukum dalam tajuk ini</h2></div>
+    <div class="tbox"><table><thead><tr><th>Perkara</th><th>Hukum</th><th>Maksud hukum</th><th>Sebab / dalil</th><th>Aplikasi</th><th>Contoh soalan</th></tr></thead><tbody id="hukum"></tbody></table></div></div>
+  <div class="sec"><div class="sec-head"><div class="kicker">D · Master Rukun dan Syarat</div><h2>Rukun, syarat sah, sunat dan makruh</h2>
+    <p class="muted">Syarat sah menentukan <b>halal atau tidak</b>. Sunat dan makruh hanya menentukan <b>sempurna atau kurang sempurna</b>.</p></div>
+    <div class="tbox"><table><thead><tr><th>Rukun</th><th>Syarat sah</th><th>Perkara sunat</th><th>Perkara makruh</th><th>Contoh</th></tr></thead><tbody id="rukun"></tbody></table></div>
+    <div class="grid3" style="margin-top:16px">
+      <div class="card"><h3>Rukun vs syarat</h3>Rukun ialah tiga unsur yang mesti ada. Syarat ialah ciri setiap unsur, contohnya penyembelih mesti Islam atau Ahli Kitab.</div>
+      <div class="card"><h3>Kesan syarat tidak dipenuhi</h3>Sembelihan tidak sah dan daging tidak halal dimakan (menjadi bangkai). Contoh buku teks: sembelihan bukan kerana Allah haram dan tidak sah dimakan.</div>
+      <div class="card"><h3>Kesan sunat ditinggalkan</h3>Sembelihan tetap sah tetapi hukumnya makruh, contohnya tidak membaca basmalah atau tidak menghadap kiblat.</div>
+    </div>
+    <div class="grid2" style="margin-top:16px" id="cardsA"></div>
+    <div class="tip" style="margin-top:14px"><b>Cara hafal:</b> Rukun <b>“PE-BI-AL”</b> (Penyembelih, Binatang, Alat). Alat dikecualikan <b>“KU-GI-TU”</b> (kuku, gigi, tulang). Sunat <b>“TA-SI-KI-BA-KI”</b> (tajam, siang, kiblat, basmalah, rusuk kiri).</div>
+  </div>
+  <div class="sec"><div class="sec-head"><div class="kicker">E · Master Perbezaan Istilah</div><h2>Istilah yang mudah dikelirukan</h2></div>
+    <div class="tbox"><table><thead><tr><th>Istilah A</th><th>Istilah B</th><th>Maksud ringkas</th><th>Perbezaan utama</th><th>Contoh situasi</th><th>Kata kunci</th></tr></thead><tbody id="beza"></tbody></table></div></div>
+  <div class="sec"><div class="sec-head"><div class="kicker">F · Master Proses dan Tatacara</div><h2>Tatacara menyembelih dan semakan status halal</h2>
+    <p class="muted">Label: <span class="pill p-r">Rukun / syarat</span><span class="pill p-s">Sunat</span><span class="pill p-x">Elakkan</span></p></div>
+    <div class="grid2"><div><h3 style="font-size:1.1rem;margin-bottom:12px">Langkah menyembelih</h3><div class="flow" id="flowA"></div></div>
+    <div><h3 style="font-size:1.1rem;margin-bottom:12px">Semakan: adakah daging ini halal?</h3><div class="flow" id="flowB"></div></div></div>
+    <div class="note" style="margin-top:14px"><b>Kesalahan yang perlu dielakkan:</b> menggunakan kuku, gigi atau tulang sebagai alat; tidak memutuskan kedua-dua urat; menyembelih binatang yang hampir mati; menyembelih bukan kerana Allah; menyeksa binatang.</div></div>
+  <div class="sec"><div class="sec-head"><div class="kicker">G · Master Soalan Hukum</div><h2>Situasi → Isu → Hukum → Alasan → Kesimpulan</h2></div><div class="sits" id="situasi"></div></div>
+  <div class="sec"><div class="sec-head"><div class="kicker">H · Master Dalil dan Hikmah</div><h2>Dalil dalam buku teks</h2></div>
+    <div class="grid2" id="dalil"></div>
+    <h3 style="margin:22px 0 10px;font-size:1.2rem">Hikmah sembelihan dari sudut syarak dan sains</h3><div class="grid3" id="hikmah"></div>
+    <div class="tip" style="margin-top:14px"><b>Nota guru buku teks:</b> Bimbing murid melaksanakan amali sembelihan dan bersifat ihsan terhadap binatang secara beradab dan istiqamah.</div></div>
+</div>
+</section>
+
+<!-- ============ SLAID ============ -->
+<section class="panel" id="p-slaid" role="tabpanel" aria-labelledby="tab-slaid" hidden>
+<div class="wrap">
+  <div class="sec-head"><div class="kicker">Fasa 4 · Slaid Pembelajaran</div><h2>18 slaid Sembelihan</h2><p class="muted">Gunakan butang atau kekunci anak panah. Setiap slaid ada isi, penerangan, kata kunci, contoh situasi dan soalan pemahaman.</p></div>
+  <div class="deck">
+    <div class="dcontrols">
+      <button class="btn" id="sPrev" type="button">← Sebelum</button>
+      <button class="btn pri" id="sNext" type="button">Seterusnya →</button>
+      <span class="muted" id="sCount" style="font-weight:800"></span>
+    </div>
+    <div class="stage" id="stage" tabindex="0" aria-live="polite"></div>
+    <div class="dots" id="sDots"></div>
+  </div>
+</div>
+</section>
+
+<!-- ============ LEMBARAN ============ -->
+<section class="panel" id="p-lembaran" role="tabpanel" aria-labelledby="tab-lembaran" hidden>
+<div class="wrap">
+  <div class="sec-head"><div class="kicker">Fasa 5 · Lembaran Kerja Master Fiqh</div><h2>Lima tahap: Kenali → Fahami → Bezakan → Aplikasi → KBAT</h2>
+  <p class="muted">Cetak atau paparkan di kelas. Tekan butang skema selepas murid mencuba.</p></div>
+  <div class="dcontrols" style="margin-bottom:14px"><button class="btn gold" id="toggleSkema" type="button" aria-pressed="false">Tunjuk skema jawapan</button></div>
+  <div class="ws" id="ws"></div>
+</div>
+</section>
+
+<!-- ============ PERMAINAN ============ -->
+<section class="panel" id="p-permainan" role="tabpanel" aria-labelledby="tab-permainan" hidden>
+<div class="wrap">
+  <div class="sec-head"><div class="kicker">Fasa 6 · Fiqh Game Zone</div><h2>Pilih permainan</h2><p class="muted">Semua soalan berdasarkan buku teks. Markah dikira automatik dan maklum balas dipaparkan selepas setiap jawapan.</p></div>
+  <div class="gamegrid" id="gamegrid"></div>
+  <div class="gstage" id="gstage"></div>
+</div>
+</section>
+
+<!-- ============ SPM ============ -->
+<section class="panel" id="p-spm" role="tabpanel" aria-labelledby="tab-spm" hidden>
+<div class="wrap">
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">Fasa 7 · Latihan Peperiksaan</div><h2>Soalan 3 format percubaan</h2>
+    <p class="muted">Soalan latihan rekaan guru mengikut format Kertas 1223/1 Soalan 3. Ini <b>bukan</b> soalan sebenar SPM.</p></div>
+    <div class="dcontrols" style="margin-bottom:14px"><button class="btn gold" id="toggleAns" type="button" aria-pressed="false">Tunjuk jawapan, skema dan teknik</button></div>
+    <div class="grid2" style="margin-bottom:16px">
+      <div class="tip"><b>Formula 4 markah:</b> 2 isi × (isi 1 markah + huraian/contoh 1 markah). Mulakan dengan kata kunci buku teks, kemudian huraikan dengan “kerana…”, “contohnya…”.</div>
+      <div class="tip"><b>Soalan hukum 2 markah:</b> nyatakan hukum (1) + alasan yang menyebut syarat/rukun/larangan yang terlibat (1).</div>
+    </div>
+    <div style="display:grid;gap:16px" id="struktur"></div>
+  </div>
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">Soalan objektif</div><h2>12 soalan aneka pilihan</h2></div>
+    <div class="mcq" id="mcq"></div>
+    <div class="dcontrols" style="margin-top:12px"><button class="btn pri" id="mcqCheck" type="button">Semak jawapan</button><span id="mcqScore" class="score" hidden></span></div>
+  </div>
+</div>
+</section>
+
+<!-- ============ DIAGNOSTIK ============ -->
+<section class="panel" id="p-diagnostik" role="tabpanel" aria-labelledby="tab-diagnostik" hidden>
+<div class="wrap">
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">Fasa 8 · Analisis Kelemahan Murid</div><h2>Ujian diagnostik lima aspek</h2>
+    <p class="muted">15 soalan, 3 bagi setiap aspek. Selepas disemak, halaman menunjukkan tahap penguasaan, analisis kesalahan dan aktiviti yang dicadangkan.</p></div>
+    <div class="dcontrols" style="margin-bottom:12px">
+      <button class="btn pri" type="button" id="dPre" aria-pressed="true">Ujian diagnostik (pra)</button>
+      <button class="btn" type="button" id="dPost" aria-pressed="false">Ujian selepas pembelajaran (pasca)</button>
+    </div>
+    <div class="dq" id="dq"></div>
+    <div class="dcontrols" style="margin-top:12px"><button class="btn pri" id="dCheck" type="button">Semak dan analisis</button><button class="btn" id="dReset" type="button">Set semula</button></div>
+    <div id="dResult" style="margin-top:18px;display:grid;gap:14px"></div>
+  </div>
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">Senarai Semak Penguasaan</div><h2>Saya boleh…</h2><p class="muted">Tanda yang sudah dikuasai. Tanda ini disimpan dalam pelayar anda sahaja.</p></div>
+    <div class="check" id="checklist"></div>
+  </div>
+  <div class="sec">
+    <div class="sec-head"><div class="kicker">Aktiviti susulan</div><h2>Pemulihan dan pengayaan</h2></div>
+    <div class="tbox"><table><thead><tr><th>Aspek</th><th>Tanda kelemahan</th><th>Aktiviti pemulihan</th><th>Aktiviti pengayaan</th></tr></thead><tbody id="remedi"></tbody></table></div>
+  </div>
+</div>
+</section>
+</main>
+
+<footer><div class="wrap"><b>Modul lain:</b><nav class="modnav" id="modnav" aria-label="Modul lain"></nav><p style="margin-top:12px">Sumber: Buku Teks Pendidikan Islam KSSM Tingkatan 4, Pelajaran 14 (ms 109–116). Label <span class="add">Tambahan</span> atau <span class="add">Prinsip umum fiqh</span> menandakan perkara di luar buku teks. Soalan latihan ialah rekaan dan bukan soalan sebenar SPM.</p></div></footer>
+
+<script>
+/* ================= DATA ================= */
+const ISTILAH = [
+ ["Sembelihan","Bahasa: memotong. Istilah: menyembelih binatang yang halal dimakan dagingnya dengan cara memutuskan urat halkum dan urat mari'.","Memotong leher binatang halal hingga dua saluran utamanya putus.","Encik Hamid menyembelih ayam dengan memutuskan saluran pernafasan dan makanannya.","halal dimakan · halkum · mari'","Menyebut “memutuskan urat leher” tanpa menyatakan halkum dan mari'."],
+ ["Urat halkum","Saluran pernafasan.","Saluran udara.","Wajib diputuskan ketika menyembelih.","pernafasan","Tertukar dengan mari'."],
+ ["Urat mari'","Saluran makanan.","Saluran makanan ke perut.","Wajib diputuskan bersama halkum.","makanan","Menyangka cukup satu urat sahaja."],
+ ["Hayat mustaqirrah","Haiwan yang mampu bergerak dengan bertenaga; antara tandanya binatang meronta-ronta dengan kuat setelah disembelih (al-Fiqh al-Manhaji).","Binatang masih benar-benar hidup ketika disembelih.","Lembu yang sihat meronta kuat selepas disembelih.","bertenaga · meronta","Menyembelih binatang yang hampir mati dan menyangka ia halal."],
+ ["Ahli Kitab","Majoriti ulama menyatakan Ahli Kitab ialah keturunan Bani Israel yang beragama Yahudi dan Nasrani (al-Mausu'ah al-Fiqhiyyah al-Kuwaitiyyah).","Penganut Yahudi dan Nasrani keturunan Bani Israel.","Sembelihan Ahli Kitab halal jika memenuhi syarat.","Bani Israel · Yahudi · Nasrani","Menyangka semua bukan Islam termasuk Ahli Kitab."],
+ ["Penyembelih","Orang yang menyembelih; mesti beragama Islam atau Ahli Kitab dan menyembelih kerana Allah.","Orang yang melakukan sembelihan.","Kanak-kanak dan wanita boleh menjadi penyembelih; sembelihan mereka sah dan halal.","Islam / Ahli Kitab · kerana Allah","Menyangka wanita tidak boleh menyembelih."],
+ ["Alat sembelihan","Alat yang boleh melukakan binatang sembelihan, kecuali kuku, gigi dan tulang.","Benda tajam untuk memotong.","Pisau yang tajam.","melukakan · bukan kuku/gigi/tulang","Menganggap tulang yang tajam dibenarkan."],
+ ["Ihsan","Berbuat baik atas segala sesuatu; jika menyembelih, perelokkan sembelihan, tajamkan pisau dan tenangkan binatang (hadis Syaddad bin Aus, riwayat Muslim).","Berbuat baik kepada binatang yang disembelih.","Menajamkan pisau jauh daripada pandangan binatang.","berbuat baik · tenangkan binatang","Tidak mengaitkan ihsan dengan larangan menyeksa."],
+ ["Menyeksa binatang","Perkara makruh. Contoh tanpa sebab: mematahkan leher, mematahkan kaki, mengheret kaki binatang ke tempat sembelihan, menajamkan pisau di hadapan binatang.","Menyakiti binatang tanpa perlu.","Mengheret kaki kambing ke tempat sembelihan.","makruh · tanpa sebab","Menyangka menyeksa menjadikan sembelihan tidak sah."],
+ ["Basmalah","Bacaan “Bismillah” ketika permulaan menyembelih; hukumnya sunat.","Menyebut nama Allah semasa mula menyembelih.","Penyembelih membaca basmalah sebelum memotong.","sunat · permulaan","Menyangka basmalah ialah syarat sah."],
+ ["Water stunner","Penggunaannya dalam proses penyembelihan ayam adalah harus (Muzakarah Jawatankuasa Fatwa, 1988).","Alat air berarus untuk memengsankan ayam sebelum disembelih.","Kilang memproses ayam menggunakan water stunner.","ayam · harus · 1988","Menyangka semua alat moden haram."],
+ ["Electrical stunning","Penggunaannya dalam penyembelihan lembu adalah harus (Muzakarah Jawatankuasa Fatwa, 1988).","Alat elektrik untuk memengsankan lembu.","Rumah sembelih lembu menggunakan electrical stunning.","lembu · harus","Tertukar jenis binatang dengan water stunner."],
+ ["Janin sembelihan","Janin yang mati selepas ibunya disembelih, atau mati dalam perut, atau lahir dalam keadaan bukan hayat mustaqirrah, halal dimakan dagingnya.","Anak dalam perut binatang yang disembelih.","Janin dalam perut lembu yang telah disembelih.","halal","Menyangka janin perlu disembelih semula."],
+ ["Bangkai","Binatang yang mati tanpa sembelihan yang sah; diharamkan dalam Surah al-Maidah 5:3.","Binatang mati sendiri atau tidak disembelih dengan betul.","Ayam yang mati tercekik.","haram dimakan","Menyangka ayam yang mati selepas dipukul halal."]
+];
+const HUKUM = [
+ ["Sembelihan","Wajib","Mesti dilakukan supaya daging halal dimakan.","al-Maidah 5:3; hadis Rafi' bin Khadij (al-Bukhari).","Memastikan ayam dan lembu disembelih mengikut syarak.","Nyatakan hukum sembelihan."],
+ ["Sembelihan bukan kerana Allah","Haram, tidak sah dimakan","Daging tidak halal.","Syarat penyembelih: menyembelih hanya kerana Allah.","Contoh: sembelihan untuk persembahan kubur keramat.","Jelaskan syarat penyembelih."],
+ ["Sembelihan Ahli Kitab","Halal (jika memenuhi syarat)","Daging boleh dimakan.","Syarat penyembelih: Islam atau Ahli Kitab.","Membezakan Ahli Kitab daripada penganut lain.","Siapakah penyembelih yang sah?"],
+ ["Sembelihan kanak-kanak dan wanita","Sah dan halal","Daging boleh dimakan.","Buku teks menyatakan sah dan halal.","Murid perempuan boleh menyertai amali.","Bolehkah wanita menyembelih?"],
+ ["Binatang yang hampir mati (tiada hayat mustaqirrah)","Tidak halal dimakan","Sembelihan tidak menjadikan daging halal.","Syarat binatang: masih mempunyai hayat mustaqirrah.","Tidak menyembelih binatang nazak untuk dijual.","Jelaskan syarat binatang sembelihan."],
+ ["Perkara sunat (5)","Sunat","Mendapat pahala; tidak membatalkan jika ditinggalkan.","Buku teks; hadis Abu Ya'la (menajamkan pisau).","Menajamkan pisau, menyembelih siang hari.","Nyatakan dua perkara sunat sembelihan."],
+ ["Perkara makruh (6)","Makruh","Dibenci; sembelihan tetap sah.","Buku teks; hadis Syaddad (ihsan).","Tidak menyembelih di hadapan binatang lain.","Nyatakan dua perkara makruh sembelihan."],
+ ["Water stunner / electrical stunning","Harus","Dibenarkan.","Muzakarah Jawatankuasa Fatwa, 1988.","Kilang ayam moden.","Tentukan hukum penggunaan alat di atas."],
+ ["Janin binatang sembelihan","Halal dimakan","Tidak perlu disembelih semula.","Buku teks (Spektrum Ilmu).","Janin dalam perut lembu sembelihan.","Apakah hukum janin yang mati selepas ibunya disembelih?"]
+];
+const TABLES = [{id:"rukun",rows:[
+ ["1. Penyembelih","Beragama Islam atau Ahli Kitab; menyembelih hanya kerana Allah.","Menajamkan pisau; menyembelih pada waktu siang; menghadap kiblat; membaca basmalah.","Menyembelih di hadapan binatang lain; menyeksa binatang; menyembelih waktu malam; tidak menghadap kiblat; tidak membaca basmalah.","Sembelihan untuk kubur keramat: tidak sah."],
+ ["2. Binatang sembelihan","Masih mempunyai hayat mustaqirrah; putus urat halkum dan mari' dengan segera dan sekali sembelih.","Dibaringkan pada rusuk kiri.","(Lihat contoh menyeksa: patah leher, patah kaki, heret kaki.)","Lembu meronta kuat selepas disembelih: hayat mustaqirrah."],
+ ["3. Alat sembelihan","Alat yang boleh melukakan binatang, kecuali kuku, gigi dan tulang.","Alat yang tajam seperti pisau.","Menggunakan pisau yang tumpul.","Menyembelih dengan tulang tajam: tidak sah."]
+]}];
+const CARDS = [{id:"cardsA",lab:"Nota",items:[
+ ["Contoh menyeksa binatang tanpa sebab",["Mematahkan leher","Mematahkan kaki","Mengheret kaki binatang ke tempat sembelihan","Menajamkan pisau sembelihan di hadapan binatang"],"Semua ini perbuatan makruh dan bertentangan dengan ihsan.","soft-peach"],
+ ["Mengapa sunat-sunat ini?",["Tajamkan pisau: hadis Abu Ya'la, tajamkan pisau dan tenangkan binatang","Siang hari: dikhuatiri berlaku kesilapan ketika menyembelih pada waktu malam","Menghadap kiblat: kiblat tempat mulia bagi umat Islam","Basmalah: dibaca ketika permulaan menyembelih"],"Alasan diambil daripada buku teks.","soft-mint"]
+]}];
+const BEZA = [
+ ["Urat halkum","Urat mari'","Dua urat yang wajib diputuskan.","Halkum: saluran pernafasan. Mari': saluran makanan.","Saluran makanan tidak putus: sembelihan tidak sah.","nafas vs makanan"],
+ ["Syarat sah","Perkara sunat","Menentukan halal vs menambah kesempurnaan.","Syarat tidak dipenuhi: tidak halal. Sunat ditinggalkan: makruh tetapi sah.","Tidak membaca basmalah: sah, makruh.","halal vs sempurna"],
+ ["Perkara makruh","Tidak sah","Kurang sempurna vs batal.","Pisau tumpul: makruh. Tulang sebagai alat: tidak sah.","Menyembelih waktu malam: makruh.","dibenci vs batal"],
+ ["Pisau tajam","Pisau tumpul","Alat sembelihan.","Tajam: sunat. Tumpul: makruh.","Ali menggunakan pisau tumpul: makruh.","sunat vs makruh"],
+ ["Menyembelih siang","Menyembelih malam","Waktu sembelihan.","Siang: sunat (elak kesilapan). Malam: makruh.","Kilang menyembelih pada waktu malam: makruh.","siang vs malam"],
+ ["Ahli Kitab","Bukan Islam lain","Penyembelih bukan Islam.","Sembelihan Ahli Kitab halal (Yahudi, Nasrani keturunan Bani Israel); penyembelih mesti Islam atau Ahli Kitab.","Penyembelih ialah penyembah berhala: tidak memenuhi syarat.","Bani Israel"],
+ ["Hayat mustaqirrah","Hampir mati","Keadaan binatang ketika disembelih.","Mustaqirrah: bergerak bertenaga, meronta kuat. Hampir mati: tidak halal.","Kambing nazak disembelih: tidak halal.","meronta kuat"],
+ ["Water stunner","Electrical stunning","Alat pemengsan.","Water stunner: ayam. Electrical stunning: lembu. Kedua-duanya harus (1988).","Kilang ayam: water stunner.","ayam vs lembu"],
+ ["Hikmah syarak","Hikmah sains","Dua sudut hikmah.","Syarak: membezakan halal dan haram supaya ibadah diterima. Sains: toksin dan bakteria dalam darah dikeluarkan; mempercepat kematian.","Darah keluar dengan banyak: hikmah sains.","ibadah vs kesihatan"]
+];
+const FLOW_A = [
+ ["1","Pastikan penyembelih layak","Islam atau Ahli Kitab; berniat menyembelih kerana Allah.","p-r","Syarat"],
+ ["2","Tajamkan pisau jauh daripada binatang","Elak menajamkan pisau di hadapan binatang kerana itu menyeksa.","p-s","Sunat"],
+ ["3","Pastikan binatang hidup bertenaga","Hayat mustaqirrah; jangan menyembelih binatang yang hampir mati.","p-r","Syarat"],
+ ["4","Baringkan pada rusuk kiri dan hadapkan ke kiblat","Siang hari lebih baik; elak di hadapan binatang lain.","p-s","Sunat"],
+ ["5","Baca basmalah","Ketika permulaan menyembelih.","p-s","Sunat"],
+ ["6","Putuskan halkum dan mari' dengan segera dan sekali sembelih","Menggunakan alat yang melukakan, bukan kuku, gigi atau tulang.","p-r","Syarat"],
+ ["7","Jangan menyeksa","Jangan patahkan leher atau kaki, atau mengheret binatang.","p-x","Elak makruh"]
+];
+const FLOW_B = [
+ ["1","Siapakah penyembelih?","Bukan Islam dan bukan Ahli Kitab, atau bukan kerana Allah → tidak halal.","p-r","Syarat 1"],
+ ["2","Adakah binatang mempunyai hayat mustaqirrah?","Hampir mati → tidak halal.","p-r","Syarat 2"],
+ ["3","Adakah halkum dan mari' putus dengan segera?","Satu urat sahaja atau tidak sempurna → tidak halal.","p-r","Syarat 3"],
+ ["4","Apakah alat yang digunakan?","Kuku, gigi atau tulang → tidak halal.","p-r","Syarat 4"],
+ ["5","Ada perkara makruh?","Pisau tumpul, malam, tiada basmalah → tetap halal tetapi makruh.","p-x","Makruh"],
+ ["6","Keputusan","Semua syarat dipenuhi → halal dimakan.","p-s","Halal"]
+];
+const SITUASI = [
+ ["Ali menyembelih ayam dengan pisau tumpul, tidak menyebut nama Allah, dan tidak memutuskan saluran pernafasan dan makanan dengan sempurna sehingga ayam mati selepas beberapa ketika.","Syarat binatang + perkara makruh","Tidak halal","Halkum dan mari' tidak diputuskan dengan sempurna dan segera (syarat). Pisau tumpul dan tiada basmalah hanya makruh.","Ayam itu tidak halal dimakan; Ali sepatutnya menggunakan pisau tajam dan memutuskan kedua-dua urat sekali gus."],
+ ["Puan Aminah menyembelih ayam dengan memenuhi semua syarat.","Penyembelih wanita","Sah dan halal","Buku teks: sembelihan wanita sah dan halal.","Ayam itu halal dimakan."],
+ ["Amin, 13 tahun, menyembelih ayam dengan cara yang betul.","Penyembelih kanak-kanak","Sah dan halal","Buku teks: sembelihan kanak-kanak sah dan halal.","Ayam itu halal."],
+ ["Seorang Ahli Kitab menyembelih lembu dengan memutuskan halkum dan mari'.","Penyembelih Ahli Kitab","Halal","Syarat: Islam atau Ahli Kitab.","Daging halal dimakan."],
+ ["Penduduk kampung menyembelih kambing sebagai persembahan kepada kubur keramat.","Niat penyembelih","Haram, tidak sah","Syarat: menyembelih hanya kerana Allah.","Daging tidak boleh dimakan dan perbuatan itu haram."],
+ ["Kambing yang sakit tenat dan tidak bergerak disembelih.","Hayat mustaqirrah","Tidak halal","Binatang yang hampir mati tidak halal walaupun disembelih.","Daging itu tidak halal dimakan."],
+ ["Pak Long menyembelih ayam menggunakan serpihan tulang yang tajam.","Alat sembelihan","Tidak sah","Alat tidak boleh daripada kuku, gigi dan tulang.","Ayam itu tidak halal."],
+ ["Penyembelih memutuskan halkum sahaja, manakala mari' tidak putus.","Syarat binatang","Tidak sah","Kedua-dua urat halkum dan mari' wajib diputuskan.","Daging tidak halal."],
+ ["Penyembelih mengasah pisau di hadapan lembu.","Menyeksa binatang","Makruh","Contoh menyeksa dalam buku teks.","Sembelihan sah tetapi makruh."],
+ ["Penyembelih menyembelih ayam di hadapan ayam-ayam lain.","Perkara makruh","Makruh","Menyembelih di hadapan binatang lain makruh.","Sembelihan sah tetapi makruh."],
+ ["Pekerja menyembelih ayam pada waktu malam.","Waktu sembelihan","Makruh (sah)","Malam makruh kerana dikhuatiri berlaku kesilapan.","Sah jika semua syarat dipenuhi."],
+ ["Penyembelih tidak menghadap kiblat dan lupa membaca basmalah.","Perkara sunat ditinggalkan","Makruh (sah)","Menghadap kiblat dan basmalah ialah sunat.","Daging tetap halal."],
+ ["Kilang ayam menggunakan water stunner sebelum menyembelih.","Alat moden","Harus","Muzakarah Jawatankuasa Fatwa, 1988.","Penggunaan dibenarkan."],
+ ["Rumah sembelih menggunakan electrical stunning untuk lembu.","Alat moden","Harus","Muzakarah Jawatankuasa Fatwa, 1988.","Penggunaan dibenarkan."],
+ ["Janin dalam perut lembu yang disembelih didapati telah mati.","Janin","Halal dimakan","Buku teks: janin yang mati selepas ibunya disembelih halal.","Janin tidak perlu disembelih semula."],
+ ["Pekerja mematahkan kaki ayam sebelum menyembelihnya supaya mudah dipegang.","Menyeksa binatang","Makruh","Mematahkan kaki ialah contoh menyeksa binatang.","Perbuatan itu bertentangan dengan ihsan."]
+];
+const DALIL = [
+ ["Surah al-Maidah 5:3","حُرِّمَتْ عَلَيْكُمُ الْمَيْتَةُ وَالدَّمُ وَلَحْمُ الْخِنزِيرِ وَمَا أُهِلَّ لِغَيْرِ اللَّهِ بِهِ وَالْمُنْخَنِقَةُ وَالْمَوْقُوذَةُ وَالْمُتَرَدِّيَةُ وَالنَّطِيحَةُ وَمَا أَكَلَ السَّبُعُ إِلَّا مَا ذَكَّيْتُمْ","Diharamkan kepada kamu bangkai, darah, daging babi, binatang yang disembelih bukan kerana Allah, yang mati tercekik, dipukul, jatuh dari tempat tinggi, ditanduk dan dimakan binatang buas, kecuali yang sempat kamu sembelih.","Binatang halal mesti disembelih dengan betul; kalau tidak, ia menjadi bangkai.","Dalil hukum sembelihan."],
+ ["Hadis riwayat al-Bukhari (Rafi' bin Khadij)","مَا أَنْهَرَ الدَّمَ وَذُكِرَ اسْمُ اللَّهِ عَلَيْهِ فَكُلُوهُ","Setiap yang ditumpahkan darahnya dengan menyebut nama Allah, maka makanlah.","Darah perlu dialirkan keluar ketika menyembelih.","Dalil nakli sembelihan."],
+ ["Hadis riwayat Muslim (Syaddad bin Aus)","إِنَّ اللَّهَ كَتَبَ الْإِحْسَانَ عَلَى كُلِّ شَيْءٍ ... وَإِذَا ذَبَحْتُمْ فَأَحْسِنُوا الذَّبْحَ وَلْيُحِدَّ أَحَدُكُمْ شَفْرَتَهُ وَلْيُرِحْ ذَبِيحَتَهُ","Allah mewajibkan perbuatan baik (ihsan) atas segala sesuatu. Jika kamu menyembelih, perelokkan sembelihan; tajamkan pisau dan tenangkan binatang sembelihan.","Ihsan kepada binatang: pisau tajam, tidak menyeksa.","Dalil perkara sunat dan larangan menyeksa."]
+];
+const HIKMAH = [
+ ["Sudut syarak","Membezakan antara daging yang halal dengan daging yang haram supaya ibadah diterima.","Memilih daging yang disahkan halal.","soft-mint"],
+ ["Sudut sains: kesihatan","Menghindarkan diri daripada penyakit kerana toksin dan bakteria yang terdapat dalam darah binatang telah dikeluarkan.","Daging yang darahnya keluar sempurna lebih selamat.","soft-teal"],
+ ["Sudut sains: ihsan","Mempercepat proses kematian binatang yang disembelih.","Pisau tajam dan sekali sembelih mengurangkan kesakitan.","soft-gold"]
+];
+const BANK = [
+ {q:"Apakah maksud sembelihan dari segi istilah?",o:["Memotong binatang menjadi kecil","Menyembelih binatang yang halal dimakan dengan memutuskan urat halkum dan urat mari'","Membunuh binatang dengan apa-apa cara","Memengsankan binatang"],a:1,e:"Definisi buku teks.",l:1,t:"is"},
+ {q:"Sembelihan dari segi bahasa bermaksud",o:["Memotong","Membakar","Mengikat","Memasak"],a:0,e:"Bahasa: memotong.",l:1,t:"is"},
+ {q:"Urat halkum ialah saluran",o:["Makanan","Pernafasan","Darah","Air kencing"],a:1,e:"Halkum: pernafasan.",l:1,t:"is"},
+ {q:"Urat mari' ialah saluran",o:["Pernafasan","Makanan","Saraf","Darah"],a:1,e:"Mari': makanan.",l:1,t:"is"},
+ {q:"Hayat mustaqirrah bermaksud",o:["Binatang yang telah mati","Haiwan yang mampu bergerak dengan bertenaga","Binatang yang dipengsankan","Binatang yang sakit"],a:1,e:"Tanda: meronta-ronta dengan kuat selepas disembelih.",l:2,t:"is"},
+ {q:"Majoriti ulama menyatakan Ahli Kitab ialah",o:["Semua bukan Islam","Keturunan Bani Israel yang beragama Yahudi dan Nasrani","Penganut Hindu","Orang yang membaca kitab"],a:1,e:"al-Mausu'ah al-Fiqhiyyah al-Kuwaitiyyah.",l:2,t:"is"},
+ {q:"Hukum sembelihan ialah",o:["Sunat","Harus","Wajib","Makruh"],a:2,e:"Wajib supaya halal dimakan.",l:1,t:"hk"},
+ {q:"Hukum sembelihan yang dilakukan oleh wanita yang memenuhi syarat ialah",o:["Tidak sah","Sah dan halal","Makruh","Haram"],a:1,e:"Buku teks: sah dan halal.",l:1,t:"hk"},
+ {q:"Hukum penggunaan water stunner dalam penyembelihan ayam ialah",o:["Haram","Harus","Wajib","Makruh"],a:1,e:"Muzakarah Jawatankuasa Fatwa, 1988.",l:2,t:"hk"},
+ {q:"Sembelihan sebagai persembahan kepada kubur keramat hukumnya",o:["Sunat","Makruh","Haram dan tidak sah dimakan","Harus"],a:2,e:"Syarat: menyembelih hanya kerana Allah.",l:2,t:"hk"},
+ {q:"Janin yang mati selepas ibunya disembelih hukumnya",o:["Haram","Halal dimakan","Perlu disembelih semula","Makruh"],a:1,e:"Buku teks: halal dimakan.",l:3,t:"hk"},
+ {q:"Hikmah sembelihan dari sudut sains ialah",o:["Membezakan halal dan haram","Toksin dan bakteria dalam darah dikeluarkan","Menambah berat daging","Menjimatkan masa"],a:1,e:"Menghindarkan penyakit.",l:2,t:"hk"},
+ {q:"Hikmah sembelihan dari sudut syarak ialah",o:["Membezakan daging halal dan haram supaya ibadah diterima","Menjadikan daging lebih lembut","Memudahkan pemasaran","Mengurangkan kos"],a:0,e:"Hikmah syarak.",l:2,t:"hk"},
+ {q:"Rukun sembelihan ialah",o:["Penyembelih, binatang sembelihan, alat sembelihan","Niat, basmalah, kiblat","Pisau, darah, daging","Imam, makmum, saksi"],a:0,e:"PE-BI-AL.",l:1,t:"rk"},
+ {q:"Syarat penyembelih ialah",o:["Lelaki dewasa sahaja","Beragama Islam atau Ahli Kitab dan menyembelih kerana Allah","Mempunyai sijil","Berumur 18 tahun"],a:1,e:"Dua syarat penyembelih.",l:2,t:"rk"},
+ {q:"Alat yang TIDAK boleh digunakan untuk menyembelih ialah",o:["Pisau","Kaca tajam","Kuku, gigi dan tulang","Parang tajam"],a:2,e:"Alat yang melukakan kecuali kuku, gigi dan tulang.",l:2,t:"rk"},
+ {q:"Urat yang wajib diputuskan ketika menyembelih ialah",o:["Halkum dan mari'","Halkum sahaja","Urat darah sahaja","Saraf tunjang"],a:0,e:"Kedua-dua urat.",l:1,t:"rk"},
+ {q:"Pemutusan urat halkum dan mari' mestilah",o:["Perlahan-lahan","Dengan segera dan sekali sembelih","Dua kali","Selepas binatang mati"],a:1,e:"Syarat binatang sembelihan.",l:2,t:"rk"},
+ {q:"Binatang sembelihan sunat dibaringkan pada",o:["Rusuk kanan","Rusuk kiri","Belakang","Perut"],a:1,e:"Rusuk kiri.",l:2,t:"rk"},
+ {q:"Membaca basmalah ketika menyembelih hukumnya",o:["Syarat sah","Sunat","Wajib","Rukun"],a:1,e:"Sunat; tidak membacanya makruh.",l:2,t:"bz"},
+ {q:"Perbezaan pisau tumpul dengan tulang tajam sebagai alat ialah",o:["Kedua-duanya tidak sah","Pisau tumpul makruh (sah); tulang tidak sah","Pisau tumpul tidak sah; tulang sah","Kedua-duanya sunat"],a:1,e:"Makruh vs tidak sah.",l:3,t:"bz"},
+ {q:"Water stunner digunakan untuk ___, manakala electrical stunning untuk ___.",o:["lembu; ayam","ayam; lembu","kambing; ayam","ikan; lembu"],a:1,e:"Kedua-duanya harus.",l:2,t:"bz"},
+ {q:"Yang manakah perkara SUNAT sembelihan?",o:["Menyembelih waktu malam","Menajamkan pisau","Menyembelih di hadapan binatang lain","Menggunakan pisau tumpul"],a:1,e:"Lain-lain ialah makruh.",l:1,t:"bz"},
+ {q:"Yang manakah perkara MAKRUH sembelihan?",o:["Menghadap kiblat","Menyembelih siang hari","Tidak membaca basmalah","Membaringkan pada rusuk kiri"],a:2,e:"Makruh.",l:2,t:"bz"},
+ {q:"Perbezaan syarat sah dengan perkara sunat sembelihan ialah",o:["Syarat menentukan halal; sunat menambah kesempurnaan","Sunat menentukan halal","Tiada beza","Kedua-duanya membatalkan"],a:0,e:"Halal vs sempurna.",l:3,t:"bz"},
+ {q:"Ali menggunakan pisau tumpul, tidak membaca basmalah dan tidak memutuskan saluran makanan dengan sempurna. Daging ayam itu",o:["Halal tetapi makruh","Tidak halal kerana syarat memutuskan urat tidak dipenuhi","Halal sepenuhnya","Sunat dimakan"],a:1,e:"Pisau tumpul dan basmalah hanya makruh; urat tidak putus menjadikannya tidak halal.",l:3,t:"st"},
+ {q:"Kambing yang sakit tenat dan tidak bergerak disembelih. Hukum dagingnya",o:["Halal","Tidak halal kerana tiada hayat mustaqirrah","Makruh","Sunat"],a:1,e:"Syarat binatang.",l:3,t:"st"},
+ {q:"Pak Long menyembelih ayam menggunakan tulang tajam. Sembelihannya",o:["Sah","Tidak sah","Makruh","Sunat"],a:1,e:"Tulang dikecualikan.",l:2,t:"st"},
+ {q:"Penyembelih mengasah pisau di hadapan lembu. Perbuatannya",o:["Sunat","Makruh kerana menyeksa binatang","Wajib","Harus"],a:1,e:"Contoh menyeksa.",l:2,t:"st"},
+ {q:"Amin, 13 tahun, menyembelih ayam dengan cara yang betul. Hukumnya",o:["Tidak sah kerana kanak-kanak","Sah dan halal","Makruh","Haram"],a:1,e:"Sembelihan kanak-kanak sah.",l:2,t:"st"},
+ {q:"Pekerja menyembelih pada waktu malam dengan memenuhi semua syarat. Daging itu",o:["Haram","Halal tetapi makruh menyembelih waktu malam","Tidak sah","Wajib dibuang"],a:1,e:"Malam: makruh.",l:2,t:"st"}
+];
+const TF = [
+ ["Hukum sembelihan ialah wajib.",true,"Supaya halal dimakan."],
+ ["Urat mari' ialah saluran pernafasan.",false,"Mari': saluran makanan; halkum: pernafasan."],
+ ["Sembelihan wanita sah dan halal.",true,"Buku teks."],
+ ["Tulang yang tajam boleh dijadikan alat sembelihan.",false,"Kuku, gigi dan tulang dikecualikan."],
+ ["Membaca basmalah ialah syarat sah sembelihan.",false,"Basmalah ialah sunat."],
+ ["Menyembelih pada waktu malam hukumnya makruh.",true,"Dikhuatiri berlaku kesilapan."],
+ ["Binatang yang hampir mati halal jika disembelih.",false,"Mesti ada hayat mustaqirrah."],
+ ["Penggunaan water stunner bagi ayam adalah harus.",true,"Muzakarah 1988."],
+ ["Menajamkan pisau di hadapan binatang ialah perbuatan sunat.",false,"Itu contoh menyeksa (makruh)."],
+ ["Binatang sembelihan sunat dibaringkan pada rusuk kiri.",true,"Betul."],
+ ["Sembelihan untuk kubur keramat halal jika dibaca basmalah.",false,"Mesti kerana Allah; haram dan tidak sah."],
+ ["Toksin dan bakteria dalam darah dikeluarkan melalui sembelihan.",true,"Hikmah sains."],
+ ["Ahli Kitab ialah semua orang bukan Islam.",false,"Keturunan Bani Israel yang beragama Yahudi dan Nasrani."],
+ ["Janin yang mati selepas ibunya disembelih halal dimakan.",true,"Buku teks."],
+ ["Rukun sembelihan ada empat.",false,"Tiga: penyembelih, binatang, alat."],
+ ["Menghadap kiblat ketika menyembelih hukumnya sunat.",true,"Kiblat tempat mulia."]
+];
+const PAIRS = [["Halkum","Saluran pernafasan"],["Mari'","Saluran makanan"],["Hayat mustaqirrah","Bergerak bertenaga, meronta kuat"],["Ahli Kitab","Yahudi dan Nasrani keturunan Bani Israel"],["Water stunner","Ayam · harus"],["Electrical stunning","Lembu · harus"],["Ihsan","Berbuat baik kepada binatang"],["Kuku, gigi, tulang","Alat yang tidak dibenarkan"],["Basmalah","Sunat ketika mula menyembelih"],["Menyeksa binatang","Makruh, contohnya patah kaki"]];
+const SORT_CATS = ["Rukun","Syarat sah","Sunat","Makruh"];
+const SORT = [["Penyembelih",0],["Binatang sembelihan",0],["Alat sembelihan",0],["Islam atau Ahli Kitab",1],["Menyembelih kerana Allah",1],["Hayat mustaqirrah",1],["Putus halkum dan mari'",1],["Alat bukan kuku, gigi, tulang",1],["Menajamkan pisau",2],["Menyembelih siang hari",2],["Menghadap kiblat",2],["Membaca basmalah",2],["Baring rusuk kiri",2],["Di hadapan binatang lain",3],["Menyeksa binatang",3],["Pisau tumpul",3],["Menyembelih waktu malam",3],["Tidak membaca basmalah",3]];
+const DETECT = [
+ {c:"Encik Hamid menyembelih lembu pada waktu siang, menghadap kiblat, membaca basmalah, tetapi menggunakan serpihan tulang yang tajam.",t:["Waktu siang","Menghadap kiblat","Membaca basmalah","Menggunakan tulang"],s:3,e:"Alat tidak boleh daripada kuku, gigi atau tulang; sembelihan tidak sah."},
+ {c:"Penyembelih membaringkan kambing pada rusuk kiri, membaca basmalah, kemudian memutuskan halkum sahaja.",t:["Rusuk kiri","Membaca basmalah","Memutuskan halkum sahaja","Penyembelih beragama Islam"],s:2,e:"Halkum dan mari' wajib diputuskan."},
+ {c:"Pak Abu ingin menjual daging. Dia menyembelih seekor kambing yang sakit tenat dan tidak bergerak menggunakan pisau tajam.",t:["Pisau tajam","Penyembelih Islam","Kambing tidak mempunyai hayat mustaqirrah","Menjual daging"],s:2,e:"Binatang yang hampir mati tidak halal."},
+ {c:"Sekumpulan penduduk menyembelih ayam dengan memenuhi syarat teknikal, tetapi tujuannya sebagai persembahan kepada kubur keramat.",t:["Pisau tajam","Memutuskan dua urat","Tujuan persembahan kubur keramat","Siang hari"],s:2,e:"Syarat: menyembelih hanya kerana Allah."},
+ {c:"Pekerja kilang mengheret kaki lembu ke tempat sembelihan, kemudian menyembelih dengan pisau tajam dan memutuskan dua urat.",t:["Mengheret kaki lembu","Pisau tajam","Memutuskan dua urat","Pekerja beragama Islam"],s:0,e:"Mengheret kaki ialah contoh menyeksa (makruh)."},
+ {c:"Amirah menyembelih ayam di hadapan ayam-ayam lain dalam reban dengan pisau tajam dan memutuskan dua urat.",t:["Penyembelih wanita","Di hadapan ayam lain","Pisau tajam","Dua urat putus"],s:1,e:"Menyembelih di hadapan binatang lain makruh; penyembelih wanita sah."}
+];
+const ESCAPE = [
+ {q:"Berapakah bilangan rukun sembelihan?",a:3,h:"PE-BI-AL",k:"rukun sembelihan"},
+ {q:"Berapakah bilangan urat yang wajib diputuskan?",a:2,h:"Halkum dan mari'",k:"urat wajib diputus"},
+ {q:"Berapakah bilangan jenis alat yang dikecualikan?",a:3,h:"KU-GI-TU",k:"alat dikecualikan"},
+ {q:"Berapakah bilangan hikmah sembelihan dalam buku teks?",a:3,h:"Syarak, kesihatan, cepat mati",k:"hikmah sembelihan"}
+];
+const WHEEL = {
+ "Istilah":[["Apakah maksud sembelihan?","Menyembelih binatang yang halal dimakan dengan memutuskan urat halkum dan urat mari'."],["Apakah hayat mustaqirrah?","Haiwan yang mampu bergerak dengan bertenaga, contohnya meronta kuat selepas disembelih."]],
+ "Rukun":[["Senaraikan rukun sembelihan.","Penyembelih, binatang sembelihan, alat sembelihan."],["Apakah dua urat yang wajib diputuskan?","Halkum dan mari'."]],
+ "Syarat":[["Nyatakan dua syarat penyembelih.","Islam atau Ahli Kitab; menyembelih hanya kerana Allah."],["Apakah syarat alat sembelihan?","Boleh melukakan, kecuali kuku, gigi dan tulang."]],
+ "Sunat":[["Nyatakan tiga perkara sunat sembelihan.","Mana-mana tiga: tajamkan pisau, siang, kiblat, basmalah, rusuk kiri, alat tajam."],["Mengapa sunat menyembelih siang hari?","Dikhuatiri berlaku kesilapan ketika menyembelih waktu malam."]],
+ "Makruh":[["Nyatakan dua perkara makruh sembelihan.","Mana-mana dua: di hadapan binatang lain, menyeksa, pisau tumpul, malam, tidak menghadap kiblat, tidak basmalah."],["Berikan dua contoh menyeksa binatang.","Mematahkan leher/kaki, mengheret kaki, menajamkan pisau di hadapan binatang."]],
+ "Dalil":[["Nyatakan dalil al-Quran sembelihan.","Surah al-Maidah 5:3."],["Apakah isi hadis Syaddad bin Aus?","Ihsan: perelokkan sembelihan, tajamkan pisau, tenangkan binatang."]],
+ "Hikmah":[["Nyatakan hikmah sembelihan dari sudut syarak.","Membezakan daging halal dan haram supaya ibadah diterima."],["Nyatakan hikmah sembelihan dari sudut sains.","Toksin dan bakteria dalam darah dikeluarkan; mempercepat kematian binatang."]],
+ "Situasi":[["Sembelih dengan tulang tajam. Hukumnya?","Tidak sah; tulang dikecualikan."],["Tidak membaca basmalah. Hukumnya?","Makruh; sembelihan tetap sah."]]
+};
+
+/* ================= HELPERS ================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const store = { get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}, set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}} };
+
+/* ================= TABS ================= */
+const TABS = ["analisis","slaid","lembaran","permainan","spm","diagnostik"];
+function openTab(id){
+  if(!TABS.includes(id)) id="analisis";
+  TABS.forEach(t=>{ $("#p-"+t).hidden = t!==id; $("#tab-"+t).setAttribute("aria-selected", t===id?"true":"false"); });
+}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{openTab(b.dataset.tab); try{history.replaceState(null,"","#"+b.dataset.tab)}catch(e){} window.scrollTo({top:0})}));
+openTab((location.hash||"").replace("#",""));
+
+/* ================= ANALISIS RENDER ================= */
+const _h=(id,html)=>{const el=document.getElementById(id); if(el) el.innerHTML=html;};
+const _td=(r)=>`<tr>${r.map((c,i)=>`<td>${i===0?`<b>${esc(c)}</b>`:esc(c)}</td>`).join("")}</tr>`;
+if(typeof ISTILAH!=="undefined") _h("istilah", ISTILAH.map(i=>`<div class="card term"><div class="t"><h3>${esc(i[0])}</h3><span class="k">${esc(i[4])}</span></div><dl><dt>Buku teks</dt><dd>${esc(i[1])}</dd><dt>Mudah</dt><dd>${esc(i[2])}</dd><dt>Contoh</dt><dd>${esc(i[3])}</dd><dt>Kesilapan</dt><dd class="x">${esc(i[5])}</dd></dl></div>`).join(""));
+if(typeof HUKUM!=="undefined") _h("hukum", HUKUM.map(_td).join(""));
+if(typeof BEZA!=="undefined") _h("beza", BEZA.map(b=>`<tr><td><b>${esc(b[0])}</b></td><td><b>${esc(b[1])}</b></td><td>${esc(b[2])}</td><td>${esc(b[3])}</td><td>${esc(b[4])}</td><td>${esc(b[5])}</td></tr>`).join(""));
+if(typeof SITUASI!=="undefined") _h("situasi", SITUASI.map((s,i)=>`<div class="sit"><div class="s1"><span class="lab"><span class="num">${i+1}</span>Situasi</span>${esc(s[0])}</div><div><span class="lab">Isu fiqh</span>${esc(s[1])}</div><div class="s3"><span class="lab">Hukum</span><b>${esc(s[2])}</b></div><div><span class="lab">Alasan</span>${esc(s[3])}</div><div class="s5"><span class="lab">Kesimpulan</span>${esc(s[4])}</div></div>`).join(""));
+if(typeof DALIL!=="undefined") _h("dalil", DALIL.map(d=>`<div class="card"><h3>${esc(d[0])}</h3><span class="ar">${d[1]}</span><p><b>Maksud:</b> ${esc(d[2])}</p><p style="margin-top:6px"><b>Huraian mudah:</b> ${esc(d[3])}</p><p style="margin-top:6px" class="muted"><b>Kaitan:</b> ${esc(d[4])}</p></div>`).join(""));
+if(typeof HIKMAH!=="undefined") _h("hikmah", HIKMAH.map(h=>`<div class="card ${h[3]||""}"><h3>${esc(h[0])}</h3><p>${esc(h[1])}</p>${h[2]?`<p style="margin-top:6px;font-size:.88rem"><b>Aplikasi:</b> ${esc(h[2])}</p>`:""}</div>`).join(""));
+const flow = arr => arr.map(f=>`<div class="fstep"><div class="d"><b>${esc(f[0])}</b>${esc(f[5]||"Langkah")}</div><div class="body"><b>${esc(f[1])}</b><span class="muted">${esc(f[2])}</span><br><span class="pill ${f[3]}">${esc(f[4])}</span></div></div>`).join("");
+if(typeof FLOW_A!=="undefined") _h("flowA", flow(FLOW_A));
+if(typeof FLOW_B!=="undefined") _h("flowB", flow(FLOW_B));
+if(typeof TABLES!=="undefined") TABLES.forEach(t=>_h(t.id, t.rows.map(_td).join("")));
+if(typeof CARDS!=="undefined") CARDS.forEach(c=>_h(c.id, c.items.map(x=>`<div class="card ${x[3]||""}"><h3>${esc(x[0])}</h3>${Array.isArray(x[1])?`<ul>${x[1].map(y=>`<li>${esc(y)}</li>`).join("")}</ul>`:`<p>${esc(x[1])}</p>`}${x[2]?`<p style="margin-top:6px;font-size:.88rem"><b>${esc(c.lab||"Contoh")}:</b> ${esc(x[2])}</p>`:""}</div>`).join("")));
+
+/* ================= SLIDES ================= */
+const ILL = {
+ kaabah:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><ellipse cx="100" cy="138" rx="90" ry="16" fill="none" stroke="#e3bd55" stroke-width="3" stroke-dasharray="6 7"/><path d="M50 60 100 40l50 20v62l-50 22-50-22Z" fill="#11161a"/><path d="M50 72l50 22 50-22" stroke="#e3bd55" stroke-width="8" fill="none"/><path d="M112 100h14v30l-14 6Z" fill="#e3bd55"/></svg>`,
+ arafah:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><path d="M10 130 70 60l30 30 30-50 60 90Z" fill="#e3bd55" fill-opacity=".85"/><path d="M40 130h30v-16l-15-12-15 12Zm50 0h30v-16l-15-12-15 12Zm50 0h30v-16l-15-12-15 12Z" fill="#ffffff" fill-opacity=".9"/><circle cx="160" cy="34" r="14" fill="#ffffff" fill-opacity=".8"/></svg>`,
+ batu:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><rect x="86" y="20" width="28" height="110" rx="6" fill="#ffffff" fill-opacity=".85"/><g fill="#e3bd55"><circle cx="40" cy="120" r="9"/><circle cx="60" cy="132" r="7"/><circle cx="150" cy="124" r="8"/><circle cx="168" cy="134" r="6"/><circle cx="135" cy="138" r="7"/><circle cx="30" cy="140" r="6"/><circle cx="62" cy="108" r="6"/></g></svg>`,
+ gunting:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><g fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round"><circle cx="60" cy="118" r="20"/><circle cx="140" cy="118" r="20"/><path d="M74 104 150 24M126 104 50 24"/></g><circle cx="100" cy="64" r="6" fill="#e3bd55"/></svg>`,
+ miqat:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><path d="M100 18c-26 0-44 20-44 42 0 30 44 78 44 78s44-48 44-78c0-22-18-42-44-42Z" fill="#e3bd55"/><circle cx="100" cy="60" r="16" fill="#0c3f34"/><path d="M20 146h160" stroke="#ffffff" stroke-width="4" stroke-dasharray="8 8"/></svg>`,
+ safa:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><path d="M10 120 40 80l30 40Zm120 0 30-40 30 40Z" fill="#e3bd55"/><g stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round"><path d="M70 92h60m-10-10 10 10-10 10"/><path d="M130 116H70m10-10-10 10 10 10"/></g><text x="40" y="146" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Safa</text><text x="160" y="146" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Marwah</text></svg>`,
+ timbang:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><g stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round"><path d="M100 24v110M50 44h100M50 44 30 94h40Zm100 0-20 50h40Z"/><path d="M70 134h60"/></g><path d="M30 94h40a20 12 0 0 1-40 0Zm100 0h40a20 12 0 0 1-40 0Z" fill="#e3bd55"/></svg>`,
+ kitab:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><path d="M100 40c-20-12-50-14-76-8v96c26-6 56-4 76 8 20-12 50-14 76-8V32c-26-6-56-4-76 8Z" fill="#ffffff" fill-opacity=".9"/><path d="M100 40v96" stroke="#e3bd55" stroke-width="5"/><path d="M40 60h44M40 78h44M116 60h44M116 78h44M40 96h44M116 96h44" stroke="#0c3f34" stroke-width="3" stroke-opacity=".5"/></svg>`,
+ mentol:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><path d="M100 20a40 40 0 0 0-22 74c6 4 8 10 8 16h28c0-6 2-12 8-16a40 40 0 0 0-22-74Z" fill="#e3bd55"/><rect x="86" y="114" width="28" height="10" rx="3" fill="#ffffff"/><rect x="88" y="128" width="24" height="8" rx="3" fill="#ffffff"/><g stroke="#ffffff" stroke-width="4" stroke-linecap="round"><path d="M40 60h-16M176 60h-16M56 26 46 16M144 26l10-10"/></g></svg>`,
+ soalan:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><circle cx="100" cy="80" r="62" fill="#e3bd55"/><text x="100" y="104" text-anchor="middle" font-size="72" font-weight="800" fill="#0c3f34">?</text></svg>`,
+ larang:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><circle cx="100" cy="80" r="58" fill="none" stroke="#e3bd55" stroke-width="12"/><path d="M60 40l80 80" stroke="#e3bd55" stroke-width="12"/><path d="M84 64h32v36H84Z" fill="#ffffff" fill-opacity=".8"/></svg>`,
+ dua:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><rect x="16" y="30" width="76" height="100" rx="12" fill="#ffffff" fill-opacity=".9"/><rect x="108" y="30" width="76" height="100" rx="12" fill="#e3bd55"/><text x="54" y="92" text-anchor="middle" font-size="22" font-weight="800" fill="#0c3f34">A</text><text x="146" y="92" text-anchor="middle" font-size="22" font-weight="800" fill="#0c3f34">B</text></svg>`
+};
+Object.assign(ILL,{pisau:`<svg class="ill" viewBox="0 0 200 160" aria-hidden="true"><path d="M30 92h100l40-30v14l-30 32H30Z" fill="#ffffff" fill-opacity=".92"/><rect x="14" y="86" width="30" height="28" rx="6" fill="#e3bd55"/><path d="M40 128h120" stroke="#e3bd55" stroke-width="5" stroke-dasharray="8 8"/></svg>`});
+const SLIDES = [
+ {cover:true,t:"Sembelihan",lead:"Pendidikan Islam Tingkatan 4 · Bidang Fiqah · Pelajaran 14 · Buku teks ms 109–116",ill:"pisau"},
+ {t:"Objektif: apa yang anda boleh buat selepas ini",isi:["Menyatakan maksud, hukum dan dalil sembelihan","Menjelaskan rukun dan syarat sah sembelihan","Membezakan perkara sunat dengan perkara makruh","Menerangkan hikmah sembelihan dari sudut syarak dan sains"],terang:"Disoal dalam 6 daripada 13 set Soalan 3 percubaan 2026.",kw:["Standard 4.21"],ex:"Set Perlis: situasi Ali menggunakan pisau tumpul.",q:"Pernahkah anda melihat sembelihan korban?",ill:"kitab"},
+ {t:"Peta konsep dalam satu pandangan",isi:["Rukun: penyembelih, binatang, alat","Syarat sah bagi setiap rukun","Sunat: 6 perkara","Makruh: 6 perkara","Hikmah: syarak dan sains"],terang:"Empat lapisan: rukun, syarat, sunat, makruh.",kw:["PE-BI-AL"],ex:"Syarat menentukan halal; sunat menentukan sempurna.",q:"Apakah tiga rukun sembelihan?",ill:"dua"},
+ {t:"Kenali tajuk: halal bermula di sini",isi:["Daging ayam dan lembu yang kita makan setiap hari mesti disembelih","Sembelihan yang salah menjadikan daging bangkai","Isu status halal premis makanan"],terang:"Buku teks memaparkan berita premis memproses ayam diarah tutup kerana cara sembelihan diragui.",kw:["Halal","Premis"],ex:"Premis tanpa sijil halal diarah tutup.",q:"Mengapakah status halal penting?",ill:"pisau"},
+ {t:"Istilah penting",isi:["Halkum: saluran pernafasan","Mari': saluran makanan","Hayat mustaqirrah: bergerak bertenaga, meronta kuat","Ahli Kitab: Yahudi dan Nasrani keturunan Bani Israel","Ihsan: berbuat baik kepada binatang"],terang:"Halkum dan mari' ialah kata kunci wajib dalam maksud sembelihan.",kw:["Halkum","Mari'","Mustaqirrah"],ex:"Lembu meronta kuat selepas disembelih: tanda hayat mustaqirrah.",q:"Apakah beza halkum dengan mari'?",ill:"kitab"},
+ {t:"Maksud dan hukum",isi:["Bahasa: memotong","Istilah: menyembelih binatang halal dimakan dengan memutuskan urat halkum dan urat mari'","Hukum: wajib (supaya halal dimakan)"],terang:"Tanpa sembelihan yang sah, daging tidak halal.",kw:["Wajib"],ex:"Ayam yang mati dipukul tidak halal.",q:"Nyatakan hukum sembelihan.",ill:"timbang"},
+ {t:"Dalil",isi:["al-Maidah 5:3 — diharamkan bangkai… kecuali yang sempat kamu sembelih","Hadis Rafi' bin Khadij (al-Bukhari) — yang ditumpahkan darahnya dengan menyebut nama Allah, makanlah","Hadis Syaddad bin Aus (Muslim) — ihsan: tajamkan pisau, tenangkan binatang"],terang:"Hadis Syaddad menjadi asas perkara sunat dan larangan menyeksa.",kw:["5:3","Ihsan"],ex:"إِلَّا مَا ذَكَّيْتُمْ",q:"Hadis manakah menjadi asas larangan menyeksa?",ill:"kitab"},
+ {t:"Rukun: PE-BI-AL",isi:["Penyembelih","Binatang sembelihan","Alat sembelihan"],terang:"Tiga unsur yang mesti ada dalam setiap sembelihan.",kw:["3 rukun"],ex:"Soalan: “Senaraikan rukun sembelihan.”",q:"Adakah basmalah rukun?",ill:"pisau"},
+ {t:"Syarat sah",isi:["Penyembelih: Islam atau Ahli Kitab; kerana Allah","Binatang: hayat mustaqirrah; putus halkum & mari' dengan segera dan sekali","Alat: boleh melukakan, kecuali kuku, gigi, tulang"],terang:"Jika satu syarat tidak dipenuhi, daging tidak halal.",kw:["KU-GI-TU"],ex:"Sembelihan untuk kubur keramat: tidak sah.",q:"Jelaskan dua syarat sah sembelihan.",ill:"larang"},
+ {t:"Perbezaan: sunat vs makruh",isi:["Sunat: tajamkan pisau, siang, kiblat, basmalah, rusuk kiri, alat tajam","Makruh: di hadapan binatang lain, menyeksa, pisau tumpul, malam, tidak kiblat, tiada basmalah","Makruh tidak membatalkan; tidak sah berlaku jika syarat gagal"],terang:"Setiap makruh ialah lawan kepada satu sunat.",kw:["Sunat","Makruh"],ex:"Pisau tumpul: makruh. Tulang: tidak sah.",q:"Apakah lawan bagi “menyembelih siang hari”?",ill:"dua"},
+ {t:"Contoh menyeksa binatang",isi:["Mematahkan leher","Mematahkan kaki","Mengheret kaki binatang ke tempat sembelihan","Menajamkan pisau di hadapan binatang"],terang:"Semua bertentangan dengan ihsan dalam hadis Syaddad bin Aus.",kw:["Ihsan","Makruh"],ex:"Set percubaan: “Jelaskan dua contoh perbuatan menyeksa binatang sembelihan.”",q:"Berikan dua contoh menyeksa.",ill:"larang"},
+ {t:"Proses menyembelih",isi:["1. Penyembelih layak, niat kerana Allah","2. Tajamkan pisau jauh daripada binatang","3. Baringkan rusuk kiri, hadap kiblat","4. Baca basmalah","5. Putuskan halkum dan mari' dengan segera, sekali","6. Jangan menyeksa"],terang:"Langkah 1 dan 5 ialah syarat; yang lain sunat atau adab.",kw:["Amali"],ex:"Fatwa 1988: water stunner (ayam) dan electrical stunning (lembu) harus.",q:"Langkah manakah merupakan syarat sah?",ill:"pisau"},
+ {t:"Contoh situasi",isi:["Ali: pisau tumpul, tiada basmalah, urat tidak putus sempurna → tidak halal","Wanita menyembelih → sah","Kambing nazak → tidak halal","Tulang tajam → tidak sah"],terang:"Bezakan punca tidak halal (syarat) daripada perkara makruh.",kw:["Isu","Hukum","Alasan"],ex:"Janin mati dalam perut lembu sembelihan: halal.",q:"Mengapakah sembelihan Ali tidak halal?",ill:"timbang"},
+ {t:"Kesalahan lazim murid",isi:["Menulis basmalah sebagai syarat sah","Menyebut “urat leher” tanpa halkum dan mari'","Menganggap wanita tidak boleh menyembelih","Tertukar water stunner dengan electrical stunning","Menganggap pisau tumpul membatalkan sembelihan"],terang:"Semak kategori sebelum menjawab: rukun, syarat, sunat atau makruh?",kw:["Semak"],ex:"Soalan “dua syarat sah” — jawapan “membaca basmalah” tidak diterima.",q:"Mengapakah basmalah bukan syarat sah?",ill:"larang"},
+ {t:"Teknik hafalan",isi:["Rukun: PE-BI-AL","Alat dikecualikan: KU-GI-TU","Sunat: TA-SI-KI-BA-KI","Hikmah: “Halal-Sihat-Cepat”","Stunning: “Air untuk Ayam, Elektrik untuk Lembu”"],terang:"Uji rakan dengan kad imbas.",kw:["Akronim"],ex:"Halal-Sihat-Cepat = 3 hikmah.",q:"Apakah TA-SI-KI-BA-KI?",ill:"mentol"},
+ {t:"Kuiz pantas",isi:["1. Hukum sembelihan?","2. Mari' ialah saluran?","3. Basmalah: syarat atau sunat?","4. Alat yang dikecualikan?","5. Water stunner untuk binatang apa?"],terang:"Jawapan: 1) Wajib · 2) Makanan · 3) Sunat · 4) Kuku, gigi, tulang · 5) Ayam",kw:["Game Zone"],ex:"Teruskan di tab Game Zone.",q:"Berapa markah anda daripada 5?",ill:"soalan"},
+ {t:"Soalan aplikasi (KBAT)",isi:["“Umat Islam hendaklah memastikan status halal daging sebelum membelinya.” Kemukakan hujah anda.","Premis penyembelihan diragui: bagaimana mengatasinya?","Mengapakah Islam menuntut ihsan kepada binatang?"],terang:"Formula 4 markah: dua isi, setiap isi ada huraian atau contoh.",kw:["Hujah","Huraikan"],ex:"Isi: daging yang tidak disembelih dengan sah menjadi bangkai dan haram dimakan (al-Maidah 3).",q:"Bina satu isi lagi beserta huraian.",ill:"mentol"},
+ {t:"Rumusan",isi:["Sembelihan wajib; putus halkum dan mari'","Rukun: penyembelih, binatang, alat","Syarat menentukan halal; sunat dan makruh menentukan kesempurnaan","Hikmah: halal-haram, kesihatan, cepat mati","Bersifat ihsan kepada binatang"],terang:"Nota guru buku teks: bimbing murid bersifat ihsan terhadap binatang secara beradab dan istiqamah.",kw:["Ihsan","Halal"],ex:"Sertai amali sembelihan dengan bimbingan guru.",q:"Apakah satu adab menyembelih yang akan anda amalkan?",ill:"pisau"}
+];
+let sIdx = 0;
+function renderSlide(){
+  const s = SLIDES[sIdx], n = SLIDES.length;
+  if (s.cover) {
+    $("#stage").innerHTML = `<div class="slide cover"><div class="main"><div class="no">Fiqh Mastery Kit · T4 · P14</div><h3>Sem<span>be</span>lihan</h3><p class="lead">${esc(s.lead)}</p><div style="max-width:220px">${ILL[s.ill]}</div></div></div>`;
+  } else {
+    $("#stage").innerHTML = `<div class="slide"><div class="main"><div class="no">Slaid ${sIdx+1} / ${n}</div><h3>${esc(s.t)}</h3><p class="lead">${esc(s.terang)}</p><ul>${s.isi.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+    <div class="side">${ILL[s.ill]}<div class="kw">${s.kw.map(k=>`<span>${esc(k)}</span>`).join("")}</div><div class="ex"><b>Contoh:</b> ${/[؀-ۿ]/.test(s.ex)?`<span class="ar" style="text-align:left">${esc(s.ex)}</span>`:esc(s.ex)}</div><div class="q"><b>Soalan pemahaman:</b> ${esc(s.q)}</div></div></div>`;
+  }
+  $("#sCount").textContent = `Slaid ${sIdx+1} daripada ${n}`;
+  $("#sPrev").disabled = sIdx===0; $("#sNext").disabled = sIdx===n-1;
+  document.querySelectorAll("#sDots button").forEach((b,i)=>b.setAttribute("aria-current", i===sIdx?"true":"false"));
+}
+$("#sDots").innerHTML = SLIDES.map((_,i)=>`<button type="button" aria-label="Slaid ${i+1}">${i+1}</button>`).join("");
+document.querySelectorAll("#sDots button").forEach((b,i)=>b.addEventListener("click",()=>{sIdx=i;renderSlide()}));
+$("#sPrev").addEventListener("click",()=>{if(sIdx>0){sIdx--;renderSlide()}});
+$("#sNext").addEventListener("click",()=>{if(sIdx<SLIDES.length-1){sIdx++;renderSlide()}});
+document.addEventListener("keydown",e=>{ if($("#p-slaid").hidden) return; if(e.target.matches("input,select,textarea")) return; if(e.key==="ArrowRight"&&sIdx<SLIDES.length-1){sIdx++;renderSlide()} if(e.key==="ArrowLeft"&&sIdx>0){sIdx--;renderSlide()} });
+renderSlide();
+
+/* ================= WORKSHEET ================= */
+const WS = [
+ {b:"Tahap 1",h:"KENALI",tasks:[
+  {t:"A. Padankan istilah dengan maksud.",body:`<div class="cols2"><ol><li>Halkum</li><li>Mari'</li><li>Hayat mustaqirrah</li><li>Ahli Kitab</li><li>Ihsan</li></ol><ol type="A"><li>Yahudi dan Nasrani keturunan Bani Israel</li><li>Saluran makanan</li><li>Berbuat baik atas segala sesuatu</li><li>Saluran pernafasan</li><li>Mampu bergerak dengan bertenaga</li></ol></div>`,s:"1–D, 2–B, 3–E, 4–A, 5–C"},
+  {t:"B. Isi tempat kosong.",body:`<ol><li>Hukum sembelihan ialah <span class="blank"></span>.</li><li>Rukun sembelihan ialah penyembelih, binatang dan <span class="blank"></span>.</li><li>Alat sembelihan tidak boleh daripada kuku, gigi dan <span class="blank"></span>.</li><li>Binatang sembelihan sunat dibaringkan pada rusuk <span class="blank"></span>.</li><li>Penggunaan water stunner bagi ayam hukumnya <span class="blank"></span>.</li></ol>`,s:"1) wajib · 2) alat sembelihan · 3) tulang · 4) kiri · 5) harus"}
+ ]},
+ {b:"Tahap 2",h:"FAHAMI",tasks:[
+  {t:"A. Betul (B) atau Salah (S).",body:`<ol><li>Basmalah ialah syarat sah sembelihan.</li><li>Sembelihan kanak-kanak sah dan halal.</li><li>Menyembelih waktu malam hukumnya haram.</li><li>Halkum dan mari' wajib diputuskan.</li><li>Janin yang mati selepas ibunya disembelih halal dimakan.</li></ol>`,s:"1) S (sunat) · 2) B · 3) S (makruh) · 4) B · 5) B"},
+  {t:"B. Kelaskan: Syarat sah (SS), Sunat (S), Makruh (M).",body:`<p>Pisau tumpul · Hayat mustaqirrah · Menghadap kiblat · Kerana Allah · Di hadapan binatang lain · Menajamkan pisau · Putus halkum dan mari'</p><div class="wbox"></div>`,s:"Pisau tumpul (M) · Hayat mustaqirrah (SS) · Menghadap kiblat (S) · Kerana Allah (SS) · Di hadapan binatang lain (M) · Menajamkan pisau (S) · Putus halkum dan mari' (SS)"},
+  {t:"C. Lengkapkan jadual syarat sah.",body:`<div class="tbox"><table style="min-width:360px"><thead><tr><th>Rukun</th><th>Syarat sah</th></tr></thead><tbody><tr><td>Penyembelih</td><td><span class="blank"></span> ; <span class="blank"></span></td></tr><tr><td>Binatang</td><td><span class="blank"></span> ; <span class="blank"></span></td></tr><tr><td>Alat</td><td><span class="blank"></span></td></tr></tbody></table></div>`,s:"Penyembelih: Islam atau Ahli Kitab; kerana Allah · Binatang: hayat mustaqirrah; putus halkum dan mari' dengan segera dan sekali · Alat: boleh melukakan kecuali kuku, gigi, tulang"}
+ ]},
+ {b:"Tahap 3",h:"BEZAKAN",tasks:[
+  {t:"A. Bezakan pasangan berikut.",body:`<ol><li>Halkum dan mari'</li><li>Pisau tumpul dan tulang tajam (dari aspek hukum)</li><li>Water stunner dan electrical stunning</li><li>Hikmah syarak dan hikmah sains</li></ol>`,s:"1) Halkum: saluran pernafasan; mari': saluran makanan. 2) Pisau tumpul: makruh tetapi sah; tulang: tidak sah. 3) Water stunner: ayam; electrical stunning: lembu; kedua-duanya harus. 4) Syarak: membezakan halal dan haram supaya ibadah diterima; sains: toksin dan bakteria dikeluarkan, kematian lebih cepat."},
+  {t:"B. Cari LIMA kesalahan.",body:`<p class="card soft-peach">Pak Dollah ingin menyembelih kambing yang sakit tenat pada waktu malam. Dia mengasah pisau di hadapan kambing itu, mengheret kakinya ke tempat sembelihan, lalu memotong halkumnya sahaja menggunakan pisau tumpul.</p>`,s:"1) Kambing tiada hayat mustaqirrah (syarat). 2) Waktu malam (makruh). 3) Mengasah pisau di hadapan binatang (menyeksa, makruh). 4) Mengheret kaki (menyeksa, makruh). 5) Memotong halkum sahaja (syarat: halkum dan mari'). (Pisau tumpul juga makruh.)"}
+ ]},
+ {b:"Tahap 4",h:"APLIKASI",tasks:[
+  {t:"A. Tentukan hukum dan alasan.",body:`<ol><li>Seorang Ahli Kitab menyembelih ayam dengan memutuskan halkum dan mari'.</li><li>Menyembelih ayam menggunakan kaca tajam.</li><li>Tidak menghadap kiblat ketika menyembelih.</li></ol>`,s:"1) Halal — penyembelih Islam atau Ahli Kitab. 2) Sah — alat boleh melukakan dan bukan kuku, gigi atau tulang. 3) Makruh — menghadap kiblat sunat; sembelihan tetap sah."},
+  {t:"B. Soalan struktur.",body:`<ol><li>Nyatakan maksud sembelihan. [2]</li><li>Senaraikan dua urat yang wajib diputuskan. [2]</li><li>Jelaskan dua perkara sunat sembelihan. [2]</li></ol>`,s:"1) Menyembelih binatang yang halal dimakan dengan memutuskan urat halkum dan urat mari'. 2) Halkum; mari'. 3) Mana-mana dua: menajamkan pisau (hadis Abu Ya'la); siang (elak kesilapan); menghadap kiblat (tempat mulia); basmalah ketika permulaan; rusuk kiri; alat tajam."}
+ ]},
+ {b:"Tahap 5",h:"KBAT",tasks:[
+  {t:"A. “Umat Islam hendaklah memastikan status halal daging sebelum membelinya.” Kemukakan hujah anda.",body:`<div class="wbox"></div>`,s:"Isi: daging yang tidak disembelih dengan sah menjadi bangkai dan haram dimakan (al-Maidah 3). Isi: hikmah syarak — membezakan halal dan haram supaya ibadah diterima. Isi: hikmah sains — toksin dan bakteria dalam darah dikeluarkan. 2 isi berhuraian."},
+  {t:"B. Nilaikan penggunaan teknologi (stunning) dalam industri penyembelihan.",body:`<div class="wbox"></div>`,s:"Harus menurut Muzakarah Jawatankuasa Fatwa 1988 (water stunner untuk ayam, electrical stunning untuk lembu). Syarat sah sembelihan (putus halkum dan mari', hayat mustaqirrah) tetap perlu dipastikan. Terima hujah munasabah. 2 isi berhuraian."},
+  {t:"C. Cadangkan langkah mengatasi isu premis penyembelihan yang diragui (berita dalam buku teks).",body:`<div class="wbox"></div>`,s:"Jawapan penilaian: membeli daripada premis yang ada sijil halal; pihak berkuasa memantau dan mengambil tindakan; melatih penyembelih tentang syarat sah; pengguna peka dan melaporkan. Mana-mana 2 isi berhuraian."}
+ ]}
+];
+$("#ws").innerHTML = WS.map(l=>`<div class="lvl"><div class="lvl-h"><span class="badge">${l.b}</span><h3>${l.h}</h3></div><div class="lvl-b">${l.tasks.map(t=>`<div class="task"><h4>${t.t}</h4>${t.body}<div class="skema">${esc(t.s)}</div></div>`).join("")}</div></div>`).join("");
+$("#toggleSkema").addEventListener("click",e=>{const on=$("#ws").classList.toggle("show-skema");e.currentTarget.setAttribute("aria-pressed",on);e.currentTarget.textContent=on?"Sembunyikan skema jawapan":"Tunjuk skema jawapan"});
+
+/* ================= GAMES ================= */
+const GAMES = [
+ ["match","Fiqh Matching","Padankan istilah dan maksud","Mudah"],
+ ["sort","Fiqh Sorting","Kelaskan rukun, syarat sah, sunat dan makruh","Sederhana"],
+ ["escape","Fiqh Escape Room","Buka 4 kunci untuk mendapat kod","Sederhana"],
+ ["box","Mystery Box","Buka kotak, jawab soalan","Campuran"],
+ ["detect","Fiqh Detective","Cari kesalahan dalam situasi","Sukar"],
+ ["wheel","Fiqh Wheel","Putar roda, jawab soalan rawak","Campuran"],
+ ["tf","True or False","Betul atau salah","Mudah"],
+ ["champ","Fiqh Champion","Kuiz 10 tahap","Mudah → Sukar"],
+ ["memory","Fiqh Memory","Permainan ingatan kad","Mudah"],
+ ["boss","Final Boss","Kalahkan Raja Lupa","Sukar"]
+];
+$("#gamegrid").innerHTML = GAMES.map((g,i)=>`<button type="button" class="gpick" data-g="${g[0]}" aria-pressed="${i===0}"><span class="lv">${i+1} · ${g[3]}</span><b>${g[1]}</b><small>${g[2]}</small></button>`).join("");
+document.querySelectorAll(".gpick").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".gpick").forEach(x=>x.setAttribute("aria-pressed",x===b));startGame(b.dataset.g)}));
+const G = $("#gstage");
+function head(title,how,score){return `<div class="ghead"><div><h3>${title}</h3><p class="how">${how}</p></div><div class="score" id="gscore">${score}</div></div>`}
+function setScore(t){const el=$("#gscore");if(el)el.textContent=t}
+function fb(ok,msg){return `<div class="fb show ${ok?'ok':'no'}">${ok?"Betul! ":"Belum tepat. "}${esc(msg)}</div>`}
+function startGame(g){ ({match:gMatch,sort:gSort,escape:gEscape,box:gBox,detect:gDetect,wheel:gWheel,tf:gTF,champ:gChamp,memory:gMemory,boss:gBoss})[g](); }
+
+function gMatch(){
+  const ps = shuffle(PAIRS).slice(0,6); let left=null, score=0, tries=0, done=0;
+  const L = shuffle(ps.map((p,i)=>({i,t:p[0]}))), R = shuffle(ps.map((p,i)=>({i,t:p[1]})));
+  G.innerHTML = head("Fiqh Matching","Klik satu istilah, kemudian klik maksudnya. +10 bagi setiap padanan betul, −2 bagi cubaan salah.","Mata: 0") +
+   `<div class="cols2"><div id="mL">${L.map(x=>`<button class="opt" data-i="${x.i}">${esc(x.t)}</button>`).join("")}</div><div id="mR">${R.map(x=>`<button class="opt" data-i="${x.i}">${esc(x.t)}</button>`).join("")}</div></div><div id="mFb"></div>`;
+  G.querySelectorAll("#mL .opt").forEach(b=>b.addEventListener("click",()=>{if(b.disabled)return;G.querySelectorAll("#mL .opt").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");left=b}));
+  G.querySelectorAll("#mR .opt").forEach(b=>b.addEventListener("click",()=>{
+    if(!left||b.disabled)return; tries++;
+    if(left.dataset.i===b.dataset.i){score+=10;done++;[left,b].forEach(x=>{x.classList.remove("sel");x.classList.add("ok");x.disabled=true});$("#mFb").innerHTML=fb(true,`${left.textContent} = ${b.textContent}.`)}
+    else{score=Math.max(0,score-2);b.classList.add("no");setTimeout(()=>b.classList.remove("no"),500);$("#mFb").innerHTML=fb(false,`${left.textContent} bukan “${b.textContent}”. Cuba lagi.`)}
+    left=null; setScore(`Mata: ${score}`);
+    if(done===ps.length) $("#mFb").innerHTML += `<div class="fb show ok">Tahniah! Semua ${ps.length} padanan selesai dalam ${tries} cubaan. <button class="btn" type="button" onclick="gMatch()">Main semula</button></div>`;
+  }));
+}
+
+function gSort(){
+  const items = shuffle(SORT).slice(0,12); let i=0, score=0;
+  function draw(){
+    if(i>=items.length){G.innerHTML=head("Fiqh Sorting","Selesai!",`Mata: ${score}/${items.length*10}`)+`<div class="fb show ok">Anda mengelaskan ${score/10} daripada ${items.length} item dengan betul. <button class="btn" type="button" onclick="gSort()">Main semula</button></div>`;return}
+    G.innerHTML = head("Fiqh Sorting","Pilih kategori yang betul bagi item yang dipaparkan. +10 bagi setiap jawapan betul.",`Mata: ${score} · ${i+1}/${items.length}`) +
+      `<div class="chipq">${esc(items[i][0])}</div><div class="bins">${SORT_CATS.map((c,k)=>`<button class="bin" data-k="${k}">${c}</button>`).join("")}</div><div id="sFb"></div>`;
+    G.querySelectorAll(".bin").forEach(b=>b.addEventListener("click",()=>{
+      const ok = +b.dataset.k===items[i][1]; if(ok)score+=10;
+      G.querySelectorAll(".bin").forEach(x=>x.disabled=true);
+      $("#sFb").innerHTML = fb(ok,`“${items[i][0]}” ialah ${SORT_CATS[items[i][1]]}.`) + `<button class="btn pri" type="button" id="sNx" style="margin-top:8px">Seterusnya</button>`;
+      $("#sNx").addEventListener("click",()=>{i++;draw()});
+    }));
+  } draw();
+}
+
+function gEscape(){
+  const open=[false,false,false,false];
+  G.innerHTML = head("Fiqh Escape Room","Anda terkunci di bilik ulang kaji. Jawab 4 soalan (nombor sahaja). Setiap jawapan ialah satu digit kod pintu. Masukkan kod 4 digit untuk keluar.","Kunci: 0/4") +
+   `<div class="locks">${ESCAPE.map((e,k)=>`<div class="lock" id="lk${k}"><b>Kunci ${k+1}</b><span>${esc(e.q)}</span><input type="number" inputmode="numeric" id="lkin${k}" aria-label="Jawapan kunci ${k+1}"><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn" type="button" data-k="${k}">Cuba buka</button><button class="btn" type="button" data-h="${k}">Petunjuk</button></div><div id="lkfb${k}"></div></div>`).join("")}</div>
+   <div class="card"><b>Pintu keluar</b><p class="how">Kod = digit Kunci 1, 2, 3, 4 mengikut turutan.</p><div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap"><input class="codein" id="code" inputmode="numeric" maxlength="4" style="max-width:160px" aria-label="Kod pintu"><button class="btn pri" type="button" id="codeBtn">Buka pintu</button></div><div id="codeFb" style="margin-top:8px"></div></div>`;
+  G.querySelectorAll("[data-k]").forEach(b=>b.addEventListener("click",()=>{const k=+b.dataset.k,v=+$("#lkin"+k).value;const ok=v===ESCAPE[k].a;
+    $("#lkfb"+k).innerHTML=fb(ok,ok?`Kunci terbuka. Digit: ${ESCAPE[k].a}`:"Semak buku teks dan cuba lagi.");
+    if(ok){open[k]=true;$("#lk"+k).classList.add("open")} setScore(`Kunci: ${open.filter(Boolean).length}/4`)}));
+  G.querySelectorAll("[data-h]").forEach(b=>b.addEventListener("click",()=>{const k=+b.dataset.h;$("#lkfb"+k).innerHTML=`<div class="fb show ok">Petunjuk: ${esc(ESCAPE[k].h)}</div>`}));
+  $("#codeBtn").addEventListener("click",()=>{const ok=$("#code").value.trim()===ESCAPE.map(e=>e.a).join("");
+    $("#codeFb").innerHTML=ok?`<div class="fb show ok">Pintu terbuka! Kod ${ESCAPE.map(e=>e.a).join("")}: ${ESCAPE.map(e=>e.a+" "+e.k).join(", ")}. Misi berjaya.</div>`:fb(false,"Kod salah. Pastikan semua kunci dibuka dahulu.")});
+}
+
+function gBox(){
+  const qs = shuffle(BANK).slice(0,9), pts = shuffle([10,10,10,20,20,20,30,30,50]); let score=0, opened=0;
+  G.innerHTML = head("Mystery Box","Pilih kotak. Setiap kotak mengandungi soalan dengan nilai mata tersembunyi. Jawab betul untuk mendapat mata itu.","Mata: 0") +
+   `<div class="boxes">${qs.map((_,k)=>`<button class="mbox" type="button" data-k="${k}">?</button>`).join("")}</div><div id="bxQ"></div>`;
+  G.querySelectorAll(".mbox").forEach(b=>b.addEventListener("click",()=>{
+    const k=+b.dataset.k, q=qs[k]; b.disabled=true; b.textContent=`${pts[k]} mata`;
+    $("#bxQ").innerHTML = `<div class="card" style="margin-top:4px"><p class="qtext">${esc(q.q)} <span class="muted">(${pts[k]} mata)</span></p><div class="opts" style="margin-top:8px">${q.o.map((o,j)=>`<button class="opt" data-j="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</button>`).join("")}</div><div id="bxFb" style="margin-top:8px"></div></div>`;
+    G.querySelectorAll("#bxQ .opt").forEach(o=>o.addEventListener("click",()=>{
+      const ok=+o.dataset.j===q.a; if(ok)score+=pts[k]; opened++;
+      G.querySelectorAll("#bxQ .opt").forEach((x,j)=>{x.disabled=true;if(j===q.a)x.classList.add("ok");else if(x===o)x.classList.add("no")});
+      $("#bxFb").innerHTML=fb(ok,q.e)+(opened===9?`<div class="fb show ok">Semua kotak dibuka. Jumlah: ${score} mata. <button class="btn" type="button" onclick="gBox()">Main semula</button></div>`:"");
+      setScore(`Mata: ${score}`);
+    }));
+  }));
+}
+
+function gDetect(){
+  const cs = shuffle(DETECT); let i=0, score=0;
+  function draw(){
+    if(i>=cs.length){G.innerHTML=head("Fiqh Detective","Kes selesai.",`Kes: ${score}/${cs.length}`)+`<div class="fb show ok">Anda menyelesaikan ${score} daripada ${cs.length} kes. <button class="btn" type="button" onclick="gDetect()">Siasat semula</button></div>`;return}
+    const c=cs[i];
+    G.innerHTML = head("Fiqh Detective","Baca laporan kes. Klik tindakan yang menjadi KESALAHAN dari sudut fiqh. +1 kes bagi jawapan tepat.",`Kes ${i+1}/${cs.length} · Selesai: ${score}`) +
+     `<div class="card soft-peach"><b>Laporan kes #${i+1}</b><p>${esc(c.c)}</p></div><div class="opts">${c.t.map((t,j)=>`<button class="opt" data-j="${j}">${esc(t)}</button>`).join("")}</div><div id="dFb"></div>`;
+    G.querySelectorAll(".opt").forEach(o=>o.addEventListener("click",()=>{
+      const ok=+o.dataset.j===c.s; if(ok)score++;
+      G.querySelectorAll(".opt").forEach((x,j)=>{x.disabled=true;if(j===c.s)x.classList.add("ok");else if(x===o)x.classList.add("no")});
+      $("#dFb").innerHTML=fb(ok,c.e)+`<button class="btn pri" type="button" id="dNx" style="margin-top:8px">Kes seterusnya</button>`;
+      $("#dNx").addEventListener("click",()=>{i++;draw()});
+    }));
+  } draw();
+}
+
+function gWheel(){
+  const cats=Object.keys(WHEEL); let rot=0, spinning=false, score=0, played=0;
+  const colors=["#0f7a62","#b8891a","#138f8f","#0b5d4b","#c79a2a","#1d8a8a","#0d6b55","#a77c16"];
+  G.innerHTML = head("Fiqh Wheel","Putar roda. Jawab soalan dengan lisan atau di kertas, kemudian dedahkan jawapan dan nilai diri anda sendiri.","Betul: 0/0") +
+   `<div class="wheelwrap"><div class="wheel"><div class="ptr"></div><canvas id="wc" width="640" height="640" aria-label="Roda soalan"></canvas></div>
+    <div style="display:grid;gap:10px"><button class="btn pri" type="button" id="spin">Putar roda</button><div id="wQ"></div></div></div>`;
+  const cv=$("#wc"), ctx=cv.getContext("2d"), N=cats.length;
+  function paint(){ctx.clearRect(0,0,640,640);ctx.save();ctx.translate(320,320);ctx.rotate(rot);
+    for(let k=0;k<N;k++){ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,310,k*2*Math.PI/N,(k+1)*2*Math.PI/N);ctx.fillStyle=colors[k];ctx.fill();ctx.save();ctx.rotate((k+.5)*2*Math.PI/N);ctx.fillStyle="#ffffff";ctx.font="700 30px Nunito Sans, sans-serif";ctx.textAlign="right";ctx.fillText(cats[k],285,10);ctx.restore()}
+    ctx.beginPath();ctx.arc(0,0,46,0,2*Math.PI);ctx.fillStyle="#e3bd55";ctx.fill();ctx.restore()}
+  paint();
+  $("#spin").addEventListener("click",()=>{ if(spinning)return; spinning=true; $("#wQ").innerHTML="";
+    const target = rot + 2*Math.PI*(4+Math.random()*2); const start=rot, t0=performance.now(), dur=matchMedia("(prefers-reduced-motion: reduce)").matches?10:2600;
+    function step(t){const p=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-p,3); rot=start+(target-start)*e; paint(); if(p<1)requestAnimationFrame(step); else done()}
+    requestAnimationFrame(step);
+    function done(){spinning=false; const a=((-Math.PI/2-rot)%(2*Math.PI)+2*Math.PI)%(2*Math.PI); const k=Math.floor(a/(2*Math.PI/N)); const cat=cats[k]; const qa=WHEEL[cat][Math.floor(Math.random()*WHEEL[cat].length)];
+      $("#wQ").innerHTML=`<div class="card"><span class="pill p-w">${esc(cat)}</span><p class="qtext" style="margin-top:6px">${esc(qa[0])}</p><button class="btn" type="button" id="wRev" style="margin-top:8px">Dedahkan jawapan</button><div id="wAns"></div></div>`;
+      $("#wRev").addEventListener("click",()=>{$("#wAns").innerHTML=`<div class="fb show ok" style="margin-top:8px">${esc(qa[1])}</div><div style="display:flex;gap:6px;margin-top:8px"><button class="btn" type="button" id="wY">Saya betul</button><button class="btn" type="button" id="wN">Saya salah</button></div>`;
+        $("#wY").addEventListener("click",()=>{score++;played++;setScore(`Betul: ${score}/${played}`);$("#wAns").innerHTML+=`<p class="muted">Dicatat. Putar lagi!</p>`;$("#wY").disabled=$("#wN").disabled=true});
+        $("#wN").addEventListener("click",()=>{played++;setScore(`Betul: ${score}/${played}`);$("#wAns").innerHTML+=`<p class="muted">Ulang kaji bahagian “${esc(cat)}” di tab Analisis.</p>`;$("#wY").disabled=$("#wN").disabled=true});
+      })}
+  });
+}
+
+function gTF(){
+  const qs=shuffle(TF).slice(0,10); let i=0, score=0;
+  function draw(){
+    if(i>=qs.length){G.innerHTML=head("True or False","Tamat.",`Mata: ${score}/10`)+`<div class="fb show ${score>=7?'ok':'no'}">Skor anda ${score}/10. ${score>=7?"Mantap!":"Ulang kaji Master Istilah dan cuba lagi."} <button class="btn" type="button" onclick="gTF()">Main semula</button></div>`;return}
+    G.innerHTML = head("True or False","Adakah pernyataan ini betul? 1 mata bagi setiap jawapan tepat.",`Mata: ${score} · ${i+1}/10`) +
+     `<div class="chipq">${esc(qs[i][0])}</div><div class="opts"><button class="opt" data-v="1">Betul</button><button class="opt" data-v="0">Salah</button></div><div id="tFb"></div>`;
+    G.querySelectorAll(".opt").forEach(o=>o.addEventListener("click",()=>{
+      const ok=(o.dataset.v==="1")===qs[i][1]; if(ok)score++;
+      G.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if((x.dataset.v==="1")===qs[i][1])x.classList.add("ok");else x.classList.add("no")});
+      $("#tFb").innerHTML=fb(ok,qs[i][2])+`<button class="btn pri" type="button" id="tNx" style="margin-top:8px">Seterusnya</button>`;
+      $("#tNx").addEventListener("click",()=>{i++;draw()});
+    }));
+  } draw();
+}
+
+function gChamp(){
+  const pick=l=>shuffle(BANK.filter(q=>q.l===l));
+  const qs=[...pick(1).slice(0,3),...pick(2).slice(0,4),...pick(3).slice(0,3)];
+  const prize=[100,200,300,500,1000,2000,4000,8000,16000,32000]; let i=0, used50=false, usedHint=false;
+  function ladder(){return `<div class="ladder">${prize.map((p,k)=>`<div class="${k===i?'cur':k<i?'past':''}"><span>Tahap ${k+1}</span><span>${p.toLocaleString("ms-MY")}</span></div>`).reverse().join("")}</div>`}
+  function draw(){
+    if(i>=qs.length){G.innerHTML=head("Fiqh Champion","Anda menjawab semua 10 tahap!","32,000 mata")+`<div class="fb show ok">Anda ialah Fiqh Champion Sembelihan! <button class="btn" type="button" onclick="gChamp()">Main semula</button></div>`;return}
+    const q=qs[i];
+    G.innerHTML = head("Who Wants To Be Fiqh Champion","10 tahap: mudah ke sukar. Satu jawapan salah menamatkan permainan. Bantuan: 50:50 dan Petunjuk, sekali setiap satu.",`${(i?prize[i-1]:0).toLocaleString("ms-MY")} mata`) +
+     `<div class="champ"><div style="display:grid;gap:10px"><p class="qtext">${esc(q.q)}</p><div class="opts">${q.o.map((o,j)=>`<button class="opt" data-j="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</button>`).join("")}</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn" type="button" id="l50" ${used50?"disabled":""}>50:50</button><button class="btn" type="button" id="lHint" ${usedHint?"disabled":""}>Petunjuk</button></div><div id="cFb"></div></div>${ladder()}</div>`;
+    $("#l50").addEventListener("click",()=>{used50=true;$("#l50").disabled=true;let rm=shuffle([0,1,2,3].filter(j=>j!==q.a)).slice(0,2);G.querySelectorAll(".champ .opt").forEach(x=>{if(rm.includes(+x.dataset.j)){x.disabled=true;x.classList.add("done")}})});
+    $("#lHint").addEventListener("click",()=>{usedHint=true;$("#lHint").disabled=true;$("#cFb").innerHTML=`<div class="fb show ok">Petunjuk: ${esc(q.e.split(/[.;:]/)[0])}…</div>`});
+    G.querySelectorAll(".champ .opt").forEach(o=>o.addEventListener("click",()=>{
+      const ok=+o.dataset.j===q.a; G.querySelectorAll(".champ .opt").forEach((x,j)=>{x.disabled=true;if(j===q.a)x.classList.add("ok");else if(x===o)x.classList.add("no")});
+      if(ok){$("#cFb").innerHTML=fb(true,q.e)+`<button class="btn pri" type="button" id="cNx" style="margin-top:8px">Ke tahap ${i+2>10?"akhir":i+2}</button>`;$("#cNx").addEventListener("click",()=>{i++;draw()})}
+      else{$("#cFb").innerHTML=fb(false,q.e)+`<div class="fb show no">Permainan tamat pada tahap ${i+1}. Mata dibawa pulang: ${(i?prize[i-1]:0).toLocaleString("ms-MY")}. <button class="btn" type="button" onclick="gChamp()">Cuba lagi</button></div>`}
+    }));
+  } draw();
+}
+
+function gMemory(){
+  const ps=shuffle(PAIRS).slice(0,6); const cards=shuffle(ps.flatMap((p,i)=>[{i,t:p[0]},{i,t:p[1]}])); let up=[], got=0, moves=0, lock=false;
+  G.innerHTML = head("Fiqh Memory","Terbalikkan dua kad. Jika istilah dan maksudnya sepadan, kad kekal terbuka. Selesaikan dengan langkah paling sedikit.","Langkah: 0") +
+   `<div class="mem">${cards.map((c,k)=>`<button class="mcard" type="button" data-k="${k}" aria-label="Kad ${k+1}">?</button>`).join("")}</div><div id="memFb"></div>`;
+  G.querySelectorAll(".mcard").forEach(b=>b.addEventListener("click",()=>{
+    const k=+b.dataset.k; if(lock||b.classList.contains("up")||b.classList.contains("got"))return;
+    b.classList.add("up"); b.textContent=cards[k].t; up.push(b);
+    if(up.length===2){moves++; setScore(`Langkah: ${moves}`); const [a,c]=up;
+      if(cards[+a.dataset.k].i===cards[+c.dataset.k].i){a.classList.replace("up","got");c.classList.replace("up","got");up=[];got++;
+        $("#memFb").innerHTML=fb(true,`${ps[cards[+a.dataset.k].i][0]}: ${ps[cards[+a.dataset.k].i][1]}.`);
+        if(got===ps.length)$("#memFb").innerHTML+=`<div class="fb show ok">Selesai dalam ${moves} langkah! <button class="btn" type="button" onclick="gMemory()">Main semula</button></div>`}
+      else{lock=true;setTimeout(()=>{up.forEach(x=>{x.classList.remove("up");x.textContent="?"});up=[];lock=false},900)}}
+  }));
+}
+
+function gBoss(){
+  const mix = shuffle([...shuffle(BANK.filter(q=>q.l>=2)).slice(0,8).map(q=>({...q,kind:"m"})),...shuffle(TF).slice(0,4).map(t=>({q:t[0],o:["Betul","Salah"],a:t[1]?0:1,e:t[2],kind:"t"}))]);
+  let hp=100, hearts=3, i=0; const dmg=Math.ceil(100/10);
+  function draw(){
+    if(hp<=0){G.innerHTML=head("Final Boss","Raja Lupa tumbang!","Menang")+`<div class="fb show ok">Hebat! Anda mengalahkan Raja Lupa dengan ${hearts} nyawa berbaki. Anda menguasai Sembelihan. <button class="btn" type="button" onclick="gBoss()">Lawan semula</button></div>`;return}
+    if(hearts<=0||i>=mix.length){G.innerHTML=head("Final Boss","Raja Lupa masih berdiri.","Kalah")+`<div class="fb show no">HP Raja Lupa berbaki ${hp}. Ulang kaji rukun, syarat sah, perkara sunat dan makruh sembelihan, kemudian cuba lagi. <button class="btn" type="button" onclick="gBoss()">Lawan semula</button></div>`;return}
+    const q=mix[i];
+    G.innerHTML = head("Final Boss: Raja Lupa","Setiap jawapan betul mengurangkan 10 HP Raja Lupa. Setiap jawapan salah mengurangkan satu nyawa anda. Kalahkan dia sebelum nyawa habis.",`Nyawa: ${"♥".repeat(hearts)}${"♡".repeat(3-hearts)}`) +
+     `<div class="bossrow"><div class="card"><b>Raja Lupa · HP ${hp}/100</b><div class="hp" style="margin-top:6px"><i style="width:${hp}%"></i></div></div><div class="card"><b>Serangan ${i+1}</b><p class="muted">${q.kind==="t"?"Betul atau salah?":"Pilih jawapan."}</p></div></div>
+      <p class="qtext">${esc(q.q)}</p><div class="opts">${q.o.map((o,j)=>`<button class="opt" data-j="${j}">${esc(o)}</button>`).join("")}</div><div id="bFb"></div>`;
+    G.querySelectorAll(".opt").forEach(o=>o.addEventListener("click",()=>{
+      const ok=+o.dataset.j===q.a; if(ok)hp=Math.max(0,hp-dmg); else hearts--;
+      G.querySelectorAll(".opt").forEach((x,j)=>{x.disabled=true;if(j===q.a)x.classList.add("ok");else if(x===o)x.classList.add("no")});
+      $("#bFb").innerHTML=fb(ok,q.e)+`<button class="btn pri" type="button" id="bNx" style="margin-top:8px">Teruskan</button>`;
+      $("#bNx").addEventListener("click",()=>{i++;draw()});
+    }));
+  } draw();
+}
+gMatch();
+
+/* ================= SPM ================= */
+const STRUKTUR = [
+ {stem:"3 (a) Hukum sembelihan adalah wajib dalam Islam.",items:[
+  {n:"(i)",q:"Nyatakan maksud sembelihan.",m:2,a:"Menyembelih binatang yang halal dimakan dagingnya dengan cara memutuskan urat halkum dan urat mari'.",s:"Menyembelih binatang halal dimakan [1] · memutuskan urat halkum dan mari' [1]",t:"Mesti sebut kedua-dua urat.",x:"Menulis “memotong leher binatang” sahaja."},
+  {n:"(ii)",q:"Jelaskan dua syarat sah sembelihan.",m:2,a:"Penyembelih mestilah beragama Islam atau Ahli Kitab. Binatang yang disembelih mesti masih mempunyai hayat mustaqirrah.",s:"Mana-mana dua: Islam/Ahli Kitab [1] · kerana Allah [1] · hayat mustaqirrah [1] · putus halkum dan mari' dengan segera [1] · alat melukakan kecuali kuku, gigi, tulang [1]",t:"Pilih syarat daripada rukun berbeza supaya jelas.",x:"Menulis perkara sunat seperti basmalah."},
+  {n:"(iii)",q:"Jelaskan dua contoh perbuatan menyeksa binatang sembelihan.",m:2,a:"Mengheret kaki binatang ke tempat sembelihan. Menajamkan pisau di hadapan binatang.",s:"Mana-mana dua: patah leher [1] · patah kaki [1] · heret kaki [1] · tajam pisau di hadapan binatang [1]",t:"Guna contoh buku teks.",x:"Menulis “menyembelih binatang” sebagai menyeksa."},
+  {n:"(iv)",q:"“Umat Islam hendaklah memastikan status halal daging sebelum membelinya.” Kemukakan hujah anda untuk menyokong pernyataan di atas.",m:4,a:"Pertama, daging yang tidak disembelih mengikut syarak menjadi bangkai dan haram dimakan, sebagaimana Surah al-Maidah ayat 3. Kedua, sembelihan yang sah membezakan daging halal dan haram supaya ibadah kita diterima.",s:"Mana-mana 2 isi berhuraian: haram/bangkai (al-Maidah 3) [1+1] · ibadah diterima [1+1] · kesihatan: toksin dan bakteria dikeluarkan [1+1] · elak tertipu premis diragui [1+1]",t:"Mulakan dengan pendirian; setiap isi mesti ada sebab.",x:"Memberi isi tanpa kaitan dengan sembelihan."}
+ ]},
+ {stem:"3 (b) Ali menyembelih seekor ayam untuk dimasak. Dia menggunakan pisau yang tumpul dan tidak menyebut nama Allah ketika menyembelih. Selain itu, dia juga tidak memutuskan saluran pernafasan dan saluran makanan dengan sempurna sehingga ayam tersebut mati selepas beberapa ketika.",items:[
+  {n:"(i)",q:"Senaraikan dua jenis urat yang wajib diputuskan semasa proses sembelihan.",m:2,a:"Urat halkum dan urat mari'.",s:"Halkum [1] · Mari' [1]",t:"Jawapan ringkas.",x:"Menulis “urat darah”."},
+  {n:"(ii)",q:"Nyatakan dua perkara makruh yang dilakukan oleh Ali.",m:2,a:"Menggunakan pisau yang tumpul. Tidak membaca basmalah.",s:"Pisau tumpul [1] · tidak membaca basmalah [1]",t:"Kenal pasti dalam petikan.",x:"Menulis “tidak memutuskan urat” sebagai makruh (itu syarat)."},
+  {n:"(iii)",q:"Jelaskan perkara yang sepatutnya dilakukan oleh Ali ketika menyembelih.",m:2,a:"Ali sepatutnya menggunakan pisau yang tajam dan memutuskan urat halkum dan mari' dengan segera dan sekali sembelih.",s:"Pisau tajam / basmalah [1] · putus halkum dan mari' dengan segera [1]",t:"Sebut satu sunat dan satu syarat.",x:"Hanya menyebut basmalah."},
+  {n:"(iv)",q:"Terangkan pandangan anda terhadap implikasi sembelihan tersebut.",m:4,a:"Pertama, ayam itu tidak halal dimakan kerana syarat memutuskan halkum dan mari' dengan segera tidak dipenuhi, maka ia menjadi bangkai. Kedua, perbuatan Ali menyeksa ayam kerana pisau tumpul dan kematiannya lambat, bertentangan dengan tuntutan ihsan dalam hadis Syaddad bin Aus.",s:"Mana-mana 2 isi berhuraian: tidak halal/bangkai [1+1] · menyeksa, bertentangan dengan ihsan [1+1] · berdosa jika dimakan/dijual [1+1] · darah tidak keluar sempurna, risiko kesihatan [1+1]",t:"Bezakan implikasi syarat (tidak halal) daripada implikasi makruh.",x:"Mengatakan ayam itu halal kerana hanya basmalah ditinggalkan."}
+ ]},
+ {stem:"3 (c) Industri penyembelihan moden menggunakan alat pemengsan (stunning).",items:[
+  {n:"(i)",q:"Tentukan hukum penggunaan water stunner dalam penyembelihan ayam dan jelaskan alasan anda.",m:2,a:"Hukumnya harus kerana diputuskan oleh Muzakarah Jawatankuasa Fatwa pada tahun 1988.",s:"Harus [1] · Muzakarah Jawatankuasa Fatwa 1988 [1]",t:"Hukum + sumber keputusan.",x:"Menulis “haram kerana menyeksa”."},
+  {n:"(ii)",q:"Nyatakan dua alat yang tidak boleh digunakan untuk menyembelih.",m:2,a:"Kuku dan tulang.",s:"Mana-mana dua: kuku [1] · gigi [1] · tulang [1]",t:"KU-GI-TU.",x:"Menulis “pisau tumpul” (itu makruh, bukan tidak boleh)."},
+  {n:"(iii)",q:"Nyatakan dua perkara sunat berkaitan binatang dan alat sembelihan.",m:2,a:"Binatang dibaringkan pada rusuk kiri. Alat sembelihan yang tajam seperti pisau.",s:"Rusuk kiri [1] · alat tajam [1]",t:"Baca kategori dalam soalan: binatang dan alat.",x:"Menyenaraikan sunat penyembelih."},
+  {n:"(iv)",q:"Huraikan dua hikmah sembelihan dari sudut syarak dan sains.",m:4,a:"Dari sudut syarak, sembelihan membezakan daging halal dengan daging haram supaya ibadah diterima. Dari sudut sains, sembelihan mengeluarkan darah yang mengandungi toksin dan bakteria, maka kita terhindar daripada penyakit.",s:"Isi syarak [1] + huraian [1] · Isi sains [1] + huraian [1] (atau: mempercepat kematian)",t:"Pastikan satu isi setiap sudut jika soalan menyebut dua sudut.",x:"Memberi dua isi daripada sudut yang sama."}
+ ]}
+];
+$("#struktur").innerHTML = STRUKTUR.map(b=>`<div class="qblock"><div class="stem">${esc(b.stem)}</div>${b.items.map(it=>`<div class="qitem"><div class="qrow"><span class="ql">${it.n}</span><span>${esc(it.q)}</span><span class="m">[${it.m} markah]</span></div>
+ <div class="ans"><div class="a1"><span class="lab">Jawapan contoh</span>${esc(it.a)}${it.tambahan?' <span class="add">Penilaian, bukan isi buku teks</span>':''}</div><div class="a2"><span class="lab">Skema pemarkahan</span>${esc(it.s)}</div><div class="a3"><span class="lab">Teknik mendapat markah</span>${esc(it.t)}</div><div class="a4"><span class="lab">Kesalahan lazim</span>${esc(it.x)}</div></div></div>`).join("")}</div>`).join("");
+$("#toggleAns").addEventListener("click",e=>{const on=$("#struktur").classList.toggle("show-ans");e.currentTarget.setAttribute("aria-pressed",on);e.currentTarget.textContent=on?"Sembunyikan jawapan":"Tunjuk jawapan, skema dan teknik"});
+
+const MCQ = shuffle(BANK).slice(0,12);
+$("#mcq").innerHTML = MCQ.map((q,k)=>`<div class="it" id="mq${k}"><b>${k+1}. ${esc(q.q)}</b><div class="opts">${q.o.map((o,j)=>`<label class="opt" style="display:flex;gap:8px;align-items:flex-start"><input type="radio" name="mq${k}" id="mq${k}o${j}" value="${j}"> <span>${String.fromCharCode(65+j)}. ${esc(o)}</span></label>`).join("")}</div><div class="fb" id="mqf${k}"></div></div>`).join("");
+$("#mcqCheck").addEventListener("click",()=>{let sc=0;MCQ.forEach((q,k)=>{const v=document.querySelector(`input[name="mq${k}"]:checked`);const ok=v&&+v.value===q.a;if(ok)sc++;
+  document.querySelectorAll(`#mq${k} .opt`).forEach((l,j)=>{l.classList.remove("ok","no");if(j===q.a)l.classList.add("ok");else if(v&&+v.value===j)l.classList.add("no")});
+  const f=$("#mqf"+k);f.className="fb show "+(ok?"ok":"no");f.textContent=(ok?"Betul. ":"Jawapan: "+String.fromCharCode(65+q.a)+". ")+q.e});
+  const s=$("#mcqScore");s.hidden=false;s.textContent=`Skor: ${sc}/12`});
+
+/* ================= DIAGNOSTIK ================= */
+const ASP = {is:"Penguasaan istilah",hk:"Penguasaan hukum",rk:"Rukun dan syarat",bz:"Membezakan konsep",st:"Soalan situasi"};
+const REMEDI = {
+ is:["Tidak dapat menyatakan maksud sembelihan, halkum, mari', hayat mustaqirrah","Kad imbas istilah; Fiqh Matching dan Fiqh Memory","Bina glosari bergambar sembelihan"],
+ hk:["Keliru hukum sembelihan, fatwa stunning dan hikmah","Jadual Master Hukum; ulang tiga hikmah “Halal-Sihat-Cepat”","Forum: ihsan kepada binatang dalam industri moden"],
+ rk:["Tertukar rukun dengan syarat sah","Akronim PE-BI-AL dan KU-GI-TU; lengkapkan jadual syarat","Amali sembelihan (aktiviti buku teks) dengan senarai semak syarat"],
+ bz:["Tertukar sunat dengan makruh, syarat dengan sunat","Fiqh Sorting (rukun/syarat/sunat/makruh); Master Perbezaan","Peta pemikiran hikmah sembelihan (aktiviti buku teks)"],
+ st:["Tidak dapat menentukan status halal dalam situasi","Fiqh Detective; format Situasi → Isu → Hukum → Alasan","Hot Seat (aktiviti buku teks) dan Final Boss"]
+};
+function pickDiag(seed){ // 3 per aspect, different sets for pre/post
+  const out=[]; Object.keys(ASP).forEach(a=>{const pool=BANK.filter(q=>q.t===a); const half=Math.floor(pool.length/2); const set = seed==="pre"?pool.slice(0,Math.max(3,half)):pool.slice(Math.max(3,half)).concat(pool.slice(0,3)); out.push(...set.slice(0,3).map(q=>({...q,asp:a})))}); return out; }
+let DMODE="pre", DQ=pickDiag("pre");
+function renderDiag(){
+  $("#dq").innerHTML = DQ.map((q,k)=>`<div class="it" id="di${k}"><span class="tag">${ASP[q.asp]}</span><b>${k+1}. ${esc(q.q)}</b><select id="ds${k}" aria-label="Jawapan soalan ${k+1}"><option value="">— pilih jawapan —</option>${q.o.map((o,j)=>`<option value="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</option>`).join("")}</select><div class="why"></div></div>`).join("");
+  $("#dResult").innerHTML="";
+}
+renderDiag();
+$("#dPre").addEventListener("click",()=>{DMODE="pre";DQ=pickDiag("pre");$("#dPre").classList.add("pri");$("#dPost").classList.remove("pri");$("#dPre").setAttribute("aria-pressed","true");$("#dPost").setAttribute("aria-pressed","false");renderDiag()});
+$("#dPost").addEventListener("click",()=>{DMODE="post";DQ=pickDiag("post");$("#dPost").classList.add("pri");$("#dPre").classList.remove("pri");$("#dPost").setAttribute("aria-pressed","true");$("#dPre").setAttribute("aria-pressed","false");renderDiag()});
+$("#dReset").addEventListener("click",renderDiag);
+$("#dCheck").addEventListener("click",()=>{
+  const res={}; Object.keys(ASP).forEach(a=>res[a]=0); const wrong=[];
+  DQ.forEach((q,k)=>{const v=$("#ds"+k).value; const ok=v!==""&&+v===q.a; if(ok)res[q.asp]++; else wrong.push({k,q,v});
+    const it=$("#di"+k); it.classList.remove("ok","no"); it.classList.add(ok?"ok":"no"); it.querySelector(".why").textContent=(ok?"Betul. ":"Jawapan: "+String.fromCharCode(65+q.a)+". ")+q.e});
+  const tag=n=>n===3?["Mantap","t-high"]:n===2?["Sederhana","t-mid"]:["Lemah","t-low"];
+  const total=Object.values(res).reduce((a,b)=>a+b,0);
+  const prev=store.get("sembelihan-diag-"+(DMODE==="pre"?"post":"pre"),null); store.set("sembelihan-diag-"+DMODE,total);
+  const weak=Object.keys(ASP).filter(a=>res[a]<=1), mid=Object.keys(ASP).filter(a=>res[a]===2), strong=Object.keys(ASP).filter(a=>res[a]===3);
+  $("#dResult").innerHTML = `<div class="card soft-gold"><h3>Keputusan ${DMODE==="pre"?"ujian diagnostik":"ujian pasca"}: ${total}/15 (${Math.round(total/15*100)}%)</h3>
+   <p>${total>=12?"Tahap penguasaan tinggi.":total>=8?"Tahap penguasaan sederhana.":"Perlu pemulihan."}${prev!==null?` Skor ujian ${DMODE==="pre"?"pasca":"pra"} sebelum ini dalam pelayar ini: ${prev}/15.`:""}</p></div>
+   <div class="aspects">${Object.keys(ASP).map(a=>{const t=tag(res[a]);return `<div class="asp"><small>${ASP[a]}</small><b>${res[a]}/3</b><span class="lvl-tag ${t[1]}">${t[0]}</span></div>`}).join("")}</div>
+   <div class="card"><h3>Analisis kesalahan</h3>${wrong.length?`<ul>${wrong.map(w=>`<li><b>S${w.k+1} (${ASP[w.q.asp]}):</b> ${w.v===""?"tidak dijawab":"memilih "+String.fromCharCode(65+ +w.v)}; jawapan ${String.fromCharCode(65+w.q.a)}. ${esc(w.q.e)}</li>`).join("")}</ul>`:"<p>Tiada kesalahan. Tahniah!</p>"}</div>
+   ${weak.length?`<div class="card soft-peach"><h3>Aktiviti pemulihan dicadangkan</h3><ul>${weak.map(a=>`<li><b>${ASP[a]}:</b> ${esc(REMEDI[a][1])}</li>`).join("")}</ul></div>`:""}
+   ${(mid.length||strong.length)?`<div class="card soft-mint"><h3>Aktiviti pengayaan dicadangkan</h3><ul>${[...strong,...mid].map(a=>`<li><b>${ASP[a]}:</b> ${esc(REMEDI[a][2])}</li>`).join("")}</ul></div>`:""}`;
+  $("#dResult").scrollIntoView({behavior:"smooth",block:"start"});
+});
+$("#remedi").innerHTML = Object.keys(ASP).map(a=>`<tr><td><b>${ASP[a]}</b></td><td>${esc(REMEDI[a][0])}</td><td>${esc(REMEDI[a][1])}</td><td>${esc(REMEDI[a][2])}</td></tr>`).join("");
+const CHECK = ["Menyatakan maksud sembelihan (bahasa dan istilah)","Menyatakan hukum dan dalil sembelihan","Menyenaraikan tiga rukun sembelihan","Menjelaskan syarat sah bagi setiap rukun","Menyenaraikan perkara sunat sembelihan beserta alasan","Menyenaraikan perkara makruh dan contoh menyeksa","Membezakan perkara yang membatalkan dengan perkara makruh","Menyatakan fatwa water stunner dan electrical stunning","Menghuraikan hikmah dari sudut syarak dan sains","Menentukan status halal dalam situasi"];
+const saved = store.get("sembelihan-check",[]);
+$("#checklist").innerHTML = CHECK.map((c,k)=>`<label for="ck${k}"><input type="checkbox" id="ck${k}" ${saved.includes(k)?"checked":""}><span>${esc(c)}</span></label>`).join("");
+$("#checklist").addEventListener("change",()=>store.set("sembelihan-check",CHECK.map((_,k)=>k).filter(k=>$("#ck"+k).checked)));
+
+/* ================= MODULE NAV ================= */
+const MODS=[["index.html","Analisis Induk"],["haji-umrah.html","T4 · Haji & Umrah"],["sembelihan.html","T4 · Sembelihan"],["korban-akikah.html","T4 · Korban & Akikah"],["muamalat.html","T4 · Muamalat"],["dhuha-gerhana.html","T4 · Dhuha & Gerhana"],["istikharah-tasbih.html","T5 · Istikharah & Tasbih"],["perkahwinan.html","T5 · Perkahwinan"],["isu-perkahwinan.html","T5 · Isu Perkahwinan"],["wasiat-faraid.html","T5 · Wasiat & Faraid"],["jenayah.html","T5 · Jenayah"]];
+(function(){const here=(location.pathname.split("/").pop()||"index.html");const n=document.getElementById("modnav");if(n)n.innerHTML=MODS.map(m=>`<a href="${m[0]}"${m[0]===here?' aria-current="page"':''}>${m[1]}</a>`).join("");})();
+</script>
+
+</body>
+</html>
