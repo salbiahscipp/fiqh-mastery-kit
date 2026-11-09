@@ -29,6 +29,10 @@ Setiap modul mempunyai enam tab:
 5. **Latihan SPM**: satu set Soalan 3 format percubaan dengan skema, teknik dan kesalahan lazim, serta 12 soalan objektif
 6. **Diagnostik**: ujian pra dan pasca (5 aspek), analisis kesalahan, aktiviti pemulihan dan pengayaan
 
+## Laman web
+
+https://salbiahscipp.github.io/fiqh-mastery-kit/
+
 ## Cara membuka
 
 Buka `index.html` dalam pelayar. Tiada pemasangan diperlukan. Fon dimuatkan daripada Google Fonts.
